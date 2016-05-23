@@ -1,3 +1,6 @@
 [submodule "behaviorlib"]
 	path = behaviorlib
 	url = http://github.com/xevrem/behaviorlib.git
+[submodule "monogame"]
+	path = monogame
+	url = http://github.com/mono/monogame.git
