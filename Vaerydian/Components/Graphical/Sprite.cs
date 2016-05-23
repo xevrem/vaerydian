@@ -31,7 +31,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Graphical
 {
-    public class Sprite : IComponent
+    public class Sprite : Component
     {
 
         private static int s_TypeID;

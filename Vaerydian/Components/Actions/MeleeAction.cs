@@ -30,7 +30,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Actions
 {
-    public class MeleeAction : IComponent
+    public class MeleeAction : Component
     {
         private static int m_TypeID;
         private int m_EntityID;

@@ -29,7 +29,7 @@ using Microsoft.Xna.Framework;
 
 namespace Vaerydian.Components.Spatials
 {
-    public class Transform : IComponent
+    public class Transform : Component
     {
         private static int t_TypeID;
         private int t_EntityID;

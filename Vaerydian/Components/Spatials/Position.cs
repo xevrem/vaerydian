@@ -28,7 +28,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Spatials
 {
-    public class Position : IComponent
+    public class Position : Component
     {
         private static int p_TypeID;
 

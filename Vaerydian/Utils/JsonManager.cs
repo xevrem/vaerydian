@@ -27,12 +27,12 @@ namespace Vaerydian
 {
 	public class JsonManager
 	{
-		private JSON j_JSON;
+		//private JSON j_JSON;
 
 		public JsonManager ()
 		{
-			j_JSON = fastJSON.JSON.Instance;
-			j_JSON.Parameters.EnableAnonymousTypes = true;
+			//j_JSON = fastJSON.JSON;
+			JSON.Parameters.EnableAnonymousTypes = true;
 		}
 
 		/// <summary>
@@ -46,7 +46,7 @@ namespace Vaerydian
 		/// </param>
 		public Dictionary<string,object> jsonToDict (string json)
 		{
-			return (Dictionary<string,object>) j_JSON.Parse(json);
+			return (Dictionary<string,object>) JSON.Parse(json);
 		}
 
 		/// <summary>
@@ -136,7 +136,7 @@ namespace Vaerydian
 		/// Object.
 		/// </param>
 		public string objToJsonString(object obj){
-			return j_JSON.Beautify(j_JSON.ToJSON(obj));
+			return JSON.Beautify(JSON.ToJSON(obj));
 		}
 
 		/// <summary>
@@ -152,7 +152,7 @@ namespace Vaerydian
 		/// The type of object
 		/// </typeparam>
 		public T jsonToObj<T>(string json){
-			return j_JSON.ToObject<T>(json);
+			return JSON.ToObject<T>(json);
 		}
 	}
 }

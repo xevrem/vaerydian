@@ -248,7 +248,7 @@ namespace Vaerydian.Screens
             if (loadingIsSlow)  
             {  
                 SpriteBatch spriteBatch = ScreenManager.SpriteBatch;  
-                SpriteFont font = FontManager.Fonts["Loading"];  
+                SpriteFont font = FontManager.fonts["Loading"];  
  
                 const string message = "Generating World...";  
  

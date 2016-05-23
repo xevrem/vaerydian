@@ -22,11 +22,33 @@ using System;
 
 namespace ECSFramework
 {
-	public class EntitySystem
+	public abstract class EntitySystem
 	{
+		public ECSInstance ecs_instance;
+
 		public EntitySystem ()
 		{
 		}
+
+		public virtual void initialize(){}
+		public abstract void preLoadContent(Bag<Entity> entities);
+		public virtual void cleanUp(Bag<Entity> entities){}
+
+
+		public void process(){
+			begin();
+
+			process_entities ();
+
+			end ();
+		}
+
+		protected abstract void process_entities();
+		protected virtual void added(Entity entity){}
+		protected virtual void begin(){}
+		protected virtual void end(){}
+		protected virtual void removed (Entity entity){}
+
 
 		//TODO
 	}

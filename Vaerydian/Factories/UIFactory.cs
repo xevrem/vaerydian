@@ -42,7 +42,7 @@ namespace Vaerydian.Factories
 {
     public static class UIFactory
     {
-        public static ECSInstance ECSInstance;
+        public static ECSInstance ecs_instance;
         public static GameContainer Container;
         private static Random rand = new Random();
 
@@ -57,27 +57,27 @@ namespace Vaerydian.Factories
         /// <param name="duration"></param>
         public static void createTimedDialogWindow(Entity caller, String dialog, Vector2 origin, String name, int duration)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
-            DialogTimer timer = new DialogTimer(duration,ECSInstance);
+            DialogTimer timer = new DialogTimer(duration,ecs_instance);
 
             GForm form = new GForm();
-            form.Caller = caller;
-            form.Owner = e;
-            form.ECSInstance = ECSInstance;
-            form.Bounds = new Rectangle((int)origin.X, (int)origin.Y, 100, 50);
+			form.caller = caller;
+            form.owner = e;
+            form.ecs_instance = ecs_instance;
+            form.bounds = new Rectangle((int)origin.X, (int)origin.Y, 100, 50);
 
             GCanvas canvas = new GCanvas();
-            canvas.Caller = caller;
-            canvas.Owner = e;
-            canvas.ECSInstance = ECSInstance;
-            canvas.Bounds = new Rectangle((int)origin.X, (int)origin.Y, 200, 200);
+            canvas.caller = caller;
+            canvas.owner = e;
+            canvas.ecs_instance = ecs_instance;
+            canvas.bounds = new Rectangle((int)origin.X, (int)origin.Y, 200, 200);
 
             GTextBox textBox = new GTextBox();
-            textBox.Caller = caller;
-            textBox.Owner = e;
-            textBox.ECSInstance = ECSInstance;
-            textBox.Bounds = new Rectangle((int)origin.X, (int)origin.Y, 100, 10);
+			textBox.caller = caller;
+            textBox.owner = e;
+            textBox.ecs_instance = ecs_instance;
+            textBox.bounds = new Rectangle((int)origin.X, (int)origin.Y, 100, 10);
             textBox.FontName = "StartScreen";
             textBox.BackgroundName = "dialog_bubble";
             textBox.Border = 10;
@@ -96,31 +96,31 @@ namespace Vaerydian.Factories
             UserInterface ui = new UserInterface(form);
 
             //assign component and issue refresh
-            ECSInstance.entity_manager.add_component(e, ui);
-            ECSInstance.refresh(e);
+            ecs_instance.entity_manager.add_component(e, ui);
+            ecs_instance.refresh(e);
         }
 
         public static void createFrame(Entity caller, Point Position, int height, int width, string textureName)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             GForm form = new GForm();
-            form.Caller = caller;
-            form.Owner = e;
-            form.ECSInstance = ECSInstance;
-            form.Bounds = new Rectangle(Position.X, Position.Y, width, height);
+            form.caller = caller;
+            form.owner = e;
+            form.ecs_instance = ecs_instance;
+            form.bounds = new Rectangle(Position.X, Position.Y, width, height);
 
             GCanvas canvas = new GCanvas();
-            canvas.Caller = caller;
-            canvas.Owner = e;
-            canvas.ECSInstance = ECSInstance;
-            canvas.Bounds = new Rectangle(Position.X, Position.Y, width, height);
+            canvas.caller = caller;
+            canvas.owner = e;
+            canvas.ecs_instance = ecs_instance;
+            canvas.bounds = new Rectangle(Position.X, Position.Y, width, height);
 
             GFrame frame = new GFrame();
-            frame.Caller = caller;
-            frame.Owner = e;
-            frame.ECSInstance = ECSInstance;
-            frame.Bounds = new Rectangle(Position.X, Position.Y, width, height);
+            frame.caller = caller;
+            frame.owner = e;
+            frame.ecs_instance = ecs_instance;
+            frame.bounds = new Rectangle(Position.X, Position.Y, width, height);
             frame.BackgroundName = textureName;
 
             canvas.Controls.Add(frame);
@@ -129,29 +129,29 @@ namespace Vaerydian.Factories
 
             UserInterface ui = new UserInterface(form);
 
-            ECSInstance.ComponentManager.addComponent(e, ui);
+            ecs_instance.component_manager.add_component(e, ui);
 
-            ECSInstance.refresh(e);
+            ecs_instance.refresh(e);
         }
 
         public static GFrame createMousePointer(Point position, int width, int height, string textureName, InterfaceHandler handler)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             GForm form = new GForm();
-            form.Owner = e;
-            form.ECSInstance = ECSInstance;
-            form.Bounds = new Rectangle(position.X, position.Y, width, height);
+            form.owner = e;
+            form.ecs_instance = ecs_instance;
+            form.bounds = new Rectangle(position.X, position.Y, width, height);
 
             GCanvas canvas = new GCanvas();
-            canvas.Owner = e;
-            canvas.ECSInstance = ECSInstance;
-            canvas.Bounds = new Rectangle(position.X, position.Y, width, height);
+            canvas.owner = e;
+            canvas.ecs_instance = ecs_instance;
+            canvas.bounds = new Rectangle(position.X, position.Y, width, height);
 
             GFrame frame = new GFrame();
-            frame.Owner = e;
-            frame.ECSInstance = ECSInstance;
-            frame.Bounds = new Rectangle(position.X, position.Y, width, height);
+            frame.owner = e;
+			frame.ecs_instance = ecs_instance;
+            frame.bounds = new Rectangle(position.X, position.Y, width, height);
             frame.BackgroundName = textureName;
 
             frame.Updating += handler;
@@ -162,16 +162,16 @@ namespace Vaerydian.Factories
 
             UserInterface ui = new UserInterface(form);
 
-            ECSInstance.ComponentManager.addComponent(e, ui);
+            ecs_instance.component_manager.add_component(e, ui);
 
-            ECSInstance.refresh(e);
+            ecs_instance.refresh(e);
 
             return frame;
         }
 
         public static void createFloatingText(string text, string font, Color color, int timeToLive, Position position)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             FloatingText fText = new FloatingText();
             fText.Text = text;
@@ -179,33 +179,33 @@ namespace Vaerydian.Factories
             fText.Color = color;
             fText.Lifetime = timeToLive;
 
-            ECSInstance.entity_manager.add_component(e, fText);
-            ECSInstance.entity_manager.add_component(e, position);
+            ecs_instance.entity_manager.add_component(e, fText);
+            ecs_instance.entity_manager.add_component(e, position);
 
-            ECSInstance.refresh(e);
+            ecs_instance.refresh(e);
         }
 
 		public static void createHitPointLabel(Entity entity, int width, int height, Point position)
 		{
-			Entity e = ECSInstance.create();
+			Entity e = ecs_instance.create();
 
-			HpLabelUpdater updater = new HpLabelUpdater(ECSInstance);
+			HpLabelUpdater updater = new HpLabelUpdater(ecs_instance);
 
 			GForm form = new GForm();
-            form.Owner = e;
-            form.ECSInstance = ECSInstance;
-            form.Bounds = new Rectangle(position.X, position.Y, width, height);
+            form.owner = e;
+            form.ecs_instance = ecs_instance;
+            form.bounds = new Rectangle(position.X, position.Y, width, height);
 
             GCanvas canvas = new GCanvas();
-            canvas.Owner = e;
-            canvas.ECSInstance = ECSInstance;
-            canvas.Bounds = new Rectangle(position.X, position.Y, width, height);
+            canvas.owner = e;
+			canvas.ecs_instance = ecs_instance;
+            canvas.bounds = new Rectangle(position.X, position.Y, width, height);
 
 			GLabel label = new GLabel();
-			label.Owner = e;
-			label.Caller = entity;
-			label.ECSInstance = ECSInstance;
-			label.Bounds = new Rectangle(position.X, position.Y, width, height);
+			label.owner = e;
+			label.caller = entity;
+			label.ecs_instance = ecs_instance;
+			label.bounds = new Rectangle(position.X, position.Y, width, height);
 			label.FontName = "StartScreen";
 			label.Border = 10;
 			label.BackgroundName = "dialog_bubble";
@@ -222,16 +222,16 @@ namespace Vaerydian.Factories
 
 			UserInterface ui = new UserInterface(form);
 
-            ECSInstance.ComponentManager.addComponent(e, ui);
+            ecs_instance.component_manager.add_component(e, ui);
 
-            ECSInstance.refresh(e);
+            ecs_instance.refresh(e);
 		}
 
 		public static Entity createStatWindow(Entity caller, Point position, Point dimensions, int buttonHeight)
 		{
-			Entity e = ECSInstance.create();
+			Entity e = ecs_instance.create();
 
-			BasicWindow window = new BasicWindow(e, caller, ECSInstance, position, dimensions, buttonHeight);
+			BasicWindow window = new BasicWindow(e, caller, ecs_instance, position, dimensions, buttonHeight);
 
 			//initialize the window
 			window.init();
@@ -264,11 +264,11 @@ namespace Vaerydian.Factories
 
 			//add any custom controls here to window.Canvas
 			GLabel label = new GLabel();
-			label.Owner = e;
-			label.Caller = caller;
-			label.ECSInstance = ECSInstance;
-			label.Bounds = new Rectangle(window.Form.Bounds.Left + 20,
-			                             window.Form.Bounds.Top + 40,
+			label.owner = e;
+			label.caller = caller;
+			label.ecs_instance = ecs_instance;
+			label.bounds = new Rectangle(window.Form.bounds.Left + 20,
+			                             window.Form.bounds.Top + 40,
 			                             dimensions.X - 40,
 			                             dimensions.Y-60);
 			label.AutoSize = false;
@@ -290,21 +290,21 @@ namespace Vaerydian.Factories
 			//create the UI component and assign it to the entity
 			UserInterface ui = new UserInterface(window.Form);
 
-            ECSInstance.ComponentManager.addComponent(e, ui);
+            ecs_instance.component_manager.add_component(e, ui);
 
-            ECSInstance.refresh(e);
+            ecs_instance.refresh(e);
 
 			return e;
 		}
 
-		private static void destroyUI(IControl sender, InterfaceArgs args)
+		private static void destroyUI(Control sender, InterfaceArgs args)
 		{
-			sender.ECSInstance.deleteEntity(sender.Owner);
+			sender.ecs_instance.delete_entity(sender.owner);
 		}
 
-		private static void labelUpdate(IControl sender, InterfaceArgs args)
+		private static void labelUpdate(Control sender, InterfaceArgs args)
 		{
-			Vaerydian.Components.Characters.Skills skills = ComponentMapper.get<Vaerydian.Components.Characters.Skills>(sender.Caller);
+			Vaerydian.Components.Characters.Skills skills = ComponentMapper.get<Vaerydian.Components.Characters.Skills>(sender.caller);
 			Vaerydian.Components.Characters.Statistics attributes = ComponentMapper.get<Vaerydian.Components.Characters.Statistics>(sender.Caller);
 
 			GLabel label = (GLabel) sender;
@@ -326,9 +326,9 @@ namespace Vaerydian.Factories
 		public static Entity createInventoryWindow(Entity caller, 
 		                                     Point position, Point dimensions, 
 		                                     int buttonHeight, int rows, int cols){
-			Entity e = ECSInstance.create ();
+			Entity e = ecs_instance.create ();
 			
-			BasicWindow window = new BasicWindow (e, caller, ECSInstance, position, dimensions, buttonHeight);
+			BasicWindow window = new BasicWindow (e, caller, ecs_instance, position, dimensions, buttonHeight);
 		
 			//initialize the window
 			window.init();
@@ -360,19 +360,19 @@ namespace Vaerydian.Factories
 			window.preAssemble();
 
 			//add what i need here
-			int x = window.Frame.Bounds.X;
-			int y = window.Frame.Bounds.Y + buttonHeight;
+			int x = window.Frame.bounds.X;
+			int y = window.Frame.bounds.Y + buttonHeight;
 
-			int xSize = window.Frame.Bounds.Width / cols;
-			int ySize = (window.Frame.Bounds.Height - buttonHeight) / rows;
+			int xSize = window.Frame.bounds.Width / cols;
+			int ySize = (window.Frame.bounds.Height - buttonHeight) / rows;
 
 			for (int i = 0; i < cols; i++) {
 				for(int j = 0; j < rows; j++){
 					GFrame slot = new GFrame ();
-					slot.Owner = e;
-					slot.Caller = caller;
-					slot.ECSInstance = ECSInstance;
-					slot.Bounds = new Rectangle (x + i*xSize, y + j*ySize, xSize-1, ySize-1);
+					slot.owner = e;
+					slot.caller = caller;
+					slot.ecs_instance = ecs_instance;
+					slot.bounds = new Rectangle (x + i*xSize, y + j*ySize, xSize-1, ySize-1);
 
 					slot.BackgroundColor = Color.White;
 					slot.BackgroundName = "frame";
@@ -390,19 +390,19 @@ namespace Vaerydian.Factories
 			//create the UI component and assign it to the entity
 			UserInterface ui = new UserInterface(window.Form);
 
-			ECSInstance.ComponentManager.addComponent(e, ui);
+			ecs_instance.component_manager.add_component(e, ui);
 
-			ECSInstance.refresh (e);
+			ecs_instance.refresh (e);
 
 			return e;
 		}
 
-		public static void getItem(IControl sender, InterfaceArgs args){
+		public static void getItem(Control sender, InterfaceArgs args){
 
 		}
 
 		public static void createConsole(){
-			Entity e = UIFactory.ECSInstance.create ();
+			Entity e = UIFactory.ecs_instance.create ();
 
 			GForm form = new GForm ();
 

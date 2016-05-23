@@ -29,7 +29,11 @@ namespace ECSFramework
 		}
 
 
-		public void add_component(Entity e, IComponent component){}
+		public void add_component(Entity e, Component component){}
+
+		public int get_entity_count(){
+			return 0;
+		}
 	}
 }
 

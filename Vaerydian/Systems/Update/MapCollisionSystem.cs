@@ -54,21 +54,21 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            m_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            m_VelocityMapper = new ComponentMapper(new Velocity(), e_ECSInstance);
-            m_GameMapMapper = new ComponentMapper(new GameMap(), e_ECSInstance);
-            m_ViewPortMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
-            m_HeadingMapper = new ComponentMapper(new Heading(), e_ECSInstance);
-            m_MapCollidableMapper = new ComponentMapper(new MapCollidable(), e_ECSInstance);
+            m_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            m_VelocityMapper = new ComponentMapper(new Velocity(), ecs_instance);
+            m_GameMapMapper = new ComponentMapper(new GameMap(), ecs_instance);
+            m_ViewPortMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            m_HeadingMapper = new ComponentMapper(new Heading(), ecs_instance);
+            m_MapCollidableMapper = new ComponentMapper(new MapCollidable(), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            m_Map = e_ECSInstance.TagManager.getEntityByTag("MAP");
-            m_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
+            m_Map = ecs_instance.tag_manager.get_entity_by_tag("MAP");
+            m_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

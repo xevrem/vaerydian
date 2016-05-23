@@ -26,7 +26,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Spatials
 {
-    public class Velocity : IComponent
+    public class Velocity : Component
     {
         private static int v_TypeID;
         private int v_EntityID;

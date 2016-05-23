@@ -55,24 +55,24 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            m_MeleeActionMapper = new ComponentMapper(new MeleeAction(), e_ECSInstance);
-            m_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            m_HeadingMapper = new ComponentMapper(new Heading(), e_ECSInstance);
-            m_SpatialMapper = new ComponentMapper(new SpatialPartition(), e_ECSInstance);
-            m_LifeMapper = new ComponentMapper(new Life(), e_ECSInstance);
-            m_InteractionMapper = new ComponentMapper(new Interactable(), e_ECSInstance);
-            m_FactionMapper = new ComponentMapper(new Factions(), e_ECSInstance);
-            m_TransformMapper = new ComponentMapper(new Transform(), e_ECSInstance);
+            m_MeleeActionMapper = new ComponentMapper(new MeleeAction(), ecs_instance);
+            m_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            m_HeadingMapper = new ComponentMapper(new Heading(), ecs_instance);
+            m_SpatialMapper = new ComponentMapper(new SpatialPartition(), ecs_instance);
+            m_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
+            m_InteractionMapper = new ComponentMapper(new Interactable(), ecs_instance);
+            m_FactionMapper = new ComponentMapper(new Factions(), ecs_instance);
+            m_TransformMapper = new ComponentMapper(new Transform(), ecs_instance);
 
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            m_Spatial = e_ECSInstance.TagManager.getEntityByTag("SPATIAL");
-            m_Mouse = e_ECSInstance.TagManager.getEntityByTag("MOUSE");
+            m_Spatial = ecs_instance.tag_manager.get_entity_by_tag("SPATIAL");
+            m_Mouse = ecs_instance.tag_manager.get_entity_by_tag("MOUSE");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {
@@ -80,12 +80,12 @@ namespace Vaerydian.Systems.Update
             Position position = (Position)m_PositionMapper.get(entity);
             SpatialPartition spatial = (SpatialPartition)m_SpatialMapper.get(m_Spatial);
 
-            action.ElapsedTime += e_ECSInstance.ElapsedTime;
+            action.ElapsedTime += ecs_instance.ElapsedTime;
 
             //is it time for the melee action to die?
             if (action.ElapsedTime >= action.Lifetime)
             {
-                e_ECSInstance.deleteEntity(entity);
+                ecs_instance.delete_entity(entity);
                 return;
             }
 
@@ -151,7 +151,7 @@ namespace Vaerydian.Systems.Update
                                     UtilFactory.createAttack(action.Owner, locals[i], AttackType.Melee);
 
                                     //destroy melee action
-                                    //e_ECSInstance.deleteEntity(entity);
+                                    //ecs_instance.delete_entity(entity);
                                     //return;
                                 }
                             }
@@ -165,7 +165,7 @@ namespace Vaerydian.Systems.Update
             Transform transform = (Transform)m_TransformMapper.get(entity);
             
             //rotate melee by degrees over the melee arc
-            float rot = (((float)action.Animation.updateFrame(e_ECSInstance.ElapsedTime) / (float)action.Animation.Frames) * action.ArcDegrees) - (action.ArcDegrees/2f);
+            float rot = (((float)action.Animation.updateFrame(ecs_instance.ElapsedTime) / (float)action.Animation.Frames) * action.ArcDegrees) - (action.ArcDegrees/2f);
             transform.Rotation = rot * (((float)Math.PI) / 180f) - VectorHelper.getAngle(new Vector2(1, 0), heading.getHeading());
 
             //adjust the arc based on current position (i.e., move with the player)

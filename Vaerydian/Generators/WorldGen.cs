@@ -26,7 +26,6 @@ using Vaerydian.Utils;
 
 using LibNoise;
 using LibNoise.Models;
-using LibNoise.Modfiers;
 using LibNoise.Modifiers;
 using System.Threading;
 

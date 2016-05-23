@@ -29,7 +29,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Utils
 {
-    class Character : IComponent
+    class Character : Component
     {
 
         private static int c_TypeID;

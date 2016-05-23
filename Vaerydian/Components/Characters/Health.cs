@@ -26,7 +26,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Characters
 {
-    class Health: IComponent
+    class Health: Component
     {
         private static int h_TypeID;
         private int h_EntityID;

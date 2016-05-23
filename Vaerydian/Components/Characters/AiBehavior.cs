@@ -24,13 +24,13 @@ using System.Text;
 
 using ECSFramework;
 
-using BehaviorLibrary;
+using BehaviorLib;
 
 using Vaerydian.Behaviors;
 
 namespace Vaerydian.Components.Characters
 {
-    class AiBehavior : IComponent
+    class AiBehavior : Component
     {
         private static int a_TypeID;
 

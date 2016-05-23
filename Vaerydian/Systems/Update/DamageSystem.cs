@@ -46,19 +46,19 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            d_DamageMapper = new ComponentMapper(new Damage(), e_ECSInstance);
-            d_HealthMapper = new ComponentMapper(new Health(), e_ECSInstance);
-            d_AttributeMapper = new ComponentMapper(new Statistics(), e_ECSInstance);
-            d_InteractMapper = new ComponentMapper(new Interactable(), e_ECSInstance);
+            d_DamageMapper = new ComponentMapper(new Damage(), ecs_instance);
+            d_HealthMapper = new ComponentMapper(new Health(), ecs_instance);
+            d_AttributeMapper = new ComponentMapper(new Statistics(), ecs_instance);
+            d_InteractMapper = new ComponentMapper(new Interactable(), ecs_instance);
 
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
          
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
         
         protected override void process(Entity entity)
         {
@@ -80,11 +80,11 @@ namespace Vaerydian.Systems.Update
                 }
             }
 
-            damage.Lifetime += e_ECSInstance.ElapsedTime;
+            damage.Lifetime += ecs_instance.ElapsedTime;
 
             if (damage.Lifetime > damage.Lifespan)
             {
-                e_ECSInstance.deleteEntity(entity);
+                ecs_instance.delete_entity(entity);
                 return;
             }
         }

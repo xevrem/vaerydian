@@ -22,11 +22,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using BehaviorLibrary;
+using BehaviorLib;
 using ECSFramework;
-using BehaviorLibrary.Components.Conditionals;
-using BehaviorLibrary.Components.Composites;
-using BehaviorLibrary.Components.Actions;
+using BehaviorLib.Components.Conditionals;
+using BehaviorLib.Components.Composites;
+using BehaviorLib.Components.Actions;
 using Vaerydian.Behaviors.Actions;
 using Microsoft.Xna.Framework;
 using Vaerydian.Utils;
@@ -34,7 +34,7 @@ using Vaerydian.Components.Dbg;
 using Vaerydian.Components.Spatials;
 using Vaerydian.Components.Utils;
 using Vaerydian.Components.Graphical;
-using BehaviorLibrary.Components.Decorators;
+using BehaviorLib.Components.Decorators;
 
 namespace Vaerydian.Behaviors
 {
@@ -72,7 +72,7 @@ namespace Vaerydian.Behaviors
         private Conditional reachedTarget;
         private Conditional isNewPath;
 
-        private RootSelector root;
+        private IndexSelector root;
 
         private BehaviorAction moveToCell;
         private BehaviorAction calcPath;
@@ -146,23 +146,23 @@ namespace Vaerydian.Behaviors
             reset = new BehaviorAction(resetPathfinder);
             animate = new BehaviorAction(updateAnimation);
             
-            ParallelSequence pSeqA = new ParallelSequence(initPathfinder, calcPath);
+            Sequence pSeqA = new Sequence(initPathfinder, calcPath);
 
             
 
-            ParallelSelector pSelA = new ParallelSelector(new Inverter(targetMoved), new Inverter(reachedTarget), new Inverter(reset), calcPath);
-            //ParallelSelector pSelA = new ParallelSelector(new Inverter(targetMoved));//, new Inverter(reset), calcPath);
-            ParallelSelector pSelB = new ParallelSelector(new Inverter(pathFound), getPath);
-            ParallelSelector pSelC = new ParallelSelector(new Inverter(isNewPath), setPath);
-            ParallelSelector pSelD = new ParallelSelector(new Inverter(reachedCell), getNextCell);
-            ParallelSelector pSelE = new ParallelSelector(reachedTarget, moveToCell);
-            //ParallelSequence pSeqC = new ParallelSequence(pSelE, reset, calcPath);
+            Selector pSelA = new Selector(new Inverter(targetMoved), new Inverter(reachedTarget), new Inverter(reset), calcPath);
+            //Selector pSelA = new Selector(new Inverter(targetMoved));//, new Inverter(reset), calcPath);
+            Selector pSelB = new Selector(new Inverter(pathFound), getPath);
+            Selector pSelC = new Selector(new Inverter(isNewPath), setPath);
+            Selector pSelD = new Selector(new Inverter(reachedCell), getNextCell);
+            Selector pSelE = new Selector(reachedTarget, moveToCell);
+            //Sequence pSeqC = new Sequence(pSelE, reset, calcPath);
 
 
-            ParallelSequence pSeqB = new ParallelSequence(new Inverter(tooClose), updatePosition, pSelA, pSelB, pSelC, pSelD, pSelE, animate);
+            Sequence pSeqB = new Sequence(new Inverter(tooClose), updatePosition, pSelA, pSelB, pSelC, pSelD, pSelE, animate);
 
             //setup root node, choose initialization phase or pathing/movement phase
-            root = new RootSelector(switchBehaviors, pSeqA, pSeqB);
+            root = new IndexSelector(switchBehaviors, pSeqA, pSeqB);
 
             f_Behavior = new Behavior(root);
 
@@ -207,13 +207,13 @@ namespace Vaerydian.Behaviors
             Position start = (Position)f_PositionMapper.get(f_ThisEntity);
             Position finish = (Position)f_PositionMapper.get(f_Target);
             
-            f_Map = s_EcsInstance.TagManager.getEntityByTag("MAP");
+            f_Map = s_EcsInstance.tag_manager.get_entity_by_tag("MAP");
             GameMap map = (GameMap)f_GameMapMapper.get(f_Map);
 
-            f_Camera = s_EcsInstance.TagManager.getEntityByTag("CAMERA");
+			f_Camera = s_EcsInstance.tag_manager.get_entity_by_tag("CAMERA");
             ViewPort viewport = (ViewPort)f_ViewPortMapper.get(f_Camera);
 
-            f_Spatial = s_EcsInstance.TagManager.getEntityByTag("SPATIAL");
+            f_Spatial = s_EcsInstance.tag_manager.get_entity_by_tag("SPATIAL");
             SpatialPartition spatial = (SpatialPartition)f_SpatialMapper.get(f_Spatial);
 
             spatial.QuadTree.setContentAtLocation(f_ThisEntity, start.Pos);

@@ -1,5 +1,5 @@
 ﻿//
-//  IComponent.cs
+//  GTextBox.cs
 //
 //  Author:
 //       erika <>
@@ -20,13 +20,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 
-namespace ECSFramework
+namespace Glimpse.Controls
 {
-	public interface IComponent
+	public class GTextBox : Control
 	{
-		int id { get; set; }
-		int owner { get; set; }
-		int type { get; set; }
+		public GTextBox ()
+		{
+		}
 	}
 }
 

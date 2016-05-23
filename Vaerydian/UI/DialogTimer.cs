@@ -54,22 +54,22 @@ namespace Vaerydian.UI
         /// </summary>
         /// <param name="control"></param>
         /// <param name="args"></param>
-        public void updateHandler(IControl control, InterfaceArgs args)
+        public void updateHandler(Control control, InterfaceArgs args)
         {
-            d_ElapsedTime += control.ECSInstance.ElapsedTime;
+            d_ElapsedTime += control.ecs_instance.ElapsedTime;
 
             if (d_ElapsedTime >= d_Duration)
-                control.ECSInstance.deleteEntity(control.Owner);
+                control.ecs_instance.delete_entity(control.owner);
 
-            Position pos = (Position)d_PositionMapper.get(control.Caller);
-            ViewPort camera = (ViewPort)d_ViewPortMapper.get(control.ECSInstance.TagManager.getEntityByTag("CAMERA"));
+            Position pos = (Position)d_PositionMapper.get(control.caller);
+            ViewPort camera = (ViewPort)d_ViewPortMapper.get(control.ecs_instance.tag_manager.get_entity_by_tag("CAMERA"));
 
             
 
             if (pos != null)
             {
                 Vector2 pt = pos.Pos - camera.getOrigin();
-                control.Bounds = new Rectangle((int)pt.X, (int)pt.Y - control.Bounds.Height - 16, control.Bounds.Width, control.Bounds.Height);
+                control.bounds = new Rectangle((int)pt.X, (int)pt.Y - control.bounds.Height - 16, control.bounds.Width, control.bounds.Height);
             }
         }
 

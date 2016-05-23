@@ -30,7 +30,16 @@ namespace ECSFramework
 		{
 		}
 
-		public T get<T>(Entity e){
+		public ComponentMapper(Component c, ECSInstance ecs_instance){
+			//TODO
+		}
+
+		public object get(Entity e){
+			//TODO
+			return default(object);
+		}
+
+		public static T get<T>(Entity e){
 			//TODO
 			return default(T);
 		}

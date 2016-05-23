@@ -86,7 +86,7 @@ namespace Vaerydian
             Content.RootDirectory = "Content";
 
             //give the fontManager a reference to Content
-            FontManager.ContentManager = this.Content;
+            FontManager.content_manager = this.Content;
 
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
@@ -100,11 +100,11 @@ namespace Vaerydian
         /// </summary>
         protected override void Initialize()
         {
-            FontManager.FontsToLoad.Add("General");
-            FontManager.FontsToLoad.Add("Loading");
-            FontManager.FontsToLoad.Add("StartScreen");
-            FontManager.FontsToLoad.Add("Damage");
-            FontManager.FontsToLoad.Add("DamageBold");
+            FontManager.fonts_to_load.Add("General");
+			FontManager.fonts_to_load.Add("Loading");
+            FontManager.fonts_to_load.Add("StartScreen");
+            FontManager.fonts_to_load.Add("Damage");
+            FontManager.fonts_to_load.Add("DamageBold");
 
             //InputManager.initialize();
 
@@ -146,7 +146,7 @@ namespace Vaerydian
         /// </summary>
         protected override void UnloadContent()
         {
-            FontManager.Fonts.Clear();
+            FontManager.fonts.Clear();
 
             for(int i = 0; i < screenManager.Screens.Count;i++)
             {
@@ -219,7 +219,7 @@ namespace Vaerydian
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
             //display performance
-            spriteBatch.DrawString(FontManager.Fonts["General"], "ms / frame: " + avg, new Vector2(0), Color.Red);
+			spriteBatch.DrawString(FontManager.fonts["General"], "ms / frame: " + avg, new Vector2(0), Color.Red);
 
             //end sprite batch
             spriteBatch.End();

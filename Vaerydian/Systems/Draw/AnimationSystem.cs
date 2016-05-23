@@ -61,15 +61,15 @@ namespace Vaerydian.Systems.Draw
         
         public override void initialize()
         {
-            a_CharacterMapper = new ComponentMapper(new Character(), e_ECSInstance);
-            a_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            a_ViewportMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
-            a_LifeMapper = new ComponentMapper(new Life(), e_ECSInstance);
+            a_CharacterMapper = new ComponentMapper(new Character(), ecs_instance);
+            a_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            a_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            a_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            a_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
+            a_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
             a_SpriteBatch = a_Container.SpriteBatch;
         }
 
@@ -109,7 +109,7 @@ namespace Vaerydian.Systems.Draw
 
             foreach (Bone bone in character.Skeletons[character.CurrentSkeleton].Bones)
             {
-                updateTime(bone, e_ECSInstance.ElapsedTime);
+                updateTime(bone, ecs_instance.ElapsedTime);
                 a_SpriteBatch.Draw(a_Textures[bone.TextureName], position.Pos + getKeyPosition(bone, character.CurrentAnimtaion) - viewPort.getOrigin() + bone.RotationOrigin,
                     null, a_Color * fade, getKeyRotation(bone, character.CurrentAnimtaion), bone.RotationOrigin, 1f, SpriteEffects.None, 1f);
             }
@@ -118,7 +118,7 @@ namespace Vaerydian.Systems.Draw
 
         }
 
-        protected override void cleanUp(Bag<Entity> entities)
+        public override void cleanUp(Bag<Entity> entities)
         {
             
         }

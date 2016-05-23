@@ -28,7 +28,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Graphical
 {
-    public class ViewPort : IComponent
+    public class ViewPort : Component
     {
 
         private static int v_TypeID;

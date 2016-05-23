@@ -28,7 +28,7 @@ using Microsoft.Xna.Framework;
 
 namespace Vaerydian.Components.Spatials
 {
-    public class Heading : IComponent
+    public class Heading : Component
     {
         private static int h_TypeID;
         private int h_EntityID;

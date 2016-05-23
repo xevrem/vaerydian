@@ -28,7 +28,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Utils
 {
-    class MapCollidable : IComponent
+    class MapCollidable : Component
     {
         private static int m_TypeID;
         private int m_EntityID;

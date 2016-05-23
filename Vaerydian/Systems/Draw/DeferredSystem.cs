@@ -48,15 +48,15 @@ namespace Vaerydian.Systems.Draw
 
         public override void initialize()
         {
-            d_GeometryMapper = new ComponentMapper(new GeometryMap(), e_ECSInstance);
+            d_GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
             d_CombinedEffect = d_Container.ContentManager.Load<Effect>("effects\\DiferredCombine");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

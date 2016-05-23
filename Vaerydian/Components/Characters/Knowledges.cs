@@ -36,7 +36,7 @@ namespace Vaerydian.Components.Characters
 		public List<Knowledge> UniqueKnowledges;	
 	}
 
-	public class Knowledges : IComponent
+	public class Knowledges : Component
     {
         private static int e_TypeID;
         private int e_EntityID;

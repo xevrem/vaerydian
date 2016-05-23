@@ -33,7 +33,7 @@ namespace Vaerydian.Components.Items
 		public ItemDef WeaponDef;
 	}
 
-    class Equipment : IComponent
+    class Equipment : Component
     {
         private static int e_TypeID;
         private int e_EntityID;

@@ -22,12 +22,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using BehaviorLibrary;
-using BehaviorLibrary.Components;
-using BehaviorLibrary.Components.Actions;
-using BehaviorLibrary.Components.Composites;
-using BehaviorLibrary.Components.Conditionals;
-using BehaviorLibrary.Components.Decorators;
+using BehaviorLib;
+using BehaviorLib.Components;
+using BehaviorLib.Components.Actions;
+using BehaviorLib.Components.Composites;
+using BehaviorLib.Components.Conditionals;
+using BehaviorLib.Components.Decorators;
 
 using ECSFramework;
 
@@ -78,7 +78,7 @@ namespace Vaerydian.Behaviors
         private Conditional reachedTarget;
         private Conditional isNewPath;
 
-        private RootSelector root;
+        private IndexSelector root;
 
         private BehaviorAction moveToCell;
         private BehaviorAction calcPath;
@@ -151,19 +151,19 @@ namespace Vaerydian.Behaviors
             reset = new BehaviorAction(resetPathfinder);
             animate = new BehaviorAction(updateAnimation);
             
-            ParallelSequence pSeqA = new ParallelSequence(initPathfinder, calcPath);
+            Sequence pSeqA = new Sequence(initPathfinder, calcPath);
 
-            ParallelSelector pSelA = new ParallelSelector(new Inverter(targetMoved), new Inverter(reset), calcPath);
-            ParallelSelector pSelB = new ParallelSelector(new Inverter(pathFound), getPath);
-            ParallelSelector pSelC = new ParallelSelector(new Inverter(isNewPath), setPath);
-            ParallelSelector pSelD = new ParallelSelector(new Inverter(reachedCell), getNextCell);
-            ParallelSelector pSelE = new ParallelSelector(reachedTarget, moveToCell);
+            Selector pSelA = new Selector(new Inverter(targetMoved), new Inverter(reset), calcPath);
+            Selector pSelB = new Selector(new Inverter(pathFound), getPath);
+            Selector pSelC = new Selector(new Inverter(isNewPath), setPath);
+            Selector pSelD = new Selector(new Inverter(reachedCell), getNextCell);
+            Selector pSelE = new Selector(reachedTarget, moveToCell);
             
 
-            ParallelSequence pSeqB = new ParallelSequence(new Inverter(tooClose), updatePosition, pSelA, pSelB, pSelC, pSelD, pSelE, animate);
+            Sequence pSeqB = new Sequence(new Inverter(tooClose), updatePosition, pSelA, pSelB, pSelC, pSelD, pSelE, animate);
 
             //setup root node, choose initialization phase or pathing/movement phase
-            root = new RootSelector(switchBehaviors, pSeqA, pSeqB);
+            root = new IndexSelector(switchBehaviors, pSeqA, pSeqB);
 
             s_Behavior = new Behavior(root);
 
@@ -207,13 +207,13 @@ namespace Vaerydian.Behaviors
             Position start = (Position)s_PositionMapper.get(s_ThisEntity);
             Position finish = (Position)s_PositionMapper.get(s_Target);
             
-            s_Map = s_EcsInstance.TagManager.getEntityByTag("MAP");
+			s_Map = s_EcsInstance.tag_manager.get_entity_by_tag("MAP");
             GameMap map = (GameMap)s_GameMapMapper.get(s_Map);
 
-            s_Camera = s_EcsInstance.TagManager.getEntityByTag("CAMERA");
+            s_Camera = s_EcsInstance.tag_manager.get_entity_by_tag("CAMERA");
             ViewPort viewport = (ViewPort)s_ViewPortMapper.get(s_Camera);
 
-            s_Spatial = s_EcsInstance.TagManager.getEntityByTag("SPATIAL");
+            s_Spatial = s_EcsInstance.tag_manager.get_entity_by_tag("SPATIAL");
             SpatialPartition spatial = (SpatialPartition)s_SpatialMapper.get(s_Spatial);
 
             spatial.QuadTree.setContentAtLocation(s_ThisEntity, start.Pos);
@@ -435,7 +435,7 @@ namespace Vaerydian.Behaviors
 
             //GameMap map = (GameMap)s_GameMapMapper.get(s_Map);
 
-            s_MapDebug = s_EcsInstance.TagManager.getEntityByTag("MAP_DEBUG");
+            s_MapDebug = s_EcsInstance.tag_manager.get_entity_by_tag("MAP_DEBUG");
             s_Debug = (MapDebug)s_MapDebugMapper.get(s_MapDebug);
 
             s_Debug.ClosedSet = findPath.getClosedSet();

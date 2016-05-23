@@ -50,22 +50,22 @@ namespace Vaerydian.Systems.Update
         
         public override void initialize()
         {
-            v_KnowledgeMapper = new ComponentMapper(new Knowledges(), e_ECSInstance);
-            v_VictoryMapper = new ComponentMapper(new Award(), e_ECSInstance);
-            v_InfoMapper = new ComponentMapper(new Information(), e_ECSInstance);
-            v_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            v_SkillMapper = new ComponentMapper(new Skills(), e_ECSInstance);
-            v_AttributeMapper = new ComponentMapper(new Statistics(), e_ECSInstance);
-            v_HealthMapper = new ComponentMapper(new Health(), e_ECSInstance);
+            v_KnowledgeMapper = new ComponentMapper(new Knowledges(), ecs_instance);
+            v_VictoryMapper = new ComponentMapper(new Award(), ecs_instance);
+            v_InfoMapper = new ComponentMapper(new Information(), ecs_instance);
+            v_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            v_SkillMapper = new ComponentMapper(new Skills(), ecs_instance);
+            v_AttributeMapper = new ComponentMapper(new Statistics(), ecs_instance);
+            v_HealthMapper = new ComponentMapper(new Health(), ecs_instance);
 
         }
         
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
             
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
                 
         protected override void process(Entity entity)
         {
@@ -95,7 +95,7 @@ namespace Vaerydian.Systems.Update
 
 
             //end victory
-            e_ECSInstance.deleteEntity(entity);
+            ecs_instance.delete_entity(entity);
         }
 
         /// <summary>

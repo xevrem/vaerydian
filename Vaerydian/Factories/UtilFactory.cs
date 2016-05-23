@@ -98,7 +98,7 @@ namespace Vaerydian.Factories
 
         }
 
-        public static void createFireSound(IUserInterface sender, InterfaceArgs args)
+        public static void createFireSound(Control sender, InterfaceArgs args)
         {
             Entity e = ECSInstance.create();
 

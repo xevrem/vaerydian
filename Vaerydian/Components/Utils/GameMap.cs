@@ -27,7 +27,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Utils
 {
-    public class GameMap : IComponent
+    public class GameMap : Component
     {
         private static int g_TypeID;
         private int g_EntityID;

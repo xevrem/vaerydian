@@ -59,18 +59,18 @@ namespace Vaerydian.Systems.Draw
 
         public override void initialize()
         {
-            h_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            h_ViewportMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
-            h_HealthMapper = new ComponentMapper(new Health(), e_ECSInstance);
+            h_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            h_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            h_HealthMapper = new ComponentMapper(new Health(), ecs_instance);
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
             h_Texture = h_Container.ContentManager.Load<Texture2D>("export");
 
-            h_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
+            h_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
 
         protected override void process(Entity entity)

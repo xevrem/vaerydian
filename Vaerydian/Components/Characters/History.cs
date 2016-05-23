@@ -28,7 +28,7 @@ namespace Vaerydian.Components.Characters
     /// <summary>
     /// maintains a history of the entity
     /// </summary>
-    class History : IComponent
+    class History : Component
     {
 
         private static int h_TypeID;

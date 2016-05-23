@@ -36,9 +36,6 @@ using Vaerydian.Components.Spatials;
 using Vaerydian.Components.Utils;
 using Vaerydian.Components.Actions;
 using Vaerydian.Components.Graphical;
-using AgentComponentBus.Components;
-using Vaerydian.ACB;
-using AgentComponentBus.Core;
 
 
 namespace Vaerydian.Factories
@@ -185,34 +182,6 @@ namespace Vaerydian.Factories
             n_EcsInstance.entity_manager.add_component(e, new Heading());
             n_EcsInstance.entity_manager.add_component(e, new Transform());
             n_EcsInstance.entity_manager.add_component(e, new Aggrivation());
-
-            //create state machine
-            StateMachine<EnemyState,EnemyState> stateMachine = new StateMachine<EnemyState, EnemyState>(EnemyState.Idle, EnemyAI.whenIdle, EnemyState.Idle);
-
-            //define states
-            stateMachine.addState(EnemyState.Wandering, EnemyAI.whenWandering);
-            stateMachine.addState(EnemyState.Following, EnemyAI.whenFollowing);
-            
-            //define transitions
-            stateMachine.addStateChange(EnemyState.Idle, EnemyState.Wandering, EnemyState.Wandering);
-            stateMachine.addStateChange(EnemyState.Wandering, EnemyState.Following, EnemyState.Following);
-            stateMachine.addStateChange(EnemyState.Following, EnemyState.Wandering, EnemyState.Wandering);
-
-            StateContainer<EnemyState, EnemyState> stateContainer = new StateContainer<EnemyState, EnemyState>();
-            stateContainer.StateMachine = stateMachine;
-
-            n_EcsInstance.entity_manager.add_component(e, stateContainer);
-            
-
-            //create ACB component
-            BusAgent busAgent = new BusAgent();
-			busAgent.Agent = ResourcePool.createAgent ();
-			busAgent.Agent.Entity = e;
-			busAgent.Agent.Init = EnemyAI.init;
-			busAgent.Agent.Run = EnemyAI.run;
-
-            n_EcsInstance.entity_manager.add_component(e, busAgent);
-
 			n_EcsInstance.entity_manager.add_component(e, AnimationFactory.createAvatar ("BAT"));
 
             //create info
@@ -304,29 +273,6 @@ namespace Vaerydian.Factories
 			n_EcsInstance.entity_manager.add_component(e, new Transform());
 			n_EcsInstance.entity_manager.add_component(e, new Aggrivation());
 
-			//create state machine
-			StateMachine<EnemyState,EnemyState> stateMachine = new StateMachine<EnemyState, EnemyState>(EnemyState.Idle, EnemyAI.whenIdle, EnemyState.Idle);
-
-			//define states
-			stateMachine.addState(EnemyState.Wandering, EnemyAI.whenWandering);
-			stateMachine.addState(EnemyState.Following, EnemyAI.whenFollowing);
-
-			//define transitions
-			stateMachine.addStateChange(EnemyState.Idle, EnemyState.Wandering, EnemyState.Wandering);
-			stateMachine.addStateChange(EnemyState.Wandering, EnemyState.Following, EnemyState.Following);
-			stateMachine.addStateChange(EnemyState.Following, EnemyState.Wandering, EnemyState.Wandering);
-
-			StateContainer<EnemyState, EnemyState> stateContainer = new StateContainer<EnemyState, EnemyState>();
-			stateContainer.StateMachine = stateMachine;
-			n_EcsInstance.entity_manager.add_component(e, stateContainer);
-
-			//create ACB component
-			BusAgent busAgent = new BusAgent();
-			busAgent.Agent = ResourcePool.createAgent ();
-			busAgent.Agent.Entity = e;
-			busAgent.Agent.Init = EnemyAI.init;
-			busAgent.Agent.Run = EnemyAI.run;
-			n_EcsInstance.entity_manager.add_component(e, busAgent);
 
 			//create avatar
 			n_EcsInstance.entity_manager.add_component(e, AnimationFactory.createAvatar (characterDef.AvatarDef.Name));

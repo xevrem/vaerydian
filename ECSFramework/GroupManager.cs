@@ -34,6 +34,7 @@ namespace ECSFramework
 
 		public Bag<Entity> get_group(string grouo){
 			//TODO
+			return new Bag<Entity>();
 		}
 	}
 }

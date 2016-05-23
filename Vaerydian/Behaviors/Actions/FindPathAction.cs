@@ -22,9 +22,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using BehaviorLibrary;
-using BehaviorLibrary.Components;
-//using BehaviorLibrary.Components.Actions;
+using BehaviorLib;
+using BehaviorLib.Components;
+//using BehaviorLib.Components.Actions;
 
 using Microsoft.Xna.Framework;
 

@@ -34,10 +34,10 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            t_TriggerMapper = new ComponentMapper(new Trigger(), e_ECSInstance);
+            t_TriggerMapper = new ComponentMapper(new Trigger(), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
             
         }
@@ -47,13 +47,13 @@ namespace Vaerydian.Systems.Update
             Trigger trigger = (Trigger)t_TriggerMapper.get(entity);
 
             //update delay time
-            trigger.ElapsedTimeDelay += e_ECSInstance.ElapsedTime;
+            trigger.ElapsedTimeDelay += ecs_instance.ElapsedTime;
 
             //is the trigger ready to fire?
             if (trigger.ElapsedTimeDelay >= trigger.TimeDelay)
             {
                 //update recurring time
-                trigger.ElapsedTimeRecurring += e_ECSInstance.ElapsedTime;
+                trigger.ElapsedTimeRecurring += ecs_instance.ElapsedTime;
 
                 //if the trigger has not fired yet, fire it
                 if (!trigger.HasFired)
@@ -70,7 +70,7 @@ namespace Vaerydian.Systems.Update
             //attempt to fire trigger
             if (trigger.IsActive)
             {
-                trigger.fire(e_ECSInstance);
+                trigger.fire(ecs_instance);
                 trigger.IsActive = false;
             }
 
@@ -78,11 +78,11 @@ namespace Vaerydian.Systems.Update
             if ((trigger.HasFired && !trigger.IsRecurring) || trigger.KillTriggerNow)
             {
                 trigger.clearAction();
-                e_ECSInstance.deleteEntity(entity);
+                ecs_instance.delete_entity(entity);
             }
         }
 
-        protected override void cleanUp(Bag<Entity> entities)
+        public override void cleanUp(Bag<Entity> entities)
         {
             
         }

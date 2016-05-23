@@ -48,7 +48,7 @@ namespace Vaerydian.Screens
 
     class StartScreen : Screen
     {
-        private ECSInstance s_ECSInstance;
+		private ECSInstance ecs_instance;
         private GameContainer s_Container;
 
         private EntitySystem s_UiUpdateSystem;
@@ -67,16 +67,16 @@ namespace Vaerydian.Screens
             base.Initialize();
 
             //setup instnace and container
-            s_ECSInstance = new ECSInstance();
+            ecs_instance = new ECSInstance();
             s_Container = ScreenManager.GameContainer;
 
 			UIFactory.Container = ScreenManager.GameContainer;
-			UIFactory.ECSInstance = s_ECSInstance;
+			UIFactory.ecs_instance = ecs_instance;
 
             //define and init systems
-            s_UiUpdateSystem = s_ecsInstance.system_manager.set_system(new UIUpdateSystem(), new UserInterface());
-            s_UiDrawSystem = s_ecsInstance.system_manager.set_system(new UIDrawSystem(s_Container.ContentManager, s_Container.GraphicsDevice), new UserInterface());
-            s_ECSInstance.SystemManager.initializeSystems();
+            s_UiUpdateSystem = ecs_instance.system_manager.set_system(new UIUpdateSystem(), new UserInterface());
+			s_UiDrawSystem = ecs_instance.system_manager.set_system(new UIDrawSystem(s_Container.ContentManager, s_Container.GraphicsDevice), new UserInterface());
+            ecs_instance.system_manager.initialize_systems();
 
 			//setup json manager
 			s_JsonManager = new JsonManager();
@@ -91,7 +91,7 @@ namespace Vaerydian.Screens
 
             
             //create menu
-            Entity e = s_ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             int border = 10;
             int spacing = 5;
@@ -100,7 +100,7 @@ namespace Vaerydian.Screens
             Point screen = new Point(s_Container.GraphicsDevice.Viewport.Width,s_Container.GraphicsDevice.Viewport.Height);
             Point location = new Point(screen.X / 2 - (width + 2 * border) / 2, screen.Y / 2);
 
-            s_ButtonMenu = new ButtonMenu(e, null, s_ECSInstance, 3, location, height, width, border, spacing);
+            s_ButtonMenu = new ButtonMenu(e, null, ecs_instance, 3, location, height, width, border, spacing);
 
 
             s_ButtonMenu.init();
@@ -160,9 +160,9 @@ namespace Vaerydian.Screens
 
             UserInterface ui = new UserInterface(s_ButtonMenu.Form);
 
-            s_ECSInstance.ComponentManager.addComponent(e, ui);
+            ecs_instance.component_manager.add_component(e, ui);
 
-            s_ECSInstance.refresh(e);
+            ecs_instance.refresh(e);
 
 			//load the json start screen file
 			s_json = s_JsonManager.loadJSON("./Content/json/start_screen.v");
@@ -171,17 +171,17 @@ namespace Vaerydian.Screens
             s_Frame = UIFactory.createMousePointer(InputManager.getMousePositionPoint(), 10, 10, "pointer", OnMousePointerUpdate);
 
             //early entity reslove
-            s_ECSInstance.resolveEntities();
+            ecs_instance.resolve_entities();
 
             //load system content
-            s_ECSInstance.SystemManager.systemsLoadContent();
+            ecs_instance.system_manager.systems_load_content();
         }
 
         public override void UnloadContent()
         {
             base.UnloadContent();
 
-            s_ECSInstance.cleanUp();
+            ecs_instance.cleanUp();
 
             GC.Collect();
         }
@@ -211,7 +211,7 @@ namespace Vaerydian.Screens
             s_UiDrawSystem.process();
         }
 
-        private void OnMouseClickNewGame(IControl control, InterfaceArgs args) 
+        private void OnMouseClickNewGame(Control control, InterfaceArgs args) 
         {
             //dispose of this screen
             this.ScreenManager.removeScreen(this);
@@ -227,7 +227,7 @@ namespace Vaerydian.Screens
 			NewLoadingScreen.Load(this.ScreenManager, true, new GameScreen(true,GameConfig.StartDefs.MapType,parameters));
         }
 
-        private void OnMouseClickWorldGen(IControl control, InterfaceArgs args)
+        private void OnMouseClickWorldGen(Control control, InterfaceArgs args)
         {
             //dispose of this screen
             this.ScreenManager.removeScreen(this);
@@ -238,15 +238,15 @@ namespace Vaerydian.Screens
 			NewLoadingScreen.Load(this.ScreenManager,true,new WorldScreen());
         }
 
-        private void OnMouseClickExit(IControl control, InterfaceArgs args)
+        private void OnMouseClickExit(Control control, InterfaceArgs args)
         {
             //tell the input manager that the player wants to quit
             InputManager.YesExit = true;
         }
 
-        private void OnMousePointerUpdate(IControl control, InterfaceArgs args)
+        private void OnMousePointerUpdate(Control control, InterfaceArgs args)
         {
-            control.Bounds = new Rectangle(args.InputStateContainer.CurrentMousePosition.X, args.InputStateContainer.CurrentMousePosition.Y, 10, 10);
+            control.bounds = new Rectangle(args.InputStateContainer.CurrentMousePosition.X, args.InputStateContainer.CurrentMousePosition.Y, 10, 10);
         }
 
     }

@@ -52,13 +52,9 @@ using Glimpse.Systems;
 using Glimpse.Components;
 using Glimpse.Managers;
 
-using AgentComponentBus.Core;
-using AgentComponentBus.Components;
-using AgentComponentBus.Systems;
 using Vaerydian.Utils;
 using Vaerydian.Sessions;
 using Vaerydian.Maps;
-using Vaerydian.ACB;
 
 
 namespace Vaerydian.Screens
@@ -108,15 +104,6 @@ namespace Vaerydian.Screens
         private EntitySystem floatingTextDisplaySystem;
         private EntitySystem quadTreeDebugRenderSystem;
         private EntitySystem uiDrawSystem;
-
-        //ACB systems
-        private EntitySystem busCommitSystem;
-        private EntitySystem busRetrieveSystem;
-        private EntitySystem busRegistrationSystem;
-		private EntitySystem busSyncOpSystem;
-
-        private TaskWorker taskWorker;
-        private Thread twThread;
 
         //private EntityFactory entityFactory;
         private NPCFactory npcFactory;
@@ -188,25 +175,17 @@ namespace Vaerydian.Screens
 			//setup factories
 			AnimationFactory.ECSInstance = ecsInstance;
 			ActionFactory.ECSInstance = ecsInstance;
-			AgentFactory.ECSInstance = ecsInstance;
-			EntityFactory.ECSInstance = ecsInstance;
+
+			EntityFactory.ecs_instance = ecsInstance;
 			EntityFactory.GameContainer = gameContainer;
 			UtilFactory.ECSInstance = ecsInstance;
 			UtilFactory.Container = gameContainer;
-			UIFactory.ECSInstance = ecsInstance;
+			UIFactory.ecs_instance = ecsInstance;
 			UIFactory.Container = gameContainer;
             
-			ResourcePool.ECSInstance = ecsInstance;
 
-			EnemyAI.ECSInstance = ecsInstance;
 
-            taskWorker = new TaskWorker();
-            taskWorker.initialize();
-            taskWorker.MaxTasksPerCycle = 10;
-			taskWorker.MaxEventsPerCycle = 10;
-			taskWorker.MaxCallBacksPerCycle = 10;
-			taskWorker.MaxTimeInTicks = 1000L;
-			taskWorker.SleepTime = new TimeSpan (160000L);
+           
 
             //create & register systems
             //register update systems
@@ -247,11 +226,6 @@ namespace Vaerydian.Screens
             uiDrawSystem = ecsInstance.system_manager.set_system(new UIDrawSystem(gameContainer.ContentManager, gameContainer.GraphicsDevice), new UserInterface());
 
 
-            //bus setup
-            busRegistrationSystem = ecsInstance.system_manager.set_system(new BusRegistrationSystem(), new BusAgent());
-            busCommitSystem = ecsInstance.system_manager.set_system(new BusCommitSystem(), new BusDataCommit());
-            busRetrieveSystem = ecsInstance.system_manager.set_system(new BusRetrieveSystem(), new BusDataRetrieval());
-			busSyncOpSystem = ecsInstance.system_manager.set_system (new SyncOperationSystem(), new SyncOperation ());
 
             //any additional component registration
             ecsInstance.component_manager.register_component_type(new Vaerydian.Components.Graphical.ViewPort());
@@ -275,7 +249,6 @@ namespace Vaerydian.Screens
             ecsInstance.component_manager.register_component_type(new Aggrivation());
 			ecsInstance.component_manager.register_component_type(new Audio());
             ecsInstance.component_manager.register_component_type(new Vaerydian.Components.Utils.Path());
-            ecsInstance.component_manager.register_component_type(new StateContainer<EnemyState, EnemyState>());
 			ecsInstance.component_manager.register_component_type (new Light ());
 
             //initialize all systems
@@ -411,8 +384,6 @@ namespace Vaerydian.Screens
 
             //setup bus components
 
-            twThread = new Thread(taskWorker.runByCount);
-            twThread.Start();
                 
         }
 
@@ -423,12 +394,6 @@ namespace Vaerydian.Screens
             Console.Out.WriteLine("LEAVING LEVEL...");
 
             ecsInstance.clean_up();
-
-            taskWorker.shutdown();
-
-            twThread.Join();
-
-            ResourcePool.cleanup();
 
             GC.Collect();
         }
@@ -448,11 +413,11 @@ namespace Vaerydian.Screens
 
 				//set skill level
 				Skills skills = new Skills ();
-				int skilllevel = ((Skills)ecsInstance.component_manager.getComponent (player, skills.getTypeId ())).Ranged.Value;
+				int skilllevel = ((Skills)ecsInstance.component_manager.get_component (player, skills.getTypeId ())).Ranged.Value;
                 
 				//set seed
 				Position pos = new Position ();
-				pos = (Position)ecsInstance.ComponentManager.getComponent (player, pos.getTypeId ());
+				pos = (Position)ecsInstance.component_manager.get_component (player, pos.getTypeId ());
 				int x = (int)(pos.Pos.X + pos.Offset.X) / 32;
 				int y = (int)(pos.Pos.Y + pos.Offset.Y) / 32;
 
@@ -530,7 +495,7 @@ namespace Vaerydian.Screens
             ecsInstance.ElapsedTime = gameTime.ElapsedGameTime.Milliseconds;
 
             //resolve any entity updates as needed
-            ecsInstance.resolveEntities();
+            ecsInstance.resolve_entities();
 
             //process systems
             playerInputSystem.process();
@@ -557,14 +522,8 @@ namespace Vaerydian.Screens
             //process user interfaces;
             uiUpdateSystem.process();
 
-            //run bus systems
-            busRegistrationSystem.process();
-            busCommitSystem.process();
-            busRetrieveSystem.process();
-			busSyncOpSystem.process();
 
 			prevCycles = currentCycles;
-			currentCycles = taskWorker.Cycles;
 			elapsedCycles = currentCycles - prevCycles;
         }
 
@@ -623,10 +582,7 @@ namespace Vaerydian.Screens
 
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
-            spriteBatch.DrawString(FontManager.Fonts["General"], "Entities: " + ecsInstance.EntityManager.getEntityCount(), new Vector2(0, 14), Color.Red);
-			spriteBatch.DrawString(FontManager.Fonts["General"], "Tasks: " + ResourcePool.Tasks.Count, new Vector2(0, 28), Color.Red);
-			spriteBatch.DrawString(FontManager.Fonts["General"], "Events: " + ResourcePool.Events.Count, new Vector2(0, 42), Color.Red);
-			spriteBatch.DrawString(FontManager.Fonts["General"], "CallBacks: " + ResourcePool.CallBacks.Count, new Vector2(0, 56), Color.Red);
+            spriteBatch.DrawString(FontManager.fonts["General"], "Entities: " + ecsInstance.entity_manager.get_entity_count(), new Vector2(0, 14), Color.Red);
 
 
             spriteBatch.End();

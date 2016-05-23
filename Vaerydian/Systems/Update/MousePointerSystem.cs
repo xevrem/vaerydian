@@ -47,16 +47,16 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            m_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            m_ViewPortMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
+            m_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            m_ViewPortMapper = new ComponentMapper(new ViewPort(), ecs_instance);
         }
 
-        protected  override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            m_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
+            m_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

@@ -59,40 +59,40 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            p_ProjectileMapper = new ComponentMapper(new Projectile(), e_ECSInstance);
-            p_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            p_VelocityMapper = new ComponentMapper(new Velocity(), e_ECSInstance);
-            p_HeadingMapper = new ComponentMapper(new Heading(), e_ECSInstance);
-            p_MapCollidableMapper = new ComponentMapper(new MapCollidable(), e_ECSInstance);
-            p_TransformMapper = new ComponentMapper(new Transform(), e_ECSInstance);
-            p_SpatialMapper = new ComponentMapper(new SpatialPartition(), e_ECSInstance);
-            p_InteractionMapper = new ComponentMapper(new Interactable(), e_ECSInstance);
-            p_HealthMapper = new ComponentMapper(new Health(), e_ECSInstance);
-            p_FactionMapper = new ComponentMapper(new Factions(), e_ECSInstance);
-            p_LifeMapper = new ComponentMapper(new Life(), e_ECSInstance);
+            p_ProjectileMapper = new ComponentMapper(new Projectile(), ecs_instance);
+            p_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            p_VelocityMapper = new ComponentMapper(new Velocity(), ecs_instance);
+            p_HeadingMapper = new ComponentMapper(new Heading(), ecs_instance);
+            p_MapCollidableMapper = new ComponentMapper(new MapCollidable(), ecs_instance);
+            p_TransformMapper = new ComponentMapper(new Transform(), ecs_instance);
+            p_SpatialMapper = new ComponentMapper(new SpatialPartition(), ecs_instance);
+            p_InteractionMapper = new ComponentMapper(new Interactable(), ecs_instance);
+            p_HealthMapper = new ComponentMapper(new Health(), ecs_instance);
+            p_FactionMapper = new ComponentMapper(new Factions(), ecs_instance);
+            p_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
 
 
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            p_Spatial = e_ECSInstance.TagManager.getEntityByTag("SPATIAL");
+            p_Spatial = ecs_instance.tag_manager.get_entity_by_tag("SPATIAL");
 
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {
                        
             Projectile projectile = (Projectile)p_ProjectileMapper.get(entity);
 
-            projectile.ElapsedTime += e_ECSInstance.ElapsedTime;
+            projectile.ElapsedTime += ecs_instance.ElapsedTime;
 
             //is it time for the projectile to die?
             if (projectile.ElapsedTime >= projectile.LifeTime)
             {
-                e_ECSInstance.deleteEntity(entity);
+                ecs_instance.delete_entity(entity);
                 return;
             }
                 
@@ -157,7 +157,7 @@ namespace Vaerydian.Systems.Update
 
 
                                     //destory yourself
-                                    e_ECSInstance.deleteEntity(entity);
+                                    ecs_instance.delete_entity(entity);
                                     return;
                                 }
                             }
@@ -188,7 +188,7 @@ namespace Vaerydian.Systems.Update
                     
 					UtilFactory.createSound("audio\\effects\\hitwall", true, 0.5f);
 
-                    e_ECSInstance.deleteEntity(entity);
+                    ecs_instance.delete_entity(entity);
                 }
             }
 

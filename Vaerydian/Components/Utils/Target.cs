@@ -42,7 +42,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Utils
 {
-	public class Target : IComponent
+	public class Target : Component
 	{
 		private static int t_TypeID;
 		private int t_EntityID;

@@ -50,7 +50,7 @@ namespace Vaerydian.Components.Characters
     }
 
 
-    class Award : IComponent
+    class Award : Component
     {
         private static int v_TypeID;
         private int v_EntityID;

@@ -29,7 +29,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Utils
 {
-    class StateContainer<TState, TTrigger> : IComponent where TState : struct, IComparable, IConvertible, IFormattable
+    class StateContainer<TState, TTrigger> : Component where TState : struct, IComparable, IConvertible, IFormattable
     {
         private static int s_TypeID;
 

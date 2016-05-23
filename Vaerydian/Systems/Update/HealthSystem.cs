@@ -44,18 +44,18 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            h_HealthMapper = new ComponentMapper(new Health(), e_ECSInstance);
-            h_LifeMapper = new ComponentMapper(new Life(), e_ECSInstance);
-            h_AggroMapper = new ComponentMapper(new Aggrivation(), e_ECSInstance);
-            h_InteractionMapper = new ComponentMapper(new Interactable(), e_ECSInstance);
+            h_HealthMapper = new ComponentMapper(new Health(), ecs_instance);
+            h_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
+            h_AggroMapper = new ComponentMapper(new Aggrivation(), ecs_instance);
+            h_InteractionMapper = new ComponentMapper(new Interactable(), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
             
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {
@@ -99,7 +99,7 @@ namespace Vaerydian.Systems.Update
                 return;
             }
 
-            health.TimeSinceLastRecover += e_ECSInstance.ElapsedTime;
+            health.TimeSinceLastRecover += ecs_instance.ElapsedTime;
 
             if (health.TimeSinceLastRecover > health.RecoveryRate)
             {

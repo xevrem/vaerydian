@@ -30,7 +30,7 @@ namespace Vaerydian.Components.Characters
 		public int DeathLongevity;
 	}
 
-    class Life : IComponent
+    class Life : Component
     {
 
         private static int l_TypeID;

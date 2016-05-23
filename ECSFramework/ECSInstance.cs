@@ -30,10 +30,11 @@ namespace ECSFramework
 		public TagManager tag_manager;
 		public GroupManager group_manager;
 
+		public int TotalTime;
+		public int ElapsedTime;
+
 		public ECSInstance ()
 		{
-
-
 
 		}
 
@@ -42,12 +43,15 @@ namespace ECSFramework
 			return new Entity();
 		}
 
-		public void refresh(){
+		public void refresh(Entity e){
 			//TODO
 		}
 
 		public void delete_entity(Entity e){
 			//TODO
+		}
+
+		public void resolve_entities(){
 		}
 
 		public void resolve_entities(Entity e){

@@ -61,10 +61,10 @@ namespace Vaerydian.Systems.Draw
         public override void initialize()
         {
             //s_ShadingEffect.CurrentTechnique = s_ShadingEffect.Techniques["PointLight"];
-            s_GeometryMapper = new ComponentMapper(new GeometryMap(), e_ECSInstance);
-            s_LightMapper = new ComponentMapper(new Light(), e_ECSInstance);
-            s_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            s_ViewPortMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
+            s_GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
+            s_LightMapper = new ComponentMapper(new Light(), ecs_instance);
+            s_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            s_ViewPortMapper = new ComponentMapper(new ViewPort(), ecs_instance);
 
             //setup vertex buffer
             s_Vertices = new VertexPositionColorTexture[4];
@@ -85,14 +85,14 @@ namespace Vaerydian.Systems.Draw
             s_BlendState.AlphaDestinationBlend = Blend.One;
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
             s_ShadingEffect = s_Container.ContentManager.Load<Effect>("effects\\Shading");
-            s_GeometryMap = e_ECSInstance.TagManager.getEntityByTag("GEOMETRY");
-            s_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
+            s_GeometryMap = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
+            s_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void begin()
         {

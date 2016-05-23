@@ -28,7 +28,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Spatials
 {
-    class SpatialPartition : IComponent
+    class SpatialPartition : Component
     {
         private static int s_TypeID;
         private int s_EntityID;

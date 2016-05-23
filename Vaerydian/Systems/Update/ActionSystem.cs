@@ -36,10 +36,10 @@ namespace Vaerydian.Systems.Update
 
 		public override void initialize ()
 		{
-			a_ActionMapper = new ComponentMapper (new VAction (), e_ECSInstance);
+			a_ActionMapper = new ComponentMapper (new VAction (), ecs_instance);
 		}
 
-		protected override void preLoadContent (Bag<Entity> entities)
+		public override void preLoadContent (Bag<Entity> entities)
 		{
 			//throw new System.NotImplementedException ();
 		}
@@ -50,7 +50,7 @@ namespace Vaerydian.Systems.Update
 
 			action.doAction();
 
-			e_ECSInstance.deleteEntity (entity);
+			ecs_instance.delete_entity (entity);
 		}
 
 		protected override void removed (Entity entity)
@@ -58,7 +58,7 @@ namespace Vaerydian.Systems.Update
 			base.removed (entity);
 		}
 
-		protected override void cleanUp (Bag<Entity> entities)
+		public override void cleanUp (Bag<Entity> entities)
 		{
 			//do nothing for now
 		}

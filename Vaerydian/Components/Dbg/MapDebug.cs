@@ -29,7 +29,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Dbg
 {
-    public class MapDebug : IComponent
+    public class MapDebug : Component
     {
 
         private static int m_TypeID;

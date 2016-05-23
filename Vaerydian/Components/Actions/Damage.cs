@@ -28,7 +28,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Actions
 {
-    class Damage : IComponent
+    class Damage : Component
     {
         private static int d_TypeID;
         private int d_EntityID;

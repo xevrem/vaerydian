@@ -92,25 +92,25 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            p_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            p_VelocityMapper = new ComponentMapper(new Velocity(), e_ECSInstance);
-            p_HeadingMapper = new ComponentMapper(new Heading(), e_ECSInstance);
-            p_LightMapper = new ComponentMapper(new Light(), e_ECSInstance);
-            p_TransformMapper = new ComponentMapper(new Transform(), e_ECSInstance);
-            p_CharacterMapper = new ComponentMapper(new Character(), e_ECSInstance);
-            p_SpatialMapper = new ComponentMapper(new SpatialPartition(), e_ECSInstance);
-			p_TargetMapper = new ComponentMapper (new Target (), e_ECSInstance);
-			p_SpriteMapper = new ComponentMapper (new Sprite (), e_ECSInstance);
+            p_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            p_VelocityMapper = new ComponentMapper(new Velocity(), ecs_instance);
+            p_HeadingMapper = new ComponentMapper(new Heading(), ecs_instance);
+            p_LightMapper = new ComponentMapper(new Light(), ecs_instance);
+            p_TransformMapper = new ComponentMapper(new Transform(), ecs_instance);
+            p_CharacterMapper = new ComponentMapper(new Character(), ecs_instance);
+            p_SpatialMapper = new ComponentMapper(new SpatialPartition(), ecs_instance);
+			p_TargetMapper = new ComponentMapper (new Target (), ecs_instance);
+			p_SpriteMapper = new ComponentMapper (new Sprite (), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            p_Mouse = e_ECSInstance.TagManager.getEntityByTag("MOUSE");
-            p_Spatial = e_ECSInstance.TagManager.getEntityByTag("SPATIAL");
-			p_Target = e_ECSInstance.TagManager.getEntityByTag ("TARGET");
+            p_Mouse = ecs_instance.tag_manager.get_entity_by_tag("MOUSE");
+            p_Spatial = ecs_instance.tag_manager.get_entity_by_tag("SPATIAL");
+			p_Target = ecs_instance.tag_manager.get_entity_by_tag ("TARGET");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {
@@ -161,7 +161,7 @@ namespace Vaerydian.Systems.Update
                 dirCount++;
 
                 //sprite.Y = MOVE_UP;
-                //sprite.X = p_Movement.updateFrame(e_ECSInstance.ElapsedTime);
+                //sprite.X = p_Movement.updateFrame(ecs_instance.ElapsedTime);
                 p_Moved = true;
             }
             
@@ -174,7 +174,7 @@ namespace Vaerydian.Systems.Update
                 dirCount++;
 
                 //sprite.Y = MOVE_DOWN;
-                //sprite.X = p_Movement.updateFrame(e_ECSInstance.ElapsedTime);
+                //sprite.X = p_Movement.updateFrame(ecs_instance.ElapsedTime);
                 p_Moved = true;
             }
             
@@ -187,7 +187,7 @@ namespace Vaerydian.Systems.Update
                 dirCount++;
 
                 //sprite.Y = MOVE_LEFT;
-                //sprite.X = p_Movement.updateFrame(e_ECSInstance.ElapsedTime);
+                //sprite.X = p_Movement.updateFrame(ecs_instance.ElapsedTime);
                 p_Moved = true;
             }
             
@@ -200,7 +200,7 @@ namespace Vaerydian.Systems.Update
                 dirCount++;
 
                 //sprite.Y = MOVE_RIGHT;
-                //sprite.X = p_Movement.updateFrame(e_ECSInstance.ElapsedTime);
+                //sprite.X = p_Movement.updateFrame(ecs_instance.ElapsedTime);
                 p_Moved = true;
             }
 
@@ -230,7 +230,7 @@ namespace Vaerydian.Systems.Update
             else if (angle >= 5.890f || angle < .393f) { sprite.Row = MOVE_RIGHT; }
 
             if(p_Moved)
-                sprite.Column = p_Movement.updateFrame(e_ECSInstance.ElapsedTime);
+                sprite.Column = p_Movement.updateFrame(ecs_instance.ElapsedTime);
             */
 
             if (p_Moved)
@@ -243,7 +243,7 @@ namespace Vaerydian.Systems.Update
             /*
             if (InputManager.isLeftButtonClicked())
             {
-                EntityFactory ef = new EntityFactory(e_ECSInstance);
+                EntityFactory ef = new EntityFactory(ecs_instance);
 
                 Vector2 dir = mPosition.getPosition() + mPosition.Offset - new Vector2(16) - pos;
 
@@ -255,11 +255,11 @@ namespace Vaerydian.Systems.Update
 
                 ef.createCollidingProjectile(pos + dir * 16, dir, 10f, 1000, ef.createLight(true, 35, new Vector3(pos + position.Offset, 10), 0.7f, Color.Purple.ToVector4()), trans, entity);
 
-                UtilFactory uf = new UtilFactory(e_ECSInstance);
+                UtilFactory uf = new UtilFactory(ecs_instance);
                 uf.createSound("audio\\effects\\fire", true,0.5f);
             }*/
 
-            p_LastFired += e_ECSInstance.ElapsedTime;
+            p_LastFired += ecs_instance.ElapsedTime;
 
             if (InputManager.isLeftButtonDown() && (p_LastFired >= 3*p_FireRate))
             {
@@ -316,7 +316,7 @@ namespace Vaerydian.Systems.Update
 					p_StatWindowOpen = true;
 				}else
 				{
-					e_ECSInstance.deleteEntity(p_StatWindow);
+					ecs_instance.delete_entity(p_StatWindow);
 					p_StatWindowOpen = false;
 				}
 			}
@@ -326,7 +326,7 @@ namespace Vaerydian.Systems.Update
 					p_InvWindow = UIFactory.createInventoryWindow (entity, new Point (300, 100), new Point (300, 300), 20, 10, 10);
 					p_InvWindowOpen = true;
 				}else {
-					e_ECSInstance.deleteEntity (p_InvWindow);
+					ecs_instance.delete_entity (p_InvWindow);
 					p_InvWindowOpen = false;
 				}
 			}
@@ -404,7 +404,7 @@ namespace Vaerydian.Systems.Update
             if(InputManager.isKeyPressed(Keys.P))
             {
 
-                NPCFactory ef = new NPCFactory(e_ECSInstance);
+                NPCFactory ef = new NPCFactory(ecs_instance);
                 ef.createFollower(mPosition.Pos + mPosition.Offset - new Vector2(16), entity, rand.Next(50,300));
 
             }
@@ -412,7 +412,7 @@ namespace Vaerydian.Systems.Update
             if (InputManager.isKeyToggled(Keys.O))
             {
 
-                NPCFactory ef = new NPCFactory(e_ECSInstance);
+                NPCFactory ef = new NPCFactory(ecs_instance);
                 //ef.createBatEnemy(mPosition.Pos + mPosition.Offset - new Vector2(16),15);
                 CharacterDef cDef = GameConfig.CharacterDefs["BAT"];
                 cDef.SkillLevel = 15;

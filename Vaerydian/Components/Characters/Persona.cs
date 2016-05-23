@@ -28,7 +28,7 @@ namespace Vaerydian.Components.Characters
     /// <summary>
     /// contains the entitie's persona
     /// </summary>
-    class Persona : IComponent
+    class Persona : Component
     {
         private static int p_TypeID;
         private int p_EntityID;

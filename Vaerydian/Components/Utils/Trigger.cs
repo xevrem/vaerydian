@@ -29,7 +29,7 @@ namespace Vaerydian.Components.Utils
 
     public delegate void TriggerActionHandler(ECSInstance ecsInstance, Object[] parameters);
 
-    public class Trigger : IComponent
+    public class Trigger : Component
     {
         private static int t_TypeID;
         private int t_EntityID;

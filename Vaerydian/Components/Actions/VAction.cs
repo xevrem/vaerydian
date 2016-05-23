@@ -24,7 +24,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Actions
 {
-	public class VAction : IComponent
+	public class VAction : Component
 	{
 
         private static int a_TypeID;

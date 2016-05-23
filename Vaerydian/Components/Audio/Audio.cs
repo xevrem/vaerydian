@@ -26,7 +26,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Audio
 {
-    class Audio : IComponent
+    class Audio : Component
     {
 
         private static int a_TypeID;

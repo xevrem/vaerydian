@@ -82,7 +82,6 @@
     <Compile Include="Components\Utils\Path.cs" />
     <Compile Include="Components\Utils\StateContainer.cs" />
     <Compile Include="Components\Utils\Trigger.cs" />
-    <Compile Include="Factories\AgentFactory.cs" />
     <Compile Include="Factories\AnimationFactory.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Factories\ItemFactory.cs" />
@@ -176,21 +175,14 @@
     <Compile Include="Characters\Skill.cs" />
     <Compile Include="Characters\Statistic.cs" />
     <Compile Include="Utils\AwardUtils.cs" />
-    <Compile Include="ACB\EnemyAI.cs" />
     <Compile Include="Systems\Update\TargetingSystem.cs" />
     <Compile Include="Components\Utils\Target.cs" />
     <Compile Include="Generators\ItemGen.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Glimpse">
-      <HintPath>..\..\Glimpse\Glimpse\bin\Release\Glimpse.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="AgentComponentBus">
-      <HintPath>..\..\AgentComponentBus\AgentComponentBus\bin\Release\AgentComponentBus.dll</HintPath>
-    </Reference>
     <Reference Include="MonoGame.Framework">
-      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\WindowsGL\Release\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.5.1.1679\Assemblies\MacOSX\MonoGame.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -223,6 +215,14 @@
     <ProjectReference Include="..\libnoise\LibNoise.csproj">
       <Project>{031C8CFF-F147-44EA-B7E5-0A5644808A7E}</Project>
       <Name>LibNoise</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\behaviorlib\behaviorlib\behaviorlib.csproj">
+      <Project>{CC824B6F-6145-485F-9604-FB94F0ECACA7}</Project>
+      <Name>behaviorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Glimpse\Glimpse.csproj">
+      <Project>{39ED39A6-AE8F-4E29-A481-1F87F61C40DB}</Project>
+      <Name>Glimpse</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

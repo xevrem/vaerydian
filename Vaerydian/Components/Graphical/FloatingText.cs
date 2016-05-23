@@ -28,7 +28,7 @@ using Microsoft.Xna.Framework;
 
 namespace Vaerydian.Components.Graphical
 {
-    class FloatingText : IComponent
+    class FloatingText : Component
     {
         private static int f_TypeID;
         private int f_EntityID;

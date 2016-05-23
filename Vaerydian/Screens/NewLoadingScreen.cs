@@ -130,9 +130,9 @@ namespace Vaerydian
             // Center the Loading text in the viewport.  
             Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
             Vector2 viewportSize = new Vector2(viewport.Width, viewport.Height);
-            Vector2 textSize = FontManager.Fonts["General"].MeasureString(message);
+			Vector2 textSize = FontManager.fonts["General"].MeasureString(message);
             Vector2 textPosition = (viewportSize - textSize) / 2;
-            Vector2 StatusMessageSize = FontManager.Fonts["General"].MeasureString(n_Screen.LoadingMessage);
+            Vector2 StatusMessageSize = FontManager.fonts["General"].MeasureString(n_Screen.LoadingMessage);
             Vector2 statusPosition = (viewportSize - StatusMessageSize) / 2;
             statusPosition.Y = statusPosition.Y + 40;
 
@@ -140,9 +140,9 @@ namespace Vaerydian
 
             n_SpriteBatch.Draw(n_LoadingTexture, n_BackgroundRect, Color.DimGray);
 
-            n_SpriteBatch.DrawString(FontManager.Fonts["General"], message, textPosition, Color.White);
+            n_SpriteBatch.DrawString(FontManager.fonts["General"], message, textPosition, Color.White);
 
-            n_SpriteBatch.DrawString(FontManager.Fonts["General"], n_Screen.LoadingMessage, statusPosition, Color.White);
+            n_SpriteBatch.DrawString(FontManager.fonts["General"], n_Screen.LoadingMessage, statusPosition, Color.White);
 
 			n_SpriteBatch.End();
 		}

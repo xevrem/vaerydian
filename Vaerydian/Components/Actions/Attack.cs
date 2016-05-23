@@ -28,7 +28,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Actions
 {
-    class Attack : IComponent
+    class Attack : Component
     {
         private static int a_TypeID;
         private int a_EntityID;

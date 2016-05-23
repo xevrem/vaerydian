@@ -27,7 +27,7 @@ using Microsoft.Xna.Framework;
 using ECSFramework;
 
 
-using BehaviorLibrary;
+using BehaviorLib;
 
 using Vaerydian.Components;
 using Vaerydian.Components.Characters;
@@ -44,16 +44,16 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            b_BehaviorMapper = new ComponentMapper(new AiBehavior(), e_ECSInstance);
-            b_LifeMapper = new ComponentMapper(new Life(), e_ECSInstance);
+            b_BehaviorMapper = new ComponentMapper(new AiBehavior(), ecs_instance);
+            b_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
 
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

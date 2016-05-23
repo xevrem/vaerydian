@@ -73,7 +73,7 @@ namespace Vaerydian.Components.Items
 		BLASTER
 	}
 
-    class Item : IComponent
+    class Item : Component
     {
         private static int i_TypeID;
         private int i_EntityID;

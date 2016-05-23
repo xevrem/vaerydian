@@ -24,12 +24,12 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 
-using BehaviorLibrary;
-using BehaviorLibrary.Components;
-using BehaviorLibrary.Components.Actions;
-using BehaviorLibrary.Components.Composites;
-using BehaviorLibrary.Components.Conditionals;
-using BehaviorLibrary.Components.Decorators;
+using BehaviorLib;
+using BehaviorLib.Components;
+using BehaviorLib.Components.Actions;
+using BehaviorLib.Components.Composites;
+using BehaviorLib.Components.Conditionals;
+using BehaviorLib.Components.Decorators;
 
 using ECSFramework;
 
@@ -51,7 +51,7 @@ namespace Vaerydian.Behaviors
         private ECSInstance w_ECSInstance;
 
         private Behavior w_Behavior;
-        private RootSelector w_Root;
+		private IndexSelector w_Root;
 
         private Entity w_ThisEntity;
         private Entity w_Target;
@@ -157,58 +157,58 @@ namespace Vaerydian.Behaviors
             playFlee = new BehaviorAction(playFleeSound);
 
 
-            ParallelSequence setPursue = new ParallelSequence(playDetected, setStatePursue);
-            ParallelSequence setFlee = new ParallelSequence(playFlee, setStateFlee);
+            Sequence setPursue = new Sequence(playDetected, setStatePursue);
+            Sequence setFlee = new Sequence(playFlee, setStateFlee);
 
             //initialize sequence
-            ParallelSequence initSeq = new ParallelSequence(init, setStateWander);
+            Sequence initSeq = new Sequence(init, setStateWander);
 
             //if not healthy, flee
-            ParallelSelector healthSel = new ParallelSelector(healthy, new Inverter(setFlee));
+            Selector healthSel = new Selector(healthy, new Inverter(setFlee));
 
             //if target is dead, wander
-            ParallelSelector deadTargetSel = new ParallelSelector(new Inverter(targetDead), setStateWander);
+            Selector deadTargetSel = new Selector(new Inverter(targetDead), setStateWander);
 
             //if not collided, then chose a new direction every second
-            ParallelSequence randWalk = new ParallelSequence(new Inverter(collided), new Timer(elapsedTime, 500, choseDirection));
+            Sequence randWalk = new Sequence(new Inverter(collided), new Timer(elapsedTime, 500, choseDirection));
             
             //if not randomly walking, correct for a collision
-            ParallelSelector walkOrCorrect = new ParallelSelector(randWalk, collideCorrection);
+            Selector walkOrCorrect = new Selector(randWalk, collideCorrection);
             
             //wander sequence, while no hostiles detected, walk around randomly
-            ParallelSequence wanderSeq = new ParallelSequence(new Inverter(new Timer(elapsedTime, 250, detectedHostile)), walkOrCorrect, move, animate);
-            //ParallelSequence wanderSeq = new ParallelSequence(new Inverter(detectedHostile), walkOrCorrect, move, animate);
+            Sequence wanderSeq = new Sequence(new Inverter(new Timer(elapsedTime, 250, detectedHostile)), walkOrCorrect, move, animate);
+            //Sequence wanderSeq = new Sequence(new Inverter(detectedHostile), walkOrCorrect, move, animate);
             
             //wander or change to pursue state88
-            ParallelSelector wanderSel2 = new ParallelSelector(wanderSeq, new Inverter(setPursue));
+            Selector wanderSel2 = new Selector(wanderSeq, new Inverter(setPursue));
 
             //move towards your target
-            ParallelSequence moveTowards = new ParallelSequence(towardsHeading, move, animate);
+            Sequence moveTowards = new Sequence(towardsHeading, move, animate);
             
             //move away from your target
-            ParallelSequence moveAway = new ParallelSequence(new Timer(elapsedTime,250,awayHeading), move, animate);
+            Sequence moveAway = new Sequence(new Timer(elapsedTime,250,awayHeading), move, animate);
             
             //if too far from your target, move towards it
-            ParallelSelector moveTooFar = new ParallelSelector(new Inverter(tooFar), moveTowards);
+            Selector moveTooFar = new Selector(new Inverter(tooFar), moveTowards);
             
             //if too close to your target, move away from it
-            ParallelSelector moveTooClose = new ParallelSelector(new Inverter(tooClose), moveAway);
+            Selector moveTooClose = new Selector(new Inverter(tooClose), moveAway);
             
             //if target isnt dead and you're not too far and not too close, shoot at it
-            ParallelSequence attackSeq = new ParallelSequence(deadTargetSel, new Inverter(tooFar), new Inverter(tooClose), new Timer(elapsedTime, 500, fireShot), animate);
+            Sequence attackSeq = new Sequence(deadTargetSel, new Inverter(tooFar), new Inverter(tooClose), new Timer(elapsedTime, 500, fireShot), animate);
             
             //move towards or away from your target, then attemp to attack it
-            ParallelSequence pursAttackSeq1 = new ParallelSequence(moveTooFar, moveTooClose, attackSeq);
+            Sequence pursAttackSeq1 = new Sequence(moveTooFar, moveTooClose, attackSeq);
             
             //as long as your healthy, pursue and attack your target
-            ParallelSequence pursAttackSeq2 = new ParallelSequence(healthSel, pursAttackSeq1);
+            Sequence pursAttackSeq2 = new Sequence(healthSel, pursAttackSeq1);
 
             //flee sequence, while unhealthy, flee
-            ParallelSequence fleeSeq = new ParallelSequence(new Inverter(healthy), deadTargetSel, new Timer(elapsedTime,250,awayHeading), move, animate);
-            ParallelSelector fleeSel = new ParallelSelector(fleeSeq, setStateWander);
+            Sequence fleeSeq = new Sequence(new Inverter(healthy), deadTargetSel, new Timer(elapsedTime,250,awayHeading), move, animate);
+            Selector fleeSel = new Selector(fleeSeq, setStateWander);
 
             //setup root selector
-            w_Root = new RootSelector(switchBehaviors, initSeq, wanderSel2, pursAttackSeq2, fleeSel); 
+            w_Root = new IndexSelector(switchBehaviors, initSeq, wanderSel2, pursAttackSeq2, fleeSel); 
             
             //set tree reference
             w_Behavior = new Behavior(w_Root);
@@ -260,7 +260,7 @@ namespace Vaerydian.Behaviors
         {
             Position position = (Position)w_PositionMapper.get(w_ThisEntity);
 
-            w_Spatial =  w_ECSInstance.TagManager.getEntityByTag("SPATIAL");
+            w_Spatial =  w_ECSInstance.tag_manager.get_entity_by_tag("SPATIAL");
             SpatialPartition spatial = (SpatialPartition)w_SpatialMapper.get(w_Spatial);
 
             Vector2 pos = position.Pos;
@@ -273,7 +273,7 @@ namespace Vaerydian.Behaviors
                         
             w_LastNode = spatial.QuadTree.setContentAtLocation(w_ThisEntity, pos + new Vector2(16,16));
 
-            w_Camera = w_ECSInstance.TagManager.getEntityByTag("CAMERA");
+            w_Camera = w_ECSInstance.tag_manager.get_entity_by_tag("CAMERA");
 
             w_EntityFaction = (Factions)w_FactionMapper.get(w_ThisEntity);
 
@@ -672,7 +672,7 @@ namespace Vaerydian.Behaviors
             Position pos = (Position)w_PositionMapper.get(w_ThisEntity);
             ViewPort camera = (ViewPort)w_ViewPortMapper.get(w_Camera);
 
-			UIFactory.createTimedDialogWindow(w_ThisEntity, "(wimper)", pos.Pos - camera.getOrigin(), "NPC-" + w_ThisEntity.Id, 1000);
+			UIFactory.createTimedDialogWindow(w_ThisEntity, "(wimper)", pos.Pos - camera.getOrigin(), "NPC-" + w_ThisEntity.id, 1000);
 
             return BehaviorReturnCode.Success;
         }
@@ -689,7 +689,7 @@ namespace Vaerydian.Behaviors
             Position pos = (Position)w_PositionMapper.get(w_ThisEntity);
             ViewPort camera = (ViewPort)w_ViewPortMapper.get(w_Camera);
 
-			UIFactory.createTimedDialogWindow(w_ThisEntity, "SCREEE!", pos.Pos - camera.getOrigin(), "NPC-" + w_ThisEntity.Id, 1000);
+			UIFactory.createTimedDialogWindow(w_ThisEntity, "SCREEE!", pos.Pos - camera.getOrigin(), "NPC-" + w_ThisEntity.id, 1000);
 
             return BehaviorReturnCode.Success;
         }

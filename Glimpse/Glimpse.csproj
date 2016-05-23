@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{39ED39A6-AE8F-4E29-A481-1F87F61C40DB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Glimpse</RootNamespace>
+    <AssemblyName>Glimpse</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.5.1.1679\Assemblies\MacOSX\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controls\GForm.cs" />
+    <Compile Include="Input\InputManager.cs" />
+    <Compile Include="Components\UserInterface.cs" />
+    <Compile Include="Managers\FontManager.cs" />
+    <Compile Include="Systems\UIUpdateSystem.cs" />
+    <Compile Include="Systems\UIDrawSystem.cs" />
+    <Compile Include="Controls\Control.cs" />
+    <Compile Include="Controls\GLabel.cs" />
+    <Compile Include="Controls\GCanvas.cs" />
+    <Compile Include="Controls\GFrame.cs" />
+    <Compile Include="Controls\GTextBox.cs" />
+    <Compile Include="Controls\GButton.cs" />
+    <Compile Include="Controls\InterfaceArgs.cs" />
+    <Compile Include="Controls\InterfaceHandler.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Input\" />
+    <Folder Include="Systems\" />
+    <Folder Include="Managers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ECSFramework\ECSFramework.csproj">
+      <Project>{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}</Project>
+      <Name>ECSFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

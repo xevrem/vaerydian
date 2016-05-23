@@ -70,19 +70,19 @@ namespace Vaerydian.Systems.Draw
         {
 
             m_RectDict = new Dictionary<short, Rectangle>();
-            m_CaveMapMapper = new ComponentMapper(new GameMap(), e_ECSInstance);
-            m_ViewportMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
-            m_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            m_MapDebugMapper = new ComponentMapper(new MapDebug(), e_ECSInstance);
-            m_GeometryMapper = new ComponentMapper(new GeometryMap(), e_ECSInstance);
+            m_CaveMapMapper = new ComponentMapper(new GameMap(), ecs_instance);
+            m_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            m_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            m_MapDebugMapper = new ComponentMapper(new MapDebug(), ecs_instance);
+            m_GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
         }
         
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            m_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
-            m_Player = e_ECSInstance.TagManager.getEntityByTag("PLAYER");
-            m_MapDebug = e_ECSInstance.TagManager.getEntityByTag("MAP_DEBUG");
-            m_Geometry = e_ECSInstance.TagManager.getEntityByTag("GEOMETRY");
+            m_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
+            m_Player = ecs_instance.tag_manager.get_entity_by_tag("PLAYER");
+            m_MapDebug = ecs_instance.tag_manager.get_entity_by_tag("MAP_DEBUG");
+            m_Geometry = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
 
             m_RectDict.Add(TerrainType_Old.CAVE_FLOOR, new Rectangle(19 * 32, 10 * 32, 32, 32));
             m_RectDict.Add(TerrainType_Old.CAVE_WALL, new Rectangle(18 * 32, 13 * 32, 32, 32));
@@ -92,7 +92,7 @@ namespace Vaerydian.Systems.Draw
             m_TileSize = m_RectDict[TerrainType_Old.CAVE_WALL].Width;
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

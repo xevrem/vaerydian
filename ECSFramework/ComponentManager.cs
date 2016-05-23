@@ -28,7 +28,16 @@ namespace ECSFramework
 		{
 		}
 
-		public void register_component_type(IComponent component){
+		public void register_component_type(Component component){
+			//TODO
+		}
+
+		public Component get_component(Entity e, int component_type){
+			//TODO
+			return default(Component);
+		}
+
+		public void add_component(Entity e, Component c){
 			//TODO
 		}
 	}

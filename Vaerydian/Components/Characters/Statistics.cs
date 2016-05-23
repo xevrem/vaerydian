@@ -39,7 +39,7 @@ namespace Vaerydian.Components.Characters
 		public Statistic Focus;
 	}
 
-    class Statistics : IComponent
+    class Statistics : Component
     {
         private static int a_TypeID;
         private int a_EntityID;

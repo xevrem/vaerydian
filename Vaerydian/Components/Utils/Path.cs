@@ -39,7 +39,7 @@ namespace Vaerydian.Components.Utils
         PathFailed
     }
 
-    class Path : IComponent
+    class Path : Component
     {
         private static int p_TypeID;
 

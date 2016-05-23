@@ -26,7 +26,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Characters
 {
-    class Aggrivation : IComponent
+    class Aggrivation : Component
     {
         private static int a_TypeID;
 

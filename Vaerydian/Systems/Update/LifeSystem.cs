@@ -40,16 +40,16 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            l_LifeMapper = new ComponentMapper(new Life(), e_ECSInstance);
-            l_NPCFactory = new NPCFactory(e_ECSInstance);
+            l_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
+            l_NPCFactory = new NPCFactory(ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            l_Player = e_ECSInstance.TagManager.getEntityByTag("PLAYER");
+            l_Player = ecs_instance.tag_manager.get_entity_by_tag("PLAYER");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {
@@ -66,7 +66,7 @@ namespace Vaerydian.Systems.Update
                 return;
             }
 
-            life.TimeSinceDeath += e_ECSInstance.ElapsedTime;
+            life.TimeSinceDeath += ecs_instance.ElapsedTime;
 
             if (life.TimeSinceDeath > life.DeathLongevity)
             {
@@ -74,7 +74,7 @@ namespace Vaerydian.Systems.Update
                 l_NPCFactory.destroyRelatedEntities(entity);
 
                 //get rid of entity
-                e_ECSInstance.deleteEntity(entity);
+                ecs_instance.delete_entity(entity);
             }
 
 

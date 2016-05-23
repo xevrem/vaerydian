@@ -35,7 +35,7 @@ namespace Vaerydian.Components.Characters
 	}
 
 
-    class Information : IComponent
+    class Information : Component
     {
         private static int i_TypeID;
         private int i_EntityID;

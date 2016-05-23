@@ -26,7 +26,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Spatials
 {
-    public class MousePosition : IComponent
+    public class MousePosition : Component
     {
         private static int m_TypeID;
         private int m_EntityID;

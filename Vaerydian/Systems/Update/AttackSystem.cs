@@ -60,25 +60,25 @@ namespace Vaerydian.Systems.Update
         
         public override void initialize()
         {
-            a_AttackMapper = new ComponentMapper(new Attack(), e_ECSInstance);
-            a_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            a_SkillMapper = new ComponentMapper(new Skills(), e_ECSInstance);
-            a_AttributeMapper = new ComponentMapper(new Statistics(), e_ECSInstance);
-            a_KnowledgeMapper = new ComponentMapper(new Knowledges(), e_ECSInstance);
-            a_EquipmentMapper = new ComponentMapper(new Equipment(), e_ECSInstance);
-            a_ItemMapper = new ComponentMapper(new Item(), e_ECSInstance);
-            a_AggroMapper = new ComponentMapper(new Aggrivation(), e_ECSInstance);
-            a_InfoMapper = new ComponentMapper(new Information(), e_ECSInstance);
-            a_InteractMapper = new ComponentMapper(new Interactable(), e_ECSInstance);
+            a_AttackMapper = new ComponentMapper(new Attack(), ecs_instance);
+            a_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            a_SkillMapper = new ComponentMapper(new Skills(), ecs_instance);
+            a_AttributeMapper = new ComponentMapper(new Statistics(), ecs_instance);
+            a_KnowledgeMapper = new ComponentMapper(new Knowledges(), ecs_instance);
+            a_EquipmentMapper = new ComponentMapper(new Equipment(), ecs_instance);
+            a_ItemMapper = new ComponentMapper(new Item(), ecs_instance);
+            a_AggroMapper = new ComponentMapper(new Aggrivation(), ecs_instance);
+            a_InfoMapper = new ComponentMapper(new Information(), ecs_instance);
+            a_InteractMapper = new ComponentMapper(new Interactable(), ecs_instance);
 
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
             
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
         
         protected override void process(Entity entity)
         {
@@ -109,7 +109,7 @@ namespace Vaerydian.Systems.Update
                     handleAbility(attack);
                     break;
                 default:
-                    e_ECSInstance.deleteEntity(entity);
+                    ecs_instance.delete_entity(entity);
                     break;
             }
         }
@@ -279,7 +279,7 @@ namespace Vaerydian.Systems.Update
 
 
             //remove attack
-            e_ECSInstance.deleteEntity(a_CurrentEntity);
+            ecs_instance.delete_entity(a_CurrentEntity);
         }
 
         /// <summary>
@@ -449,7 +449,7 @@ namespace Vaerydian.Systems.Update
             }
 
             //remove attack
-            e_ECSInstance.deleteEntity(a_CurrentEntity);
+            ecs_instance.delete_entity(a_CurrentEntity);
         }
 
         /// <summary>
@@ -459,7 +459,7 @@ namespace Vaerydian.Systems.Update
         private void handleAbility(Attack attack)
         {
             //remove attack
-            e_ECSInstance.deleteEntity(a_CurrentEntity);
+            ecs_instance.delete_entity(a_CurrentEntity);
         }
     }
 }

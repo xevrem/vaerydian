@@ -57,22 +57,22 @@ namespace Vaerydian.Systems.Draw
 
         public override void initialize()
         {
-            s_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            s_ViewportMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
-            s_SpriteMapper = new ComponentMapper(new Sprite(), e_ECSInstance);
-            s_GeometryMapper = new ComponentMapper(new GeometryMap(), e_ECSInstance);
-            s_TranformMapper = new ComponentMapper(new Transform(), e_ECSInstance); 
+            s_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            s_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            s_SpriteMapper = new ComponentMapper(new Sprite(), ecs_instance);
+            s_GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
+            s_TranformMapper = new ComponentMapper(new Transform(), ecs_instance); 
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
             Sprite sprite;
             String texName;
             
             //pre-load all known textures
-            for (int i = 0; i < entities.Size(); i++)
+            for (int i = 0; i < entities.count; i++)
             {
-                sprite = (Sprite) s_SpriteMapper.get(entities.Get(i));
+                sprite = (Sprite) s_SpriteMapper.get(entities.get(i));
                 texName = sprite.NormalName;
                 if(!s_Normals.ContainsKey(texName))
                     s_Normals.Add(texName, s_Container.ContentManager.Load<Texture2D>(texName));
@@ -81,11 +81,11 @@ namespace Vaerydian.Systems.Draw
             s_Normals.Add("projectile", s_Container.ContentManager.Load<Texture2D>("projectile2"));
 
             //pre-load camera entity reference
-            s_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
-            s_Geometry = e_ECSInstance.TagManager.getEntityByTag("GEOMETRY");
+            s_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
+            s_Geometry = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void added(Entity entity)
         {

@@ -61,19 +61,19 @@ namespace Vaerydian.Systems.Draw
 
         public override void initialize()   
         {
-            d_DamageMapper = new ComponentMapper(new Damage(), e_ECSInstance);
-            d_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            d_ViewPortMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
-            d_FloatMapper = new ComponentMapper(new FloatingText(), e_ECSInstance);
+            d_DamageMapper = new ComponentMapper(new Damage(), ecs_instance);
+            d_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            d_ViewPortMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            d_FloatMapper = new ComponentMapper(new FloatingText(), ecs_instance);
         }
         
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            d_Font = FontManager.Fonts["Damage"];
-            d_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
+            d_Font = FontManager.fonts["Damage"];
+            d_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {
@@ -85,10 +85,10 @@ namespace Vaerydian.Systems.Draw
             else
             {
                 //see if we should destroy this
-                text.ElapsedTime += e_ECSInstance.ElapsedTime;
+                text.ElapsedTime += ecs_instance.ElapsedTime;
                 if (text.ElapsedTime >= text.Lifetime)
                 {
-                    e_ECSInstance.deleteEntity(entity);
+                    ecs_instance.delete_entity(entity);
                     return;
                 }
             }

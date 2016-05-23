@@ -28,7 +28,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Actions
 {
-    class Interactable : IComponent
+    class Interactable : Component
     {
 
         private static int i_TypeID;

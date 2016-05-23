@@ -50,20 +50,20 @@ namespace Vaerydian.Systems.Update
 
         public override void initialize()
         {
-            a_AudioMapper = new ComponentMapper(new Audio(), e_ECSInstance);
+            a_AudioMapper = new ComponentMapper(new Audio(), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            for (int i = 0; i < entities.Size(); i++)
+            for (int i = 0; i < entities.count; i++)
             {
-                Audio audio = (Audio) a_AudioMapper.get(entities.Get(i));
+				Audio audio = (Audio) a_AudioMapper.get(entities.get(i));
                 if(!a_SoundEffects.ContainsKey(audio.SoundEffectName))
                     a_SoundEffects.Add(audio.SoundEffectName, a_Container.ContentManager.Load<SoundEffect>(audio.SoundEffectName));
             }
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void added(Entity entity)
         {
@@ -82,7 +82,7 @@ namespace Vaerydian.Systems.Update
             a_SoundEffects[audio.SoundEffectName].Play(audio.Volume, audio.Pitch, 0f);
 
             audio.Play = false;
-            e_ECSInstance.deleteEntity(entity);
+            ecs_instance.delete_entity(entity);
         }
 
 

@@ -28,9 +28,9 @@ namespace ECSFramework
 		{
 		}
 
-		public EntitySystem set_system(params EntityProcessingSystem[] systems){
+		public EntitySystem set_system(EntitySystem system, params Component[] components){
 			//TODO
-			return new EntitySystem();
+			return system;
 		}
 
 		public void initialize_systems(){

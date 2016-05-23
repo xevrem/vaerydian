@@ -47,7 +47,7 @@ namespace Vaerydian
 
 		#region implemented abstract members of EntitySystem
 
-		protected override void cleanUp (Bag<Entity> entities)
+		public override void cleanUp (Bag<Entity> entities)
 		{
 			//throw new NotImplementedException ();
 		}
@@ -56,14 +56,14 @@ namespace Vaerydian
 		{
 			base.initialize ();
 
-			l_LightMapper = new ComponentMapper (new Light(), e_ECSInstance);
-			l_PosMapper = new ComponentMapper (new Position(), e_ECSInstance);
-			l_GameMapMapper = new ComponentMapper (new GameMap(), e_ECSInstance);
+			l_LightMapper = new ComponentMapper (new Light(), ecs_instance);
+			l_PosMapper = new ComponentMapper (new Position(), ecs_instance);
+			l_GameMapMapper = new ComponentMapper (new GameMap(), ecs_instance);
 		}
 
-		protected override void preLoadContent (Bag<Entity> entities)
+		public override void preLoadContent (Bag<Entity> entities)
 		{
-			l_GameMap = e_ECSInstance.TagManager.getEntityByTag ("MAP");
+			l_GameMap = ecs_instance.tag_manager.get_entity_by_tag ("MAP");
 		}
 
 		#endregion

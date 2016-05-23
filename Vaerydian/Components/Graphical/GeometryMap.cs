@@ -30,7 +30,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Vaerydian.Components.Graphical
 {
-    public class GeometryMap : IComponent
+    public class GeometryMap : Component
     {
         private static int d_TypeID;
         private int d_EntityID;

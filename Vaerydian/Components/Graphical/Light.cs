@@ -28,7 +28,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Graphical
 {
-    class Light : IComponent
+    class Light : Component
     {
         private static int l_TypeID;
         private int l_EntityID;

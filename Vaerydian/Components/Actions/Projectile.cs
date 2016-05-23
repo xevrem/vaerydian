@@ -26,7 +26,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Actions
 {
-    class Projectile : IComponent
+    class Projectile : Component
     {
         private static int p_TypeID;
         private int p_EntityID;

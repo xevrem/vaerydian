@@ -26,7 +26,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Utils
 {
-    public class CameraFocus : IComponent
+    public class CameraFocus : Component
     {
         private static int c_TypeID;
         private int c_EntityID;

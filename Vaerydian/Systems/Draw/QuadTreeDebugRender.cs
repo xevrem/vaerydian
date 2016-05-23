@@ -58,21 +58,21 @@ namespace Vaerydian.Systems.Draw
 
         public override void initialize()
         {
-            q_SpatialMapper = new ComponentMapper(new SpatialPartition(), e_ECSInstance);
-            q_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            q_ViewPortMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
+            q_SpatialMapper = new ComponentMapper(new SpatialPartition(), ecs_instance);
+            q_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            q_ViewPortMapper = new ComponentMapper(new ViewPort(), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
-            q_Player = e_ECSInstance.TagManager.getEntityByTag("PLAYER");
-            q_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
-            q_Spatial = e_ECSInstance.TagManager.getEntityByTag("SPATIAL");
+            q_Player = ecs_instance.tag_manager.get_entity_by_tag("PLAYER");
+            q_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
+            q_Spatial = ecs_instance.tag_manager.get_entity_by_tag("SPATIAL");
 
             q_Texture = q_Contaner.ContentManager.Load<Texture2D>("export");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

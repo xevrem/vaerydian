@@ -22,11 +22,17 @@ using System;
 
 namespace ECSFramework
 {
-	public class EntityProcessingSystem
+	public abstract class EntityProcessingSystem : EntitySystem
 	{
 		public EntityProcessingSystem ()
 		{
 		}
+			
+		protected override void process_entities(){
+		}
+
+		protected abstract void process(Entity entity);
+
 
 		//TODO
 	}

@@ -34,7 +34,7 @@ namespace Vaerydian.Components.Characters
 		public List<Faction> Factions;
 	}
 
-	class Factions : IComponent
+	class Factions : Component
     {
         private static int f_TypeID;
         private int f_EntityID;

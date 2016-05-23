@@ -36,7 +36,7 @@ namespace Vaerydian.Components.Characters
 		public Skill Avoidance;
 	}
 
-	class Skills : IComponent
+	class Skills : Component
     {
         private static int s_TypeID;
         private int s_EntityID;

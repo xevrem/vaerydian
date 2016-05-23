@@ -57,22 +57,22 @@ namespace Vaerydian.Systems.Draw
 
         public override void initialize()
         {
-            s_PositionMapper = new ComponentMapper(new Position(), e_ECSInstance);
-            s_ViewportMapper = new ComponentMapper(new ViewPort(), e_ECSInstance);
-            s_SpriteMapper = new ComponentMapper(new Sprite(), e_ECSInstance);
-            s_GeometryMapper = new ComponentMapper(new GeometryMap(), e_ECSInstance);
+            s_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            s_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            s_SpriteMapper = new ComponentMapper(new Sprite(), ecs_instance);
+            s_GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
         }
 
-        protected override void preLoadContent(Bag<Entity> entities)
+        public override void preLoadContent(Bag<Entity> entities)
         {
             s_DepthTexture = s_Container.ContentManager.Load<Texture2D>("depth");
 
             //pre-load camera entity reference
-            s_Camera = e_ECSInstance.TagManager.getEntityByTag("CAMERA");
-            s_Geometry = e_ECSInstance.TagManager.getEntityByTag("GEOMETRY");
+            s_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
+            s_Geometry = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
         }
 
-        protected override void cleanUp(Bag<Entity> entities) { }
+        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

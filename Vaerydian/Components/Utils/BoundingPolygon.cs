@@ -28,7 +28,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Utils
 {
-    class BoundingPolygon : IComponent
+    class BoundingPolygon : Component
     {
 
         private static int b_TypeID;

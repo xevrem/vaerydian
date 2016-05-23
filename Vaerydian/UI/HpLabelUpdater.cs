@@ -40,10 +40,10 @@ namespace Vaerydian
 			h_HealthMapper = new ComponentMapper(new Health(), h_ECSInstance);
 		}
 
-		public void updateHandler (IControl control, InterfaceArgs args)
+		public void updateHandler (Control control, InterfaceArgs args)
 		{
 
-			Health health = (Health) h_HealthMapper.get(control.Caller);
+			Health health = (Health) h_HealthMapper.get(control.caller);
 
 			GLabel label = (GLabel) control;
 			label.Text = health.CurrentHealth + " / " + health.MaxHealth;

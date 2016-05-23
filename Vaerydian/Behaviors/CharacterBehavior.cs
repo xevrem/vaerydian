@@ -23,7 +23,7 @@ using System.Linq;
 using System.Text;
 
 
-using BehaviorLibrary;
+using BehaviorLib;
 
 namespace Vaerydian.Behaviors
 {
