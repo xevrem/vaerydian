@@ -2,10 +2,7 @@
 
 Vaerydian is an in-work Action RPG written in C# utilizing:
 * [MonoGame](http://github.com/mono/MonoGame) - Graphics Framework
-* [BehaviorLibrary](http://github.com/NetGnome/BehaviorLibrary) - AI Framework
-* [ECSFramework](http://github.com/NetGnome/ECSFramework) - Entity-Component-System based Game Framework
-* [AgentComponentBus](http://github.com/NetGnome/AgentComponentBus) - Asynchronous processing framework for ECSFramework
-* [Glimpse](http://github.com/NetGnome/Glimpse) - UI Framework for MonoGame & ECSFramework
+* [BehaviorLib](http://github.com/xevrem/BehaviorLib) - AI Framework
 * [fastJSON](http://fastjson.codeplex.com) - A Very fast JSON parser, used for driving the game with data
 * [LibNoise](http://libnoisedotnet.codeplex.com) - a C# implementation of the famous libnoise noise framework, used for procedural content
 
