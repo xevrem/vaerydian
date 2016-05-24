@@ -161,7 +161,7 @@ namespace Vaerydian.Screens
             ecs_instance.refresh(e);
 
 			//load the json start screen file
-			s_json = s_JsonManager.loadJSON("./Content/json/start_screen.v");
+			s_json = s_JsonManager.loadJSON(GameConfig.root_dir + "/Content/json/start_screen.v");
 
             //create mouse pointer
 			s_Frame = UIFactory.createMousePointer(InputManager.getMousePosition(), 10, 10, "pointer", OnMousePointerUpdate);

@@ -35,6 +35,7 @@ namespace Glimpse.Managers
 		public static void LoadContent(){
 			foreach(string fontname in fonts_to_load){
 				fonts[fontname] = content_manager.Load<SpriteFont> (fontname);
+
 			}
 		}
 	}

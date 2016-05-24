@@ -40,6 +40,7 @@ using ECSFramework;
 
 using Glimpse.Input;
 using Glimpse.Managers;
+using System.Reflection;
 
 namespace Vaerydian
 {
@@ -83,7 +84,7 @@ namespace Vaerydian
             // add a gamer-services component, which is required for the storage APIs
             //Components.Add(new GamerServicesComponent(this));
 
-            Content.RootDirectory = "Content";
+			Content.RootDirectory = GameConfig.root_dir + "/Content";
 
             //give the fontManager a reference to Content
             FontManager.content_manager = this.Content;

@@ -19,6 +19,9 @@
 */
 using System;
 
+using MonoMac.AppKit;
+using MonoMac.Foundation;
+
 namespace Vaerydian
 {
 
@@ -29,11 +32,16 @@ namespace Vaerydian
         /// </summary>
         static void Main(string[] args)
         {
+			//NSApplication.Init ();
 
-			using (VaerydianGame game = new VaerydianGame())
-            {
-				game.Run();
-            }
+			try{
+				using (VaerydianGame game = new VaerydianGame())
+            	{
+					game.Run();
+            	}
+			}catch(Exception e){
+				Console.Out.WriteLine (e.ToString ());
+			}
         }
     }
 

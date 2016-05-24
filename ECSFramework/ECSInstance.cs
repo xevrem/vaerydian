@@ -35,7 +35,11 @@ namespace ECSFramework
 
 		public ECSInstance ()
 		{
-
+			this.entity_manager = new EntityManager ();
+			this.component_manager = new ComponentManager ();
+			this.system_manager = new SystemManager ();
+			this.tag_manager = new TagManager ();
+			this.group_manager = new GroupManager ();
 		}
 
 		public Entity create(){

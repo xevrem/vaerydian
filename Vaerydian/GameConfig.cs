@@ -28,6 +28,8 @@ using Vaerydian.Components.Actions;
 using Vaerydian.Characters;
 using Vaerydian.Components.Characters;
 using Vaerydian.Components.Items;
+using System.IO;
+using System.Reflection;
 
 namespace Vaerydian
 {
@@ -35,6 +37,8 @@ namespace Vaerydian
 	public static class GameConfig
 	{
 		private static JsonManager g_JM = new JsonManager();
+
+		public static string root_dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
 		public static bool loadConfig(){
 
@@ -118,7 +122,7 @@ namespace Vaerydian
 		/// <returns><c>true</c>, if damage defs was loaded, <c>false</c> otherwise.</returns>
 		private static bool LoadDamageDefs(){
 			try{
-				string json = g_JM.loadJSON("./Content/json/damage.v");
+				string json = g_JM.loadJSON(GameConfig.root_dir + "/Content/json/damage.v");
 				JsonObject jo = g_JM.jsonToJsonObject(json);
 				
 				List<Dictionary<string,object>> dDefs = jo ["damage_defs"].asList<Dictionary<string,object>> ();
@@ -156,7 +160,7 @@ namespace Vaerydian
 		/// <returns><c>true</c>, if action defs was loaded, <c>false</c> otherwise.</returns>
 		private static bool loadActionDefs(){
 			try{
-				string json = g_JM.loadJSON("./Content/json/actions.v");
+				string json = g_JM.loadJSON(GameConfig.root_dir + "/Content/json/actions.v");
 				JsonObject jo = g_JM.jsonToJsonObject(json);
 
 				List<Dictionary<string,object>> aDefs = jo ["action_defs"].asList<Dictionary<string,object>> ();
@@ -192,7 +196,7 @@ namespace Vaerydian
 		/// <returns><c>true</c>, if terrain defs was loaded, <c>false</c> otherwise.</returns>
 		private static bool loadTerrainDefs(){
 			try{
-				string json = g_JM.loadJSON ("./Content/json/terrain.v");
+				string json = g_JM.loadJSON (GameConfig.root_dir + "/Content/json/terrain.v");
 				JsonObject jo = g_JM.jsonToJsonObject(json);
 
 				List<Dictionary<string,object>> tDefs = jo ["terrain_defs"].asList<Dictionary<string,object>> ();
@@ -239,7 +243,7 @@ namespace Vaerydian
 		private static bool loadMapDefs(){
 
 			try{
-				string json = g_JM.loadJSON("./Content/json/maps.v");
+				string json = g_JM.loadJSON(GameConfig.root_dir + "/Content/json/maps.v");
 				JsonObject jo = g_JM.jsonToJsonObject(json);
 
 				List<Dictionary<string,object>> mDefs = jo["map_defs"].asList<Dictionary<string,object>>();
@@ -303,7 +307,7 @@ namespace Vaerydian
 		/// <returns><c>true</c>, if start defs was loaded, <c>false</c> otherwise.</returns>
 		private static bool loadStartDefs(){
 			try{
-				string json = g_JM.loadJSON ("./Content/json/start_screen.v");
+				string json = g_JM.loadJSON (GameConfig.root_dir + "/Content/json/start_screen.v");
 				JsonObject jo = g_JM.jsonToJsonObject(json);
 
 				StartDefs.Seed = jo ["start_level", "seed"].asInt ();  
@@ -337,7 +341,7 @@ namespace Vaerydian
 		/// <returns><c>true</c>, if character animation was loaded, <c>false</c> otherwise.</returns>
 		private static bool loadAvatars(){
 			try{
-				string json = g_JM.loadJSON("./Content/json/avatars.v");
+				string json = g_JM.loadJSON(GameConfig.root_dir + "/Content/json/avatars.v");
 				JsonObject jo = g_JM.jsonToJsonObject(json);
 
 				//construct all animation defs
@@ -455,7 +459,7 @@ namespace Vaerydian
 		/// <returns><c>true</c>, if creatures was loaded, <c>false</c> otherwise.</returns>
 		private static bool loadCreatures(){
 			try{
-				string json = g_JM.loadJSON ("./Content/json/characters.v");
+				string json = g_JM.loadJSON (GameConfig.root_dir + "/Content/json/characters.v");
 				JsonObject jo = g_JM.jsonToJsonObject (json);
 
 				List<Dictionary<string,object>> cDefs = jo ["character_defs"].asList<Dictionary<string,object>> ();
