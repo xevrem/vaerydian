@@ -19,12 +19,6 @@
 */
 using System;
 
-
-//using MonoMac.AppKit;
-//using MonoMac.Foundation;
-using Vaerydian;
-using Microsoft.Xna.Framework;
-
 namespace Vaerydian
 {
 
@@ -35,11 +29,10 @@ namespace Vaerydian
         /// </summary>
         static void Main(string[] args)
         {
-			//NSApplication.Init ();
 
 			using (VaerydianGame game = new VaerydianGame())
             {
-                game.Run();
+				game.Run();
             }
         }
     }
