@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -113,16 +113,16 @@ namespace Vaerydian.Screens
             //quick test hack
             Map map = MapMaker.create(w_MapEngine.XTiles, w_MapEngine.YTiles);
 
-            object[] parameters = new object[WorldGen.WORLD_PARAMS_SIZE];
+            object[] parameters = new object[WorldGen.WORL_PARAMS_SIZE];
 
-            parameters[WorldGen.WORLD_PARAMS_X] = 0;
-            parameters[WorldGen.WORLD_PARAMS_Y] = 0;
-            parameters[WorldGen.WORLD_PARAMS_DX] = w_ViewPort.Dimensions.X;
-            parameters[WorldGen.WORLD_PARAMS_DY] = w_ViewPort.Dimensions.Y;
-            parameters[WorldGen.WORLD_PARAMS_Z] = 5f;
-            parameters[WorldGen.WORLD_PARAMS_XSIZE] = w_MapEngine.XTiles;
-            parameters[WorldGen.WORLD_PARAMS_YSIZE] = w_MapEngine.YTiles;
-            parameters[WorldGen.WORLD_PARAMS_SEED] = new Random().Next();
+            parameters[WorldGen.WORL_PARAMS_X] = 0;
+            parameters[WorldGen.WORL_PARAMS_Y] = 0;
+            parameters[WorldGen.WORL_PARAMS_DX] = w_ViewPort.Dimensions.X;
+            parameters[WorldGen.WORL_PARAMS_DY] = w_ViewPort.Dimensions.Y;
+            parameters[WorldGen.WORL_PARAMS_Z] = 5f;
+            parameters[WorldGen.WORL_PARAMS_XSIZE] = w_MapEngine.XTiles;
+            parameters[WorldGen.WORL_PARAMS_YSIZE] = w_MapEngine.YTiles;
+            parameters[WorldGen.WORL_PARAMS_SEED] = new Random().Next();
 
             MapMaker.Parameters = parameters;
 

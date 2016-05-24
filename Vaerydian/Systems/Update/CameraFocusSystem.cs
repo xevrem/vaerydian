@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -37,33 +37,33 @@ namespace Vaerydian.Systems.Update
     class CameraFocusSystem : EntityProcessingSystem
     {
 
-        private ComponentMapper c_PositionMapper;
-        private ComponentMapper c_CameraFocusMapper;
-        private ComponentMapper c_ViewportMapper;
+        private ComponentMapper _PositionMapper;
+        private ComponentMapper _CameraFocusMapper;
+        private ComponentMapper _ViewportMapper;
 
-        private Entity c_Camera;
+        private Entity _Camera;
 
         public CameraFocusSystem() : base() { }
 
         public override void initialize()
         {
-            c_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
-            c_CameraFocusMapper = new ComponentMapper(new CameraFocus(), ecs_instance);
-            c_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            _PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            _CameraFocusMapper = new ComponentMapper(new CameraFocus(), ecs_instance);
+            _ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
         }
 
         public override void preLoadContent(Bag<Entity> entities)
         {
-            c_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
+            _Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
 
         public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {
-            Position focusPosition = (Position) c_PositionMapper.get(entity);
-            CameraFocus focus = (CameraFocus) c_CameraFocusMapper.get(entity);
-            ViewPort cameraView = (ViewPort)c_ViewportMapper.get(c_Camera);
+            Position focusPosition = (Position) _PositionMapper.get(entity);
+            CameraFocus focus = (CameraFocus) _CameraFocusMapper.get(entity);
+            ViewPort cameraView = (ViewPort)_ViewportMapper.get(_Camera);
 
             Vector2 cPos = cameraView.getOrigin();
             Vector2 center = cPos + cameraView.getDimensions() / 2;

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -37,29 +37,29 @@ namespace Vaerydian.Components.Characters
 
     class Information : Component
     {
-        private static int i_TypeID;
-        private int i_EntityID;
+        private static int i_type_id;
+        private int i_entity_id;
 
         public Information() { }
 
         public int getEntityId()
         {
-            return i_EntityID;
+            return i_entity_id;
         }
 
         public int getTypeId()
         {
-            return i_TypeID;
+            return i_type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            i_EntityID = entityId;
+            i_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            i_TypeID = typeId;
+            i_type_id = typeId;
         }
 
         /// <summary>

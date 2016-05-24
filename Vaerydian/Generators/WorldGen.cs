@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -39,47 +39,47 @@ namespace Vaerydian.Generators
         /// <summary>
         /// parameter index for world params array size
         /// </summary>
-        public const short WORLD_PARAMS_SIZE = 8;
+        public const short WORL_PARAMS_SIZE = 8;
 
         /// <summary>
         /// parameter index for world gen's starting x index
         /// </summary>
-        public const short WORLD_PARAMS_X = 0;
+        public const short WORL_PARAMS_X = 0;
 
         /// <summary>
         /// parameter index for world gen's starting y index
         /// </summary>
-        public const short WORLD_PARAMS_Y = 1;
+        public const short WORL_PARAMS_Y = 1;
         
         /// <summary>
         /// parameter index for world gen's finishing x index
         /// </summary>
-        public const short WORLD_PARAMS_DX = 2;
+        public const short WORL_PARAMS_DX = 2;
         
         /// <summary>
         /// parameter index for world gen's finishing y index
         /// </summary>
-        public const short WORLD_PARAMS_DY = 3;
+        public const short WORL_PARAMS_DY = 3;
         
         /// <summary>
         /// parameter index for z value for noise
         /// </summary>
-        public const short WORLD_PARAMS_Z = 4;
+        public const short WORL_PARAMS_Z = 4;
 
         /// <summary>
         /// parameter index for number of cells in x-dimension
         /// </summary>
-        public const short WORLD_PARAMS_XSIZE = 5;
+        public const short WORL_PARAMS_XSIZE = 5;
 
         /// <summary>
         /// parameter index for number of cells in y-dimension
         /// </summary>
-        public const short WORLD_PARAMS_YSIZE = 6;
+        public const short WORL_PARAMS_YSIZE = 6;
 
         /// <summary>
         /// parameter index for random's seed value
         /// </summary>
-        public const short WORLD_PARAMS_SEED = 7;
+        public const short WORL_PARAMS_SEED = 7;
 
         //noise generator
         private static Perlin w_Perlin = new Perlin();
@@ -105,7 +105,7 @@ namespace Vaerydian.Generators
         private const int RAINFALL_GENERATIONS = 1;
         private const int RAINFALL_PROPIGATION_LIMIT = 100;
         private const float RAINFALL_MOISTURE_CONVERSION = 0.5f;
-        private const float RAINFALL_LAND_BASE = 0.3f;
+        private const float RAINFALL_LAN_BASE = 0.3f;
         private const float RAINFALL_MOUNTAIN_BASE = 0.1f;
         private const float RAINFALL_OCEAN_BASE = 0.75f;
 
@@ -152,14 +152,14 @@ namespace Vaerydian.Generators
             try
             {
                 generateMap( map,
-                            (int)parameters[WORLD_PARAMS_X],
-                            (int)parameters[WORLD_PARAMS_Y],
-                            (int)parameters[WORLD_PARAMS_DX],
-                            (int)parameters[WORLD_PARAMS_DY],
-                            (float)parameters[WORLD_PARAMS_Z],
-                            (int)parameters[WORLD_PARAMS_XSIZE],
-                            (int)parameters[WORLD_PARAMS_YSIZE],
-                            (int)parameters[WORLD_PARAMS_SEED]);
+                            (int)parameters[WORL_PARAMS_X],
+                            (int)parameters[WORL_PARAMS_Y],
+                            (int)parameters[WORL_PARAMS_DX],
+                            (int)parameters[WORL_PARAMS_DY],
+                            (float)parameters[WORL_PARAMS_Z],
+                            (int)parameters[WORL_PARAMS_XSIZE],
+                            (int)parameters[WORL_PARAMS_YSIZE],
+                            (int)parameters[WORL_PARAMS_SEED]);
             }
             catch (Exception e)
             {
@@ -507,92 +507,92 @@ namespace Vaerydian.Generators
                 if (((terrain.Temperature >= 0f) && (terrain.Temperature < 0.40f) &&
                     (terrain.Rainfall >= 0) && (terrain.Rainfall < 0.15f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_ARCTIC_DESERT;
+                    terrain.TerrainType = TerrainType_Old.LAN_ARCTI_DESERT;
                 }
                 else if (((terrain.Temperature >= 0.3f) && (terrain.Temperature < 0.75f) &&
                    (terrain.Rainfall >= 0) && (terrain.Rainfall < 0.15f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_DESERT;
+                    terrain.TerrainType = TerrainType_Old.LAN_DESERT;
                 }
                 else if (((terrain.Temperature >= 0.75f) && (terrain.Temperature <= 1f) &&
                    (terrain.Rainfall >= 0) && (terrain.Rainfall < 0.15f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_SCORCHED;
+                    terrain.TerrainType = TerrainType_Old.LAN_SCORCHED;
                 }
                 else if (((terrain.Temperature >= 0f) && (terrain.Temperature < 0.15f) &&
                     (terrain.Rainfall >= 0.15f) && (terrain.Rainfall < 0.65f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_SNOW_PLAINS;
+                    terrain.TerrainType = TerrainType_Old.LAN_SNOW_PLAINS;
                 }
                 else if (((terrain.Temperature >= 0.15f) && (terrain.Temperature < 0.45f) &&
                     (terrain.Rainfall >= 0.15f) && (terrain.Rainfall < 0.40f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TUNDRA;
+                    terrain.TerrainType = TerrainType_Old.LAN_TUNDRA;
                 }
                 else if (((terrain.Temperature >= 0.15f) && (terrain.Temperature < 0.45f) &&
                    (terrain.Rainfall >= 0.40f) && (terrain.Rainfall < 0.65f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TAIGA;
+                    terrain.TerrainType = TerrainType_Old.LAN_TAIGA;
                 }
                 else if (((terrain.Temperature >= 0.45f) && (terrain.Temperature < 0.80f) &&
                    (terrain.Rainfall >= 0.15f) && (terrain.Rainfall < 0.30f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TEMPERATE_GRASSLAND;
+                    terrain.TerrainType = TerrainType_Old.LAN_TEMPERATE_GRASSLAND;
                 }
                 else if (((terrain.Temperature >= 0.45f) && (terrain.Temperature < 0.80f) &&
                    (terrain.Rainfall >= 0.30f) && (terrain.Rainfall < 0.45f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_SHRUBLAND;
+                    terrain.TerrainType = TerrainType_Old.LAN_SHRUBLAND;
                 }
                 else if (((terrain.Temperature >= 0.80f) && (terrain.Temperature <= 1f) &&
                    (terrain.Rainfall >= 0.15) && (terrain.Rainfall < 0.45f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_SAVANA;
+                    terrain.TerrainType = TerrainType_Old.LAN_SAVANA;
                 }
                 else if (((terrain.Temperature >= 0.45f) && (terrain.Temperature < 0.85f) &&
                    (terrain.Rainfall >= 0.45f) && (terrain.Rainfall < 0.65f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TEMPERATE_FOREST;
+                    terrain.TerrainType = TerrainType_Old.LAN_TEMPERATE_FOREST;
                 }
                 else if (((terrain.Temperature >= 0.85f) && (terrain.Temperature <= 1f) &&
                     (terrain.Rainfall >= 0.45f) && (terrain.Rainfall < 0.75f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TROPICAL_FOREST;
+                    terrain.TerrainType = TerrainType_Old.LAN_TROPICAL_FOREST;
                 }
                 else if (((terrain.Temperature >= 0f) && (terrain.Temperature < 0.20f) &&
                     (terrain.Rainfall >= 0.65f) && (terrain.Rainfall < 0.85f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_GLACIER;
+                    terrain.TerrainType = TerrainType_Old.LAN_GLACIER;
                 }
                 else if (((terrain.Temperature >= 0.20f) && (terrain.Temperature < 0.50f) &&
                 (terrain.Rainfall >= 0.65f) && (terrain.Rainfall < 0.85f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_MARSH;
+                    terrain.TerrainType = TerrainType_Old.LAN_MARSH;
                 }
                 else if (((terrain.Temperature >= 0.50f) && (terrain.Temperature < 0.85f) &&
                    (terrain.Rainfall >= 0.65f) && (terrain.Rainfall < 0.85f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TEMPERATE_RAIN_FOREST;
+                    terrain.TerrainType = TerrainType_Old.LAN_TEMPERATE_RAIN_FOREST;
                 }
                 else if (((terrain.Temperature >= 0f) && (terrain.Temperature < 0.25f) &&
                    (terrain.Rainfall >= 0.85f) && (terrain.Rainfall <= 1f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_HYBOREAN_RIMELAND;
+                    terrain.TerrainType = TerrainType_Old.LAN_HYBOREAN_RIMELAND;
                 }
                 else if (((terrain.Temperature >= 0.25f) && (terrain.Temperature < 0.55f) &&
                     (terrain.Rainfall >= 0.85f) && (terrain.Rainfall <= 1f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_BOG;
+                    terrain.TerrainType = TerrainType_Old.LAN_BOG;
                 }
                 else if (((terrain.Temperature >= 0.55f) && (terrain.Temperature < 0.85f) &&
                    (terrain.Rainfall >= 0.85f) && (terrain.Rainfall <= 1f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_SWAMP;
+                    terrain.TerrainType = TerrainType_Old.LAN_SWAMP;
                 }
                 else if (((terrain.Temperature >= 0.85f) && (terrain.Temperature <= 1f) &&
                     (terrain.Rainfall >= 0.75f) && (terrain.Rainfall <= 1f)))
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TROPICAL_RAIN_FOREST;
+                    terrain.TerrainType = TerrainType_Old.LAN_TROPICAL_RAIN_FOREST;
                 }
             }
             else if (terrain.TerrainType == TerrainType_Old.BASE_MOUNTAIN)
@@ -657,17 +657,17 @@ namespace Vaerydian.Generators
 
                 if (terrain.Temperature <= 0.15)
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TUNDRA;
+                    terrain.TerrainType = TerrainType_Old.LAN_TUNDRA;
                     return;
                 }
                 else if (terrain.Temperature <= 0.25f && terrain.Height < 0.5)
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TAIGA;
+                    terrain.TerrainType = TerrainType_Old.LAN_TAIGA;
                     return;
                 }
                 else if (terrain.Temperature > 0.35f && terrain.Rainfall > 0.65f && terrain.Height < 0.2)
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_SWAMP;
+                    terrain.TerrainType = TerrainType_Old.LAN_SWAMP;
                     return;
                 }
                 else if (terrain.Height > 0.1 && terrain.Height <= 0.125)
@@ -677,27 +677,27 @@ namespace Vaerydian.Generators
                 }
                 else if (terrain.Rainfall <= 0.10)// && terrain.Temperature >.45)
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_SCORCHED;
+                    terrain.TerrainType = TerrainType_Old.LAN_SCORCHED;
                     return;
                 }
                 else if (terrain.Rainfall > 0.10 && terrain.Rainfall <= 0.25)
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_SAVANA;
+                    terrain.TerrainType = TerrainType_Old.LAN_SAVANA;
                     return;
                 }
                 else if (terrain.Temperature > 0.7f && terrain.Rainfall > 0.35f)
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TROPICAL_RAIN_FOREST;
+                    terrain.TerrainType = TerrainType_Old.LAN_TROPICAL_RAIN_FOREST;
                     return;
                 }
                 else if (terrain.Temperature > 0.25f && terrain.Rainfall > 0.25f)
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_TEMPERATE_FOREST;
+                    terrain.TerrainType = TerrainType_Old.LAN_TEMPERATE_FOREST;
                     return;
                 }
                 else
                 {
-                    terrain.TerrainType = TerrainType_Old.LAND_SAVANA;
+                    terrain.TerrainType = TerrainType_Old.LAN_SAVANA;
                     return;
                 }
 

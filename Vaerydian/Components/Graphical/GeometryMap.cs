@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -32,98 +32,98 @@ namespace Vaerydian.Components.Graphical
 {
     public class GeometryMap : Component
     {
-        private static int d_TypeID;
-        private int d_EntityID;
+        private static int _type_id;
+        private int _entity_id;
 
         public GeometryMap() { }
 
         public int getEntityId()
         {
-            return d_EntityID;
+            return _entity_id;
         }
 
         public int getTypeId()
         {
-            return d_TypeID;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            d_EntityID = entityId;
+            _entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            d_TypeID = typeId;
+            _type_id = typeId;
         }
 
-        private RenderTarget2D d_ColorMap;
+        private RenderTarget2D _ColorMap;
 
         public RenderTarget2D ColorMap
         {
-            get { return d_ColorMap; }
-            set { d_ColorMap = value; }
+            get { return _ColorMap; }
+            set { _ColorMap = value; }
         }
 
-        private RenderTarget2D d_DepthMap;
+        private RenderTarget2D _DepthMap;
 
         public RenderTarget2D DepthMap
         {
-            get { return d_DepthMap; }
-            set { d_DepthMap = value; }
+            get { return _DepthMap; }
+            set { _DepthMap = value; }
         }
 
-        private RenderTarget2D d_NormalMap;
+        private RenderTarget2D _NormalMap;
 
         public RenderTarget2D NormalMap
         {
-            get { return d_NormalMap; }
-            set { d_NormalMap = value; }
+            get { return _NormalMap; }
+            set { _NormalMap = value; }
         }
 
-        private RenderTarget2D d_ShadingMap;
+        private RenderTarget2D _ShadingMap;
 
         public RenderTarget2D ShadingMap
         {
-            get { return d_ShadingMap; }
-            set { d_ShadingMap = value; }
+            get { return _ShadingMap; }
+            set { _ShadingMap = value; }
         }
 
-        private Texture2D d_ColorMapTexture;
+        private Texture2D _ColorMapTexture;
 
         public Texture2D ColorMapTexture
         {
-            get { return d_ColorMapTexture; }
-            set { d_ColorMapTexture = value; }
+            get { return _ColorMapTexture; }
+            set { _ColorMapTexture = value; }
         }
-        private Texture2D d_DepthMapTexture;
+        private Texture2D _DepthMapTexture;
 
         public Texture2D DepthMapTexture
         {
-            get { return d_DepthMapTexture; }
-            set { d_DepthMapTexture = value; }
+            get { return _DepthMapTexture; }
+            set { _DepthMapTexture = value; }
         }
-        private Texture2D d_NormalMapTexture;
+        private Texture2D _NormalMapTexture;
 
         public Texture2D NormalMapTexture
         {
-            get { return d_NormalMapTexture; }
-            set { d_NormalMapTexture = value; }
+            get { return _NormalMapTexture; }
+            set { _NormalMapTexture = value; }
         }
-        private Texture2D d_ShadowMapTexture;
+        private Texture2D _ShadowMapTexture;
 
         public Texture2D ShadowMapTexture
         {
-            get { return d_ShadowMapTexture; }
-            set { d_ShadowMapTexture = value; }
+            get { return _ShadowMapTexture; }
+            set { _ShadowMapTexture = value; }
         }
 
-        private Vector4 d_AmbientColor;
+        private Vector4 _AmbientColor;
 
         public Vector4 AmbientColor
         {
-            get { return d_AmbientColor; }
-            set { d_AmbientColor = value; }
+            get { return _AmbientColor; }
+            set { _AmbientColor = value; }
         }
     }
 }

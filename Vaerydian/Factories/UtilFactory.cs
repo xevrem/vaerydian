@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -42,7 +42,7 @@ namespace Vaerydian.Factories
 {
     public static class UtilFactory
     {
-        public static ECSInstance ECSInstance;
+        public static ECSInstance ecs_instance;
         public static GameContainer Container;
         private static Random rand = new Random();
 
@@ -54,11 +54,11 @@ namespace Vaerydian.Factories
         /// <param name="attackType"></param>
         public static void createAttack(Entity attacker, Entity defender, AttackType attackType)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
-            ECSInstance.entity_manager.add_component(e, new Attack(attacker, defender, attackType));
+            ecs_instance.add_component(e, new Attack(attacker, defender, attackType));
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
 
@@ -71,7 +71,7 @@ namespace Vaerydian.Factories
         /// <param name="pos"></param>
         public static void createDirectDamage(int amount, DamageType type, Entity target,Position pos)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             Damage damage = new Damage();
 
@@ -81,44 +81,44 @@ namespace Vaerydian.Factories
             damage.DamageType = type;
             damage.Lifespan = 500;//.5 second
 
-            ECSInstance.entity_manager.add_component(e, damage);
-            ECSInstance.entity_manager.add_component(e, pos);
+            ecs_instance.add_component(e, damage);
+            ecs_instance.add_component(e, pos);
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
         public static void createSound(String name, bool play, float volume)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             Audio audio = new Audio(name,play,volume);
 
-            ECSInstance.entity_manager.add_component(e, audio);
+            ecs_instance.add_component(e, audio);
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
 
         }
 
         public static void createFireSound(Control sender, InterfaceArgs args)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             Audio audio = new Audio("audio\\effects\\fire", true, 1f);
 
-            ECSInstance.entity_manager.add_component(e, audio);
+            ecs_instance.add_component(e, audio);
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
         public static void createSound(String name, bool play, float volume, float pitch)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             Audio audio = new Audio(name, play, volume, pitch);
 
-            ECSInstance.entity_manager.add_component(e, audio);
+            ecs_instance.add_component(e, audio);
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
 
         }
 
@@ -127,7 +127,7 @@ namespace Vaerydian.Factories
         /// </summary>
         public static void createMeleeAction(Vector2 position, Vector2 heading, Transform transform, Entity owner)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             Sprite sprite = new Sprite("sword", "swordnormal", 32, 32, 0, 0);
 
@@ -138,13 +138,13 @@ namespace Vaerydian.Factories
             action.Lifetime = 250;
             action.Range = 32;
 
-            ECSInstance.entity_manager.add_component(e, new Position(position,new Vector2(16)));
-            ECSInstance.entity_manager.add_component(e, new Heading(heading));
-            ECSInstance.entity_manager.add_component(e, transform);
-            ECSInstance.entity_manager.add_component(e, sprite);
-            ECSInstance.entity_manager.add_component(e, action);
+            ecs_instance.add_component(e, new Position(position,new Vector2(16)));
+            ecs_instance.add_component(e, new Heading(heading));
+            ecs_instance.add_component(e, transform);
+            ecs_instance.add_component(e, sprite);
+            ecs_instance.add_component(e, action);
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Vaerydian.Factories
         /// </summary>
         public static void createVictoryAward(Entity awarder, Entity receiver, int maxAwardable)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             Award victory = new Award();
             victory.AwardType = AwardType.Victory;
@@ -160,14 +160,14 @@ namespace Vaerydian.Factories
             victory.Receiver = receiver;
             victory.MaxAwardable = maxAwardable;
 
-            ECSInstance.entity_manager.add_component(e, victory);
+            ecs_instance.add_component(e, victory);
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
         public static void createSkillupAward(Entity awarder, Entity receiver, SkillName skill, int maxAwardable)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             Award award = new Award();
             award.AwardType = AwardType.SkillUp;
@@ -176,14 +176,14 @@ namespace Vaerydian.Factories
             award.MaxAwardable = maxAwardable;
             award.SkillName = skill;
 
-            ECSInstance.entity_manager.add_component(e, award);
+            ecs_instance.add_component(e, award);
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
         public static void createAttributeAward(Entity awarder, Entity receiver, StatType attribute, int maxAwardable)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             Award award = new Award();
             award.AwardType = AwardType.Attribute;
@@ -192,41 +192,41 @@ namespace Vaerydian.Factories
             award.MaxAwardable = maxAwardable;
             award.StatType = attribute;
 
-            ECSInstance.entity_manager.add_component(e, award);
+            ecs_instance.add_component(e, award);
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
         public static void createHealthAward(Entity receiver, int maxAwardable)
         {
-            Entity e = ECSInstance.create();
+            Entity e = ecs_instance.create();
 
             Award award = new Award();
             award.AwardType = AwardType.Health;
             award.Receiver = receiver;
             award.MaxAwardable = maxAwardable;
 
-            ECSInstance.entity_manager.add_component(e, award);
+            ecs_instance.add_component(e, award);
 
-            ECSInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
 		public static void createTarget(){
 
-			Entity e = ECSInstance.create ();
+			Entity e = ecs_instance.create ();
 			Target target = new Target ();
 			target.TargetEntity = null;
 
-			ECSInstance.entity_manager.add_component (e, target);
-			ECSInstance.entity_manager.add_component (e, new Position(new Vector2(0),new Vector2(24)));
+			ecs_instance.add_component (e, target);
+			ecs_instance.add_component (e, new Position(new Vector2(0),new Vector2(24)));
 
 			Sprite sprite = new Sprite ("reticle", "reticle_normal", 48, 48, 0, 0);
 			sprite.Visible = false;
-			ECSInstance.entity_manager.add_component (e, sprite);
+			ecs_instance.add_component (e, sprite);
 
-			ECSInstance.tag_manager.tag_entity("TARGET",e);
+			ecs_instance.tag_manager.tag_entity("TARGET",e);
 
-			ECSInstance.refresh (e);
+			ecs_instance.resolve (e);
 		}
     }
 }

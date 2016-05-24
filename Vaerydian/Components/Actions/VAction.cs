@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -27,8 +27,8 @@ namespace Vaerydian.Components.Actions
 	public class VAction : Component
 	{
 
-        private static int a_TypeID;
-        private int a_EntityID;
+        private static int _type_id;
+        private int _entity_id;
 
 		public VAction ()
 		{
@@ -36,27 +36,27 @@ namespace Vaerydian.Components.Actions
 
         public int getEntityId()
         {
-            return a_EntityID;
+            return _entity_id;
         }
 
         public int getTypeId()
         {
-            return a_TypeID;
+            return _type_id;
         }
 
 		public static int TypeId{ 
-			get { return a_TypeID; }
-			set { a_TypeID = value; } 
+			get { return _type_id; }
+			set { _type_id = value; } 
 		}
 
         public void setEntityId(int entityId)
         {
-            a_EntityID = entityId;
+            _entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            a_TypeID = typeId;
+            _type_id = typeId;
         }
 
 		public Entity Owner{ get; set; }

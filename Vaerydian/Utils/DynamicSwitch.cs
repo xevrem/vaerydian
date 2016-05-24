@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -32,8 +32,8 @@ namespace Vaerydian.Utils
 	/// </summary>
 	public class DynamicSwitch<T>{
 		
-		private Dictionary<T,SwitchCase<T>> d_SwitchDict = new Dictionary<T,SwitchCase<T>>();
-		private SwitchCase<T> d_Default = null;
+		private Dictionary<T,SwitchCase<T>> _SwitchDict = new Dictionary<T,SwitchCase<T>>();
+		private SwitchCase<T> _Default = null;
 
 		/// <summary>
 		/// Adds a case to the dynamic switch
@@ -42,10 +42,10 @@ namespace Vaerydian.Utils
 		/// <param name="tCase">T case identifier</param>
 		/// <param name="method">Method delegate</param>
 		public bool addCase(T tCase, SwitchCase<T> method){
-			if (d_SwitchDict.ContainsKey (tCase))
+			if (_SwitchDict.ContainsKey (tCase))
 				return false;
 			else {
-				d_SwitchDict.Add(tCase,method);
+				_SwitchDict.Add(tCase,method);
 				return true;
 			}
 		}
@@ -56,8 +56,8 @@ namespace Vaerydian.Utils
 		/// <returns><c>true</c>, if case was removed, <c>false</c> otherwise.</returns>
 		/// <param name="tCase">T case identifier to remove</param>
 		public bool removeCase(T tCase){
-			if (d_SwitchDict.ContainsKey (tCase)) {
-				return d_SwitchDict.Remove (tCase);
+			if (_SwitchDict.ContainsKey (tCase)) {
+				return _SwitchDict.Remove (tCase);
 			} else
 				return false;
 		}
@@ -68,7 +68,7 @@ namespace Vaerydian.Utils
 		/// <returns><c>true</c>, if default was set, <c>false</c> otherwise.</returns>
 		/// <param name="method">Method delegte</param>
 		public bool setDefault(SwitchCase<T> method){
-			d_Default = method;
+			_Default = method;
 			return true;
 		}
 
@@ -76,7 +76,7 @@ namespace Vaerydian.Utils
 		/// Does the default case
 		/// </summary>
 		public void doDefault(){
-			d_Default.Invoke (default (T));
+			_Default.Invoke (default (T));
 		}
 
 		/// <summary>
@@ -84,9 +84,9 @@ namespace Vaerydian.Utils
 		/// </summary>
 		/// <param name="tCase">T case to be switched</param>
 		public void doSwitch(T tCase){
-			if (d_SwitchDict.ContainsKey (tCase))
-				d_SwitchDict [tCase].Invoke (tCase);
-			else if (d_Default != null)
+			if (_SwitchDict.ContainsKey (tCase))
+				_SwitchDict [tCase].Invoke (tCase);
+			else if (_Default != null)
 				doDefault ();
 			else
 				return;

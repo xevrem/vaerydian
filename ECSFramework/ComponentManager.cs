@@ -24,8 +24,11 @@ namespace ECSFramework
 {
 	public class ComponentManager
 	{
+		private Bag<Bag<Component>> _components;
+
 		public ComponentManager ()
 		{
+			this._components = new Bag<Bag<Component>> ();
 		}
 
 		public void register_component_type(Component component){
@@ -38,6 +41,10 @@ namespace ECSFramework
 		}
 
 		public void add_component(Entity e, Component c){
+			//TODO
+		}
+
+		public void remove_components(Entity e){
 			//TODO
 		}
 	}

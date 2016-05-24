@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -68,14 +68,14 @@ namespace Vaerydian.Generators
         /// </summary>
         public const int CAVE_PARAMS_SEED = 6;
 
-        private static Random c_Random = new Random();
+        private static Random _Random = new Random();
 
-        private static String c_StatusMessage = "Generating Cave...";
+        private static String _StatusMessage = "Generating Cave...";
 
         public static String StatusMessage
         {
-            get { return c_StatusMessage; }
-            set { c_StatusMessage = value; }
+            get { return _StatusMessage; }
+            set { _StatusMessage = value; }
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Vaerydian.Generators
             Map map = (Map)args[1];
             
             //randomly set it
-            if (c_Random.Next(100) <= prob)
+            if (_Random.Next(100) <= prob)
             {
                 //terrain.TerrainType = TerrainType_Old.CAVE_WALL;
                 //terrain.IsBlocking = true;
@@ -165,8 +165,8 @@ namespace Vaerydian.Generators
 
             //set the seed
             map.Seed = seed;
-            c_Random = new Random(map.Seed);
-            MapHelper.Random = c_Random;
+            _Random = new Random(map.Seed);
+            MapHelper.Random = _Random;
 
             //fill map as blocking
             MapHelper.floodAllOp( map, setBlocking); 
@@ -182,8 +182,8 @@ namespace Vaerydian.Generators
 
             for (int i = 0; i <= iter; i++)
             {
-                rX = c_Random.Next(1, x - 1);
-                rY = c_Random.Next(1, y - 1);
+                rX = _Random.Next(1, x - 1);
+                rY = _Random.Next(1, y - 1);
 
 
                 Terrain terrain = map.Terrain[rX, rY];
@@ -232,7 +232,7 @@ namespace Vaerydian.Generators
 
         private static void addVariation(Terrain terrain, params object[] args)
         {
-            terrain.Variation += (float)(0.125 - (c_Random.NextDouble() * 0.25));
+            terrain.Variation += (float)(0.125 - (_Random.NextDouble() * 0.25));
         }
 
 

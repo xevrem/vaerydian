@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -30,47 +30,47 @@ namespace Vaerydian.Utils
         /// <summary>
         /// data structure
         /// </summary>
-        HeapCell<T>[] b_Data = new HeapCell<T>[0];
+        HeapCell<T>[] _Data = new HeapCell<T>[0];
 
-        private int b_Length;
+        private int _Length;
 
-        private int b_Size;
+        private int _Size;
 
         public int Size
         {
-            get { return b_Size; }
-            set { b_Size = value; }
+            get { return _Size; }
+            set { _Size = value; }
         }
 
         public BinaryHeap()
         {
-            b_Size = 0;
-            b_Length = 16 * 2 + 2;
-            b_Data = new HeapCell<T>[b_Length];
+            _Size = 0;
+            _Length = 16 * 2 + 2;
+            _Data = new HeapCell<T>[_Length];
 
 
-            for (int i = 0; i < b_Length; i++)
+            for (int i = 0; i < _Length; i++)
             {
-                b_Data[i] = new HeapCell<T>();
+                _Data[i] = new HeapCell<T>();
             }
         }
 
         public BinaryHeap(int length)
         {
-            b_Size = 0;
-            b_Length = length * 2 + 2;
-            b_Data = new HeapCell<T>[b_Length];
+            _Size = 0;
+            _Length = length * 2 + 2;
+            _Data = new HeapCell<T>[_Length];
 
-            for (int i = 0; i < b_Length; i++)
+            for (int i = 0; i < _Length; i++)
             {
-                b_Data[i] = new HeapCell<T>();
+                _Data[i] = new HeapCell<T>();
             }
         }
 
         public HeapCell<T> this[int index]
         {
-            get { return b_Data[index]; }
-            set { b_Data[index] = value; }
+            get { return _Data[index]; }
+            set { _Data[index] = value; }
         }
 
         /// <summary>
@@ -90,25 +90,25 @@ namespace Vaerydian.Utils
         /// <param name="cell">heapcell to be used</param>
         private void add(HeapCell<T> cell)
         {
-            b_Size++;
+            _Size++;
 
-            if ((b_Size * 2 + 1) >= b_Length)
-                grow(b_Size);
+            if ((_Size * 2 + 1) >= _Length)
+                grow(_Size);
 
-            b_Data[b_Size] = cell;
+            _Data[_Size] = cell;
 
-            int i = b_Size;
+            int i = _Size;
 
             //do any needed swapping
             while (i != 1)
             {
                 //compare cells
-                if (b_Data[i].Value <= b_Data[i / 2].Value)
+                if (_Data[i].Value <= _Data[i / 2].Value)
                 {
                     //if i is less than i/2, swap
-                    HeapCell<T> temp = b_Data[i / 2];
-                    b_Data[i / 2] = b_Data[i];
-                    b_Data[i] = temp;
+                    HeapCell<T> temp = _Data[i / 2];
+                    _Data[i / 2] = _Data[i];
+                    _Data[i] = temp;
                     i = i / 2;
                 }
                 else//otherwise break
@@ -118,12 +118,12 @@ namespace Vaerydian.Utils
 
         public HeapCell<T> removeFirst()
         {
-            HeapCell<T> retVal = b_Data[1];
+            HeapCell<T> retVal = _Data[1];
 
             //move last item to 1st position, reduce size by 1
-            b_Data[1] = b_Data[b_Size];
-            b_Data[b_Size] = null;
-            b_Size--;
+            _Data[1] = _Data[_Size];
+            _Data[_Size] = null;
+            _Size--;
 
             int u, v;
             v = 1;
@@ -134,26 +134,26 @@ namespace Vaerydian.Utils
                 u = v;
 
                 //if both children exist
-                if ((2 * u + 1) <= b_Size)
+                if ((2 * u + 1) <= _Size)
                 {
                     //select lowest child
-                    if (b_Data[u].Value >= b_Data[2 * u].Value)
+                    if (_Data[u].Value >= _Data[2 * u].Value)
                         v = 2 * u;
-                    if (b_Data[v].Value >= b_Data[2 * u + 1].Value)
+                    if (_Data[v].Value >= _Data[2 * u + 1].Value)
                         v = 2 * u + 1;
                 }//if only one child exists
-                else if (2 * u <= b_Size)
+                else if (2 * u <= _Size)
                 {
-                    if (b_Data[u].Value >= b_Data[2 * u].Value)
+                    if (_Data[u].Value >= _Data[2 * u].Value)
                         v = 2 * u;
                 }
 
                 //do we need to swap or exit?
                 if (u != v)
                 {
-                    HeapCell<T> temp = b_Data[u];
-                    b_Data[u] = b_Data[v];
-                    b_Data[v] = temp;
+                    HeapCell<T> temp = _Data[u];
+                    _Data[u] = _Data[v];
+                    _Data[v] = temp;
                 }
                 else
                 {
@@ -174,31 +174,31 @@ namespace Vaerydian.Utils
             int length = size * 2 + 2;
             HeapCell<T>[] data = new HeapCell<T>[length];
 
-            Array.Copy(b_Data, data, b_Length);
+            Array.Copy(_Data, data, _Length);
 
-            b_Data = data;
-            b_Length = length;
+            _Data = data;
+            _Length = length;
 
             return;
         }
 
         public void Clear()
         {
-            for (int i = 0; i < b_Size; i++)
+            for (int i = 0; i < _Size; i++)
             {
-                b_Data[i] = null;
+                _Data[i] = null;
             }
 
-            b_Size = 0;
+            _Size = 0;
         }
 
         public override String ToString()
         {
             String str = "";
 
-            for (int i = 1; i < b_Size + 1; i++)
+            for (int i = 1; i < _Size + 1; i++)
             {
-                str += b_Data[i].Value + ", ";
+                str += _Data[i].Value + ", ";
             }
 
             return str;

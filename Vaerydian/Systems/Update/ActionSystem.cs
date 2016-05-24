@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -28,7 +28,7 @@ namespace Vaerydian.Systems.Update
 {
 	public class ActionSystem : EntityProcessingSystem
 	{
-		private ComponentMapper a_ActionMapper;
+		private ComponentMapper _ActionMapper;
 
 		public ActionSystem ()
 		{
@@ -36,7 +36,7 @@ namespace Vaerydian.Systems.Update
 
 		public override void initialize ()
 		{
-			a_ActionMapper = new ComponentMapper (new VAction (), ecs_instance);
+			_ActionMapper = new ComponentMapper (new VAction (), ecs_instance);
 		}
 
 		public override void preLoadContent (Bag<Entity> entities)
@@ -46,7 +46,7 @@ namespace Vaerydian.Systems.Update
 
 		protected override void process (Entity entity)
 		{
-			VAction action = (VAction) a_ActionMapper.get(entity);
+			VAction action = (VAction) _ActionMapper.get(entity);
 
 			action.doAction();
 

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -322,41 +322,41 @@ namespace Vaerydian.Systems.Draw
         {
             switch (terrain.TerrainType)
             {
-            case TerrainType_Old.LAND_ARCTIC_DESERT:
+            case TerrainType_Old.LAN_ARCTI_DESERT:
                 return new Color(204, 204, 255);
-            case TerrainType_Old.LAND_DESERT:
+            case TerrainType_Old.LAN_DESERT:
                 return new Color(204, 204, 0);
-            case TerrainType_Old.LAND_SCORCHED:
+            case TerrainType_Old.LAN_SCORCHED:
                 return new Color(153, 102, 51);
-            case TerrainType_Old.LAND_SNOW_PLAINS:
+            case TerrainType_Old.LAN_SNOW_PLAINS:
                 return Color.White;
-            case TerrainType_Old.LAND_TUNDRA:
+            case TerrainType_Old.LAN_TUNDRA:
                 return new Color(53, 111, 53);
-            case TerrainType_Old.LAND_TAIGA:
+            case TerrainType_Old.LAN_TAIGA:
                 return new Color(24, 72, 48);
-            case TerrainType_Old.LAND_TEMPERATE_GRASSLAND:
+            case TerrainType_Old.LAN_TEMPERATE_GRASSLAND:
                 return new Color(153, 255, 102);
-            case TerrainType_Old.LAND_SHRUBLAND:
+            case TerrainType_Old.LAN_SHRUBLAND:
                 return new Color(102, 153, 0);
-            case TerrainType_Old.LAND_SAVANA:
+            case TerrainType_Old.LAN_SAVANA:
                 return new Color(204, 255, 102);
-            case TerrainType_Old.LAND_TEMPERATE_FOREST:
+            case TerrainType_Old.LAN_TEMPERATE_FOREST:
                 return new Color(0, 153, 0);
-            case TerrainType_Old.LAND_TROPICAL_FOREST:
+            case TerrainType_Old.LAN_TROPICAL_FOREST:
                 return new Color(102, 255, 51);
-            case TerrainType_Old.LAND_GLACIER:
+            case TerrainType_Old.LAN_GLACIER:
                 return new Color(153, 255, 204);
-            case TerrainType_Old.LAND_MARSH:
+            case TerrainType_Old.LAN_MARSH:
                 return new Color(33, 101, 67);
-            case TerrainType_Old.LAND_TEMPERATE_RAIN_FOREST:
+            case TerrainType_Old.LAN_TEMPERATE_RAIN_FOREST:
                 return new Color(0, 102, 0);
-            case TerrainType_Old.LAND_HYBOREAN_RIMELAND:
+            case TerrainType_Old.LAN_HYBOREAN_RIMELAND:
                 return new Color(204, 255, 255);
-            case TerrainType_Old.LAND_BOG:
+            case TerrainType_Old.LAN_BOG:
                 return new Color(51, 51, 0);
-            case TerrainType_Old.LAND_SWAMP:
+            case TerrainType_Old.LAN_SWAMP:
                 return new Color(0, 51, 0);
-            case TerrainType_Old.LAND_TROPICAL_RAIN_FOREST:
+            case TerrainType_Old.LAN_TROPICAL_RAIN_FOREST:
                 return new Color(0, 128, 0);
             case TerrainType_Old.OCEAN_ICE:
                 return new Color(204, 255, 255);

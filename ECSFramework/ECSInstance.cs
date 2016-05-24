@@ -19,6 +19,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Collections.Generic;
 
 namespace ECSFramework
 {
@@ -33,6 +34,9 @@ namespace ECSFramework
 		public int TotalTime;
 		public int ElapsedTime;
 
+		private Queue<Entity> _updating_entities;
+		private Queue<Entity> _deleting_entities;
+
 		public ECSInstance ()
 		{
 			this.entity_manager = new EntityManager ();
@@ -40,26 +44,43 @@ namespace ECSFramework
 			this.system_manager = new SystemManager ();
 			this.tag_manager = new TagManager ();
 			this.group_manager = new GroupManager ();
+			this._updating_entities = new Queue<Entity> ();
+			this._deleting_entities = new Queue<Entity> ();
 		}
 
 		public Entity create(){
-			//TODO
-			return new Entity();
+			return this.entity_manager.create();
 		}
 
-		public void refresh(Entity e){
-			//TODO
+		public void add_component(Entity e, Component c){
+			this.component_manager.add_component(e,c);
+		}
+
+		public void resolve(Entity e){
+			//TODO: add entity to an update list
+			if (e != null)
+				this._updating_entities.Enqueue (e);
 		}
 
 		public void delete_entity(Entity e){
-			//TODO
+			//TODO: add entity to a delete list
+			if (e != null)
+				this._deleting_entities.Enqueue (e);
 		}
 
 		public void resolve_entities(){
-		}
+			//TODO: process updates
+			if (this._updating_entities.Count > 0) {
+				foreach (Entity e in this._updating_entities) {
+					this.system_manager.resolve (e);
+				}
+			}
 
-		public void resolve_entities(Entity e){
-			//TODO
+			if (this._deleting_entities.Count > 0) {
+				foreach (Entity e in this._deleting_entities) {
+					//TODO: procee deletions
+				}
+			}
 		}
 
 		public void clean_up(){

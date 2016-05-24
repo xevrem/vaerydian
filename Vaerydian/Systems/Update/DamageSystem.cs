@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -35,21 +35,21 @@ namespace Vaerydian.Systems.Update
 {
     class DamageSystem : EntityProcessingSystem
     {
-        private ComponentMapper d_DamageMapper;
-        private ComponentMapper d_HealthMapper;
-        private ComponentMapper d_AttributeMapper;
-        private ComponentMapper d_InteractMapper;
+        private ComponentMapper _DamageMapper;
+        private ComponentMapper _HealthMapper;
+        private ComponentMapper _AttributeMapper;
+        private ComponentMapper _InteractMapper;
 
-        private Random d_Rand = new Random();
+        private Random _Rand = new Random();
 
         public DamageSystem() { }
 
         public override void initialize()
         {
-            d_DamageMapper = new ComponentMapper(new Damage(), ecs_instance);
-            d_HealthMapper = new ComponentMapper(new Health(), ecs_instance);
-            d_AttributeMapper = new ComponentMapper(new Statistics(), ecs_instance);
-            d_InteractMapper = new ComponentMapper(new Interactable(), ecs_instance);
+            _DamageMapper = new ComponentMapper(new Damage(), ecs_instance);
+            _HealthMapper = new ComponentMapper(new Health(), ecs_instance);
+            _AttributeMapper = new ComponentMapper(new Statistics(), ecs_instance);
+            _InteractMapper = new ComponentMapper(new Interactable(), ecs_instance);
 
         }
 
@@ -62,7 +62,7 @@ namespace Vaerydian.Systems.Update
         
         protected override void process(Entity entity)
         {
-            Damage damage = (Damage)d_DamageMapper.get(entity);
+            Damage damage = (Damage)_DamageMapper.get(entity);
 
             if (damage.IsActive)
             {
@@ -91,7 +91,7 @@ namespace Vaerydian.Systems.Update
 
         private void handleDirectDamage(Damage damage)
         {
-            Health health = (Health)d_HealthMapper.get(damage.Target);
+            Health health = (Health)_HealthMapper.get(damage.Target);
 
             if (health != null)
             {
@@ -100,14 +100,14 @@ namespace Vaerydian.Systems.Update
 
                 if (damage.DamageAmount > 0)
                 {
-                    if (((Interactable)d_InteractMapper.get(damage.Target)).SupportedInteractions.MAY_ADVANCE)
+                    if (((Interactable)_InteractMapper.get(damage.Target)).SupportedInteractions.MAY_ADVANCE)
                     {
-                        int endurance = ((Statistics)d_AttributeMapper.get(damage.Target)).Endurance.Value;
+                        int endurance = ((Statistics)_AttributeMapper.get(damage.Target)).Endurance.Value;
 
                         if (health.MaxHealth < (endurance * 5))
                         {
 
-                            if (d_Rand.NextDouble() <= ((double)(endurance*5) - (double)health.MaxHealth)/(double)(endurance*5))
+                            if (_Rand.NextDouble() <= ((double)(endurance*5) - (double)health.MaxHealth)/(double)(endurance*5))
                             {
                                 UtilFactory.createHealthAward(damage.Target, 1);
                             }
@@ -116,7 +116,7 @@ namespace Vaerydian.Systems.Update
                     
 
 					//FIX
-                    switch (d_Rand.Next(0, 7))
+                    switch (_Rand.Next(0, 7))
                     {
                         case 1:
                             UtilFactory.createSound("audio\\effects\\hurt", true, 1f);

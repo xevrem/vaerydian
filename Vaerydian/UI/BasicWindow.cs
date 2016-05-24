@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -28,16 +28,16 @@ namespace Vaerydian
 {
 	public class BasicWindow
 	{
-		private GForm b_Form;
-		private GCanvas b_Canvas;
-		private GFrame b_Frame;
-		private GButton b_Button;
-		private Entity b_Owner;
-		private Entity b_Caller;
-		private ECSInstance b_ECSInstance;
-		private Point b_Position;
-		private Point b_Dimensions;
-		private int b_ButtonHeight = 10;
+		private GForm _Form;
+		private GCanvas _Canvas;
+		private GFrame _Frame;
+		private GButton _Button;
+		private Entity _Owner;
+		private Entity _Caller;
+		private ECSInstance _ECSInstance;
+		private Point _Position;
+		private Point _Dimensions;
+		private int _ButtonHeight = 10;
 
 		/// <summary>
 		/// creates a base window UI control
@@ -62,12 +62,12 @@ namespace Vaerydian
 		/// </param>
 		public BasicWindow (Entity owner, Entity caller, ECSInstance ecsInstance, Point position, Point dimensions, int buttonHeight)
 		{
-			b_Owner = owner;
-			b_Caller = caller;
-			b_ECSInstance = ecsInstance;
-			b_Position = position;
-			b_Dimensions = dimensions;
-			b_ButtonHeight = buttonHeight;
+			_Owner = owner;
+			_Caller = caller;
+			_ECSInstance = ecsInstance;
+			_Position = position;
+			_Dimensions = dimensions;
+			_ButtonHeight = buttonHeight;
 		}
 
 		/// <summary>
@@ -78,10 +78,10 @@ namespace Vaerydian
 		/// </value>
 		public GForm Form {
 			get {
-				return b_Form;
+				return _Form;
 			}
 			set {
-				b_Form = value;
+				_Form = value;
 			}
 		}
 
@@ -93,10 +93,10 @@ namespace Vaerydian
 		/// </value>
 		public GCanvas Canvas {
 			get {
-				return b_Canvas;
+				return _Canvas;
 			}
 			set {
-				b_Canvas = value;
+				_Canvas = value;
 			}
 		}
 
@@ -108,10 +108,10 @@ namespace Vaerydian
 		/// </value>
 		public GFrame Frame {
 			get {
-				return b_Frame;
+				return _Frame;
 			}
 			set {
-				b_Frame = value;
+				_Frame = value;
 			}
 		}
 
@@ -123,10 +123,10 @@ namespace Vaerydian
 		/// </value>
 		public GButton Button {
 			get {
-				return b_Button;
+				return _Button;
 			}
 			set {
-				b_Button = value;
+				_Button = value;
 			}
 		}
 
@@ -135,29 +135,29 @@ namespace Vaerydian
 		/// </summary>
 		public void init()
 		{
-			b_Form = new GForm();
-			b_Form.owner = b_Owner;
-			b_Form.caller = b_Caller;
-			b_Form.ecs_instance = b_ECSInstance;
-			b_Form.bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_Dimensions.Y);			
+			_Form = new GForm();
+			_Form.owner = _Owner;
+			_Form.caller = _Caller;
+			_Form.ecs_instance = _ECSInstance;
+			_Form.bounds = new Rectangle(_Position.X,_Position.Y,_Dimensions.X,_Dimensions.Y);			
 			
-			b_Canvas = new GCanvas();
-			b_Canvas.owner = b_Owner;
-			b_Canvas.caller = b_Caller;
-			b_Canvas.ecs_instance = b_ECSInstance;
-			b_Canvas.bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_Dimensions.Y);
+			_Canvas = new GCanvas();
+			_Canvas.owner = _Owner;
+			_Canvas.caller = _Caller;
+			_Canvas.ecs_instance = _ECSInstance;
+			_Canvas.bounds = new Rectangle(_Position.X,_Position.Y,_Dimensions.X,_Dimensions.Y);
 
-			b_Frame = new GFrame();
-			b_Frame.owner = b_Owner;
-			b_Frame.caller = b_Caller;
-			b_Frame.ecs_instance = b_ECSInstance;
-			b_Frame.bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_Dimensions.Y);
+			_Frame = new GFrame();
+			_Frame.owner = _Owner;
+			_Frame.caller = _Caller;
+			_Frame.ecs_instance = _ECSInstance;
+			_Frame.bounds = new Rectangle(_Position.X,_Position.Y,_Dimensions.X,_Dimensions.Y);
 
-			b_Button = new GButton();
-			b_Button.owner = b_Owner;
-			b_Button.caller = b_Caller;
-			b_Button.ecs_instance = b_ECSInstance;
-			b_Button.bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_ButtonHeight);
+			_Button = new GButton();
+			_Button.owner = _Owner;
+			_Button.caller = _Caller;
+			_Button.ecs_instance = _ECSInstance;
+			_Button.bounds = new Rectangle(_Position.X,_Position.Y,_Dimensions.X,_ButtonHeight);
 		}
 
 		/// <summary>
@@ -165,8 +165,8 @@ namespace Vaerydian
 		/// </summary>
 		public void preAssemble ()
 		{
-			b_Canvas.controls.Add(b_Frame);
-			b_Canvas.controls.Add(b_Button);
+			_Canvas.controls.Add(_Frame);
+			_Canvas.controls.Add(_Button);
 		}
 
 		/// <summary>
@@ -174,7 +174,7 @@ namespace Vaerydian
 		/// </summary>
 		public void assemble()
 		{
-			b_Form.canvas_controls.Add(b_Canvas);
+			_Form.canvas_controls.Add(_Canvas);
 		}
 
 

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -34,8 +34,8 @@ namespace Vaerydian.Components.Graphical
     public class Sprite : Component
     {
 
-        private static int s_TypeID;
-        private int s_EntityID;
+        private static int s_type_id;
+        private int s_entity_id;
 
         
 
@@ -53,12 +53,12 @@ namespace Vaerydian.Components.Graphical
 
         public int getEntityId()
         {
-            return s_EntityID;
+            return s_entity_id;
         }
 
         public int getTypeId()
         {
-            return s_TypeID;
+            return s_type_id;
         }
 
         public String getTextureName()
@@ -68,12 +68,12 @@ namespace Vaerydian.Components.Graphical
 
         public void setEntityId(int entityId)
         {
-            s_EntityID = entityId;
+            s_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            s_TypeID = typeId;
+            s_type_id = typeId;
         }
 
         private String s_TextureName;

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -29,8 +29,8 @@ namespace Vaerydian.Components.Utils
 {
     public class GameMap : Component
     {
-        private static int g_TypeID;
-        private int g_EntityID;
+        private static int g_type_id;
+        private int g_entity_id;
 
         private Map g_Map;
 
@@ -73,31 +73,31 @@ namespace Vaerydian.Components.Utils
 
         public int getEntityId()
         {
-            return g_EntityID;
+            return g_entity_id;
         }
 
         public int getTypeId()
         {
-            return g_TypeID;
+            return g_type_id;
         }
 
 		public static int TypeID {
 			get {
-				return g_TypeID;
+				return g_type_id;
 			}
 			set {
-				g_TypeID = value;
+				g_type_id = value;
 			}
 		}
 
         public void setEntityId(int entityId)
         {
-            g_EntityID = entityId;
+            g_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            g_TypeID = typeId;
+            g_type_id = typeId;
         }
 
         public Terrain getTerrain (int x, int y)

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -38,19 +38,19 @@ namespace Vaerydian.Factories
     class MapFactory
     {
 
-        private ECSInstance m_EcsInstance;
+		private ECSInstance ecs_instance;
         private static GameContainer m_Container;
         private Random rand = new Random();
 
         public MapFactory(ECSInstance ecsInstance, GameContainer container)
         {
-            m_EcsInstance = ecsInstance;
+            ecs_instance = ecsInstance;
             m_Container = container;
         }
 
         public MapFactory(ECSInstance ecsInstance) 
         {
-            m_EcsInstance = ecsInstance;
+            ecs_instance = ecsInstance;
         }
 
 		public GameMap createRandomDungeonMap (int x, int y,int features, int seed)
@@ -70,12 +70,12 @@ namespace Vaerydian.Factories
 
 			GameMap gameMap = new GameMap(map);
 
-			Entity e = m_EcsInstance.create();
-            m_EcsInstance.entity_manager.add_component(e, gameMap);
+			Entity e = ecs_instance.create();
+            ecs_instance.add_component(e, gameMap);
 
-            m_EcsInstance.tag_manager.tag_entity("MAP", e);
+            ecs_instance.tag_manager.tag_entity("MAP", e);
 
-            m_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
 
             return gameMap;
 		}
@@ -99,12 +99,12 @@ namespace Vaerydian.Factories
 
 			GameMap gameMap = new GameMap(map);
 
-			Entity e = m_EcsInstance.create();
-            m_EcsInstance.entity_manager.add_component(e, gameMap);
+			Entity e = ecs_instance.create();
+            ecs_instance.add_component(e, gameMap);
 
-            m_EcsInstance.tag_manager.tag_entity("MAP", e);
+            ecs_instance.tag_manager.tag_entity("MAP", e);
 
-            m_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
 
             return gameMap;
 		}
@@ -139,12 +139,12 @@ namespace Vaerydian.Factories
 
             GameMap gameMap = new GameMap(map);
 
-            Entity e = m_EcsInstance.create();
-            m_EcsInstance.entity_manager.add_component(e, gameMap);
+            Entity e = ecs_instance.create();
+            ecs_instance.add_component(e, gameMap);
 
-            m_EcsInstance.tag_manager.tag_entity("MAP", e);
+            ecs_instance.tag_manager.tag_entity("MAP", e);
 
-            m_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
 
             return gameMap;
         }
@@ -153,16 +153,16 @@ namespace Vaerydian.Factories
         {
             Map map = MapMaker.create(xSize, ySize);
 
-            object[] parameters = new object[WorldGen.WORLD_PARAMS_SIZE];
+            object[] parameters = new object[WorldGen.WORL_PARAMS_SIZE];
 
-            parameters[WorldGen.WORLD_PARAMS_X] = x;
-            parameters[WorldGen.WORLD_PARAMS_Y] = y;
-            parameters[WorldGen.WORLD_PARAMS_DX] = dx;
-            parameters[WorldGen.WORLD_PARAMS_DY] = dy;
-            parameters[WorldGen.WORLD_PARAMS_Z] = z;
-            parameters[WorldGen.WORLD_PARAMS_XSIZE] = xSize;
-            parameters[WorldGen.WORLD_PARAMS_YSIZE] = ySize;
-            parameters[WorldGen.WORLD_PARAMS_SEED] = seed;
+            parameters[WorldGen.WORL_PARAMS_X] = x;
+            parameters[WorldGen.WORL_PARAMS_Y] = y;
+            parameters[WorldGen.WORL_PARAMS_DX] = dx;
+            parameters[WorldGen.WORL_PARAMS_DY] = dy;
+            parameters[WorldGen.WORL_PARAMS_Z] = z;
+            parameters[WorldGen.WORL_PARAMS_XSIZE] = xSize;
+            parameters[WorldGen.WORL_PARAMS_YSIZE] = ySize;
+            parameters[WorldGen.WORL_PARAMS_SEED] = seed;
 
             MapMaker.Parameters = parameters;
 
@@ -170,24 +170,24 @@ namespace Vaerydian.Factories
 
             GameMap gameMap = new GameMap(map);
 
-            Entity e = m_EcsInstance.create();
-            m_EcsInstance.entity_manager.add_component(e, gameMap);
+            Entity e = ecs_instance.create();
+            ecs_instance.add_component(e, gameMap);
 
-            m_EcsInstance.tag_manager.tag_entity("MAP", e);
+            ecs_instance.tag_manager.tag_entity("MAP", e);
 
-            m_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
 
             return gameMap;
         }
 
         public GameMap recreateWorldMap(GameMap map)
         {
-            Entity e = m_EcsInstance.create();
-            m_EcsInstance.entity_manager.add_component(e, map);
+            Entity e = ecs_instance.create();
+            ecs_instance.add_component(e, map);
 
-            m_EcsInstance.tag_manager.tag_entity("MAP", e);
+            ecs_instance.tag_manager.tag_entity("MAP", e);
 
-            m_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
 
             return map;
         }

@@ -19,17 +19,21 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Collections.Generic;
 
 namespace ECSFramework
 {
 	public class SystemManager
 	{
+		private List<EntitySystem> _systems;
+
 		public SystemManager ()
 		{
+			this._systems = new List<EntitySystem> ();
 		}
 
 		public EntitySystem set_system(EntitySystem system, params Component[] components){
-			//TODO
+			//TODO add the system and assign its components.
 			return system;
 		}
 
@@ -38,6 +42,14 @@ namespace ECSFramework
 		}
 
 		public void systems_load_content(){
+			//TODO
+		}
+
+		public void resolve(Entity e){
+			//TODO: assign the entity to the appropriate systems.
+		}
+
+		public void delete_entity(Entity e){
 			//TODO
 		}
 	}

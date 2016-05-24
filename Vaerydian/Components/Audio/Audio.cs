@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -29,84 +29,84 @@ namespace Vaerydian.Components.Audio
     class Audio : Component
     {
 
-        private static int a_TypeID;
-        private int a_EntityID;
+        private static int _type_id;
+        private int _entity_id;
 
         public Audio() { }
 
         public Audio(String soundEffectName, bool playNow, float volume)
         {
-            a_SoundEffectName = soundEffectName;
-            a_Play = playNow;
-            a_Volume = volume;   
+            _SoundEffectName = soundEffectName;
+            _Play = playNow;
+            _Volume = volume;   
         }
 
         public Audio(String soundEffectName, bool playNow, float volume, float pitch)
         {
-            a_SoundEffectName = soundEffectName;
-            a_Play = playNow;
-            a_Volume = volume;
-            a_Pitch = pitch;
+            _SoundEffectName = soundEffectName;
+            _Play = playNow;
+            _Volume = volume;
+            _Pitch = pitch;
         }
 
         public int getEntityId()
         {
-            return a_EntityID;
+            return _entity_id;
         }
 
         public int getTypeId()
         {
-            return a_TypeID;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            a_EntityID = entityId;
+            _entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            a_TypeID = typeId;
+            _type_id = typeId;
         }
 
-        private String a_SoundEffectName;
+        private String _SoundEffectName;
 
         public String SoundEffectName
         {
-            get { return a_SoundEffectName; }
-            set { a_SoundEffectName = value; }
+            get { return _SoundEffectName; }
+            set { _SoundEffectName = value; }
         }
 
-        private bool a_Play = false;
+        private bool _Play = false;
 
         public bool Play
         {
-            get { return a_Play; }
-            set { a_Play = value; }
+            get { return _Play; }
+            set { _Play = value; }
         }
 
-        private bool a_Loop = false;
+        private bool _Loop = false;
 
         public bool Loop
         {
-            get { return a_Loop; }
-            set { a_Loop = value; }
+            get { return _Loop; }
+            set { _Loop = value; }
         }
 
-        private float a_Volume = 1f;
+        private float _Volume = 1f;
 
         public float Volume
         {
-            get { return a_Volume; }
-            set { a_Volume = value; }
+            get { return _Volume; }
+            set { _Volume = value; }
         }
 
-        private float a_Pitch = 0f;
+        private float _Pitch = 0f;
 
         public float Pitch
         {
-            get { return a_Pitch; }
-            set { a_Pitch = value; }
+            get { return _Pitch; }
+            set { _Pitch = value; }
         }
 
 

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -28,8 +28,8 @@ namespace Vaerydian.Components.Spatials
 {
     public class Velocity : Component
     {
-        private static int v_TypeID;
-        private int v_EntityID;
+        private static int v_type_id;
+        private int v_entity_id;
 
         private float v_Velocity;
 
@@ -48,22 +48,22 @@ namespace Vaerydian.Components.Spatials
 
         public int getEntityId()
         {
-            return v_EntityID;
+            return v_entity_id;
         }
 
         public int getTypeId()
         {
-            return v_TypeID;
+            return v_type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            v_EntityID = entityId;
+            v_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            v_TypeID = typeId;
+            v_type_id = typeId;
         }
     }
 }

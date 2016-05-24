@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -62,7 +62,7 @@ namespace Vaerydian.Behaviors
         private bool f_moved = false;
 
         private const int INITIALIZATION = 0;
-        private const int PATHING_AND_MOVEMENT = 1;
+        private const int PATHING_AN_MOVEMENT = 1;
 
         private Conditional tooClose;
         private Conditional targetMoved;
@@ -190,7 +190,7 @@ namespace Vaerydian.Behaviors
                 s_LastNode.Contents.Remove(f_ThisEntity);
             }
 
-            c_IsClean = true;
+            _IsClean = true;
         }
 
 
@@ -198,7 +198,7 @@ namespace Vaerydian.Behaviors
         {
             //is it time to start pathing?
             if (f_BeginPathingAndMovement)
-                return PATHING_AND_MOVEMENT;
+                return PATHING_AN_MOVEMENT;
             return INITIALIZATION;
         }
 

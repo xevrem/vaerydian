@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -96,8 +96,8 @@ namespace Vaerydian.Factories
             UserInterface ui = new UserInterface(form);
 
             //assign component and issue refresh
-            ecs_instance.entity_manager.add_component(e, ui);
-            ecs_instance.refresh(e);
+            ecs_instance.add_component(e, ui);
+            ecs_instance.resolve(e);
         }
 
         public static void createFrame(Entity caller, Point Position, int height, int width, string textureName)
@@ -131,7 +131,7 @@ namespace Vaerydian.Factories
 
             ecs_instance.component_manager.add_component(e, ui);
 
-            ecs_instance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
         public static GFrame createMousePointer(Point position, int width, int height, string textureName, InterfaceHandler handler)
@@ -164,7 +164,7 @@ namespace Vaerydian.Factories
 
             ecs_instance.component_manager.add_component(e, ui);
 
-            ecs_instance.refresh(e);
+            ecs_instance.resolve(e);
 
             return frame;
         }
@@ -179,10 +179,10 @@ namespace Vaerydian.Factories
             fText.Color = color;
             fText.Lifetime = timeToLive;
 
-            ecs_instance.entity_manager.add_component(e, fText);
-            ecs_instance.entity_manager.add_component(e, position);
+            ecs_instance.add_component(e, fText);
+            ecs_instance.add_component(e, position);
 
-            ecs_instance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
 		public static void createHitPointLabel(Entity entity, int width, int height, Point position)
@@ -224,7 +224,7 @@ namespace Vaerydian.Factories
 
             ecs_instance.component_manager.add_component(e, ui);
 
-            ecs_instance.refresh(e);
+            ecs_instance.resolve(e);
 		}
 
 		public static Entity createStatWindow(Entity caller, Point position, Point dimensions, int buttonHeight)
@@ -290,7 +290,7 @@ namespace Vaerydian.Factories
 
             ecs_instance.component_manager.add_component(e, ui);
 
-            ecs_instance.refresh(e);
+            ecs_instance.resolve(e);
 
 			return e;
 		}
@@ -405,7 +405,7 @@ namespace Vaerydian.Factories
 
 			ecs_instance.component_manager.add_component(e, ui);
 
-			ecs_instance.refresh (e);
+			ecs_instance.resolve (e);
 
 			return e;
 		}

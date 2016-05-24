@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -30,8 +30,8 @@ namespace Vaerydian.Components.Spatials
 {
     public class Heading : Component
     {
-        private static int h_TypeID;
-        private int h_EntityID;
+        private static int h_type_id;
+        private int h_entity_id;
 
         private Vector2 h_Heading;
 
@@ -44,12 +44,12 @@ namespace Vaerydian.Components.Spatials
 
         public int getEntityId()
         {
-            return h_EntityID;
+            return h_entity_id;
         }
 
         public int getTypeId()
         {
-            return h_TypeID;
+            return h_type_id;
         }
 
         public Vector2 getHeading()
@@ -59,12 +59,12 @@ namespace Vaerydian.Components.Spatials
 
         public void setEntityId(int entityId)
         {
-            h_EntityID = entityId;
+            h_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            h_TypeID = typeId;
+            h_type_id = typeId;
         }
 
         public void setHeading(Vector2 heading)

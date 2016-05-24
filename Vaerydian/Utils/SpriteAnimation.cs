@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -28,72 +28,72 @@ namespace Vaerydian.Utils
 {
     public class SpriteAnimation
     {
-        private int a_FrameRate;
+        private int _FrameRate;
 
-        private int a_Frames;
+        private int _Frames;
 
-        private int a_ElapsedTime = 0;
+        private int _ElapsedTime = 0;
 
-        private int a_LastFrame = 0;
+        private int _LastFrame = 0;
 
         public SpriteAnimation() { }
 
         public SpriteAnimation(int frames, int frameRate) 
         {
-            a_Frames = frames;
-            a_FrameRate = frameRate;
+            _Frames = frames;
+            _FrameRate = frameRate;
         }
 
         public void reset()
         {
-            a_ElapsedTime = 0;
-            a_LastFrame = 0;
+            _ElapsedTime = 0;
+            _LastFrame = 0;
         }
 
         public int updateFrame(GameTime gameTime)
         {
-            a_ElapsedTime += gameTime.ElapsedGameTime.Milliseconds;
+            _ElapsedTime += gameTime.ElapsedGameTime.Milliseconds;
 
-            if (a_ElapsedTime > a_FrameRate)
+            if (_ElapsedTime > _FrameRate)
             {
                 //reset elapsed
-                a_ElapsedTime = 0;
+                _ElapsedTime = 0;
 
                 //update frame
-                a_LastFrame++;
+                _LastFrame++;
 
                 //make sure we didnt run over
-                if (a_LastFrame == a_Frames)
-                    a_LastFrame = 0;
+                if (_LastFrame == _Frames)
+                    _LastFrame = 0;
 
                 //return frame
-                return a_LastFrame;
+                return _LastFrame;
             }
             else
-                return a_LastFrame;
+                return _LastFrame;
         }
 
         public int updateFrame(int gameTime)
         {
-            a_ElapsedTime += gameTime;
+            _ElapsedTime += gameTime;
 
-            if (a_ElapsedTime > a_FrameRate)
+            if (_ElapsedTime > _FrameRate)
             {
                 //reset elapsed
-                a_ElapsedTime = 0;
+                _ElapsedTime = 0;
 
                 //update frame
-                a_LastFrame++;
+                _LastFrame++;
 
                 //make sure we didnt run over
-                if (a_LastFrame == a_Frames)
-                    a_LastFrame = 0;
+                if (_LastFrame == _Frames)
+                    _LastFrame = 0;
 
                 //return frame
-                return a_LastFrame;
+                return _LastFrame;
             }
             else
-                return a_LastFrame;
+                return _LastFrame;
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace Vaerydian.Utils
         /// </summary>
         public int Frames
         {
-            get { return a_Frames; }
-            set { a_Frames = value; }
+            get { return _Frames; }
+            set { _Frames = value; }
         }
     }
 }

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -37,15 +37,15 @@ namespace Vaerydian.Systems.Update
 {
     class BehaviorSystem : EntityProcessingSystem
     {
-        private ComponentMapper b_BehaviorMapper;
-        private ComponentMapper b_LifeMapper;
+        private ComponentMapper _BehaviorMapper;
+        private ComponentMapper _LifeMapper;
 
         public BehaviorSystem() {}//: base(intervals) { }
 
         public override void initialize()
         {
-            b_BehaviorMapper = new ComponentMapper(new AiBehavior(), ecs_instance);
-            b_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
+            _BehaviorMapper = new ComponentMapper(new AiBehavior(), ecs_instance);
+            _LifeMapper = new ComponentMapper(new Life(), ecs_instance);
         }
 
         public override void preLoadContent(Bag<Entity> entities)
@@ -57,8 +57,8 @@ namespace Vaerydian.Systems.Update
 
         protected override void process(Entity entity)
         {
-            AiBehavior aiBehavior = (AiBehavior)b_BehaviorMapper.get(entity);
-            Life life = (Life)b_LifeMapper.get(entity);
+            AiBehavior aiBehavior = (AiBehavior)_BehaviorMapper.get(entity);
+            Life life = (Life)_LifeMapper.get(entity);
             if (life.IsAlive)
                 aiBehavior.Behavior.Behave();
             else

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -37,29 +37,29 @@ namespace Vaerydian.Systems.Update
 {
     class AudioSystem : EntityProcessingSystem
     {
-        private GameContainer a_Container;
+        private GameContainer _Container;
 
-        private ComponentMapper a_AudioMapper;
+        private ComponentMapper _AudioMapper;
 
-        private Dictionary<String, SoundEffect> a_SoundEffects = new Dictionary<String, SoundEffect>();
+        private Dictionary<String, SoundEffect> _SoundEffects = new Dictionary<String, SoundEffect>();
 
         public AudioSystem(GameContainer container) : base() 
         {
-            a_Container = container;
+            _Container = container;
         }
 
         public override void initialize()
         {
-            a_AudioMapper = new ComponentMapper(new Audio(), ecs_instance);
+            _AudioMapper = new ComponentMapper(new Audio(), ecs_instance);
         }
 
         public override void preLoadContent(Bag<Entity> entities)
         {
             for (int i = 0; i < entities.count; i++)
             {
-				Audio audio = (Audio) a_AudioMapper.get(entities.get(i));
-                if(!a_SoundEffects.ContainsKey(audio.SoundEffectName))
-                    a_SoundEffects.Add(audio.SoundEffectName, a_Container.ContentManager.Load<SoundEffect>(audio.SoundEffectName));
+				Audio audio = (Audio) _AudioMapper.get(entities.get(i));
+                if(!_SoundEffects.ContainsKey(audio.SoundEffectName))
+                    _SoundEffects.Add(audio.SoundEffectName, _Container.ContentManager.Load<SoundEffect>(audio.SoundEffectName));
             }
         }
 
@@ -67,19 +67,19 @@ namespace Vaerydian.Systems.Update
 
         protected override void added(Entity entity)
         {
-            Audio audio = (Audio)a_AudioMapper.get(entity);
-            if (!a_SoundEffects.ContainsKey(audio.SoundEffectName))
-                a_SoundEffects.Add(audio.SoundEffectName, a_Container.ContentManager.Load<SoundEffect>(audio.SoundEffectName));
+            Audio audio = (Audio)_AudioMapper.get(entity);
+            if (!_SoundEffects.ContainsKey(audio.SoundEffectName))
+                _SoundEffects.Add(audio.SoundEffectName, _Container.ContentManager.Load<SoundEffect>(audio.SoundEffectName));
         }
 
         protected override void process(Entity entity)
         {
-            Audio audio = (Audio)a_AudioMapper.get(entity);
+            Audio audio = (Audio)_AudioMapper.get(entity);
 
             if (!audio.Play)
                 return;
 
-            a_SoundEffects[audio.SoundEffectName].Play(audio.Volume, audio.Pitch, 0f);
+            _SoundEffects[audio.SoundEffectName].Play(audio.Volume, audio.Pitch, 0f);
 
             audio.Play = false;
             ecs_instance.delete_entity(entity);

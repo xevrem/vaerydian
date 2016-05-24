@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -35,60 +35,60 @@ namespace Vaerydian.Components.Items
 
     class Equipment : Component
     {
-        private static int e_TypeID;
-        private int e_EntityID;
+        private static int e_type_id;
+        private int e_entity_id;
 
         public Equipment() { }
 
         public int getEntityId()
         {
-            return e_EntityID;
+            return e_entity_id;
         }
 
         public int getTypeId()
         {
-            return e_TypeID;
+            return e_type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            e_EntityID = entityId;
+            e_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            e_TypeID = typeId;
+            e_type_id = typeId;
         }
 
-        private Entity a_RangedWeapon;
+        private Entity _RangedWeapon;
         /// <summary>
         /// the given entity's ranged weapon entity reference
         /// </summary>
         public Entity RangedWeapon
         {
-            get { return a_RangedWeapon; }
-            set { a_RangedWeapon = value; }
+            get { return _RangedWeapon; }
+            set { _RangedWeapon = value; }
         }
 
-        private Entity a_MeleeWeapon;
+        private Entity _MeleeWeapon;
 
         /// <summary>
         /// the given entity's melee weapon entity reference
         /// </summary>
         public Entity MeleeWeapon
         {
-            get { return a_MeleeWeapon; }
-            set { a_MeleeWeapon = value; }
+            get { return _MeleeWeapon; }
+            set { _MeleeWeapon = value; }
         }
 
-        private Entity a_Armor;
+        private Entity _Armor;
         /// <summary>
         /// the given entities armor entity reference
         /// </summary>
         public Entity Armor
         {
-            get { return a_Armor; }
-            set { a_Armor = value; }
+            get { return _Armor; }
+            set { _Armor = value; }
         }
     }
 }

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -30,38 +30,38 @@ namespace Vaerydian.Components.Graphical
 {
     class Light : Component
     {
-        private static int l_TypeID;
-        private int l_EntityID;
+        private static int l_type_id;
+        private int l_entity_id;
 
         public Light() { }
 
         public int getEntityId()
         {
-            return l_EntityID;
+            return l_entity_id;
         }
 
         public int getTypeId()
         {
-            return l_TypeID;
+            return l_type_id;
         }
 
 		public static int TypeID {
 			get {
-				return l_TypeID;
+				return l_type_id;
 			}
 			set {
-				l_TypeID = value;
+				l_type_id = value;
 			}
 		}
 
         public void setEntityId(int entityId)
         {
-            l_EntityID = entityId;
+            l_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            l_TypeID = typeId;
+            l_type_id = typeId;
         }
 
         private bool l_IsEnabled;

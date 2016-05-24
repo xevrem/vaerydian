@@ -2,7 +2,7 @@
       Erika V. Jonell <@xevrem>
  Author:
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -156,9 +156,9 @@ namespace Vaerydian.Screens
 
             UserInterface ui = new UserInterface(s_ButtonMenu.Form);
 
-            ecs_instance.component_manager.add_component(e, ui);
+            ecs_instance.add_component(e, ui);
 
-            ecs_instance.refresh(e);
+            ecs_instance.resolve(e);
 
 			//load the json start screen file
 			s_json = s_JsonManager.loadJSON(GameConfig.root_dir + "/Content/json/start_screen.v");
@@ -187,10 +187,10 @@ namespace Vaerydian.Screens
             base.hasFocusUpdate(gameTime);
 
             //check to see if escape was recently pressed
-            if (InputManager.isKeyToggled(Keys.Escape))
-            {
-                InputManager.YesExit = true;
-            }
+//            if (InputManager.isKeyToggled(Keys.Escape))
+//            {
+//                InputManager.YesExit = true;
+//            }
         }
 
         public override void Update(GameTime gameTime)
@@ -204,7 +204,9 @@ namespace Vaerydian.Screens
         {
             base.Draw(gameTime);
 
-            s_UiDrawSystem.process();
+			ScreenManager.GameContainer.GraphicsDevice.Clear(Color.Black);
+
+			s_UiDrawSystem.process();
         }
 
         private void OnMouseClickNewGame(Control control, InterfaceArgs args) 

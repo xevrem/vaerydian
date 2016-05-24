@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -43,24 +43,24 @@ namespace Vaerydian.Utils
         public const short OCEAN_COAST = 104;
 
         //land types
-        public const short LAND_SCORCHED = 200;
-        public const short LAND_DESERT = 201;
-        public const short LAND_SAVANA = 202;
-        public const short LAND_TEMPERATE_FOREST = 203;
-        public const short LAND_TROPICAL_RAIN_FOREST = 204;
-        public const short LAND_SWAMP = 205;
-        public const short LAND_TAIGA = 206;
-        public const short LAND_TUNDRA = 207;
-        public const short LAND_TEMPERATE_GRASSLAND = 208;
-        public const short LAND_SHRUBLAND = 209;
-        public const short LAND_TEMPERATE_RAIN_FOREST = 210;
-        public const short LAND_TROPICAL_FOREST = 211;
-        public const short LAND_SNOW_PLAINS = 212;
-        public const short LAND_MARSH = 213;
-        public const short LAND_BOG = 214;
-        public const short LAND_ARCTIC_DESERT = 215;
-        public const short LAND_GLACIER = 216;
-        public const short LAND_HYBOREAN_RIMELAND = 217;
+        public const short LAN_SCORCHED = 200;
+        public const short LAN_DESERT = 201;
+        public const short LAN_SAVANA = 202;
+        public const short LAN_TEMPERATE_FOREST = 203;
+        public const short LAN_TROPICAL_RAIN_FOREST = 204;
+        public const short LAN_SWAMP = 205;
+        public const short LAN_TAIGA = 206;
+        public const short LAN_TUNDRA = 207;
+        public const short LAN_TEMPERATE_GRASSLAND = 208;
+        public const short LAN_SHRUBLAND = 209;
+        public const short LAN_TEMPERATE_RAIN_FOREST = 210;
+        public const short LAN_TROPICAL_FOREST = 211;
+        public const short LAN_SNOW_PLAINS = 212;
+        public const short LAN_MARSH = 213;
+        public const short LAN_BOG = 214;
+        public const short LAN_ARCTI_DESERT = 215;
+        public const short LAN_GLACIER = 216;
+        public const short LAN_HYBOREAN_RIMELAND = 217;
 
         //mountain types
         public const short MOUNTAIN_FOOTHILL = 300;

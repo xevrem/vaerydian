@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -30,120 +30,120 @@ namespace Vaerydian.Components.Actions
 {
     class Damage : Component
     {
-        private static int d_TypeID;
-        private int d_EntityID;
+        private static int _type_id;
+        private int _entity_id;
 
         public Damage() { }
 
         public int getEntityId()
         {
-            return d_EntityID;
+            return _entity_id;
         }
 
         public int getTypeId()
         {
-            return d_TypeID;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            d_EntityID = entityId;
+            _entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            d_TypeID = typeId;
+            _type_id = typeId;
         }
 
-        private bool d_IsActive = true;
+        private bool _IsActive = true;
         /// <summary>
         /// is damage component still active
         /// </summary>
         public bool IsActive
         {
-            get { return d_IsActive; }
-            set { d_IsActive = value; }
+            get { return _IsActive; }
+            set { _IsActive = value; }
         }
 
-        private DamageClass d_DamageClass;
+        private DamageClass _DamageClass;
         /// <summary>
         /// class of damage
         /// </summary>
         public DamageClass DamageClass
         {
-            get { return d_DamageClass; }
-            set { d_DamageClass = value; }
+            get { return _DamageClass; }
+            set { _DamageClass = value; }
         }
 
-        private DamageType d_DamageType;
+        private DamageType _DamageType;
         /// <summary>
         /// type of damage
         /// </summary>
         public DamageType DamageType
         {
-            get { return d_DamageType; }
-            set { d_DamageType = value; }
+            get { return _DamageType; }
+            set { _DamageType = value; }
         }
 
-        private int d_DamageAmount = 0;
+        private int _DamageAmount = 0;
         /// <summary>
         /// amount of damage
         /// </summary>
         public int DamageAmount
         {
-            get { return d_DamageAmount; }
-            set { d_DamageAmount = value; }
+            get { return _DamageAmount; }
+            set { _DamageAmount = value; }
         }
 
-        private int d_DamageRate = 0;
+        private int _DamageRate = 0;
         
         /// <summary>
         /// rate of damage
         /// </summary>
         public int DamageRate
         {
-            get { return d_DamageRate; }
-            set { d_DamageRate = value; }
+            get { return _DamageRate; }
+            set { _DamageRate = value; }
         }
 
-        private int d_TimeSinceLastDamage = 0;
+        private int _TimeSinceLastDamage = 0;
         /// <summary>
         /// time since target was last damaged (only applicable for over-time damage classes)
         /// </summary>
         public int TimeSinceLastDamage
         {
-            get { return d_TimeSinceLastDamage; }
-            set { d_TimeSinceLastDamage = value; }
+            get { return _TimeSinceLastDamage; }
+            set { _TimeSinceLastDamage = value; }
         }
 
-        private int d_Lifetime = 0;
+        private int _Lifetime = 0;
         /// <summary>
         /// time damage component has been alive
         /// </summary>
         public int Lifetime
         {
-            get { return d_Lifetime; }
-            set { d_Lifetime = value; }
+            get { return _Lifetime; }
+            set { _Lifetime = value; }
         }
 
-        private int d_Lifespan = 0;
+        private int _Lifespan = 0;
         /// <summary>
         /// total time damage component may live
         /// </summary>
         public int Lifespan
         {
-            get { return d_Lifespan; }
-            set { d_Lifespan = value; }
+            get { return _Lifespan; }
+            set { _Lifespan = value; }
         }
 
-        private Entity d_Target;
+        private Entity _Target;
         /// <summary>
         /// target of the damage
         /// </summary>
         public Entity Target
         {
-            get { return d_Target; }
-            set { d_Target = value; }
+            get { return _Target; }
+            set { _Target = value; }
         }
 
     }

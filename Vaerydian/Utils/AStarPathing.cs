@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -44,62 +44,62 @@ namespace Vaerydian.Utils
     public class AStarPathing
     {
 
-        private GameMap a_GameMap;
-        private Vector2 a_Start,a_Finish;
-        private Cell a_StartCell, a_FinishCell;
-        /*private List<Cell> a_OpenSet = new List<Cell>();
+        private GameMap _GameMap;
+        private Vector2 _Start,_Finish;
+        private Cell _StartCell, _FinishCell;
+        /*private List<Cell> _OpenSet = new List<Cell>();
         
         public List<Cell> OpenSet
         {
-            get { return a_OpenSet; }
-            set { a_OpenSet = value; }
+            get { return _OpenSet; }
+            set { _OpenSet = value; }
         }*/
 
-        private BinaryHeap<Cell> a_OpenSet = new BinaryHeap<Cell>(16);
+        private BinaryHeap<Cell> _OpenSet = new BinaryHeap<Cell>(16);
 
         public BinaryHeap<Cell> OpenSet
         {
-            get { return a_OpenSet; }
-            set { a_OpenSet = value; }
+            get { return _OpenSet; }
+            set { _OpenSet = value; }
         }
 
         
-        private List<Cell> a_ClosedSet = new List<Cell>();
+        private List<Cell> _ClosedSet = new List<Cell>();
 
         public List<Cell> ClosedSet
         {
-            get { return a_ClosedSet; }
-            set { a_ClosedSet = value; }
+            get { return _ClosedSet; }
+            set { _ClosedSet = value; }
         }
 
-        private List<Cell> a_BlockingSet = new List<Cell>();
+        private List<Cell> _BlockingSet = new List<Cell>();
 
         public List<Cell> BlockingSet
         {
-            get { return a_BlockingSet; }
-            set { a_BlockingSet = value; }
+            get { return _BlockingSet; }
+            set { _BlockingSet = value; }
         }
 
         private int linCost = 10;
         private int diaCost = 14;
-        private int a_MaxLoops = 1000;
+        private int _MaxLoops = 1000;
 
-        private bool a_Failed = false;
+        private bool _Failed = false;
 
         public bool Failed
         {
-            get { return a_Failed; }
-            set { a_Failed = value; }
+            get { return _Failed; }
+            set { _Failed = value; }
         }
 
-        private bool a_IsFound = false;
+        private bool _IsFound = false;
         /// <summary>
         /// did it complete?
         /// </summary>
         public bool IsFound
         {
-            get { return a_IsFound; }
-            set { a_IsFound = value; }
+            get { return _IsFound; }
+            set { _IsFound = value; }
         }
 
         /// <summary>
@@ -110,21 +110,21 @@ namespace Vaerydian.Utils
         /// <param name="map">map to path through</param>
         public AStarPathing(Vector2 start, Vector2 finish, GameMap map) 
         {
-            a_GameMap = map;
-            a_Start = start;
-            a_Finish = finish;
-            a_StartCell = createCell((int)start.X, (int)start.Y);
-            a_FinishCell = createCell((int)finish.X, (int)finish.Y);
-            //a_OpenSet.Add(a_StartCell);
-            a_OpenSet.add(a_StartCell.F, a_StartCell);
+            _GameMap = map;
+            _Start = start;
+            _Finish = finish;
+            _StartCell = createCell((int)start.X, (int)start.Y);
+            _FinishCell = createCell((int)finish.X, (int)finish.Y);
+            //_OpenSet.Add(_StartCell);
+            _OpenSet.add(_StartCell.F, _StartCell);
 
-            List<Cell> temp = findAdjacentCells(a_StartCell);
+            List<Cell> temp = findAdjacentCells(_StartCell);
             for (int i = 0; i < temp.Count; i++)
             {
-                a_OpenSet.add(temp[i].F,temp[i]);
+                _OpenSet.add(temp[i].F,temp[i]);
             }
             
-            a_ClosedSet.Add(a_OpenSet.removeFirst().Data);
+            _ClosedSet.Add(_OpenSet.removeFirst().Data);
         }
 
         /// <summary>
@@ -136,33 +136,33 @@ namespace Vaerydian.Utils
             List<Cell> workingList = new List<Cell>();
             Cell temp;
 
-            while (loopCount < a_MaxLoops)
+            while (loopCount < _MaxLoops)
             {
                 //have we failed to find it?
-                if (a_OpenSet.Size == 0)
+                if (_OpenSet.Size == 0)
                 {
-                    if (contains(a_FinishCell, a_ClosedSet) < 0)
+                    if (contains(_FinishCell, _ClosedSet) < 0)
                     {
-                        a_Failed = true;
+                        _Failed = true;
                         return;
                     }
                 }
 
                 //find the current loswest cost square
-                //temp = findLeastCostCell(a_OpenSet);
-                temp = a_OpenSet.removeFirst().Data;
-                //a_OpenSet.Remove(temp);
-                a_ClosedSet.Add(temp);
+                //temp = findLeastCostCell(_OpenSet);
+                temp = _OpenSet.removeFirst().Data;
+                //_OpenSet.Remove(temp);
+                _ClosedSet.Add(temp);
 
-                int fin = contains(a_FinishCell, a_ClosedSet);
+                int fin = contains(_FinishCell, _ClosedSet);
 
                 //did we find it?
                 if (fin >= 0)
                 {
-                    a_IsFound = true;
-                    temp = a_ClosedSet[fin];
-                    temp.Parent = a_ClosedSet[fin - 1];
-                    a_ClosedSet[fin] = temp;
+                    _IsFound = true;
+                    temp = _ClosedSet[fin];
+                    temp.Parent = _ClosedSet[fin - 1];
+                    _ClosedSet[fin] = temp;
                     return;
                 }
                 
@@ -171,7 +171,7 @@ namespace Vaerydian.Utils
 
                 for (int i = 0; i < workingList.Count; i++)
                 {
-                    a_OpenSet.add(workingList[i].F,workingList[i]);
+                    _OpenSet.add(workingList[i].F,workingList[i]);
                 }
 
                 loopCount++;
@@ -188,14 +188,14 @@ namespace Vaerydian.Utils
 
             List<Cell> path = new List<Cell>();
 
-            Cell next = a_ClosedSet[contains(a_FinishCell,a_ClosedSet)];
+            Cell next = _ClosedSet[contains(_FinishCell,_ClosedSet)];
             path.Add(next);
 
-            while (loopCount < a_ClosedSet.Count)
+            while (loopCount < _ClosedSet.Count)
             {
                 next = next.Parent;
                 
-                if (next.Position == a_StartCell.Position)
+                if (next.Position == _StartCell.Position)
                 {
                     break;
                 }
@@ -254,8 +254,8 @@ namespace Vaerydian.Utils
         {
             int x, y;
 
-            x = (int) Math.Abs(a_Finish.X - cell.Position.X);
-            y = (int) Math.Abs(a_Finish.Y - cell.Position.Y);
+            x = (int) Math.Abs(_Finish.X - cell.Position.X);
+            y = (int) Math.Abs(_Finish.Y - cell.Position.Y);
 
             cell.H = (x + y) * 10;
 
@@ -283,7 +283,7 @@ namespace Vaerydian.Utils
                         continue;
 
                     //get the terrain
-                    terrain = a_GameMap.getTerrain((int) cell.Position.X + i, (int)cell.Position.Y + j);//);
+                    terrain = _GameMap.getTerrain((int) cell.Position.X + i, (int)cell.Position.Y + j);//);
                     //is terrain valid?
                     if (terrain == null)
                         continue;
@@ -291,7 +291,7 @@ namespace Vaerydian.Utils
                     //is it blocking?
                     if (terrain.IsBlocking)
                     {
-                        a_BlockingSet.Add(createCell((int)cell.Position.X +i, (int)cell.Position.Y + j));
+                        _BlockingSet.Add(createCell((int)cell.Position.X +i, (int)cell.Position.Y + j));
                         continue;
                     }
 
@@ -299,7 +299,7 @@ namespace Vaerydian.Utils
                     Cell newCell = createCell((int)cell.Position.X + i, (int)cell.Position.Y + j);
 
                     //if we've already got it, ignore it
-                    if (contains(newCell, a_ClosedSet) >= 0)
+                    if (contains(newCell, _ClosedSet) >= 0)
                         continue;
 
                     //set its parent
@@ -370,10 +370,10 @@ namespace Vaerydian.Utils
 
                     
                     //check to see if we already have this one on an open list
-                    int pos = heapContains(newCell, a_OpenSet);
+                    int pos = heapContains(newCell, _OpenSet);
                     if (pos >= 0)
                     {
-                        Cell temp = a_OpenSet[pos].Data;
+                        Cell temp = _OpenSet[pos].Data;
                         
                         //is cell a better path?
                         if (cell.G + (temp.G - temp.Parent.G) < temp.G)
@@ -387,14 +387,14 @@ namespace Vaerydian.Utils
 
                             temp.F = findCost(temp);
 
-                            a_OpenSet[pos] = new HeapCell<Cell>(temp.F,temp);
+                            _OpenSet[pos] = new HeapCell<Cell>(temp.F,temp);
                             continue;
                         }
                         else
                             continue;
                     }
 
-                    //a_OpenSet.add(newCell.F, newCell);
+                    //_OpenSet.add(newCell.F, newCell);
 
                     //add its location to the list as a good candidate
                     goodAdjacents.Add(newCell);
@@ -457,7 +457,7 @@ namespace Vaerydian.Utils
         private bool cellIsBlocking(int x, int y)
         {
             Terrain terrain;
-            terrain = a_GameMap.getTerrain(x, y);
+            terrain = _GameMap.getTerrain(x, y);
             //is terrain valid?
             if (terrain == null)
                 return true;
@@ -477,23 +477,23 @@ namespace Vaerydian.Utils
         {
             reset();
             
-            a_GameMap = map;
-            a_Start = start;
-            a_Finish = finish;
-            a_StartCell = createCell((int)start.X, (int)start.Y);
-            a_FinishCell = createCell((int)finish.X, (int)finish.Y);
+            _GameMap = map;
+            _Start = start;
+            _Finish = finish;
+            _StartCell = createCell((int)start.X, (int)start.Y);
+            _FinishCell = createCell((int)finish.X, (int)finish.Y);
 
-            a_OpenSet.add(a_StartCell.F,a_StartCell);
+            _OpenSet.add(_StartCell.F,_StartCell);
 
-            List<Cell> temp = findAdjacentCells(a_StartCell);
+            List<Cell> temp = findAdjacentCells(_StartCell);
             for (int i = 0; i < temp.Count; i++)
             {
-                a_OpenSet.add(temp[i].F, temp[i]);
+                _OpenSet.add(temp[i].F, temp[i]);
             }
 
-            //a_OpenSet.Remove(a_StartCell);
-            //a_ClosedSet.Add(a_StartCell);
-            a_ClosedSet.Add(a_OpenSet.removeFirst().Data);
+            //_OpenSet.Remove(_StartCell);
+            //_ClosedSet.Add(_StartCell);
+            _ClosedSet.Add(_OpenSet.removeFirst().Data);
 
         }
 
@@ -502,13 +502,13 @@ namespace Vaerydian.Utils
         /// </summary>
         private void reset()
         {
-            a_OpenSet.Clear();
-            a_ClosedSet.Clear();
-            a_BlockingSet.Clear();
+            _OpenSet.Clear();
+            _ClosedSet.Clear();
+            _BlockingSet.Clear();
             
 
-            a_Failed = false;
-            a_IsFound = false;
+            _Failed = false;
+            _IsFound = false;
         }
 
     }

@@ -36,6 +36,14 @@ namespace ECSFramework
 			//TODO
 			return new Bag<Entity>();
 		}
+
+		public void refresh(Entity e){
+			//TODO
+		}
+
+		public void delete_entity(Entity e){
+			//TODO
+		}
 	}
 }
 

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -29,60 +29,60 @@ namespace Vaerydian.Utils
 {
     class Bone
     {
-        private int a_ElapsedTime;
+        private int _ElapsedTime;
 
         public int ElapsedTime
         {
-            get { return a_ElapsedTime; }
-            set { a_ElapsedTime = value; }
+            get { return _ElapsedTime; }
+            set { _ElapsedTime = value; }
         }
 
-        private int a_AnimationTime;
+        private int _AnimationTime;
 
         public int AnimationTime
         {
-            get { return a_AnimationTime; }
-            set { a_AnimationTime = value; }
+            get { return _AnimationTime; }
+            set { _AnimationTime = value; }
         }
 
-        private Dictionary<String, List<KeyFrame>> a_Animations = new Dictionary<string, List<KeyFrame>>();
+        private Dictionary<String, List<KeyFrame>> _Animations = new Dictionary<string, List<KeyFrame>>();
 
         public Dictionary<String, List<KeyFrame>> Animations
         {
-            get { return a_Animations; }
-            set { a_Animations = value; }
+            get { return _Animations; }
+            set { _Animations = value; }
         }
 
-        private String a_TextureName;
+        private String _TextureName;
 
         public String TextureName
         {
-            get { return a_TextureName; }
-            set { a_TextureName = value; }
+            get { return _TextureName; }
+            set { _TextureName = value; }
         }
 
-        private Vector2 a_Origin;
+        private Vector2 _Origin;
 
         public Vector2 Origin
         {
-            get { return a_Origin; }
-            set { a_Origin = value; }
+            get { return _Origin; }
+            set { _Origin = value; }
         }
 
-        private Vector2 a_RotationOrigin;
+        private Vector2 _RotationOrigin;
 
         public Vector2 RotationOrigin
         {
-            get { return a_RotationOrigin; }
-            set { a_RotationOrigin = value; }
+            get { return _RotationOrigin; }
+            set { _RotationOrigin = value; }
         }
 
-        private float a_Rotation;
+        private float _Rotation;
 
         public float Rotation
         {
-            get { return a_Rotation; }
-            set { a_Rotation = value; }
+            get { return _Rotation; }
+            set { _Rotation = value; }
         }
 
         

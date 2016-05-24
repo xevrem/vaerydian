@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -31,36 +31,36 @@ namespace Vaerydian.Components.Utils
 {
     class StateContainer<TState, TTrigger> : Component where TState : struct, IComparable, IConvertible, IFormattable
     {
-        private static int s_TypeID;
+        private static int s_type_id;
 
         public static int TypeID
         {
-          get { return StateContainer<TState, TTrigger>.s_TypeID; }
-          set { StateContainer<TState, TTrigger>.s_TypeID = value; }
+          get { return StateContainer<TState, TTrigger>.s_type_id; }
+          set { StateContainer<TState, TTrigger>.s_type_id = value; }
         }
 
-        private int s_EntityID;
+        private int s_entity_id;
 
         public StateContainer() { }
 
         public int getEntityId()
         {
-            return s_EntityID;
+            return s_entity_id;
         }
 
         public int getTypeId()
         {
-            return s_TypeID;
+            return s_type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            s_EntityID = entityId;
+            s_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            s_TypeID = typeId;
+            s_type_id = typeId;
         }
 
         private StateMachine<TState, TTrigger> s_StateMachine;

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -32,19 +32,19 @@ namespace Vaerydian.UI
 {
     class ButtonMenu
     {
-        private Entity b_Owner;
-        private Entity b_Caller;
-        private ECSInstance b_ECSInstance;
-        private List<GButton> b_Buttons = new List<GButton>();
-        private int b_ButtonCount;
-        private int b_border;
-        private int b_Height;
-        private int b_Width;
-        private int b_Spacing;
-        private Point b_Position;
-        private GForm b_Form = new GForm();
-        private GCanvas b_Canvas = new GCanvas();
-        private GFrame b_Frame = new GFrame();
+        private Entity _Owner;
+        private Entity _Caller;
+        private ECSInstance _ECSInstance;
+        private List<GButton> _Buttons = new List<GButton>();
+        private int _ButtonCount;
+        private int _border;
+        private int _Height;
+        private int _Width;
+        private int _Spacing;
+        private Point _Position;
+        private GForm _Form = new GForm();
+        private GCanvas _Canvas = new GCanvas();
+        private GFrame _Frame = new GFrame();
 
         /// <summary>
         /// 
@@ -58,15 +58,15 @@ namespace Vaerydian.UI
         /// <param name="border"></param>
         public ButtonMenu(Entity owner, Entity caller, ECSInstance ecsInstance, int buttonCount, Point position, int height, int width, int border, int spacing)
         {
-            b_Owner = owner;
-            b_Caller = caller;
-            b_ECSInstance = ecsInstance;
-            b_ButtonCount = buttonCount;
-            b_Position = position;
-            b_Height = height;
-            b_Width = width;
-            b_border = border;
-            b_Spacing = spacing;
+            _Owner = owner;
+            _Caller = caller;
+            _ECSInstance = ecsInstance;
+            _ButtonCount = buttonCount;
+            _Position = position;
+            _Height = height;
+            _Width = width;
+            _border = border;
+            _Spacing = spacing;
         }
 
         /// <summary>
@@ -74,8 +74,8 @@ namespace Vaerydian.UI
         /// </summary>
         public List<GButton> Buttons
         {
-            get { return b_Buttons; }
-            set { b_Buttons = value; }
+            get { return _Buttons; }
+            set { _Buttons = value; }
         }
 
         /// <summary>
@@ -83,8 +83,8 @@ namespace Vaerydian.UI
         /// </summary>
         public GForm Form
         {
-            get { return b_Form; }
-            set { b_Form = value; }
+            get { return _Form; }
+            set { _Form = value; }
         }
 
         /// <summary>
@@ -92,8 +92,8 @@ namespace Vaerydian.UI
         /// </summary>
         public GFrame Frame
         {
-            get { return b_Frame; }
-            set { b_Frame = value; }
+            get { return _Frame; }
+            set { _Frame = value; }
         }
         
         /// <summary>
@@ -102,53 +102,53 @@ namespace Vaerydian.UI
         public void init()
         {
             //setup form
-            b_Form = new GForm();
-            b_Form.owner = b_Owner;
-            b_Form.caller = b_Caller;
-            b_Form.ecs_instance = b_ECSInstance;
-            b_Form.bounds = new Rectangle(b_Position.X, b_Position.Y, b_Width + 2 * b_border, (b_Height + b_Spacing) * b_ButtonCount + 2 * b_border);
+            _Form = new GForm();
+            _Form.owner = _Owner;
+            _Form.caller = _Caller;
+            _Form.ecs_instance = _ECSInstance;
+            _Form.bounds = new Rectangle(_Position.X, _Position.Y, _Width + 2 * _border, (_Height + _Spacing) * _ButtonCount + 2 * _border);
 
             //setup canvas
-            b_Canvas = new GCanvas();
-            b_Canvas.owner = b_Owner;
-            b_Canvas.caller = b_Caller;
-            b_Canvas.ecs_instance = b_ECSInstance;
-            b_Canvas.bounds = new Rectangle(b_Position.X, b_Position.Y, b_Width + 2 * b_border, (b_Height + b_Spacing) * b_ButtonCount + 2 * b_border);
+            _Canvas = new GCanvas();
+            _Canvas.owner = _Owner;
+            _Canvas.caller = _Caller;
+            _Canvas.ecs_instance = _ECSInstance;
+            _Canvas.bounds = new Rectangle(_Position.X, _Position.Y, _Width + 2 * _border, (_Height + _Spacing) * _ButtonCount + 2 * _border);
 
             //setup frame
-            b_Frame = new GFrame();
-            b_Frame.owner = b_Owner;
-            b_Frame.caller = b_Caller;
-            b_Frame.ecs_instance = b_ECSInstance;
-            b_Frame.bounds = new Rectangle(b_Position.X, b_Position.Y, b_Width + 2 * b_border, (b_Height + b_Spacing) * b_ButtonCount + 2 * b_border);
+            _Frame = new GFrame();
+            _Frame.owner = _Owner;
+            _Frame.caller = _Caller;
+            _Frame.ecs_instance = _ECSInstance;
+            _Frame.bounds = new Rectangle(_Position.X, _Position.Y, _Width + 2 * _border, (_Height + _Spacing) * _ButtonCount + 2 * _border);
 
-            //b_Canvas.Controls.Add(b_Frame);
+            //_Canvas.Controls.Add(_Frame);
 
-            for (int i = 0; i < b_ButtonCount; i++)
+            for (int i = 0; i < _ButtonCount; i++)
             {
                 GButton button = new GButton();
-                button.owner = b_Owner;
-                button.caller = b_Caller;
-                button.ecs_instance = b_ECSInstance;
-                button.bounds = new Rectangle(b_Position.X + b_border, b_Position.Y + b_border + i * (b_Height + b_Spacing), b_Width, b_Height);
+                button.owner = _Owner;
+                button.caller = _Caller;
+                button.ecs_instance = _ECSInstance;
+                button.bounds = new Rectangle(_Position.X + _border, _Position.Y + _border + i * (_Height + _Spacing), _Width, _Height);
 				
-                //b_Canvas.Controls.Add(button);
-                b_Buttons.Add(button);
+                //_Canvas.Controls.Add(button);
+                _Buttons.Add(button);
             }
             
-            //b_Form.CanvasControls.Add(b_Canvas);
+            //_Form.CanvasControls.Add(_Canvas);
         }
 
         public void assemble()
         {
-            b_Canvas.controls.Add(b_Frame);
+            _Canvas.controls.Add(_Frame);
 
-            for (int i = 0; i < b_Buttons.Count; i++)
+            for (int i = 0; i < _Buttons.Count; i++)
             {
-                b_Canvas.controls.Add(b_Buttons[i]);
+                _Canvas.controls.Add(_Buttons[i]);
             }
 
-			b_Form.canvas_controls.Add(b_Canvas);
+			_Form.canvas_controls.Add(_Canvas);
         }
 
 

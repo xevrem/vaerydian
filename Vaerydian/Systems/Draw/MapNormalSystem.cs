@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -58,7 +58,7 @@ namespace Vaerydian.Systems.Draw
 
         private int m_xStart, m_yStart, m_xFinish, m_yFinish, m_TileSize;
 
-        private Terrain c_CaveTerrain;
+        private Terrain _CaveTerrain;
 
         public MapNormalSystem(GameContainer container)
         {
@@ -117,16 +117,16 @@ namespace Vaerydian.Systems.Draw
                 for (int y = m_yStart; y <= m_yFinish; y++)
                 {
                     //grab current tile terrain
-                    c_CaveTerrain = map.getTerrain(x, y);
+                    _CaveTerrain = map.getTerrain(x, y);
 
                     //ensure its useable
-                    if (c_CaveTerrain == null)
+                    if (_CaveTerrain == null)
                         continue;
 
                     //calculate position to place tile
                     pos = new Vector2(x * m_TileSize, y * m_TileSize);
 
-                    m_SpriteBatch.Draw(m_Texture, pos-origin, m_RectDict[c_CaveTerrain.TerrainType], Color.White, 0f, new Vector2(0), new Vector2(1), SpriteEffects.None, 0f);
+                    m_SpriteBatch.Draw(m_Texture, pos-origin, m_RectDict[_CaveTerrain.TerrainType], Color.White, 0f, new Vector2(0), new Vector2(1), SpriteEffects.None, 0f);
                 }
             }
 

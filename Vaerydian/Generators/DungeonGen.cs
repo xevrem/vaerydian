@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -44,14 +44,14 @@ namespace Vaerydian.Generators
 		private const int WEST = 3;
 
 
-		private static Random d_Rand = new Random();
+		private static Random _Rand = new Random();
 
-		private static String d_StatusMessage = "Generating Dungeon...";
+		private static String _StatusMessage = "Generating Dungeon...";
 
         public static String StatusMessage
         {
-            get { return d_StatusMessage; }
-            set { d_StatusMessage = value; }
+            get { return _StatusMessage; }
+            set { _StatusMessage = value; }
         }
 
 		/// <summary>
@@ -83,8 +83,8 @@ namespace Vaerydian.Generators
 
             map.MapDef = GameConfig.MapDefs["DUNGEON_DEFAULT"];
             
-            d_Rand = new Random(seed);
-            MapHelper.Random = d_Rand;
+            _Rand = new Random(seed);
+            MapHelper.Random = _Rand;
 
 			//MapHelper.floodInitializeAll(map, TerrainType_Old.DUNGEON_BEDROCK);
             MapHelper.floodInitializeAll(map, "BEDROCK");
@@ -116,13 +116,13 @@ namespace Vaerydian.Generators
 
 		private static void addVariation(Terrain terrain, params object[] args)
         {
-            terrain.Variation += (float)(0.125 - (d_Rand.NextDouble() * 0.25));
+            terrain.Variation += (float)(0.125 - (_Rand.NextDouble() * 0.25));
         }
 
 		private static bool createDungeon (Map map, int xSize, int ySize, int features)
 		{
 
-			makeRoom (map, xSize / 2, ySize / 2, d_Rand.Next(6,20),d_Rand.Next(6,20), d_Rand.Next (0, 4));
+			makeRoom (map, xSize / 2, ySize / 2, _Rand.Next(6,20),_Rand.Next(6,20), _Rand.Next (0, 4));
 
 			int createdFeatures = 1;
 
@@ -143,8 +143,8 @@ namespace Vaerydian.Generators
 				//try to find a usable terrain
 				for(int search = 0; search < 1000; search++){
 
-					dx = d_Rand.Next(1,xSize-1);
-					dy = d_Rand.Next(1,ySize-1);
+					dx = _Rand.Next(1,xSize-1);
+					dy = _Rand.Next(1,ySize-1);
 					direction = -1;
 
 					//MapHelper.isOfTileType(map,map.Terrain[dx,dy], "WALL");
@@ -194,10 +194,10 @@ namespace Vaerydian.Generators
 				}
 				//if we fuond a valid tile, determine which feature to build
 				if(direction > -1){
-					int feature = d_Rand.Next(0,100);
+					int feature = _Rand.Next(0,100);
 
 					if(feature <= 100){//make a room
-						if(makeRoom(map,dx+xmod,dy+ymod,d_Rand.Next(6,20),d_Rand.Next(6,20),direction)){
+						if(makeRoom(map,dx+xmod,dy+ymod,_Rand.Next(6,20),_Rand.Next(6,20),direction)){
 							createdFeatures++;
 
 							//set its entrance and ensure its reachable
@@ -210,7 +210,7 @@ namespace Vaerydian.Generators
 						}
 					}
 					else if(feature >= 100){//make a corridor
-						if(makeCorridor(map,dx+xmod,dy+ymod,d_Rand.Next(6,20),direction)){
+						if(makeCorridor(map,dx+xmod,dy+ymod,_Rand.Next(6,20),direction)){
 							createdFeatures++;
 
 							//map.Terrain[dx,dy].TerrainType = TerrainType_Old.DUNGEON_DOOR;
@@ -228,7 +228,7 @@ namespace Vaerydian.Generators
 		private static bool makeCorridor (Map map, int x, int y, int length, int direction)
 		{
 			//set corridor dimensions
-			int len = d_Rand.Next (6, length);
+			int len = _Rand.Next (6, length);
 			int dx = 0;
 			int dy = 0;
 
@@ -308,8 +308,8 @@ namespace Vaerydian.Generators
 		private static bool makeRoom (Map map, int x, int y, int xLength, int yLength, int direction)
 		{
 			//set room dimensions, should be at least 4x4
-			int xlen = d_Rand.Next (6, xLength);
-			int ylen = d_Rand.Next (6, yLength);
+			int xlen = _Rand.Next (6, xLength);
+			int ylen = _Rand.Next (6, yLength);
 
 			switch (direction) {
 			case NORTH:

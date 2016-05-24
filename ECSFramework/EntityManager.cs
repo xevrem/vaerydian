@@ -19,20 +19,45 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Collections.Generic;
 
 namespace ECSFramework
 {
 	public class EntityManager
 	{
+		private Bag<Entity> _entities;
+		private Queue<int> _old_ids;
+
+		private int _next_id = 0;
+
 		public EntityManager ()
 		{
+			this._entities = new Bag<Entity> ();
+			this._old_ids = new Queue<int> ();
 		}
 
+		public Entity create(){
+			Entity entity = new Entity();
 
-		public void add_component(Entity e, Component component){}
+			//re-use old IDs first
+			if (this._old_ids.Count > 0) {
+				entity.id = this._old_ids.Dequeue ();
+			} else {
+				entity.id = this._next_id++;
+			}
+
+			this._entities.set (entity.id, entity);
+
+			return entity;
+		}
 
 		public int get_entity_count(){
-			return 0;
+			return _entities.count;
+		}
+
+		public void delete_entity(Entity e){
+			this._old_ids.Enqueue(e.id);
+			this._entities.set (e.id, null);
 		}
 	}
 }

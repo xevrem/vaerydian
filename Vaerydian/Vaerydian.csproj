@@ -448,9 +448,9 @@
       <Project>{39ED39A6-AE8F-4E29-A481-1F87F61C40DB}</Project>
       <Name>Glimpse</Name>
     </ProjectReference>
-    <ProjectReference Include="..\monogame\MonoGame.Framework\MonoGame.Framework.MacOS.csproj">
-      <Project>{36C538E6-C32A-4A8D-A39C-566173D7118E}</Project>
-      <Name>MonoGame.Framework.MacOS</Name>
+    <ProjectReference Include="..\monogame\MonoGame.Framework\MonoGame.Framework.Linux.csproj">
+      <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
+      <Name>MonoGame.Framework.Linux</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -31,37 +31,37 @@ namespace Vaerydian.Components.Utils
     class BoundingPolygon : Component
     {
 
-        private static int b_TypeID;
-        private int b_EntityID;
+        private static int _type_id;
+        private int _entity_id;
 
         public BoundingPolygon() { }
 
         public int getEntityId()
         {
-            return b_EntityID;
+            return _entity_id;
         }
 
         public int getTypeId()
         {
-            return b_TypeID;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            b_EntityID = entityId;
+            _entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            b_TypeID = typeId;
+            _type_id = typeId;
         }
 
-        private Polygon b_Polygon;
+        private Polygon _Polygon;
 
         internal Polygon Polygon
         {
-            get { return b_Polygon; }
-            set { b_Polygon = value; }
+            get { return _Polygon; }
+            set { _Polygon = value; }
         }
     }
 }

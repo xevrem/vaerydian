@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -35,46 +35,46 @@ namespace Vaerydian.Systems.Draw
 {
     class DeferredSystem : EntityProcessingSystem
     {
-        private GameContainer d_Container;
-        private SpriteBatch d_SpriteBatch;
-        private Effect d_CombinedEffect;
-        private ComponentMapper d_GeometryMapper;
+        private GameContainer _Container;
+        private SpriteBatch _SpriteBatch;
+        private Effect _CombinedEffect;
+        private ComponentMapper _GeometryMapper;
 
         public DeferredSystem(GameContainer container) 
         {
-            d_Container = container;
-            d_SpriteBatch = d_Container.SpriteBatch;
+            _Container = container;
+            _SpriteBatch = _Container.SpriteBatch;
         }
 
         public override void initialize()
         {
-            d_GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
+            _GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
         }
 
         public override void preLoadContent(Bag<Entity> entities)
         {
-            d_CombinedEffect = d_Container.ContentManager.Load<Effect>("effects\\DiferredCombine");
+            _CombinedEffect = _Container.ContentManager.Load<Effect>("effects\\DiferredCombine");
         }
 
         public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {
-            GeometryMap geometry = (GeometryMap)d_GeometryMapper.get(entity);
+            GeometryMap geometry = (GeometryMap)_GeometryMapper.get(entity);
 
             //setup effect parameters and techniques
-            d_CombinedEffect.CurrentTechnique = d_CombinedEffect.Techniques["Combine"];
-            d_CombinedEffect.Parameters["ambient"].SetValue(1f);
-            d_CombinedEffect.Parameters["lightAmbient"].SetValue(4);
-            d_CombinedEffect.Parameters["ambientColor"].SetValue(geometry.AmbientColor);
-            d_CombinedEffect.Parameters["ColorMap"].SetValue(geometry.ColorMap);
-            d_CombinedEffect.Parameters["ShadingMap"].SetValue(geometry.ShadingMap);
-            d_CombinedEffect.Parameters["NormalMap"].SetValue(geometry.NormalMap);
-            d_CombinedEffect.CurrentTechnique.Passes[0].Apply();
+            _CombinedEffect.CurrentTechnique = _CombinedEffect.Techniques["Combine"];
+            _CombinedEffect.Parameters["ambient"].SetValue(1f);
+            _CombinedEffect.Parameters["lightAmbient"].SetValue(4);
+            _CombinedEffect.Parameters["ambientColor"].SetValue(geometry.AmbientColor);
+            _CombinedEffect.Parameters["ColorMap"].SetValue(geometry.ColorMap);
+            _CombinedEffect.Parameters["ShadingMap"].SetValue(geometry.ShadingMap);
+            _CombinedEffect.Parameters["NormalMap"].SetValue(geometry.NormalMap);
+            _CombinedEffect.CurrentTechnique.Passes[0].Apply();
 
-            d_SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, d_CombinedEffect);
-            d_SpriteBatch.Draw(geometry.ColorMap, Vector2.Zero, Color.White);
-            d_SpriteBatch.End();
+            _SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, _CombinedEffect);
+            _SpriteBatch.Draw(geometry.ColorMap, Vector2.Zero, Color.White);
+            _SpriteBatch.End();
         }
     }
 }

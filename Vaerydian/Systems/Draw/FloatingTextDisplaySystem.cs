@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -40,45 +40,45 @@ namespace Vaerydian.Systems.Draw
 {
     public class FloatingTextDisplaySystem : EntityProcessingSystem
     {
-        private GameContainer d_Container;
-        private SpriteBatch d_SpriteBatch;
+        private GameContainer _Container;
+        private SpriteBatch _SpriteBatch;
 
-        private ComponentMapper d_DamageMapper;
-        private ComponentMapper d_PositionMapper;
-        private ComponentMapper d_ViewPortMapper;
-        private ComponentMapper d_FloatMapper;
+        private ComponentMapper _DamageMapper;
+        private ComponentMapper _PositionMapper;
+        private ComponentMapper _ViewPortMapper;
+        private ComponentMapper _FloatMapper;
 
-        private SpriteFont d_Font;
+        private SpriteFont _Font;
 
-        private Entity d_Camera;
+        private Entity _Camera;
 
         public FloatingTextDisplaySystem(GameContainer container)
         {
-            d_Container = container;
-            d_SpriteBatch = container.SpriteBatch;
+            _Container = container;
+            _SpriteBatch = container.SpriteBatch;
         }
 
 
         public override void initialize()   
         {
-            d_DamageMapper = new ComponentMapper(new Damage(), ecs_instance);
-            d_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
-            d_ViewPortMapper = new ComponentMapper(new ViewPort(), ecs_instance);
-            d_FloatMapper = new ComponentMapper(new FloatingText(), ecs_instance);
+            _DamageMapper = new ComponentMapper(new Damage(), ecs_instance);
+            _PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            _ViewPortMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            _FloatMapper = new ComponentMapper(new FloatingText(), ecs_instance);
         }
         
         public override void preLoadContent(Bag<Entity> entities)
         {
-            d_Font = FontManager.fonts["Damage"];
-            d_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
+            _Font = FontManager.fonts["Damage"];
+            _Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
 
         public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {
-            //Damage damage = (Damage)d_DamageMapper.get(entity);
-            FloatingText text = (FloatingText)d_FloatMapper.get(entity);
+            //Damage damage = (Damage)_DamageMapper.get(entity);
+            FloatingText text = (FloatingText)_FloatMapper.get(entity);
 
             if (text == null)
                 return;
@@ -94,12 +94,12 @@ namespace Vaerydian.Systems.Draw
             }
 
             
-            Position position = (Position)d_PositionMapper.get(entity);//damage.Target);
+            Position position = (Position)_PositionMapper.get(entity);//damage.Target);
 
             if (position == null || text == null)
                 return;
 
-            ViewPort camera = (ViewPort)d_ViewPortMapper.get(d_Camera);
+            ViewPort camera = (ViewPort)_ViewPortMapper.get(_Camera);
             Vector2 origin = camera.getOrigin();
             Vector2 pos = position.Pos + new Vector2(0, -text.ElapsedTime / 7);
 
@@ -123,17 +123,17 @@ namespace Vaerydian.Systems.Draw
                 fade = (1f - (text.ElapsedTime - half) / half);
             
 
-            d_SpriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+            _SpriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
             
             //background
-            d_SpriteBatch.DrawString(d_Font, text.Text, pos - origin + new Vector2(1, 0), Color.Black * fade);
-            d_SpriteBatch.DrawString(d_Font, text.Text, pos - origin + new Vector2(-1, 0), Color.Black * fade);
-            d_SpriteBatch.DrawString(d_Font, text.Text, pos - origin + new Vector2(0, 1), Color.Black * fade);
-            d_SpriteBatch.DrawString(d_Font, text.Text, pos - origin + new Vector2(0, -1), Color.Black * fade);
+            _SpriteBatch.DrawString(_Font, text.Text, pos - origin + new Vector2(1, 0), Color.Black * fade);
+            _SpriteBatch.DrawString(_Font, text.Text, pos - origin + new Vector2(-1, 0), Color.Black * fade);
+            _SpriteBatch.DrawString(_Font, text.Text, pos - origin + new Vector2(0, 1), Color.Black * fade);
+            _SpriteBatch.DrawString(_Font, text.Text, pos - origin + new Vector2(0, -1), Color.Black * fade);
             //foreground
-            d_SpriteBatch.DrawString(d_Font, text.Text, pos - origin, text.Color * fade);
+            _SpriteBatch.DrawString(_Font, text.Text, pos - origin, text.Color * fade);
 
-            d_SpriteBatch.End();
+            _SpriteBatch.End();
         }
 
 

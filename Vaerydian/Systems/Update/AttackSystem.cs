@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -41,18 +41,18 @@ namespace Vaerydian.Systems.Update
 {
     class AttackSystem : EntityProcessingSystem
     {
-        private ComponentMapper a_AttackMapper;
-        private ComponentMapper a_PositionMapper;
-        private ComponentMapper a_SkillMapper;
-        private ComponentMapper a_AttributeMapper;
-        private ComponentMapper a_KnowledgeMapper;
-        private ComponentMapper a_EquipmentMapper;
-        private ComponentMapper a_ItemMapper;
-        private ComponentMapper a_AggroMapper;
-        private ComponentMapper a_InfoMapper;
-        private ComponentMapper a_InteractMapper;
+        private ComponentMapper _AttackMapper;
+        private ComponentMapper _PositionMapper;
+        private ComponentMapper _SkillMapper;
+        private ComponentMapper _AttributeMapper;
+        private ComponentMapper _KnowledgeMapper;
+        private ComponentMapper _EquipmentMapper;
+        private ComponentMapper _ItemMapper;
+        private ComponentMapper _AggroMapper;
+        private ComponentMapper _InfoMapper;
+        private ComponentMapper _InteractMapper;
 
-        private Entity a_CurrentEntity;
+        private Entity _CurrentEntity;
 
         private Random rand = new Random();
 
@@ -60,16 +60,16 @@ namespace Vaerydian.Systems.Update
         
         public override void initialize()
         {
-            a_AttackMapper = new ComponentMapper(new Attack(), ecs_instance);
-            a_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
-            a_SkillMapper = new ComponentMapper(new Skills(), ecs_instance);
-            a_AttributeMapper = new ComponentMapper(new Statistics(), ecs_instance);
-            a_KnowledgeMapper = new ComponentMapper(new Knowledges(), ecs_instance);
-            a_EquipmentMapper = new ComponentMapper(new Equipment(), ecs_instance);
-            a_ItemMapper = new ComponentMapper(new Item(), ecs_instance);
-            a_AggroMapper = new ComponentMapper(new Aggrivation(), ecs_instance);
-            a_InfoMapper = new ComponentMapper(new Information(), ecs_instance);
-            a_InteractMapper = new ComponentMapper(new Interactable(), ecs_instance);
+            _AttackMapper = new ComponentMapper(new Attack(), ecs_instance);
+            _PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            _SkillMapper = new ComponentMapper(new Skills(), ecs_instance);
+            _AttributeMapper = new ComponentMapper(new Statistics(), ecs_instance);
+            _KnowledgeMapper = new ComponentMapper(new Knowledges(), ecs_instance);
+            _EquipmentMapper = new ComponentMapper(new Equipment(), ecs_instance);
+            _ItemMapper = new ComponentMapper(new Item(), ecs_instance);
+            _AggroMapper = new ComponentMapper(new Aggrivation(), ecs_instance);
+            _InfoMapper = new ComponentMapper(new Information(), ecs_instance);
+            _InteractMapper = new ComponentMapper(new Interactable(), ecs_instance);
 
         }
 
@@ -83,11 +83,11 @@ namespace Vaerydian.Systems.Update
         protected override void process(Entity entity)
         {
             //retrieve this attack
-            a_CurrentEntity = entity;
-            Attack attack = (Attack)a_AttackMapper.get(entity);
+            _CurrentEntity = entity;
+            Attack attack = (Attack)_AttackMapper.get(entity);
 
             //see if defender is aggroable
-            Aggrivation aggro = (Aggrivation)a_AggroMapper.get(attack.Defender);
+            Aggrivation aggro = (Aggrivation)_AggroMapper.get(attack.Defender);
             if (aggro != null)
             {
                 //set aggro
@@ -120,7 +120,7 @@ namespace Vaerydian.Systems.Update
         /// <param name="attack">attack to handle</param>
         private void handleMelee(Attack attack)
         {
-            Position position = (Position)a_PositionMapper.get(attack.Defender);
+            Position position = (Position)_PositionMapper.get(attack.Defender);
 
             //dont continue if this attack has no position
             if (position == null)
@@ -131,24 +131,24 @@ namespace Vaerydian.Systems.Update
             Position newPos = new Position(pos + new Vector2(rand.Next(16) + 8, 0), Vector2.Zero);
 
             //get equipment
-            Equipment attEquip = (Equipment)a_EquipmentMapper.get(attack.Attacker);
-            Equipment defEquip = (Equipment)a_EquipmentMapper.get(attack.Defender);
+            Equipment attEquip = (Equipment)_EquipmentMapper.get(attack.Attacker);
+            Equipment defEquip = (Equipment)_EquipmentMapper.get(attack.Defender);
 
             //dont continue if we have no equipment to use
             if (attEquip == null || defEquip == null)
                 return;
 
             //get weapon and armor
-            Item weapon = (Item)a_ItemMapper.get(attEquip.MeleeWeapon);
-			Item armor = (Item)a_ItemMapper.get(defEquip.Armor);
+            Item weapon = (Item)_ItemMapper.get(attEquip.MeleeWeapon);
+			Item armor = (Item)_ItemMapper.get(defEquip.Armor);
 
             //dont continue if either of these are null
             if (weapon == null || armor == null)
                 return;
 
             //get attributes
-            Statistics attAttr = (Statistics)a_AttributeMapper.get(attack.Attacker);
-            Statistics defAttr = (Statistics)a_AttributeMapper.get(attack.Defender);
+            Statistics attAttr = (Statistics)_AttributeMapper.get(attack.Attacker);
+            Statistics defAttr = (Statistics)_AttributeMapper.get(attack.Defender);
 
             //dont continue if either of these are null
             if (attAttr == null || defAttr == null)
@@ -160,16 +160,16 @@ namespace Vaerydian.Systems.Update
             int endurance = defAttr.Endurance.Value;
 
             //get Experience
-            Knowledges attKnw = (Knowledges)a_KnowledgeMapper.get(attack.Attacker);
-            Knowledges defKnw = (Knowledges)a_KnowledgeMapper.get(attack.Defender);
+            Knowledges attKnw = (Knowledges)_KnowledgeMapper.get(attack.Attacker);
+            Knowledges defKnw = (Knowledges)_KnowledgeMapper.get(attack.Defender);
 
             //dont continue if null
             if (attKnw == null || defKnw == null)
                 return;
 
             //get Skills
-            Skills attSkills = (Skills)a_SkillMapper.get(attack.Attacker);
-            Skills defSkills = (Skills)a_SkillMapper.get(attack.Defender);
+            Skills attSkills = (Skills)_SkillMapper.get(attack.Attacker);
+            Skills defSkills = (Skills)_SkillMapper.get(attack.Defender);
 
             //dont continue if either of these are null
             if (attSkills == null || defSkills == null)
@@ -178,8 +178,8 @@ namespace Vaerydian.Systems.Update
             int atkSkill = attSkills.Melee.Value;
             int defSkill = defSkills.Avoidance.Value;
 
-            Information infoDef = (Information)a_InfoMapper.get(attack.Defender);
-            Information infoAtk = (Information)a_InfoMapper.get(attack.Attacker);
+            Information infoDef = (Information)_InfoMapper.get(attack.Defender);
+            Information infoAtk = (Information)_InfoMapper.get(attack.Attacker);
 
             //dont continue if you dont have info
             if (infoDef == null || infoAtk == null)
@@ -222,8 +222,8 @@ namespace Vaerydian.Systems.Update
                 UIFactory.createFloatingText(""+damage, "DAMAGE", Color.Yellow, 500, new Position(newPos.Pos, newPos.Offset));
             }
 
-            Interactable interactor = (Interactable)a_InteractMapper.get(attack.Attacker);
-            Interactable interactee = (Interactable)a_InteractMapper.get(attack.Defender);
+            Interactable interactor = (Interactable)_InteractMapper.get(attack.Attacker);
+            Interactable interactee = (Interactable)_InteractMapper.get(attack.Defender);
 
             //only do if interaction supported
             if (interactee != null && interactor != null)
@@ -279,7 +279,7 @@ namespace Vaerydian.Systems.Update
 
 
             //remove attack
-            ecs_instance.delete_entity(a_CurrentEntity);
+            ecs_instance.delete_entity(_CurrentEntity);
         }
 
         /// <summary>
@@ -288,7 +288,7 @@ namespace Vaerydian.Systems.Update
         /// <param name="attack">attack to handle</param>
         private void handleProjectile(Attack attack) 
         {
-            Position position = (Position)a_PositionMapper.get(attack.Defender);
+            Position position = (Position)_PositionMapper.get(attack.Defender);
 
             //dont continue if this attack has no position
             if (position == null)
@@ -299,24 +299,24 @@ namespace Vaerydian.Systems.Update
             Position newPos = new Position(pos + new Vector2(rand.Next(16)+8, 0), Vector2.Zero);
 
             //get equipment
-            Equipment attEquip = (Equipment)a_EquipmentMapper.get(attack.Attacker);
-            Equipment defEquip = (Equipment)a_EquipmentMapper.get(attack.Defender);
+            Equipment attEquip = (Equipment)_EquipmentMapper.get(attack.Attacker);
+            Equipment defEquip = (Equipment)_EquipmentMapper.get(attack.Defender);
 
             //dont continue if we have no equipment to use
             if (attEquip == null || defEquip == null)
                 return;
 
             //get weapon and armor
-            Item weapon = (Item) a_ItemMapper.get(attEquip.RangedWeapon);
-            Item armor = (Item) a_ItemMapper.get(defEquip.Armor);
+            Item weapon = (Item) _ItemMapper.get(attEquip.RangedWeapon);
+            Item armor = (Item) _ItemMapper.get(defEquip.Armor);
 
             //dont continue if either of these are null
             if (weapon == null || armor == null)
                 return;
 
             //get attributes
-            Statistics attAttr = (Statistics)a_AttributeMapper.get(attack.Attacker);
-            Statistics defAttr = (Statistics)a_AttributeMapper.get(attack.Defender);
+            Statistics attAttr = (Statistics)_AttributeMapper.get(attack.Attacker);
+            Statistics defAttr = (Statistics)_AttributeMapper.get(attack.Defender);
 
             //dont continue if either of these are null
             if (attAttr == null || defAttr == null)
@@ -328,16 +328,16 @@ namespace Vaerydian.Systems.Update
 			int endurance = defAttr.Endurance.Value;
 
             //get Experience
-            Knowledges attKnw = (Knowledges)a_KnowledgeMapper.get(attack.Attacker);
-            Knowledges defKnw = (Knowledges)a_KnowledgeMapper.get(attack.Defender);
+            Knowledges attKnw = (Knowledges)_KnowledgeMapper.get(attack.Attacker);
+            Knowledges defKnw = (Knowledges)_KnowledgeMapper.get(attack.Defender);
 
             //dont continue if null
             if (attKnw == null || defKnw == null)
                 return;
 
             //get Skills
-            Skills attSkills = (Skills)a_SkillMapper.get(attack.Attacker);
-            Skills defSkills = (Skills)a_SkillMapper.get(attack.Defender);
+            Skills attSkills = (Skills)_SkillMapper.get(attack.Attacker);
+            Skills defSkills = (Skills)_SkillMapper.get(attack.Defender);
 
             //dont continue if either of these are null
             if (attSkills == null || defSkills == null)
@@ -347,8 +347,8 @@ namespace Vaerydian.Systems.Update
             int defSkill = defSkills.Avoidance.Value;
 
 
-            Information infoDef = (Information)a_InfoMapper.get(attack.Defender);
-            Information infoAtk = (Information)a_InfoMapper.get(attack.Attacker);
+            Information infoDef = (Information)_InfoMapper.get(attack.Defender);
+            Information infoAtk = (Information)_InfoMapper.get(attack.Attacker);
 
             //dont continue if you dont have info
             if (infoDef == null || infoAtk == null)
@@ -393,8 +393,8 @@ namespace Vaerydian.Systems.Update
             }
 
 
-            Interactable interactor = (Interactable)a_InteractMapper.get(attack.Attacker);
-            Interactable interactee = (Interactable)a_InteractMapper.get(attack.Defender);
+            Interactable interactor = (Interactable)_InteractMapper.get(attack.Attacker);
+            Interactable interactee = (Interactable)_InteractMapper.get(attack.Defender);
 
             //only do if interaction supported
             if (interactor != null && interactor != null)
@@ -449,7 +449,7 @@ namespace Vaerydian.Systems.Update
             }
 
             //remove attack
-            ecs_instance.delete_entity(a_CurrentEntity);
+            ecs_instance.delete_entity(_CurrentEntity);
         }
 
         /// <summary>
@@ -459,7 +459,7 @@ namespace Vaerydian.Systems.Update
         private void handleAbility(Attack attack)
         {
             //remove attack
-            ecs_instance.delete_entity(a_CurrentEntity);
+            ecs_instance.delete_entity(_CurrentEntity);
         }
     }
 }

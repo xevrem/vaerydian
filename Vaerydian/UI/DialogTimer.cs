@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -36,18 +36,18 @@ namespace Vaerydian.UI
 {
     class DialogTimer
     {
-        private int d_Duration;
+        private int _Duration;
 
-        private int d_ElapsedTime;
+        private int _ElapsedTime;
 
-        private ComponentMapper d_PositionMapper;
-        private ComponentMapper d_ViewPortMapper;
+        private ComponentMapper _PositionMapper;
+        private ComponentMapper _ViewPortMapper;
 
         public DialogTimer(int duration, ECSInstance ecsInstance)
         {
-            d_Duration = duration;
-            d_PositionMapper = new ComponentMapper(new Position(), ecsInstance);
-            d_ViewPortMapper = new ComponentMapper(new ViewPort(), ecsInstance);
+            _Duration = duration;
+            _PositionMapper = new ComponentMapper(new Position(), ecsInstance);
+            _ViewPortMapper = new ComponentMapper(new ViewPort(), ecsInstance);
         }
 
         /// <summary>
@@ -57,13 +57,13 @@ namespace Vaerydian.UI
         /// <param name="args"></param>
         public void updateHandler(Control control, InterfaceArgs args)
         {
-            d_ElapsedTime += control.ecs_instance.ElapsedTime;
+            _ElapsedTime += control.ecs_instance.ElapsedTime;
 
-            if (d_ElapsedTime >= d_Duration)
+            if (_ElapsedTime >= _Duration)
                 control.ecs_instance.delete_entity(control.owner);
 
-            Position pos = (Position)d_PositionMapper.get(control.caller);
-            ViewPort camera = (ViewPort)d_ViewPortMapper.get(control.ecs_instance.tag_manager.get_entity_by_tag("CAMERA"));
+            Position pos = (Position)_PositionMapper.get(control.caller);
+            ViewPort camera = (ViewPort)_ViewPortMapper.get(control.ecs_instance.tag_manager.get_entity_by_tag("CAMERA"));
 
             
 

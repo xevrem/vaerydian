@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -40,81 +40,81 @@ namespace Vaerydian.Systems.Draw
     class AnimationSystem : EntityProcessingSystem
     {
         
-        private ComponentMapper a_CharacterMapper;
-        private ComponentMapper a_PositionMapper;
-        private ComponentMapper a_ViewportMapper;
-        private ComponentMapper a_LifeMapper;
+        private ComponentMapper _CharacterMapper;
+        private ComponentMapper _PositionMapper;
+        private ComponentMapper _ViewportMapper;
+        private ComponentMapper _LifeMapper;
         
-        private GameContainer a_Container;
-        private SpriteBatch a_SpriteBatch;
+        private GameContainer _Container;
+        private SpriteBatch _SpriteBatch;
 
-        private Dictionary<String, Texture2D> a_Textures = new Dictionary<string, Texture2D>();
+        private Dictionary<String, Texture2D> _Textures = new Dictionary<string, Texture2D>();
 
-        private Entity a_Camera;
+        private Entity _Camera;
 
-        private Color a_Color;
+        private Color _Color;
 
         public AnimationSystem(GameContainer container)
         {
-            a_Container = container;
+            _Container = container;
         }
         
         public override void initialize()
         {
-            a_CharacterMapper = new ComponentMapper(new Character(), ecs_instance);
-            a_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
-            a_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
-            a_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
+            _CharacterMapper = new ComponentMapper(new Character(), ecs_instance);
+            _PositionMapper = new ComponentMapper(new Position(), ecs_instance);
+            _ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
+            _LifeMapper = new ComponentMapper(new Life(), ecs_instance);
         }
 
         public override void preLoadContent(Bag<Entity> entities)
         {
-            a_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
-            a_SpriteBatch = a_Container.SpriteBatch;
+            _Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
+            _SpriteBatch = _Container.SpriteBatch;
         }
 
         protected override void added(Entity entity)
         {
-            Character character = (Character)a_CharacterMapper.get(entity);
+            Character character = (Character)_CharacterMapper.get(entity);
 
                foreach (Bone bone in character.Skeletons[character.CurrentSkeleton].Bones)
             {
-                if(!a_Textures.ContainsKey(bone.TextureName))
-                    a_Textures.Add(bone.TextureName, a_Container.ContentManager.Load<Texture2D>(bone.TextureName));
+                if(!_Textures.ContainsKey(bone.TextureName))
+                    _Textures.Add(bone.TextureName, _Container.ContentManager.Load<Texture2D>(bone.TextureName));
             }
         }
 
         protected override void process(Entity entity)
         {
-            Character character = (Character)a_CharacterMapper.get(entity);
-            Position position = (Position)a_PositionMapper.get(entity);
-            ViewPort viewPort = (ViewPort)a_ViewportMapper.get(a_Camera);
-            Life life = (Life)a_LifeMapper.get(entity);
+            Character character = (Character)_CharacterMapper.get(entity);
+            Position position = (Position)_PositionMapper.get(entity);
+            ViewPort viewPort = (ViewPort)_ViewportMapper.get(_Camera);
+            Life life = (Life)_LifeMapper.get(entity);
 
-            a_SpriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+            _SpriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
             float fade = 1;
 			
 			//FIX this to come from a component, not calc'd here
-            a_Color = Color.White;
+            _Color = Color.White;
 
             if (life != null)
             {
                 if (!life.IsAlive)
                 {
                     fade = (1f - ((float)life.TimeSinceDeath / (float)life.DeathLongevity));
-                    a_Color = Color.Red;
+                    _Color = Color.Red;
                 }
             }
 
             foreach (Bone bone in character.Skeletons[character.CurrentSkeleton].Bones)
             {
                 updateTime(bone, ecs_instance.ElapsedTime);
-                a_SpriteBatch.Draw(a_Textures[bone.TextureName], position.Pos + getKeyPosition(bone, character.CurrentAnimtaion) - viewPort.getOrigin() + bone.RotationOrigin,
-                    null, a_Color * fade, getKeyRotation(bone, character.CurrentAnimtaion), bone.RotationOrigin, 1f, SpriteEffects.None, 1f);
+                _SpriteBatch.Draw(_Textures[bone.TextureName], position.Pos + getKeyPosition(bone, character.CurrentAnimtaion) - viewPort.getOrigin() + bone.RotationOrigin,
+                    null, _Color * fade, getKeyRotation(bone, character.CurrentAnimtaion), bone.RotationOrigin, 1f, SpriteEffects.None, 1f);
             }
 
-            a_SpriteBatch.End();
+            _SpriteBatch.End();
 
         }
 

@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -32,24 +32,24 @@ namespace Vaerydian.Factories
 {
     class ItemFactory
     {
-		private ECSInstance i_EcsInstance;
+		private ECSInstance ecs_instance;
         private static GameContainer i_Container;
         private Random rand = new Random();
 
         public ItemFactory(ECSInstance ecsInstance, GameContainer container)
         {
-            i_EcsInstance = ecsInstance;
+            ecs_instance = ecsInstance;
             i_Container = container;
         }
 
         public ItemFactory(ECSInstance ecsInstance) 
         {
-            i_EcsInstance = ecsInstance;
+            ecs_instance = ecsInstance;
         }
 
         public Entity createTestMeleeWeapon()
         {
-            Entity e = i_EcsInstance.create();
+            Entity e = ecs_instance.create();
 
             Item item = new Item("TestMeleeWeapon", 0, 100);
 			item.Lethality = 10;
@@ -64,16 +64,16 @@ namespace Vaerydian.Factories
             //Weapon weapon = new Weapon(10, 5, 0, 48, WeaponType.MELEE, DamageType.SLASHING);
             //weapon.MeleeWeaponType = MeleeWeaponType.Sword;
 
-            i_EcsInstance.entity_manager.add_component(e, item);
+            ecs_instance.add_component(e, item);
             //i_ECSInstance.entity_manager.add_component(e, weapon);
 
-            i_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
             return e;
         }
 
         public Entity createTestRangedWeapon()
         {
-            Entity e = i_EcsInstance.create();
+            Entity e = ecs_instance.create();
 
             Item item = new Item("TestRangedWeapon", 0, 100);
 			item.Lethality = 5;
@@ -87,17 +87,17 @@ namespace Vaerydian.Factories
             //Weapon weapon = new Weapon(5, 5, 100, 300, WeaponType.RANGED, DamageType.PIERCING);
             //weapon.RangedWeaponType = RangedWeaponType.Blaster;
 
-            i_EcsInstance.entity_manager.add_component(e, item);
+            ecs_instance.add_component(e, item);
             //i_ECSInstance.entity_manager.add_component(e, weapon);
 
-            i_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
 
             return e;
         }
 
         public Entity createTestArmor()
         {
-            Entity e = i_EcsInstance.create();
+            Entity e = ecs_instance.create();
 
             Item item = new Item("TestArmor", 0, 100);
 			item.Mobility = 5;
@@ -105,10 +105,10 @@ namespace Vaerydian.Factories
 
             //Armor armor = new Armor(5, 5);
 
-            i_EcsInstance.entity_manager.add_component(e, item);
+            ecs_instance.add_component(e, item);
             //i_ECSInstance.entity_manager.add_component(e, armor);
 
-            i_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
 
             return e;
         }
@@ -126,8 +126,8 @@ namespace Vaerydian.Factories
 
         public void destoryEquipment(Entity entity)
         {
-            ComponentMapper equipMapper = new ComponentMapper(new Equipment(),i_EcsInstance);
-            ComponentMapper itemMapper = new ComponentMapper(new Item(),i_EcsInstance);
+            ComponentMapper equipMapper = new ComponentMapper(new Equipment(),ecs_instance);
+            ComponentMapper itemMapper = new ComponentMapper(new Item(),ecs_instance);
 
             Equipment equip = (Equipment)equipMapper.get(entity);
 
@@ -137,18 +137,18 @@ namespace Vaerydian.Factories
             //remove melee weapon
             Item meleeWeapon = (Item)itemMapper.get(equip.MeleeWeapon);
             if (meleeWeapon != null)
-                i_EcsInstance.delete_entity(equip.MeleeWeapon);
+                ecs_instance.delete_entity(equip.MeleeWeapon);
 			
 
             //remove ranged weapon
             Item rangedWeapon = (Item)itemMapper.get(equip.RangedWeapon);
             if (rangedWeapon != null)
-                i_EcsInstance.delete_entity(equip.RangedWeapon);
+                ecs_instance.delete_entity(equip.RangedWeapon);
 
             //remove armor
             Item armor = (Item)itemMapper.get(equip.Armor);
             if (armor != null)
-                i_EcsInstance.delete_entity(equip.Armor);
+                ecs_instance.delete_entity(equip.Armor);
 
 
             return;

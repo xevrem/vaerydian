@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -32,51 +32,51 @@ namespace Vaerydian.Components.Characters
 {
     class AiBehavior : Component
     {
-        private static int a_TypeID;
+        private static int _type_id;
 
         public static int TypeID
         {
-            get { return AiBehavior.a_TypeID; }
-            set { AiBehavior.a_TypeID = value; }
+            get { return AiBehavior._type_id; }
+            set { AiBehavior._type_id = value; }
         }
-        private int a_EntityID;
+        private int _entity_id;
 
-        private CharacterBehavior a_Behavior;
+        private CharacterBehavior _Behavior;
 
         /// <summary>
         /// current behavior of this AI
         /// </summary>
         public CharacterBehavior Behavior
         {
-            get { return a_Behavior; }
-            set { a_Behavior = value; }
+            get { return _Behavior; }
+            set { _Behavior = value; }
         }
 
         public AiBehavior() { }
 
         public AiBehavior(CharacterBehavior behavior) 
         {
-            a_Behavior = behavior;
+            _Behavior = behavior;
         }
 
         public int getEntityId()
         {
-            return a_EntityID;
+            return _entity_id;
         }
 
         public int getTypeId()
         {
-            return a_TypeID;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            a_EntityID = entityId;
+            _entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            a_TypeID = typeId;
+            _type_id = typeId;
         }
     }
 }

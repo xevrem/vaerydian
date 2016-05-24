@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -30,60 +30,60 @@ namespace Vaerydian.Components.Actions
 {
     class Attack : Component
     {
-        private static int a_TypeID;
-        private int a_EntityID;
+        private static int _type_id;
+        private int _entity_id;
 
         public Attack() { }
 
         public Attack(Entity attacker, Entity defender, AttackType attackType)
         {
-            a_Attacker = attacker;
-            a_Defenter = defender;
-            a_AttackType = attackType;
+            _Attacker = attacker;
+            _Defenter = defender;
+            _AttackType = attackType;
         }
 
         public int getEntityId()
         {
-            return a_EntityID;
+            return _entity_id;
         }
 
         public int getTypeId()
         {
-            return a_TypeID;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            a_EntityID = entityId;
+            _entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            a_TypeID = typeId;
+            _type_id = typeId;
         }
 
-        private Entity a_Attacker;
+        private Entity _Attacker;
 
         public Entity Attacker
         {
-            get { return a_Attacker; }
-            set { a_Attacker = value; }
+            get { return _Attacker; }
+            set { _Attacker = value; }
         }
 
-        private Entity a_Defenter;
+        private Entity _Defenter;
 
         public Entity Defender
         {
-            get { return a_Defenter; }
-            set { a_Defenter = value; }
+            get { return _Defenter; }
+            set { _Defenter = value; }
         }
 
-        private AttackType a_AttackType;
+        private AttackType _AttackType;
 
         public AttackType AttackType
         {
-            get { return a_AttackType; }
-            set { a_AttackType = value; }
+            get { return _AttackType; }
+            set { _AttackType = value; }
         }
 
 

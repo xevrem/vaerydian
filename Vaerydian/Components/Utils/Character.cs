@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -32,54 +32,54 @@ namespace Vaerydian.Components.Utils
     class Character : Component
     {
 
-        private static int c_TypeID;
+        private static int _type_id;
 
-        private int c_EntityID;
+        private int _entity_id;
 
         public Character() { }
 
         public int getEntityId()
         {
-            return c_EntityID;
+            return _entity_id;
         }
 
         public int getTypeId()
         {
-            return c_TypeID;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            c_EntityID = entityId;
+            _entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            c_TypeID = typeId;
+            _type_id = typeId;
         }
 
-        private String c_CurrentSkeleton;
+        private String _CurrentSkeleton;
 
         public String CurrentSkeleton
         {
-            get { return c_CurrentSkeleton; }
-            set { c_CurrentSkeleton = value; }
+            get { return _CurrentSkeleton; }
+            set { _CurrentSkeleton = value; }
         }
 
-        private Dictionary<String, Skeleton> c_Skeletons = new Dictionary<string, Skeleton>();
+        private Dictionary<String, Skeleton> _Skeletons = new Dictionary<string, Skeleton>();
 
         public Dictionary<String, Skeleton> Skeletons
         {
-            get { return c_Skeletons; }
-            set { c_Skeletons = value; }
+            get { return _Skeletons; }
+            set { _Skeletons = value; }
         }
 
-        private String c_CurrentAnimtaion;
+        private String _CurrentAnimtaion;
 
         public String CurrentAnimtaion
         {
-            get { return c_CurrentAnimtaion; }
-            set { c_CurrentAnimtaion = value; }
+            get { return _CurrentAnimtaion; }
+            set { _CurrentAnimtaion = value; }
         }
 
     }

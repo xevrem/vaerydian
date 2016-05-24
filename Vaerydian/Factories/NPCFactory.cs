@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -42,17 +42,17 @@ namespace Vaerydian.Factories
 {
     class NPCFactory
     {
-        private ECSInstance n_EcsInstance;
+		private ECSInstance ecs_instance;
         private Random n_Rand = new Random();
 
         public NPCFactory(ECSInstance ecsInstance) 
         {
-            n_EcsInstance = ecsInstance;
+            ecs_instance = ecsInstance;
         }
 
         public void destroyRelatedEntities(Entity entity)
         {
-            ItemFactory itFact = new ItemFactory(n_EcsInstance);
+            ItemFactory itFact = new ItemFactory(ecs_instance);
 
             itFact.destoryEquipment(entity);
         }
@@ -60,17 +60,17 @@ namespace Vaerydian.Factories
 
         public void createFollower(Vector2 position, Entity target, float distance)
         {
-            Entity e = n_EcsInstance.create();
+            Entity e = ecs_instance.create();
 
-            n_EcsInstance.entity_manager.add_component(e, new Position(position, new Vector2(16)));
-            n_EcsInstance.entity_manager.add_component(e, new Velocity(4f));
-			n_EcsInstance.entity_manager.add_component(e, new Sprite("characters\\herr_von_speck_sheet", "characters\\normals\\herr_von_speck_sheet_normals", 32, 32, 0, 0));
-			n_EcsInstance.entity_manager.add_component(e, new AiBehavior(new FollowerBehavior(e,target,distance,n_EcsInstance)));//new FollowPath(e, target, distance, n_EcsInstance)));
-			n_EcsInstance.entity_manager.add_component(e, new MapCollidable());
-			n_EcsInstance.entity_manager.add_component(e, new Heading());
-			n_EcsInstance.entity_manager.add_component(e, new Transform());
-			n_EcsInstance.entity_manager.add_component(e, new Aggrivation());
-			n_EcsInstance.entity_manager.add_component(e, new Path());
+            ecs_instance.add_component(e, new Position(position, new Vector2(16)));
+            ecs_instance.add_component(e, new Velocity(4f));
+			ecs_instance.add_component(e, new Sprite("characters\\herr_von_speck_sheet", "characters\\normals\\herr_von_speck_sheet_normals", 32, 32, 0, 0));
+			ecs_instance.add_component(e, new AiBehavior(new FollowerBehavior(e,target,distance,ecs_instance)));//new FollowPath(e, target, distance, n_EcsInstance)));
+			ecs_instance.add_component(e, new MapCollidable());
+			ecs_instance.add_component(e, new Heading());
+			ecs_instance.add_component(e, new Transform());
+			ecs_instance.add_component(e, new Aggrivation());
+			ecs_instance.add_component(e, new Path());
 
             /*
             //setup pathing agent
@@ -99,13 +99,13 @@ namespace Vaerydian.Factories
 			info.GeneralGroup = "BAT";
 			info.VariationGroup = "NONE";
 			info.UniqueGroup = "NONE";
-            n_EcsInstance.entity_manager.add_component(e, info);
+            ecs_instance.add_component(e, info);
 
             //create life
             Life life = new Life();
             life.IsAlive = true;
             life.DeathLongevity = 500;
-            n_EcsInstance.entity_manager.add_component(e, life);
+            ecs_instance.add_component(e, life);
 
             //create interactions
             Interactable interact = new Interactable();
@@ -115,11 +115,11 @@ namespace Vaerydian.Factories
             interact.SupportedInteractions.AWARDS_VICTORY = true;
             interact.SupportedInteractions.CAUSES_ADVANCEMENT = true;
             interact.SupportedInteractions.MAY_ADVANCE = false;
-            n_EcsInstance.entity_manager.add_component(e, interact);
+            ecs_instance.add_component(e, interact);
 
             //create test equipment
-            ItemFactory iFactory = new ItemFactory(n_EcsInstance);
-            n_EcsInstance.entity_manager.add_component(e, iFactory.createTestEquipment());
+            ItemFactory iFactory = new ItemFactory(ecs_instance);
+            ecs_instance.add_component(e, iFactory.createTestEquipment());
 
             int skillLevel = 25;
 
@@ -129,7 +129,7 @@ namespace Vaerydian.Factories
 			knowledges.GeneralKnowledge.Add ("BAT", new Knowledge { Name="", Value=skillLevel, KnowledgeType=KnowledgeType.General });
 			knowledges.VariationKnowledge.Add ("NONE", new Knowledge { Name="", Value=0f, KnowledgeType=KnowledgeType.General });
 			knowledges.UniqueKnowledge.Add ("NONE", new Knowledge { Name="", Value=0f, KnowledgeType=KnowledgeType.General });
-			n_EcsInstance.entity_manager.add_component(e, knowledges);
+			ecs_instance.add_component(e, knowledges);
 
             //setup attributes
             Statistics statistics = new Statistics();
@@ -141,48 +141,48 @@ namespace Vaerydian.Factories
 			statistics.Perception = new Statistic {Name= "PERCEPTION",Value= skillLevel,StatType= StatType.PERCEPTION };
 			statistics.Personality = new Statistic {Name= "PERSONALITY",Value= skillLevel,StatType= StatType.PERSONALITY };
 			statistics.Quickness = new Statistic {Name= "QUICKNESS",Value= skillLevel,StatType= StatType.QUICKNESS };
-            n_EcsInstance.entity_manager.add_component(e, statistics);
+            ecs_instance.add_component(e, statistics);
 
             //create health
 			Health health = new Health(statistics.Endurance.Value * 3);
             health.RecoveryAmmount = statistics.Endurance.Value / 5;
             health.RecoveryRate = 1000;
-            n_EcsInstance.entity_manager.add_component(e, health);
+            ecs_instance.add_component(e, health);
 
             //setup skills
 			Skills skills = new Skills();
 			skills.Ranged = new Skill{Name="RANGED",Value= skillLevel,SkillType= SkillType.Offensive};
 			skills.Avoidance = new Skill{Name="AVOIDANCE",Value= skillLevel,SkillType= SkillType.Defensive};
 			skills.Melee = new Skill{Name="MELEE",Value= skillLevel,SkillType= SkillType.Offensive};
-			n_EcsInstance.entity_manager.add_component(e, skills);
+			ecs_instance.add_component(e, skills);
 
 			Factions factions = new Factions();
 			factions.OwnerFaction = new Faction{Name="ALLY",Value=100,FactionType=FactionType.Ally};
 			factions.KnownFactions.Add("WILDERNESS", new Faction{Name="WILDERNESS",Value=-10,FactionType= FactionType.Wilderness});
 			factions.KnownFactions.Add("PLAYER", new Faction{Name="PLAYER",Value=100,FactionType= FactionType.Player});
-			n_EcsInstance.entity_manager.add_component(e, factions);
+			ecs_instance.add_component(e, factions);
 
 
-			n_EcsInstance.entity_manager.add_component(e, EntityFactory.createLight(true, 3, new Vector3(position, 10), 0.5f, new Vector4(1, 1, 1, 1)));
+			ecs_instance.add_component(e, EntityFactory.createLight(true, 3, new Vector3(position, 10), 0.5f, new Vector4(1, 1, 1, 1)));
 
 
-            n_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
 
         }
 
 
         public void createBatEnemy(Vector2 position, int skillLevel)
         {
-            Entity e = n_EcsInstance.create();
+            Entity e = ecs_instance.create();
 
-            n_EcsInstance.entity_manager.add_component(e, new Position(position, new Vector2(16)));
-            n_EcsInstance.entity_manager.add_component(e, new Velocity(3f));
-            n_EcsInstance.entity_manager.add_component(e, new AiBehavior(new WanderingEnemyBehavior(e, n_EcsInstance)));
-            n_EcsInstance.entity_manager.add_component(e, new MapCollidable());
-            n_EcsInstance.entity_manager.add_component(e, new Heading());
-            n_EcsInstance.entity_manager.add_component(e, new Transform());
-            n_EcsInstance.entity_manager.add_component(e, new Aggrivation());
-			n_EcsInstance.entity_manager.add_component(e, AnimationFactory.createAvatar ("BAT"));
+            ecs_instance.add_component(e, new Position(position, new Vector2(16)));
+            ecs_instance.add_component(e, new Velocity(3f));
+            ecs_instance.add_component(e, new AiBehavior(new WanderingEnemyBehavior(e, ecs_instance)));
+            ecs_instance.add_component(e, new MapCollidable());
+            ecs_instance.add_component(e, new Heading());
+            ecs_instance.add_component(e, new Transform());
+            ecs_instance.add_component(e, new Aggrivation());
+			ecs_instance.add_component(e, AnimationFactory.createAvatar ("BAT"));
 
             //create info
             Information info = new Information();
@@ -190,13 +190,13 @@ namespace Vaerydian.Factories
 			info.GeneralGroup = "BAT";
 			info.VariationGroup = "NONE";
 			info.UniqueGroup = "NONE";
-            n_EcsInstance.entity_manager.add_component(e, info);
+            ecs_instance.add_component(e, info);
 
             //create life
             Life life = new Life();
             life.IsAlive = true;
             life.DeathLongevity = 500;
-            n_EcsInstance.entity_manager.add_component(e, life);
+            ecs_instance.add_component(e, life);
 
             //create interactions
             Interactable interact = new Interactable();
@@ -206,11 +206,11 @@ namespace Vaerydian.Factories
             interact.SupportedInteractions.AWARDS_VICTORY = true;
             interact.SupportedInteractions.CAUSES_ADVANCEMENT = true;
             interact.SupportedInteractions.MAY_ADVANCE = false;
-            n_EcsInstance.entity_manager.add_component(e, interact);
+            ecs_instance.add_component(e, interact);
 
             //create test equipment
-            ItemFactory iFactory = new ItemFactory(n_EcsInstance);
-            n_EcsInstance.entity_manager.add_component(e, iFactory.createTestEquipment());
+            ItemFactory iFactory = new ItemFactory(ecs_instance);
+            ecs_instance.add_component(e, iFactory.createTestEquipment());
 
             //setup experiences
 			Knowledges knowledges = new Knowledges();
@@ -218,7 +218,7 @@ namespace Vaerydian.Factories
 			knowledges.GeneralKnowledge.Add ("BAT", new Knowledge { Name="", Value=skillLevel, KnowledgeType=KnowledgeType.General });
 			knowledges.VariationKnowledge.Add ("NONE", new Knowledge { Name="", Value=0f, KnowledgeType=KnowledgeType.General });
 			knowledges.UniqueKnowledge.Add ("NONE", new Knowledge { Name="", Value=0f, KnowledgeType=KnowledgeType.General });
-			n_EcsInstance.entity_manager.add_component(e, knowledges);
+			ecs_instance.add_component(e, knowledges);
 
             //setup attributes
             Statistics statistics = new Statistics();
@@ -230,52 +230,52 @@ namespace Vaerydian.Factories
 			statistics.Perception = new Statistic {Name= "PERCEPTION",Value= skillLevel,StatType= StatType.PERCEPTION };
 			statistics.Personality = new Statistic {Name= "PERSONALITY",Value= skillLevel,StatType= StatType.PERSONALITY };
 			statistics.Quickness = new Statistic {Name= "QUICKNESS",Value= skillLevel,StatType= StatType.QUICKNESS };
-            n_EcsInstance.entity_manager.add_component(e, statistics);
+            ecs_instance.add_component(e, statistics);
 
             //create health
             Health health = new Health(statistics.Endurance.Value * 3);
             health.RecoveryAmmount = statistics.Endurance.Value / 5;
             health.RecoveryRate = 1000;
-            n_EcsInstance.entity_manager.add_component(e, health);
+            ecs_instance.add_component(e, health);
 
             //setup skills
 			Skills skills = new Skills();
 			skills.Ranged = new Skill{Name="RANGED",Value= skillLevel,SkillType= SkillType.Offensive};
 			skills.Avoidance = new Skill{Name="AVOIDANCE",Value= skillLevel,SkillType= SkillType.Defensive};
 			skills.Melee = new Skill{Name="MELEE",Value= skillLevel,SkillType= SkillType.Offensive};
-			n_EcsInstance.entity_manager.add_component(e, skills);
+			ecs_instance.add_component(e, skills);
 
             //setup factions
             Factions factions = new Factions();
 			factions.OwnerFaction = new Faction{Name="WILDERNESS",Value=100,FactionType= FactionType.Wilderness};
 			factions.KnownFactions.Add ("PLAYER", new Faction { Name="PLAYER", Value=-10, FactionType= FactionType.Player });
 			factions.KnownFactions.Add ("ALLY", new Faction { Name="ALLY", Value=-10, FactionType=FactionType.Ally });
-            n_EcsInstance.entity_manager.add_component(e, factions);
+            ecs_instance.add_component(e, factions);
 
             Aggrivation aggro = new Aggrivation();
-            n_EcsInstance.entity_manager.add_component(e, aggro);
+            ecs_instance.add_component(e, aggro);
 
-			n_EcsInstance.entity_manager.add_component(e, EntityFactory.createLight(true, 3, new Vector3(position, 10), 0.5f, new Vector4(1,1,.6f, 1)));
+			ecs_instance.add_component(e, EntityFactory.createLight(true, 3, new Vector3(position, 10), 0.5f, new Vector4(1,1,.6f, 1)));
 
-            n_EcsInstance.group_manager.add_entity_to_group("WANDERERS", e);
+            ecs_instance.group_manager.add_entity_to_group("WANDERERS", e);
 
-            n_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
 		public Entity createCharacter (CharacterDef characterDef, Vector2 position){
-			Entity e = n_EcsInstance.create();
+			Entity e = ecs_instance.create();
 
-			n_EcsInstance.entity_manager.add_component(e, new Position(position, new Vector2(16)));
-			n_EcsInstance.entity_manager.add_component(e, new Velocity(3f));
-			n_EcsInstance.entity_manager.add_component(e, new AiBehavior(new WanderingEnemyBehavior(e, n_EcsInstance)));
-			n_EcsInstance.entity_manager.add_component(e, new MapCollidable());
-			n_EcsInstance.entity_manager.add_component(e, new Heading());
-			n_EcsInstance.entity_manager.add_component(e, new Transform());
-			n_EcsInstance.entity_manager.add_component(e, new Aggrivation());
+			ecs_instance.add_component(e, new Position(position, new Vector2(16)));
+			ecs_instance.add_component(e, new Velocity(3f));
+			ecs_instance.add_component(e, new AiBehavior(new WanderingEnemyBehavior(e, ecs_instance)));
+			ecs_instance.add_component(e, new MapCollidable());
+			ecs_instance.add_component(e, new Heading());
+			ecs_instance.add_component(e, new Transform());
+			ecs_instance.add_component(e, new Aggrivation());
 
 
 			//create avatar
-			n_EcsInstance.entity_manager.add_component(e, AnimationFactory.createAvatar (characterDef.AvatarDef.Name));
+			ecs_instance.add_component(e, AnimationFactory.createAvatar (characterDef.AvatarDef.Name));
 
 			//create info
 			Information info = new Information();
@@ -283,23 +283,23 @@ namespace Vaerydian.Factories
 			info.GeneralGroup = characterDef.InfoDef.GeneralGroup;
 			info.VariationGroup = characterDef.InfoDef.VariationGroup;
 			info.UniqueGroup = characterDef.InfoDef.UniqueGroup;
-			n_EcsInstance.entity_manager.add_component(e, info);
+			ecs_instance.add_component(e, info);
 
 			//create life
 			Life life = new Life();
 			life.IsAlive = true;
 			life.DeathLongevity = characterDef.LifeDef.DeathLongevity;
-			n_EcsInstance.entity_manager.add_component(e, life);
+			ecs_instance.add_component(e, life);
 
 			//create interactions
 			Interactable interact = new Interactable();
 			interact.SupportedInteractions = characterDef.SupportedInteractions;
-			n_EcsInstance.entity_manager.add_component(e, interact);
+			ecs_instance.add_component(e, interact);
 
 			//create test equipment
             //FIXME: 
-			ItemFactory iFactory = new ItemFactory(n_EcsInstance);
-			n_EcsInstance.entity_manager.add_component(e, iFactory.createTestEquipment());
+			ItemFactory iFactory = new ItemFactory(ecs_instance);
+			ecs_instance.add_component(e, iFactory.createTestEquipment());
 
 			//setup knowledges
 			Knowledges knowledges = new Knowledges();
@@ -316,7 +316,7 @@ namespace Vaerydian.Factories
 			foreach (Knowledge knowledge in characterDef.KnowledgesDef.UniqueKnowledges) {
 				knowledges.UniqueKnowledge.Add(knowledge.Name,knowledge);
 			}
-			n_EcsInstance.entity_manager.add_component(e, knowledges);
+			ecs_instance.add_component(e, knowledges);
 
 			//setup attributes
 			Statistics statistics = new Statistics();
@@ -334,13 +334,13 @@ namespace Vaerydian.Factories
             statistics.Personality.Value = characterDef.SkillLevel;
 			statistics.Quickness = characterDef.StatisticsDef.Quickness;
             statistics.Quickness.Value = characterDef.SkillLevel;
-			n_EcsInstance.entity_manager.add_component(e, statistics);
+			ecs_instance.add_component(e, statistics);
 
 			//create health
 			Health health = new Health(statistics.Endurance.Value * 3);
 			health.RecoveryAmmount = statistics.Endurance.Value / 5;
 			health.RecoveryRate = 1000;
-			n_EcsInstance.entity_manager.add_component(e, health);
+			ecs_instance.add_component(e, health);
 
 			//setup skills
 			Skills skills = new Skills();
@@ -350,7 +350,7 @@ namespace Vaerydian.Factories
 			skills.Ranged.Value = characterDef.SkillLevel;
 			skills.Avoidance.Value = characterDef.SkillLevel;
 			skills.Melee.Value = characterDef.SkillLevel;
-			n_EcsInstance.entity_manager.add_component(e, skills);
+			ecs_instance.add_component(e, skills);
 
 			//setup factions
 			Factions factions = new Factions();
@@ -358,16 +358,16 @@ namespace Vaerydian.Factories
 			foreach (Faction faction in characterDef.FactionsDef.Factions) {
 				factions.KnownFactions.Add (faction.Name, faction);
 			}
-			n_EcsInstance.entity_manager.add_component(e, factions);
+			ecs_instance.add_component(e, factions);
 
 			Aggrivation aggro = new Aggrivation();
-			n_EcsInstance.entity_manager.add_component(e, aggro);
+			ecs_instance.add_component(e, aggro);
 
-			n_EcsInstance.entity_manager.add_component(e, EntityFactory.createLight(true, 3, new Vector3(position, 10), 0.5f, new Vector4(1,1,.6f, 1)));
+			ecs_instance.add_component(e, EntityFactory.createLight(true, 3, new Vector3(position, 10), 0.5f, new Vector4(1,1,.6f, 1)));
 
-			n_EcsInstance.group_manager.add_entity_to_group("WANDERERS", e);
+			ecs_instance.group_manager.add_entity_to_group("WANDERERS", e);
 
-			n_EcsInstance.refresh(e);
+			ecs_instance.resolve(e);
 
 			return e;
 		}
@@ -411,7 +411,7 @@ namespace Vaerydian.Factories
         /// <param name="map">map they are spawned in</param>
         public void createWandererTrigger(int count, GameMap map, int skillLevel)
         {
-            Entity e = n_EcsInstance.create();
+            Entity e = ecs_instance.create();
 
             Trigger trigger = new Trigger(count, map, skillLevel);
 
@@ -420,9 +420,9 @@ namespace Vaerydian.Factories
             trigger.RecurrancePeriod = 10000;
             trigger.IsRecurring = true;
 
-            n_EcsInstance.entity_manager.add_component(e, trigger);
+            ecs_instance.add_component(e, trigger);
 
-            n_EcsInstance.refresh(e);
+            ecs_instance.resolve(e);
         }
 
         /// <summary>
@@ -436,7 +436,7 @@ namespace Vaerydian.Factories
             GameMap map = (GameMap)parameters[1];
             int skillLevel = (int)parameters[2];
 
-            Bag<Entity> wanderers = n_EcsInstance.group_manager.get_group("WANDERERS");
+            Bag<Entity> wanderers = ecs_instance.group_manager.get_group("WANDERERS");
 
             int size = 0;
 

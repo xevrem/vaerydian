@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -30,29 +30,29 @@ namespace Vaerydian.Components.Graphical
 {
     class FloatingText : Component
     {
-        private static int f_TypeID;
-        private int f_EntityID;
+        private static int f_type_id;
+        private int f_entity_id;
 
         public FloatingText() { }
 
         public int getEntityId()
         {
-            return f_EntityID;
+            return f_entity_id;
         }
 
         public int getTypeId()
         {
-            return f_TypeID;
+            return f_type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            f_EntityID = entityId;
+            f_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            f_TypeID = typeId;
+            f_type_id = typeId;
         }
 
         private String f_Text;

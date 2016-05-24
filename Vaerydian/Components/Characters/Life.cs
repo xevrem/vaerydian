@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -33,60 +33,60 @@ namespace Vaerydian.Components.Characters
     class Life : Component
     {
 
-        private static int l_TypeID;
-        private int l_EntityID;
+        private static int l_type_id;
+        private int l_entity_id;
 
         public Life() { }
 
         public int getEntityId()
         {
-            return l_EntityID;
+            return l_entity_id;
         }
 
         public int getTypeId()
         {
-            return l_TypeID;
+            return l_type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            l_EntityID = entityId;
+            l_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            l_TypeID = typeId;
+            l_type_id = typeId;
         }
 
-        private bool d_IsAlive = true;
+        private bool _IsAlive = true;
         /// <summary>
         /// is the entity currently alive
         /// </summary>
         public bool IsAlive
         {
-            get { return d_IsAlive; }
-            set { d_IsAlive = value; }
+            get { return _IsAlive; }
+            set { _IsAlive = value; }
         }
 
-        private int d_TimeSinceDeath = 0;
+        private int _TimeSinceDeath = 0;
 
         /// <summary>
         /// total time spent "dead"
         /// </summary>
         public int TimeSinceDeath
         {
-            get { return d_TimeSinceDeath; }
-            set { d_TimeSinceDeath = value; }
+            get { return _TimeSinceDeath; }
+            set { _TimeSinceDeath = value; }
         }
 
-        private int d_DeathLongevity;
+        private int _DeathLongevity;
         /// <summary>
         /// total time allowed to be "dead"
         /// </summary>
         public int DeathLongevity
         {
-            get { return d_DeathLongevity; }
-            set { d_DeathLongevity = value; }
+            get { return _DeathLongevity; }
+            set { _DeathLongevity = value; }
         }
 
 

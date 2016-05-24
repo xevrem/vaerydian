@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -34,12 +34,12 @@ namespace Vaerydian.Behaviors
         
         public abstract void deathCleanup();
 
-        protected bool c_IsClean = false;
+        protected bool _IsClean = false;
 
         public bool IsClean
         {
-            get { return c_IsClean; }
-            set { c_IsClean = value; }
+            get { return _IsClean; }
+            set { _IsClean = value; }
         }
 
     }

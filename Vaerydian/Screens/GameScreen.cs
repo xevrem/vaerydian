@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -173,12 +173,12 @@ namespace Vaerydian.Screens
             gameContainer = ScreenManager.GameContainer;
 
 			//setup factories
-			AnimationFactory.ECSInstance = ecsInstance;
+			AnimationFactory.ecs_instance = ecsInstance;
 			ActionFactory.ECSInstance = ecsInstance;
 
 			EntityFactory.ecs_instance = ecsInstance;
 			EntityFactory.GameContainer = gameContainer;
-			UtilFactory.ECSInstance = ecsInstance;
+			UtilFactory.ecs_instance = ecsInstance;
 			UtilFactory.Container = gameContainer;
 			UIFactory.ecs_instance = ecsInstance;
 			UIFactory.Container = gameContainer;

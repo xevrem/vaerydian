@@ -2,7 +2,7 @@
  Author:
       Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Erika V. Jonell
+ Copyright (c) 2013, 2014, 2015, 2016 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -31,8 +31,8 @@ namespace Vaerydian.Components.Utils
 
     public class Trigger : Component
     {
-        private static int t_TypeID;
-        private int t_EntityID;
+        private static int t_type_id;
+        private int t_entity_id;
 
         private Object[] t_Params;
 
@@ -45,22 +45,22 @@ namespace Vaerydian.Components.Utils
 
         public int getEntityId()
         {
-            return t_EntityID;
+            return t_entity_id;
         }
 
         public int getTypeId()
         {
-            return t_TypeID;
+            return t_type_id;
         }
 
         public void setEntityId(int entityId)
         {
-            t_EntityID = entityId;
+            t_entity_id = entityId;
         }
 
         public void setTypeId(int typeId)
         {
-            t_TypeID = typeId;
+            t_type_id = typeId;
         }
 
         private bool t_IsActive = false;

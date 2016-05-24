@@ -36,6 +36,15 @@ namespace ECSFramework
 		public void tag_entity(string tag, Entity e){
 			//TODO
 		}
+
+		public void refresh(Entity e){
+			//TODO
+		}
+
+		public void delete_entity(Entity e){
+			//TODO
+		}
+
 	}
 }
 
