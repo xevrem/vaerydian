@@ -66,7 +66,7 @@ namespace Vaerydian
         {
             graphics = new GraphicsDeviceManager(this);
             
-			this.Window.AllowUserResizing = true;
+			//this.Window.AllowUserResizing = true;
 			
 			graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;

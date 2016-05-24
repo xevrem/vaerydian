@@ -26,6 +26,13 @@ using Microsoft.Xna.Framework;
 namespace Glimpse.Input
 {
 
+	public struct InputStateContainer{
+		public MouseState current_mouse_state;
+		public MouseState previous_mouse_state;
+		public KeyboardState current_kb_state;
+		public KeyboardState previous_kb_state;
+	}
+
 	public static class InputManager
 	{
 		public static bool YesScreenshot = false;
@@ -33,6 +40,8 @@ namespace Glimpse.Input
 
 		private static KeyboardState _previous_kb_state;
 		private static KeyboardState _current_kb_state;
+		private static MouseState _previous_m_state;
+		private static MouseState _current_m_state;
 
 		public static bool isKeyToggled(Keys key){
 			return _previous_kb_state.IsKeyDown (key) && _current_kb_state.IsKeyUp (key);
@@ -45,6 +54,8 @@ namespace Glimpse.Input
 		public static void Update(){
 			_previous_kb_state = _current_kb_state;
 			_current_kb_state = Keyboard.GetState ();
+			_previous_m_state = _current_m_state;
+			_current_m_state = Mouse.GetState ();
 		}
 
 		public static bool isLeftButtonDown(){
@@ -57,6 +68,10 @@ namespace Glimpse.Input
 
 		public static Vector2 getMousePositionVector(){
 			return Mouse.GetState ().Position.ToVector2 ();
+		}
+
+		public static Point getMousePosition(){
+			return Mouse.GetState ().Position;
 		}
 
 	}

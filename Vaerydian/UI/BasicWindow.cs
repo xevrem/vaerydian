@@ -136,28 +136,28 @@ namespace Vaerydian
 		public void init()
 		{
 			b_Form = new GForm();
-			b_Form.Owner = b_Owner;
-			b_Form.Caller = b_Caller;
-			b_Form.ECSInstance = b_ECSInstance;
-			b_Form.Bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_Dimensions.Y);			
+			b_Form.owner = b_Owner;
+			b_Form.caller = b_Caller;
+			b_Form.ecs_instance = b_ECSInstance;
+			b_Form.bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_Dimensions.Y);			
 			
 			b_Canvas = new GCanvas();
-			b_Canvas.Owner = b_Owner;
-			b_Canvas.Caller = b_Caller;
-			b_Canvas.ECSInstance = b_ECSInstance;
-			b_Canvas.Bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_Dimensions.Y);
+			b_Canvas.owner = b_Owner;
+			b_Canvas.caller = b_Caller;
+			b_Canvas.ecs_instance = b_ECSInstance;
+			b_Canvas.bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_Dimensions.Y);
 
 			b_Frame = new GFrame();
-			b_Frame.Owner = b_Owner;
-			b_Frame.Caller = b_Caller;
-			b_Frame.ECSInstance = b_ECSInstance;
-			b_Frame.Bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_Dimensions.Y);
+			b_Frame.owner = b_Owner;
+			b_Frame.caller = b_Caller;
+			b_Frame.ecs_instance = b_ECSInstance;
+			b_Frame.bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_Dimensions.Y);
 
 			b_Button = new GButton();
-			b_Button.Owner = b_Owner;
-			b_Button.Caller = b_Caller;
-			b_Button.ECSInstance = b_ECSInstance;
-			b_Button.Bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_ButtonHeight);
+			b_Button.owner = b_Owner;
+			b_Button.caller = b_Caller;
+			b_Button.ecs_instance = b_ECSInstance;
+			b_Button.bounds = new Rectangle(b_Position.X,b_Position.Y,b_Dimensions.X,b_ButtonHeight);
 		}
 
 		/// <summary>
@@ -165,8 +165,8 @@ namespace Vaerydian
 		/// </summary>
 		public void preAssemble ()
 		{
-			b_Canvas.Controls.Add(b_Frame);
-			b_Canvas.Controls.Add(b_Button);
+			b_Canvas.controls.Add(b_Frame);
+			b_Canvas.controls.Add(b_Button);
 		}
 
 		/// <summary>
@@ -174,7 +174,7 @@ namespace Vaerydian
 		/// </summary>
 		public void assemble()
 		{
-			b_Form.CanvasControls.Add(b_Canvas);
+			b_Form.canvas_controls.Add(b_Canvas);
 		}
 
 

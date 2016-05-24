@@ -20,6 +20,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using ECSFramework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace Glimpse.Systems
 {
@@ -27,6 +29,9 @@ namespace Glimpse.Systems
 	{
 		public UIDrawSystem ()
 		{
+		}
+
+		public UIDrawSystem(ContentManager content_manager, GraphicsDevice graphics_device){
 		}
 
 		#region implemented abstract members of EntityProcessingSystem

@@ -1,5 +1,5 @@
 ﻿//
-//  InterfaceHandler.cs
+//  InterfaceArgs.cs
 //
 //  Author:
 //       erika <>
@@ -19,9 +19,22 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+using Glimpse.Controls;
 
-namespace Glimpse.Controls
+namespace Glimpse.Input
 {
+	
 	public delegate void InterfaceHandler(Control control, InterfaceArgs args);
+
+	public class InterfaceArgs
+	{
+		public InputStateContainer state_container;
+
+		public InterfaceArgs ()
+		{
+		}
+	}
 }
 

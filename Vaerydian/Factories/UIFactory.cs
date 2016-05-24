@@ -78,20 +78,20 @@ namespace Vaerydian.Factories
             textBox.owner = e;
             textBox.ecs_instance = ecs_instance;
             textBox.bounds = new Rectangle((int)origin.X, (int)origin.Y, 100, 10);
-            textBox.FontName = "StartScreen";
-            textBox.BackgroundName = "dialog_bubble";
-            textBox.Border = 10;
-            textBox.Text = dialog;
-            textBox.TextColor = Color.White;
-            textBox.CenterText = true;
-            textBox.BackgroundColor = Color.Black;
-            textBox.BackgroundTransparency = 0.75f;
+            textBox.font_name = "StartScreen";
+			textBox.background_name = "dialog_bubble";
+            textBox.border = 10;
+			textBox.text = dialog;
+			textBox.text_color = Color.White;
+            textBox.center_text = true;
+            textBox.background_color = Color.Black;
+            textBox.transparency = 0.75f;
 
-            textBox.Updating += timer.updateHandler;
+            textBox.updating += timer.updateHandler;
 
-            canvas.Controls.Add(textBox);
+            canvas.controls.Add(textBox);
 
-            form.CanvasControls.Add(canvas);
+			form.canvas_controls.Add(canvas);
 
             UserInterface ui = new UserInterface(form);
 
@@ -121,11 +121,11 @@ namespace Vaerydian.Factories
             frame.owner = e;
             frame.ecs_instance = ecs_instance;
             frame.bounds = new Rectangle(Position.X, Position.Y, width, height);
-            frame.BackgroundName = textureName;
+			frame.background_name = textureName;
 
-            canvas.Controls.Add(frame);
+            canvas.controls.Add(frame);
 
-            form.CanvasControls.Add(canvas);
+            form.canvas_controls.Add(canvas);
 
             UserInterface ui = new UserInterface(form);
 
@@ -152,13 +152,13 @@ namespace Vaerydian.Factories
             frame.owner = e;
 			frame.ecs_instance = ecs_instance;
             frame.bounds = new Rectangle(position.X, position.Y, width, height);
-            frame.BackgroundName = textureName;
+            frame.background_name = textureName;
 
-            frame.Updating += handler;
+            frame.updating += handler;
 
-            canvas.Controls.Add(frame);
+            canvas.controls.Add(frame);
 
-            form.CanvasControls.Add(canvas);
+            form.canvas_controls.Add(canvas);
 
             UserInterface ui = new UserInterface(form);
 
@@ -206,19 +206,19 @@ namespace Vaerydian.Factories
 			label.caller = entity;
 			label.ecs_instance = ecs_instance;
 			label.bounds = new Rectangle(position.X, position.Y, width, height);
-			label.FontName = "StartScreen";
-			label.Border = 10;
-			label.BackgroundName = "dialog_bubble";
-			label.BackgroundColor = Color.Black;
-			label.BackgroundTransparency = 0.5f;
-			label.CenterText = true;
-			label.Text = "XXX / XXX";
-			label.TextColor = Color.Red;
-			label.Updating += updater.updateHandler;
+			label.font_name = "StartScreen";
+			label.border = 10;
+			label.background_name = "dialog_bubble";
+			label.background_color = Color.Black;
+			label.transparency = 0.5f;
+			label.center_text = true;
+			label.text = "XXX / XXX";
+			label.text_color = Color.Red;
+			label.updating += updater.updateHandler;
 
 
-			canvas.Controls.Add(label);
-			form.CanvasControls.Add(canvas);
+			canvas.controls.Add(label);
+			form.canvas_controls.Add(canvas);
 
 			UserInterface ui = new UserInterface(form);
 
@@ -237,27 +237,25 @@ namespace Vaerydian.Factories
 			window.init();
 
 			//setup background frame
-			window.Frame.BackgroundColor = Color.White;
-			window.Frame.BackgroundName = "whitebg";
-			window.Frame.Transparency = 0.5f;
+			window.Frame.background_color = Color.White;
+			window.Frame.background_name = "whitebg";
+			window.Frame.transparency = 0.5f;
 
 			//setup close button
-			window.Button.NormalTextureName = "test_dialog";
-            window.Button.PressedTextureName = "test_dialog2";
-            window.Button.MouseOverTextureName = "test_dialog2";
-            window.Button.Color = Color.Gray;
-            window.Button.Transparency = 1f;
-            window.Button.Border = 0;
-            window.Button.FontName = "General";
-            window.Button.AutoSize = false;
-            window.Button.CenterText = true;
-            window.Button.Text = "Player Stats";
-            window.Button.NormalTextColor = Color.White;
-            window.Button.MouseOverTextColor = Color.Yellow;
-            window.Button.PressedTextColor = Color.Red;
+			window.Button.background_color = Color.Gray;
+			window.Button.background_name = "test_dialog";
+            window.Button.font_name = "General";
+            window.Button.center_text = true;
+			window.Button.text = "Player Stats";
+			window.Button.text_color = Color.White;
+            
+            
 
-			//setup window delete
-			window.Button.MouseClick += destroyUI;
+			//setup mouse events
+			window.Button.mouse_hover += change_button_on_hover;
+			window.Button.mouse_press += change_button_on_press;
+			window.Button.mouse_leave += change_button_on_leave;
+			window.Button.mouse_click += destroyUI;
 
 			//pre-assemble window
 			window.preAssemble();
@@ -271,18 +269,18 @@ namespace Vaerydian.Factories
 			                             window.Form.bounds.Top + 40,
 			                             dimensions.X - 40,
 			                             dimensions.Y-60);
-			label.AutoSize = false;
-			label.Text = "stuffs";
-			label.FontName = "General";
-			label.Border = 0;
-			label.TextColor = Color.White;
-			label.BackgroundName = "frame";
-			label.BackgroundColor = Color.Black;
-			label.BackgroundTransparency = 0.5f;
-			label.Updating += labelUpdate;
+			label.autosize = false;
+			label.text = "stuffs";
+			label.font_name = "General";
+			label.border = 0;
+			label.text_color = Color.White;
+			label.background_name = "frame";
+			label.background_color = Color.Black;
+			label.transparency = 0.5f;
+			label.updating += labelUpdate;
 
 			//add controls to canvas
-			window.Canvas.Controls.Add(label);
+			window.Canvas.controls.Add(label);
 
 			//final assemble
 			window.assemble();
@@ -297,6 +295,21 @@ namespace Vaerydian.Factories
 			return e;
 		}
 
+		private static void change_button_on_press(Control sender, InterfaceArgs args){
+			sender.background_name = "test_dialog2";
+			sender.text_color = Color.Red;
+		}
+
+		private static void change_button_on_hover(Control sender, InterfaceArgs args){
+			sender.background_name = "test_dialog2";
+			sender.text_color = Color.Yellow;
+		}
+
+		private static void change_button_on_leave(Control sender, InterfaceArgs args){
+			sender.background_name = "test_dialog1";
+			sender.text_color = Color.White;
+		}
+
 		private static void destroyUI(Control sender, InterfaceArgs args)
 		{
 			sender.ecs_instance.delete_entity(sender.owner);
@@ -305,10 +318,10 @@ namespace Vaerydian.Factories
 		private static void labelUpdate(Control sender, InterfaceArgs args)
 		{
 			Vaerydian.Components.Characters.Skills skills = ComponentMapper.get<Vaerydian.Components.Characters.Skills>(sender.caller);
-			Vaerydian.Components.Characters.Statistics attributes = ComponentMapper.get<Vaerydian.Components.Characters.Statistics>(sender.Caller);
+			Vaerydian.Components.Characters.Statistics attributes = ComponentMapper.get<Vaerydian.Components.Characters.Statistics>(sender.caller);
 
 			GLabel label = (GLabel) sender;
-			label.Text = "  Skills" + "\n" +
+			label.text = "  Skills" + "\n" +
 				"    Range: " + skills.Ranged.Value + "\n" +
 				"    Melee: " + skills.Melee.Value + "\n" +
 				"    Avoidance: " + skills.Avoidance.Value + "\n" +
@@ -334,27 +347,27 @@ namespace Vaerydian.Factories
 			window.init();
 
 			//setup background frame
-			window.Frame.BackgroundColor = Color.White;
-			window.Frame.BackgroundName = "whitebg";
-			window.Frame.Transparency = 0.5f;
+			window.Frame.background_color = Color.White;
+			window.Frame.background_name = "whitebg";
+			window.Frame.transparency = 0.5f;
 
 			//setup close button
-			window.Button.NormalTextureName = "test_dialog";
-			window.Button.PressedTextureName = "test_dialog2";
-			window.Button.MouseOverTextureName = "test_dialog2";
-			window.Button.Color = Color.Gray;
-			window.Button.Transparency = 1f;
-			window.Button.Border = 0;
-			window.Button.FontName = "General";
-			window.Button.AutoSize = false;
-			window.Button.CenterText = true;
-			window.Button.Text = "Inventory";
-			window.Button.NormalTextColor = Color.White;
-			window.Button.MouseOverTextColor = Color.Yellow;
-			window.Button.PressedTextColor = Color.Red;
+			window.Button.background_name = "test_dialog";
+			window.Button.background_color = Color.Gray;
+			window.Button.transparency = 1f;
+			window.Button.border = 0;
+			window.Button.font_name = "General";
 
-			//setup window delete
-			window.Button.MouseClick += destroyUI;
+			window.Button.center_text = true;
+			window.Button.text = "Inventory";
+			window.Button.text_color = Color.White;
+
+
+			//setup button mouse events
+			window.Button.mouse_hover += change_button_on_hover;
+			window.Button.mouse_press += change_button_on_press;
+			window.Button.mouse_leave += change_button_on_leave;
+			window.Button.mouse_click += destroyUI;
 
 			//pre-assemble window
 			window.preAssemble();
@@ -374,13 +387,13 @@ namespace Vaerydian.Factories
 					slot.ecs_instance = ecs_instance;
 					slot.bounds = new Rectangle (x + i*xSize, y + j*ySize, xSize-1, ySize-1);
 
-					slot.BackgroundColor = Color.White;
-					slot.BackgroundName = "frame";
-					slot.Transparency = 0.5f;
+					slot.background_color = Color.White;
+					slot.background_name = "frame";
+					slot.transparency = 0.5f;
 
-					slot.MouseClick += getItem;
+					slot.mouse_click += getItem;
 
-					window.Canvas.Controls.Add (slot);
+					window.Canvas.controls.Add (slot);
 				}
 			}
 
@@ -398,7 +411,7 @@ namespace Vaerydian.Factories
 		}
 
 		public static void getItem(Control sender, InterfaceArgs args){
-
+			//TODO
 		}
 
 		public static void createConsole(){

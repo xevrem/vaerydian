@@ -21,6 +21,7 @@
 using System;
 using ECSFramework;
 using Microsoft.Xna.Framework;
+using Glimpse.Input;
 
 namespace Glimpse.Controls
 {
@@ -29,7 +30,31 @@ namespace Glimpse.Controls
 		public Entity owner;
 		public Entity caller;
 		public ECSInstance ecs_instance;
+
+		//control attributes
 		public Rectangle bounds;
+		public string font_name;
+		public string background_name;
+		public int border = 0;
+		public string text;
+		public Color text_color = Color.Black;
+		public bool center_text = false;
+		public bool autosize = false;
+		public Color background_color = Color.White;
+		public float transparency = 1.0f;
+
+		public event InterfaceHandler updating;
+		public event InterfaceHandler drawing;
+		public event InterfaceHandler mouse_click;
+		public event InterfaceHandler mouse_hover;
+		public event InterfaceHandler mouse_press;
+		public event InterfaceHandler mouse_leave;
+
+		public abstract void update();
+		public abstract void draw();
+		public abstract void clean_up();
+		public abstract void reload();
+		public abstract void resize();
 	}
 }
 

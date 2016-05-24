@@ -103,34 +103,34 @@ namespace Vaerydian.UI
         {
             //setup form
             b_Form = new GForm();
-            b_Form.Owner = b_Owner;
-            b_Form.Caller = b_Caller;
-            b_Form.ECSInstance = b_ECSInstance;
-            b_Form.Bounds = new Rectangle(b_Position.X, b_Position.Y, b_Width + 2 * b_border, (b_Height + b_Spacing) * b_ButtonCount + 2 * b_border);
+            b_Form.owner = b_Owner;
+            b_Form.caller = b_Caller;
+            b_Form.ecs_instance = b_ECSInstance;
+            b_Form.bounds = new Rectangle(b_Position.X, b_Position.Y, b_Width + 2 * b_border, (b_Height + b_Spacing) * b_ButtonCount + 2 * b_border);
 
             //setup canvas
             b_Canvas = new GCanvas();
-            b_Canvas.Owner = b_Owner;
-            b_Canvas.Caller = b_Caller;
-            b_Canvas.ECSInstance = b_ECSInstance;
-            b_Canvas.Bounds = new Rectangle(b_Position.X, b_Position.Y, b_Width + 2 * b_border, (b_Height + b_Spacing) * b_ButtonCount + 2 * b_border);
+            b_Canvas.owner = b_Owner;
+            b_Canvas.caller = b_Caller;
+            b_Canvas.ecs_instance = b_ECSInstance;
+            b_Canvas.bounds = new Rectangle(b_Position.X, b_Position.Y, b_Width + 2 * b_border, (b_Height + b_Spacing) * b_ButtonCount + 2 * b_border);
 
             //setup frame
             b_Frame = new GFrame();
-            b_Frame.Owner = b_Owner;
-            b_Frame.Caller = b_Caller;
-            b_Frame.ECSInstance = b_ECSInstance;
-            b_Frame.Bounds = new Rectangle(b_Position.X, b_Position.Y, b_Width + 2 * b_border, (b_Height + b_Spacing) * b_ButtonCount + 2 * b_border);
+            b_Frame.owner = b_Owner;
+            b_Frame.caller = b_Caller;
+            b_Frame.ecs_instance = b_ECSInstance;
+            b_Frame.bounds = new Rectangle(b_Position.X, b_Position.Y, b_Width + 2 * b_border, (b_Height + b_Spacing) * b_ButtonCount + 2 * b_border);
 
             //b_Canvas.Controls.Add(b_Frame);
 
             for (int i = 0; i < b_ButtonCount; i++)
             {
                 GButton button = new GButton();
-                button.Owner = b_Owner;
-                button.Caller = b_Caller;
-                button.ECSInstance = b_ECSInstance;
-                button.Bounds = new Rectangle(b_Position.X + b_border, b_Position.Y + b_border + i * (b_Height + b_Spacing), b_Width, b_Height);
+                button.owner = b_Owner;
+                button.caller = b_Caller;
+                button.ecs_instance = b_ECSInstance;
+                button.bounds = new Rectangle(b_Position.X + b_border, b_Position.Y + b_border + i * (b_Height + b_Spacing), b_Width, b_Height);
 				
                 //b_Canvas.Controls.Add(button);
                 b_Buttons.Add(button);
@@ -141,14 +141,14 @@ namespace Vaerydian.UI
 
         public void assemble()
         {
-            b_Canvas.Controls.Add(b_Frame);
+            b_Canvas.controls.Add(b_Frame);
 
             for (int i = 0; i < b_Buttons.Count; i++)
             {
-                b_Canvas.Controls.Add(b_Buttons[i]);
+                b_Canvas.controls.Add(b_Buttons[i]);
             }
 
-            b_Form.CanvasControls.Add(b_Canvas);
+			b_Form.canvas_controls.Add(b_Canvas);
         }
 
 

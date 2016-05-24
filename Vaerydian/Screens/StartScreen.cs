@@ -1,6 +1,6 @@
 ﻿/*
- Author:
       Thomas H. Jonell <@Net_Gnome>
+ Author:
  
  Copyright (c) 2013 Thomas H. Jonell
 
@@ -105,55 +105,51 @@ namespace Vaerydian.Screens
 
             s_ButtonMenu.init();
 
-            s_ButtonMenu.Frame.BackgroundName = "frame";
-            s_ButtonMenu.Frame.BackgroundColor = Color.Black;
-            s_ButtonMenu.Frame.Transparency = 0.75f;            
+			s_ButtonMenu.Frame.background_name = "frame";
+            s_ButtonMenu.Frame.background_color = Color.Black;
+			s_ButtonMenu.Frame.transparency = 0.75f;            
            
-            s_ButtonMenu.Buttons[0].NormalTextureName = "test_dialog";
-            s_ButtonMenu.Buttons[0].PressedTextureName = "test_dialog2";
-            s_ButtonMenu.Buttons[0].MouseOverTextureName = "test_dialog2";
-            s_ButtonMenu.Buttons[0].Color = Color.Gray;
-            s_ButtonMenu.Buttons[0].Transparency = 1f; //0.75f;
-            s_ButtonMenu.Buttons[0].Border = 10;
-            s_ButtonMenu.Buttons[0].FontName = "General";
-            s_ButtonMenu.Buttons[0].AutoSize = false;
-            s_ButtonMenu.Buttons[0].CenterText = true;
-            s_ButtonMenu.Buttons[0].Text = "New Game";
-            s_ButtonMenu.Buttons[0].NormalTextColor = Color.White;
-            s_ButtonMenu.Buttons[0].MouseOverTextColor = Color.Yellow;
-            s_ButtonMenu.Buttons[0].PressedTextColor = Color.Red;
-            s_ButtonMenu.Buttons[0].MouseClick += OnMouseClickNewGame;
+			s_ButtonMenu.Buttons[0].background_name = "test_dialog";
+            s_ButtonMenu.Buttons[0].background_color = Color.Gray;
+            s_ButtonMenu.Buttons[0].transparency = 1f; //0.75f;
+            s_ButtonMenu.Buttons[0].border = 10;
+            s_ButtonMenu.Buttons[0].font_name = "General";
+            s_ButtonMenu.Buttons[0].autosize = false;
+            s_ButtonMenu.Buttons[0].center_text = true;
+			s_ButtonMenu.Buttons[0].text = "New Game";
+            s_ButtonMenu.Buttons[0].text_color = Color.White;
+			s_ButtonMenu.Buttons[0].mouse_hover += change_button_on_hover;
+			s_ButtonMenu.Buttons[0].mouse_press += change_button_on_press;
+			s_ButtonMenu.Buttons[0].mouse_leave += change_button_on_leave;
+			s_ButtonMenu.Buttons[0].mouse_click += OnMouseClickNewGame;
 
-            s_ButtonMenu.Buttons[1].NormalTextureName = "test_dialog";
-            s_ButtonMenu.Buttons[1].PressedTextureName = "test_dialog2";
-            s_ButtonMenu.Buttons[1].MouseOverTextureName = "test_dialog2";
-            s_ButtonMenu.Buttons[1].Color = Color.Gray;
-            s_ButtonMenu.Buttons[1].Transparency = 1f;
-            s_ButtonMenu.Buttons[1].Border = 10;
-            s_ButtonMenu.Buttons[1].FontName = "General";
-            s_ButtonMenu.Buttons[1].AutoSize = false;
-            s_ButtonMenu.Buttons[1].CenterText = true;
-            s_ButtonMenu.Buttons[1].Text = "World Gen";
-            s_ButtonMenu.Buttons[1].NormalTextColor = Color.White;
-            s_ButtonMenu.Buttons[1].MouseOverTextColor = Color.Yellow;
-            s_ButtonMenu.Buttons[1].PressedTextColor = Color.Red;
-            s_ButtonMenu.Buttons[1].MouseClick += OnMouseClickWorldGen;
+			s_ButtonMenu.Buttons[1].background_name = "test_dialog";           
+            s_ButtonMenu.Buttons[1].background_color = Color.Gray;
+            s_ButtonMenu.Buttons[1].transparency = 1f;
+			s_ButtonMenu.Buttons[1].border = 10;
+            s_ButtonMenu.Buttons[1].font_name = "General";
+            s_ButtonMenu.Buttons[1].autosize = false;
+            s_ButtonMenu.Buttons[1].center_text = true;
+			s_ButtonMenu.Buttons[1].text = "World Gen";
+			s_ButtonMenu.Buttons[1].text_color = Color.White;
+			s_ButtonMenu.Buttons[1].mouse_hover += change_button_on_hover;
+			s_ButtonMenu.Buttons[1].mouse_press += change_button_on_press;
+			s_ButtonMenu.Buttons[1].mouse_leave += change_button_on_leave;
+			s_ButtonMenu.Buttons[1].mouse_click += OnMouseClickNewGame;
 
-            s_ButtonMenu.Buttons[2].NormalTextureName = "test_dialog";
-            s_ButtonMenu.Buttons[2].PressedTextureName = "test_dialog2";
-            s_ButtonMenu.Buttons[2].MouseOverTextureName = "test_dialog2";
-            s_ButtonMenu.Buttons[2].Color = Color.Gray;
-            s_ButtonMenu.Buttons[2].Transparency = 1f;
-            s_ButtonMenu.Buttons[2].Border = 10;
-            s_ButtonMenu.Buttons[2].FontName = "General";
-            s_ButtonMenu.Buttons[2].AutoSize = false;
-            s_ButtonMenu.Buttons[2].CenterText = true;
-            s_ButtonMenu.Buttons[2].Text = "Exit Game";
-            s_ButtonMenu.Buttons[2].NormalTextColor = Color.White;
-            s_ButtonMenu.Buttons[2].MouseOverTextColor = Color.Yellow;
-            s_ButtonMenu.Buttons[2].PressedTextColor = Color.Red;
-            s_ButtonMenu.Buttons[2].MouseClick += OnMouseClickExit;
-            
+			s_ButtonMenu.Buttons[2].background_name = "test_dialog";
+			s_ButtonMenu.Buttons[2].background_color = Color.Gray;
+            s_ButtonMenu.Buttons[2].transparency = 1f;
+            s_ButtonMenu.Buttons[2].border = 10;
+            s_ButtonMenu.Buttons[2].font_name = "General";
+            s_ButtonMenu.Buttons[2].autosize = false;
+            s_ButtonMenu.Buttons[2].center_text = true;
+			s_ButtonMenu.Buttons[2].text = "Exit Game";
+			s_ButtonMenu.Buttons[2].text_color = Color.White;
+			s_ButtonMenu.Buttons[2].mouse_hover += change_button_on_hover;
+			s_ButtonMenu.Buttons[2].mouse_press += change_button_on_press;
+			s_ButtonMenu.Buttons[2].mouse_leave += change_button_on_leave;
+			s_ButtonMenu.Buttons[2].mouse_click += OnMouseClickNewGame;            
 
 
             s_ButtonMenu.assemble();
@@ -168,7 +164,7 @@ namespace Vaerydian.Screens
 			s_json = s_JsonManager.loadJSON("./Content/json/start_screen.v");
 
             //create mouse pointer
-            s_Frame = UIFactory.createMousePointer(InputManager.getMousePositionPoint(), 10, 10, "pointer", OnMousePointerUpdate);
+			s_Frame = UIFactory.createMousePointer(InputManager.getMousePosition(), 10, 10, "pointer", OnMousePointerUpdate);
 
             //early entity reslove
             ecs_instance.resolve_entities();
@@ -181,7 +177,7 @@ namespace Vaerydian.Screens
         {
             base.UnloadContent();
 
-            ecs_instance.cleanUp();
+            ecs_instance.clean_up();
 
             GC.Collect();
         }
@@ -246,8 +242,23 @@ namespace Vaerydian.Screens
 
         private void OnMousePointerUpdate(Control control, InterfaceArgs args)
         {
-            control.bounds = new Rectangle(args.InputStateContainer.CurrentMousePosition.X, args.InputStateContainer.CurrentMousePosition.Y, 10, 10);
+			control.bounds = new Rectangle(args.state_container.current_mouse_state.Position.X, args.state_container.current_mouse_state.Position.Y, 10, 10);
         }
+
+		private void change_button_on_press(Control sender, InterfaceArgs args){
+			sender.background_name = "test_dialog2";
+			sender.text_color = Color.Red;
+		}
+
+		private void change_button_on_hover(Control sender, InterfaceArgs args){
+			sender.background_name = "test_dialog2";
+			sender.text_color = Color.Yellow;
+		}
+
+		private void change_button_on_leave(Control sender, InterfaceArgs args){
+			sender.background_name = "test_dialog1";
+			sender.text_color = Color.White;
+		}
 
     }
 }

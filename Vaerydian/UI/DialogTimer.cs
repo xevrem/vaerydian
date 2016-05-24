@@ -30,6 +30,7 @@ using ECSFramework;
 
 using Vaerydian.Components.Spatials;
 using Vaerydian.Components.Graphical;
+using Glimpse.Input;
 
 namespace Vaerydian.UI
 {

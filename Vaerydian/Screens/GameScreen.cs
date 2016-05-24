@@ -201,7 +201,7 @@ namespace Vaerydian.Screens
             healthSystem = ecsInstance.system_manager.set_system(new HealthSystem(), new Health());
             lifeSystem = ecsInstance.system_manager.set_system(new LifeSystem(), new Life());
             victorySystem = ecsInstance.system_manager.set_system(new AwardSystem(), new Award());
-            uiUpdateSystem = ecsInstance.system_manager.set_system(new UIUpdateSystem(), new UserInterface());
+			uiUpdateSystem = ecsInstance.system_manager.set_system(new UIUpdateSystem(), new UserInterface());
             triggerSystem = ecsInstance.system_manager.set_system(new TriggerSystem(), new Trigger());
 			actionSystem = ecsInstance.system_manager.set_system (new ActionSystem (), new VAction ());
 			lightSystem = ecsInstance.system_manager.set_system (new LightSystem (), new Light (), new Position ());
@@ -249,7 +249,7 @@ namespace Vaerydian.Screens
             ecsInstance.component_manager.register_component_type(new Aggrivation());
 			ecsInstance.component_manager.register_component_type(new Audio());
             ecsInstance.component_manager.register_component_type(new Vaerydian.Components.Utils.Path());
-			ecsInstance.component_manager.register_component_type (new Light ());
+			ecsInstance.component_manager.register_component_type(new Light ());
 
             //initialize all systems
             ecsInstance.system_manager.initialize_systems();

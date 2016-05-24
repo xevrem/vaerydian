@@ -25,6 +25,7 @@ using ECSFramework;
 
 using Vaerydian.Components.Characters;
 using Vaerydian.Components.Spatials;
+using Glimpse.Input;
 
 namespace Vaerydian
 {
@@ -46,7 +47,7 @@ namespace Vaerydian
 			Health health = (Health) h_HealthMapper.get(control.caller);
 
 			GLabel label = (GLabel) control;
-			label.Text = health.CurrentHealth + " / " + health.MaxHealth;
+			label.text = health.CurrentHealth + " / " + health.MaxHealth;
 			label.resize();
 		}
 	}

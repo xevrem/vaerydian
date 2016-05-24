@@ -19,14 +19,45 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using Microsoft.Xna.Framework;
 
 namespace Glimpse.Controls
 {
 	public class GLabel : Control
 	{
+
 		public GLabel ()
 		{
 		}
+
+		#region implemented abstract members of Control
+
+		public override void update ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void draw ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void clean_up ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void reload ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void resize ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		#endregion
 	}
 }
 

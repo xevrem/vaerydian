@@ -20,13 +20,27 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using ECSFramework;
+using Glimpse.Controls;
 
 namespace Glimpse.Components
 {
 	public class UserInterface : Component
 	{
-		public UserInterface ()
+		public UserInterface(){}
+
+		public UserInterface (GForm form)
 		{
+			this.form = form;
+		}
+
+		public GForm form;
+
+		public void update(){
+			form.update ();
+		}
+			
+		public void draw(){
+			form.draw ();
 		}
 	}
 }

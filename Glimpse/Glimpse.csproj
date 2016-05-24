@@ -29,9 +29,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="MonoGame.Framework">
-      <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.5.1.1679\Assemblies\MacOSX\MonoGame.Framework.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -47,8 +44,7 @@
     <Compile Include="Controls\GFrame.cs" />
     <Compile Include="Controls\GTextBox.cs" />
     <Compile Include="Controls\GButton.cs" />
-    <Compile Include="Controls\InterfaceArgs.cs" />
-    <Compile Include="Controls\InterfaceHandler.cs" />
+    <Compile Include="Input\InterfaceArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -63,9 +59,9 @@
       <Project>{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}</Project>
       <Name>ECSFramework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\monogame\MonoGame.Framework\MonoGame.Framework.Windows.csproj">
-      <Project>{7DE47032-A904-4C29-BD22-2D235E8D91BA}</Project>
-      <Name>MonoGame.Framework.Windows</Name>
+    <ProjectReference Include="..\monogame\MonoGame.Framework\MonoGame.Framework.MacOS.csproj">
+      <Project>{36C538E6-C32A-4A8D-A39C-566173D7118E}</Project>
+      <Name>MonoGame.Framework.MacOS</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

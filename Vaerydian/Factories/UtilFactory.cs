@@ -35,6 +35,7 @@ using Vaerydian.Components.Graphical;
 using Vaerydian.Components.Utils;
 using Vaerydian.Components.Characters;
 using Vaerydian.Characters;
+using Glimpse.Input;
 
 
 namespace Vaerydian.Factories
