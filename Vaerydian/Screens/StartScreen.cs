@@ -1,8 +1,8 @@
 ﻿/*
-      Thomas H. Jonell <@Net_Gnome>
+      Erika V. Jonell <@xevrem>
  Author:
  
- Copyright (c) 2013 Thomas H. Jonell
+ Copyright (c) 2013 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by

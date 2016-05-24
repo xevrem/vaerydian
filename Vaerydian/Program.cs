@@ -1,8 +1,8 @@
 /*
  Author:
-      Thomas H. Jonell <@Net_Gnome>
+      Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Thomas H. Jonell
+ Copyright (c) 2013 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -19,6 +19,12 @@
 */
 using System;
 
+
+//using MonoMac.AppKit;
+//using MonoMac.Foundation;
+using Vaerydian;
+using Microsoft.Xna.Framework;
+
 namespace Vaerydian
 {
 
@@ -29,7 +35,9 @@ namespace Vaerydian
         /// </summary>
         static void Main(string[] args)
         {
-            using (VaerydianGame game = new VaerydianGame())
+			//NSApplication.Init ();
+
+			using (VaerydianGame game = new VaerydianGame())
             {
                 game.Run();
             }

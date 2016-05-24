@@ -1,8 +1,8 @@
 /*
  Author:
-      Thomas H. Jonell <@Net_Gnome>
+      Erika V. Jonell <@xevrem>
  
- Copyright (c) 2013 Thomas H. Jonell
+ Copyright (c) 2013 Erika V. Jonell
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -46,7 +46,7 @@ namespace Vaerydian
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class VaerydianGame : Microsoft.Xna.Framework.Game
+	public class VaerydianGame : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -66,7 +66,7 @@ namespace Vaerydian
         {
             graphics = new GraphicsDeviceManager(this);
             
-			//this.Window.AllowUserResizing = true;
+			this.Window.AllowUserResizing = true;
 			
 			graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
@@ -134,6 +134,7 @@ namespace Vaerydian
 				InputManager.YesExit = true;
 
             NewLoadingScreen.Load(screenManager, false, new StartScreen());
+			//screenManager.addScreen (new StartScreen());
 #if DEBUG
             Console.Out.WriteLine("GAME LOADED...");
 #endif
