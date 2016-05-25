@@ -28,7 +28,7 @@ namespace Vaerydian.Components.Characters
 {
     class Health: Component
     {
-        private static int h_type_id;
+		private static int _type_id;
         private int h_entity_id;
 
         public Health() { }
@@ -39,6 +39,11 @@ namespace Vaerydian.Components.Characters
             h_CurrentHealth = max;
         }
 
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
         public int getEntityId()
         {
             return h_entity_id;
@@ -46,7 +51,7 @@ namespace Vaerydian.Components.Characters
 
         public int getTypeId()
         {
-            return h_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -56,7 +61,7 @@ namespace Vaerydian.Components.Characters
 
         public void setTypeId(int typeId)
         {
-            h_type_id = typeId;
+            _type_id = typeId;
         }
 
         private int h_MaxHealth;

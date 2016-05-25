@@ -29,7 +29,7 @@ namespace Vaerydian.Components.Utils
 {
     public class GameMap : Component
     {
-        private static int g_type_id;
+		private static int _type_id;
         private int g_entity_id;
 
         private Map g_Map;
@@ -71,6 +71,11 @@ namespace Vaerydian.Components.Utils
             g_Map = map;
         }
 
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
         public int getEntityId()
         {
             return g_entity_id;
@@ -78,15 +83,15 @@ namespace Vaerydian.Components.Utils
 
         public int getTypeId()
         {
-            return g_type_id;
+            return _type_id;
         }
 
 		public static int TypeID {
 			get {
-				return g_type_id;
+				return _type_id;
 			}
 			set {
-				g_type_id = value;
+				_type_id = value;
 			}
 		}
 
@@ -97,7 +102,7 @@ namespace Vaerydian.Components.Utils
 
         public void setTypeId(int typeId)
         {
-            g_type_id = typeId;
+            _type_id = typeId;
         }
 
         public Terrain getTerrain (int x, int y)

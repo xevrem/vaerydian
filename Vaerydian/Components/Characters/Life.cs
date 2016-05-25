@@ -33,10 +33,15 @@ namespace Vaerydian.Components.Characters
     class Life : Component
     {
 
-        private static int l_type_id;
+		private static int _type_id;
         private int l_entity_id;
 
         public Life() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -45,7 +50,7 @@ namespace Vaerydian.Components.Characters
 
         public int getTypeId()
         {
-            return l_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -55,7 +60,7 @@ namespace Vaerydian.Components.Characters
 
         public void setTypeId(int typeId)
         {
-            l_type_id = typeId;
+            _type_id = typeId;
         }
 
         private bool _IsAlive = true;

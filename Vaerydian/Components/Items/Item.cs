@@ -75,10 +75,15 @@ namespace Vaerydian.Components.Items
 
     class Item : Component
     {
-        private static int i_type_id;
+		private static int _type_id;
         private int i_entity_id;
 
         public Item() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public Item(String name, int Value, int durability)
         {
@@ -95,7 +100,7 @@ namespace Vaerydian.Components.Items
 
         public int getTypeId()
         {
-            return i_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -105,7 +110,7 @@ namespace Vaerydian.Components.Items
 
         public void setTypeId(int typeId)
         {
-            i_type_id = typeId;
+            _type_id = typeId;
         }
 
         /// <summary>

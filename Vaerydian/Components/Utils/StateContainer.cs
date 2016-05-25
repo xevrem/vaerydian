@@ -31,17 +31,22 @@ namespace Vaerydian.Components.Utils
 {
     class StateContainer<TState, TTrigger> : Component where TState : struct, IComparable, IConvertible, IFormattable
     {
-        private static int s_type_id;
+		private static int _type_id;
 
         public static int TypeID
         {
-          get { return StateContainer<TState, TTrigger>.s_type_id; }
-          set { StateContainer<TState, TTrigger>.s_type_id = value; }
+          get { return StateContainer<TState, TTrigger>._type_id; }
+          set { StateContainer<TState, TTrigger>._type_id = value; }
         }
 
         private int s_entity_id;
 
         public StateContainer() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -50,7 +55,7 @@ namespace Vaerydian.Components.Utils
 
         public int getTypeId()
         {
-            return s_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -60,7 +65,7 @@ namespace Vaerydian.Components.Utils
 
         public void setTypeId(int typeId)
         {
-            s_type_id = typeId;
+            _type_id = typeId;
         }
 
         private StateMachine<TState, TTrigger> s_StateMachine;

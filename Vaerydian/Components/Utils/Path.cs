@@ -41,17 +41,22 @@ namespace Vaerydian.Components.Utils
 
     class Path : Component
     {
-        private static int p_type_id;
+		private static int _type_id;
 
         public static int TypeID
         {
-            get { return Path.p_type_id; }
-            set { Path.p_type_id = value; }
+            get { return Path._type_id; }
+            set { Path._type_id = value; }
         }
 
         private int p_entity_id;
 
         public Path() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -60,7 +65,7 @@ namespace Vaerydian.Components.Utils
 
         public int getTypeId()
         {
-            return p_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -70,7 +75,7 @@ namespace Vaerydian.Components.Utils
 
         public void setTypeId(int typeId)
         {
-            p_type_id = typeId;
+            _type_id = typeId;
         }
 
         private Vector2 p_Start;

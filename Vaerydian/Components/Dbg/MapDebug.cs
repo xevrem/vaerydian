@@ -32,7 +32,7 @@ namespace Vaerydian.Components.Dbg
     public class MapDebug : Component
     {
 
-        private static int m_type_id;
+		private static int _type_id;
         private int m_entity_id;
 
         private List<Cell> m_Path = new List<Cell>();
@@ -77,6 +77,11 @@ namespace Vaerydian.Components.Dbg
 
         public MapDebug() { }
 
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
         public int getEntityId()
         {
             return m_entity_id;
@@ -84,7 +89,7 @@ namespace Vaerydian.Components.Dbg
 
         public int getTypeId()
         {
-            return m_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -94,7 +99,7 @@ namespace Vaerydian.Components.Dbg
 
         public void setTypeId(int typeId)
         {
-            m_type_id = typeId;
+            _type_id = typeId;
         }
     }
 }

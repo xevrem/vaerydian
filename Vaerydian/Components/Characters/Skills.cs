@@ -38,10 +38,15 @@ namespace Vaerydian.Components.Characters
 
 	class Skills : Component
     {
-        private static int s_type_id;
+		private static int _type_id;
         private int s_entity_id;
 
         public Skills() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -50,7 +55,7 @@ namespace Vaerydian.Components.Characters
 
         public int getTypeId()
         {
-            return s_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -60,7 +65,7 @@ namespace Vaerydian.Components.Characters
 
         public void setTypeId(int typeId)
         {
-            s_type_id = typeId;
+            _type_id = typeId;
         }
 
 		public Skill Melee;

@@ -31,13 +31,18 @@ namespace Vaerydian.Components.Graphical
     public class ViewPort : Component
     {
 
-        private static int v_type_id;
+		private static int _type_id;
         private int v_entity_id;
 
         private Vector2 v_Origin;
         private Vector2 v_Dimensions;
 
         public ViewPort() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public ViewPort(Vector2 origin, Vector2 dimensions) 
         {
@@ -52,7 +57,7 @@ namespace Vaerydian.Components.Graphical
 
         public int getTypeId()
         {
-            return v_type_id;
+            return _type_id;
         }
 
         public Vector2 getOrigin()
@@ -72,7 +77,7 @@ namespace Vaerydian.Components.Graphical
 
         public void setTypeId(int typeId)
         {
-            v_type_id = typeId;
+            _type_id = typeId;
         }
 
         public void setOrigin(Vector2 origin)

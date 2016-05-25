@@ -30,10 +30,15 @@ namespace Vaerydian.Components.Graphical
 {
     class Light : Component
     {
-        private static int l_type_id;
+		private static int _type_id;
         private int l_entity_id;
 
         public Light() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -42,15 +47,15 @@ namespace Vaerydian.Components.Graphical
 
         public int getTypeId()
         {
-            return l_type_id;
+            return _type_id;
         }
 
 		public static int TypeID {
 			get {
-				return l_type_id;
+				return _type_id;
 			}
 			set {
-				l_type_id = value;
+				_type_id = value;
 			}
 		}
 
@@ -61,7 +66,7 @@ namespace Vaerydian.Components.Graphical
 
         public void setTypeId(int typeId)
         {
-            l_type_id = typeId;
+            _type_id = typeId;
         }
 
         private bool l_IsEnabled;

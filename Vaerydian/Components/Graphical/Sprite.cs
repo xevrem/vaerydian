@@ -34,12 +34,17 @@ namespace Vaerydian.Components.Graphical
     public class Sprite : Component
     {
 
-        private static int s_type_id;
+		private static int _type_id;
         private int s_entity_id;
 
         
 
         public Sprite() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public Sprite(String textureName, String normalName,int height, int width, int xInd, int yInd)
         {
@@ -58,7 +63,7 @@ namespace Vaerydian.Components.Graphical
 
         public int getTypeId()
         {
-            return s_type_id;
+            return _type_id;
         }
 
         public String getTextureName()
@@ -73,7 +78,7 @@ namespace Vaerydian.Components.Graphical
 
         public void setTypeId(int typeId)
         {
-            s_type_id = typeId;
+            _type_id = typeId;
         }
 
         private String s_TextureName;

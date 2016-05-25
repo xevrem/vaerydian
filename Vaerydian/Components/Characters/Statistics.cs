@@ -46,6 +46,11 @@ namespace Vaerydian.Components.Characters
 
         public Statistics() { }
 
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
         public int getEntityId()
         {
             return _entity_id;

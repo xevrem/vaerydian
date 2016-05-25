@@ -30,12 +30,12 @@ namespace Vaerydian.Components.Spatials
 {
     public class Position : Component
     {
-        private static int p_type_id;
+		private static int _type_id;
 
         public static int TypeID
         {
-            get { return Position.p_type_id; }
-            set { Position.p_type_id = value; }
+            get { return Position._type_id; }
+            set { Position._type_id = value; }
         }
 
         private int p_entity_id;
@@ -58,6 +58,11 @@ namespace Vaerydian.Components.Spatials
 
         public Position() { }
 
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
         public Position(Vector2 position, Vector2 offset)
         {
             p_Position = position;
@@ -71,7 +76,7 @@ namespace Vaerydian.Components.Spatials
 
         public int getTypeId()
         {
-            return p_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -81,7 +86,7 @@ namespace Vaerydian.Components.Spatials
 
         public void setTypeId(int typeId)
         {
-            p_type_id = typeId;
+            _type_id = typeId;
         }
 
     }

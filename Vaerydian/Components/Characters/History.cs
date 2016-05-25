@@ -31,10 +31,15 @@ namespace Vaerydian.Components.Characters
     class History : Component
     {
 
-        private static int h_type_id;
+		private static int _type_id;
         private int h_entity_id;
 
         public History() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -43,10 +48,10 @@ namespace Vaerydian.Components.Characters
 
         public int getTypeId()
         {
-            return h_type_id;
+            return _type_id;
         }
 
-		public static int TypeId{ get { return h_type_id; } set { h_type_id = value; } }
+		public static int TypeId{ get { return _type_id; } set { _type_id = value; } }
 
         public void setEntityId(int entityId)
         {
@@ -55,7 +60,7 @@ namespace Vaerydian.Components.Characters
 
         public void setTypeId(int typeId)
         {
-            h_type_id = typeId;
+            _type_id = typeId;
         }
 
     }

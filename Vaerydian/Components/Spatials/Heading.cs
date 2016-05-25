@@ -30,7 +30,7 @@ namespace Vaerydian.Components.Spatials
 {
     public class Heading : Component
     {
-        private static int h_type_id;
+		private static int _type_id;
         private int h_entity_id;
 
         private Vector2 h_Heading;
@@ -42,6 +42,11 @@ namespace Vaerydian.Components.Spatials
             h_Heading = heading;
         }
 
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
         public int getEntityId()
         {
             return h_entity_id;
@@ -49,7 +54,7 @@ namespace Vaerydian.Components.Spatials
 
         public int getTypeId()
         {
-            return h_type_id;
+            return _type_id;
         }
 
         public Vector2 getHeading()
@@ -64,7 +69,7 @@ namespace Vaerydian.Components.Spatials
 
         public void setTypeId(int typeId)
         {
-            h_type_id = typeId;
+            _type_id = typeId;
         }
 
         public void setHeading(Vector2 heading)

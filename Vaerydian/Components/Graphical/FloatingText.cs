@@ -30,10 +30,15 @@ namespace Vaerydian.Components.Graphical
 {
     class FloatingText : Component
     {
-        private static int f_type_id;
+		private static int _type_id;
         private int f_entity_id;
 
         public FloatingText() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -42,7 +47,7 @@ namespace Vaerydian.Components.Graphical
 
         public int getTypeId()
         {
-            return f_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -52,7 +57,7 @@ namespace Vaerydian.Components.Graphical
 
         public void setTypeId(int typeId)
         {
-            f_type_id = typeId;
+            _type_id = typeId;
         }
 
         private String f_Text;

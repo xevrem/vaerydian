@@ -37,10 +37,15 @@ namespace Vaerydian.Components.Characters
 
     class Information : Component
     {
-        private static int i_type_id;
+		private static int _type_id;
         private int i_entity_id;
 
         public Information() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -49,7 +54,7 @@ namespace Vaerydian.Components.Characters
 
         public int getTypeId()
         {
-            return i_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -59,7 +64,7 @@ namespace Vaerydian.Components.Characters
 
         public void setTypeId(int typeId)
         {
-            i_type_id = typeId;
+            _type_id = typeId;
         }
 
         /// <summary>

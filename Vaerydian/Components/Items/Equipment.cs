@@ -35,10 +35,15 @@ namespace Vaerydian.Components.Items
 
     class Equipment : Component
     {
-        private static int e_type_id;
+		private static int _type_id;
         private int e_entity_id;
 
         public Equipment() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -47,7 +52,7 @@ namespace Vaerydian.Components.Items
 
         public int getTypeId()
         {
-            return e_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -57,7 +62,7 @@ namespace Vaerydian.Components.Items
 
         public void setTypeId(int typeId)
         {
-            e_type_id = typeId;
+            _type_id = typeId;
         }
 
         private Entity _RangedWeapon;

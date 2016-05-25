@@ -28,7 +28,7 @@ namespace Vaerydian.Components.Spatials
 {
     public class Velocity : Component
     {
-        private static int v_type_id;
+		private static int _type_id;
         private int v_entity_id;
 
         private float v_Velocity;
@@ -46,6 +46,11 @@ namespace Vaerydian.Components.Spatials
             v_Velocity = velocity;
         }
 
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
         public int getEntityId()
         {
             return v_entity_id;
@@ -53,7 +58,7 @@ namespace Vaerydian.Components.Spatials
 
         public int getTypeId()
         {
-            return v_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -63,7 +68,7 @@ namespace Vaerydian.Components.Spatials
 
         public void setTypeId(int typeId)
         {
-            v_type_id = typeId;
+            _type_id = typeId;
         }
     }
 }
