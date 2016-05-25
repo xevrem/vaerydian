@@ -25,7 +25,7 @@ namespace ECSFramework
 	public class ComponentManager
 	{
 		private Bag<Bag<Component>> _components;
-		private int _next_type_id = 0;
+		private int _next_type_id = 1;
 		private ECSInstance _ecs_instance;
 
 		public ComponentManager (ECSInstance instance)
@@ -35,8 +35,10 @@ namespace ECSFramework
 		}
 
 		public void register_component_type(Component component){
-			component.type_id = _next_type_id++;
-			this._components [component.type_id] = new Bag<Component> ();
+			if (component.type_id == 0) {
+				component.type_id = _next_type_id++;
+				this._components [component.type_id] = new Bag<Component> ();
+			}
 		}
 
 		public Component get_component(Entity e, int component_type){

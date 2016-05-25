@@ -33,6 +33,12 @@ namespace Glimpse.Components
 			this.form = form;
 		}
 
+		private static int _type_id;
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
 		public GForm form;
 
 		public void update(){

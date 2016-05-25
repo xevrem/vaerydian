@@ -37,9 +37,10 @@ namespace ECSFramework
 		public EntitySystem set_system(EntitySystem system, params Component[] components){
 			//TODO add the system and assign its components.
 			foreach (Component c in components) {
+				this._ecs_instance.component_manager.register_component_type (c);
 				system.component_types.Add (c.type_id);
 			}
-
+			system.ecs_instance = this._ecs_instance;
 			this._systems.Add (system);
 			return system;
 		}

@@ -28,7 +28,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Actions
 {
-    class Attack : Component
+	class Attack : Component
     {
         private static int _type_id;
         private int _entity_id;
@@ -41,6 +41,15 @@ namespace Vaerydian.Components.Actions
             _Defenter = defender;
             _AttackType = attackType;
         }
+
+		#region implemented abstract members of Component
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
+		#endregion
 
         public int getEntityId()
         {

@@ -41,6 +41,11 @@ namespace Vaerydian.Components.Characters
         }
         private int _entity_id;
 
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
+
         private CharacterBehavior _Behavior;
 
         /// <summary>

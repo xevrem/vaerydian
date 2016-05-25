@@ -26,7 +26,7 @@ namespace ECSFramework
 	{
 		public int id { get; set; }
 		public int owner_id { get; set; }
-		public int type_id { get; set; }
+		public abstract int type_id { get; set; }
 	}
 
 }

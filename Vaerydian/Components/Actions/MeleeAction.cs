@@ -32,10 +32,15 @@ namespace Vaerydian.Components.Actions
 {
     public class MeleeAction : Component
     {
-        private static int m_type_id;
+		private static int _type_id;
         private int m_entity_id;
 
         public MeleeAction() { }
+
+		public override int type_id{ 
+			get{ return this.type_id;} 
+			set{ _type_id = value;}
+		}
 
         public int getEntityId()
         {
@@ -44,7 +49,7 @@ namespace Vaerydian.Components.Actions
 
         public int getTypeId()
         {
-            return m_type_id;
+            return _type_id;
         }
 
         public void setEntityId(int entityId)
@@ -54,7 +59,7 @@ namespace Vaerydian.Components.Actions
 
         public void setTypeId(int typeId)
         {
-            m_type_id = typeId;
+            _type_id = typeId;
         }
 
         
