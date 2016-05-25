@@ -64,7 +64,6 @@ namespace Vaerydian.Screens
 
         public override void Initialize()
         {
-            base.Initialize();
 
             //setup instnace and container
             ecs_instance = new ECSInstance();
@@ -80,11 +79,12 @@ namespace Vaerydian.Screens
 
 			//setup json manager
 			s_JsonManager = new JsonManager();
+
+			base.Initialize();
         }
 
         public override void LoadContent()
         {
-            base.LoadContent();
 
             //create backdrop
             UIFactory.createFrame(null, new Point(0, 0), s_Container.GraphicsDevice.Viewport.Height, s_Container.GraphicsDevice.Viewport.Width, "Title");
@@ -171,42 +171,47 @@ namespace Vaerydian.Screens
 
             //load system content
             ecs_instance.system_manager.systems_load_content();
+
+			base.LoadContent();
         }
 
         public override void UnloadContent()
         {
-            base.UnloadContent();
-
             ecs_instance.clean_up();
 
             GC.Collect();
+
+			base.UnloadContent();
         }
 
         public override void hasFocusUpdate(GameTime gameTime)
         {
-            base.hasFocusUpdate(gameTime);
+			base.hasFocusUpdate(gameTime);
 
             //check to see if escape was recently pressed
             if (InputManager.isKeyToggled(Keys.Escape))
             {
                 InputManager.YesExit = true;
             }
+
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+			base.Update(gameTime);
 
-            s_UiUpdateSystem.process();
+			s_UiUpdateSystem.process();
+
         }
 
         public override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
+			base.Draw(gameTime);
 
 			ScreenManager.GameContainer.GraphicsDevice.Clear(Color.Black);
 
 			s_UiDrawSystem.process();
+
         }
 
         private void OnMouseClickNewGame(Control control, InterfaceArgs args) 

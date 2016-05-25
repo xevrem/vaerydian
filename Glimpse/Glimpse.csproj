@@ -30,6 +30,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.0\Assemblies\MacOSX\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.0\Assemblies\MacOSX\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+      <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.0\Assemblies\MacOSX\Tao.Sdl.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,10 +69,6 @@
     <ProjectReference Include="..\ECSFramework\ECSFramework.csproj">
       <Project>{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}</Project>
       <Name>ECSFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\monogame\MonoGame.Framework\MonoGame.Framework.Windows.csproj">
-      <Project>{7DE47032-A904-4C29-BD22-2D235E8D91BA}</Project>
-      <Name>MonoGame.Framework.Windows</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -67,7 +67,7 @@ namespace Vaerydian
         {
             graphics = new GraphicsDeviceManager(this);
             
-			this.Window.AllowUserResizing = true;
+			//this.Window.AllowUserResizing = true;
 			
 			graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
@@ -84,7 +84,7 @@ namespace Vaerydian
             // add a gamer-services component, which is required for the storage APIs
             //Components.Add(new GamerServicesComponent(this));
 
-			Content.RootDirectory = GameConfig.root_dir + "/Content";
+			Content.RootDirectory = "Content";//GameConfig.root_dir + "/Content";
 
             //give the fontManager a reference to Content
             FontManager.content_manager = this.Content;
@@ -148,6 +148,7 @@ namespace Vaerydian
         /// </summary>
         protected override void UnloadContent()
         {
+
             FontManager.fonts.Clear();
 
             for(int i = 0; i < screenManager.Screens.Count;i++)
@@ -158,6 +159,9 @@ namespace Vaerydian
             Console.Out.WriteLine("GAME QUITTING...");
 #endif
             GC.Collect();
+
+			base.UnloadContent ();
+
         }
 
         /// <summary>
@@ -167,6 +171,9 @@ namespace Vaerydian
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+			base.Update(gameTime);
+
+
             //update all input
 			InputManager.Update();
 
@@ -176,18 +183,18 @@ namespace Vaerydian
                 this.Exit();
             }
 
-			if(InputManager.isKeyToggled(Keys.F1))
-				this.changeRez = true;
-			
-			if (changeRez) 
-			{
-				graphics.PreferredBackBufferHeight = height;
-	            graphics.PreferredBackBufferWidth = width;
-
-				graphics.ApplyChanges();
-
-				changeRez = false;
-			}
+//			if(InputManager.isKeyToggled(Keys.F1))
+//				this.changeRez = true;
+//			
+//			if (changeRez) 
+//			{
+//				graphics.PreferredBackBufferHeight = height;
+//	            graphics.PreferredBackBufferWidth = width;
+//
+//				graphics.ApplyChanges();
+//
+//				changeRez = false;
+//			}
 			
             //calculate ms/s
             elapsed += gameTime.ElapsedGameTime.Milliseconds;
@@ -200,7 +207,6 @@ namespace Vaerydian
             }
 
 
-            base.Update(gameTime);
         }
 
         /// <summary>
@@ -209,8 +215,9 @@ namespace Vaerydian
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw (GameTime gameTime)
 		{
-
+			//graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 			base.Draw (gameTime);
+
 
 			if (InputManager.YesExit)
 				return;
@@ -226,6 +233,7 @@ namespace Vaerydian
             //end sprite batch
             spriteBatch.End();
             
+
         }
     }
 }

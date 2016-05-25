@@ -38,7 +38,7 @@ namespace Vaerydian
 	{
 		private static JsonManager g_JM = new JsonManager();
 
-		public static string root_dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+		public static string root_dir = ".";//Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
 		public static bool loadConfig(){
 

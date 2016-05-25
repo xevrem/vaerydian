@@ -27,6 +27,7 @@ using MonoMac.Foundation;
 namespace Vaerydian
 {
 
+	#if WINDOWS_OR_LINUX
     static class Program
     {
         /// <summary>
@@ -34,9 +35,6 @@ namespace Vaerydian
         /// </summary>
         static void Main(string[] args)
         {
-			#if OSX
-			NSApplication.Init ();
-			#endif
 
 			try{
 				using (VaerydianGame game = new VaerydianGame())
@@ -48,6 +46,46 @@ namespace Vaerydian
 			}
         }
     }
+	#endif
+
+	#if OSX
+	static class Program
+	{
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		static void Main (string[] args)
+		{
+			NSApplication.Init ();
+
+
+			using (var p = new NSAutoreleasePool ()) {
+				NSApplication.SharedApplication.Delegate = new AppDelegate ();
+				NSApplication.Main (args);
+			}
+		}
+	}
+
+	class AppDelegate : NSApplicationDelegate
+	{
+		private static VaerydianGame game;
+
+		public override void FinishedLaunching (NSObject notification)
+		{
+			try{
+				game = new VaerydianGame();
+				game.Run ();
+			}catch(Exception e){
+				Console.Out.WriteLine (e.ToString ());
+			}
+		}
+
+		public override bool ApplicationShouldTerminateAfterLastWindowClosed (NSApplication sender)
+		{
+			return true;
+		}
+	}
+	#endif
 
 }
 
