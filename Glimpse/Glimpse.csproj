@@ -60,9 +60,9 @@
       <Project>{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}</Project>
       <Name>ECSFramework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\monogame\MonoGame.Framework\MonoGame.Framework.Linux.csproj">
-      <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
-      <Name>MonoGame.Framework.Linux</Name>
+    <ProjectReference Include="..\monogame\MonoGame.Framework\MonoGame.Framework.Windows.csproj">
+      <Project>{7DE47032-A904-4C29-BD22-2D235E8D91BA}</Project>
+      <Name>MonoGame.Framework.Windows</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

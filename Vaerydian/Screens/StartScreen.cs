@@ -187,10 +187,10 @@ namespace Vaerydian.Screens
             base.hasFocusUpdate(gameTime);
 
             //check to see if escape was recently pressed
-//            if (InputManager.isKeyToggled(Keys.Escape))
-//            {
-//                InputManager.YesExit = true;
-//            }
+            if (InputManager.isKeyToggled(Keys.Escape))
+            {
+                InputManager.YesExit = true;
+            }
         }
 
         public override void Update(GameTime gameTime)

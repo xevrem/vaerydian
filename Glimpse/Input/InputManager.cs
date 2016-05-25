@@ -56,10 +56,6 @@ namespace Glimpse.Input
 			_current_kb_state = Keyboard.GetState ();
 			_previous_m_state = _current_m_state;
 			_current_m_state = Mouse.GetState ();
-
-//			if (isKeyToggled (Keys.Escape)) {
-//				InputManager.YesExit = true;
-//			}
 		}
 
 		public static bool isLeftButtonDown(){
