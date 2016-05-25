@@ -59,7 +59,7 @@ namespace Vaerydian.Systems.Draw
             _Container = container;
         }
         
-        public override void initialize()
+		protected override void initialize()
         {
             _CharacterMapper = new ComponentMapper(new Character(), ecs_instance);
             _PositionMapper = new ComponentMapper(new Position(), ecs_instance);
@@ -67,7 +67,7 @@ namespace Vaerydian.Systems.Draw
             _LifeMapper = new ComponentMapper(new Life(), ecs_instance);
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             _Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
             _SpriteBatch = _Container.SpriteBatch;
@@ -116,11 +116,6 @@ namespace Vaerydian.Systems.Draw
 
             _SpriteBatch.End();
 
-        }
-
-        public override void cleanUp(Bag<Entity> entities)
-        {
-            
         }
 
         public void updateTime(Bone bone, int gameTime)

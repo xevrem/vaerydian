@@ -45,19 +45,17 @@ namespace Vaerydian.Systems.Update
 
         public CameraFocusSystem() : base() { }
 
-        public override void initialize()
+		protected override void initialize()
         {
             _PositionMapper = new ComponentMapper(new Position(), ecs_instance);
             _CameraFocusMapper = new ComponentMapper(new CameraFocus(), ecs_instance);
             _ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             _Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

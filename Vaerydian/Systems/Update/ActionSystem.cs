@@ -34,15 +34,11 @@ namespace Vaerydian.Systems.Update
 		{
 		}
 
-		public override void initialize ()
+		protected override void initialize ()
 		{
 			_ActionMapper = new ComponentMapper (new VAction (), ecs_instance);
 		}
-
-		public override void preLoadContent (Bag<Entity> entities)
-		{
-			//throw new System.NotImplementedException ();
-		}
+			
 
 		protected override void process (Entity entity)
 		{
@@ -58,12 +54,6 @@ namespace Vaerydian.Systems.Update
 			base.removed (entity);
 		}
 
-		public override void cleanUp (Bag<Entity> entities)
-		{
-			//do nothing for now
-		}
-
-		private void foo(){}
 	}
 }
 

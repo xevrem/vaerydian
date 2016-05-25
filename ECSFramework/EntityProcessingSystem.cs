@@ -28,7 +28,10 @@ namespace ECSFramework
 		{
 		}
 			
-		protected override void process_entities(){
+		protected override void process_entities(Bag<Entity> entities){
+			for (int i = 0; i < entities.count; i++) {
+				process (entities [i]);
+			}
 		}
 
 		protected abstract void process(Entity entity);

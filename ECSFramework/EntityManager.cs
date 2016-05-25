@@ -27,11 +27,13 @@ namespace ECSFramework
 	{
 		private Bag<Entity> _entities;
 		private Queue<int> _old_ids;
+		private ECSInstance _ecs_instance;
 
 		private int _next_id = 0;
 
-		public EntityManager ()
+		public EntityManager (ECSInstance instance)
 		{
+			this._ecs_instance = instance;
 			this._entities = new Bag<Entity> ();
 			this._old_ids = new Queue<int> ();
 		}

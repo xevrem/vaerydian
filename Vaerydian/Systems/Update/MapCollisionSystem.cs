@@ -52,7 +52,7 @@ namespace Vaerydian.Systems.Update
 
         public MapCollisionSystem() { }
 
-        public override void initialize()
+		protected override void initialize()
         {
             m_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
             m_VelocityMapper = new ComponentMapper(new Velocity(), ecs_instance);
@@ -62,13 +62,11 @@ namespace Vaerydian.Systems.Update
             m_MapCollidableMapper = new ComponentMapper(new MapCollidable(), ecs_instance);
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             m_Map = ecs_instance.tag_manager.get_entity_by_tag("MAP");
             m_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

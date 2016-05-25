@@ -57,16 +57,14 @@ namespace Vaerydian.Systems.Draw
             h_SpriteBatch = container.SpriteBatch;
         }
 
-        public override void initialize()
+		protected override void initialize()
         {
             h_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
             h_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
             h_HealthMapper = new ComponentMapper(new Health(), ecs_instance);
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
-
-        public override void preLoadContent(Bag<Entity> entities)
+	
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             h_Texture = h_Container.ContentManager.Load<Texture2D>("export");
 

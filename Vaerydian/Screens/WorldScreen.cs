@@ -73,9 +73,9 @@ namespace Vaerydian.Screens
 
         private int yStart = 0;
 
-        private int xFinish = 768;
+        private int xFinish = 1280;
 
-        private int yFinish = 480;
+        private int yFinish = 720;
 
         private ScreenViewPort w_ViewPort = new ScreenViewPort();
 
@@ -104,7 +104,7 @@ namespace Vaerydian.Screens
 
             w_MapEngine.ContentManager = this.ScreenManager.Game.Content;
 
-            w_MapEngine.TileSize = 5;// ws_TileSize;
+            w_MapEngine.TileSize = ws_TileSize;
 
             w_MapEngine.XTiles = w_ViewPort.Dimensions.X;
 
@@ -217,7 +217,7 @@ namespace Vaerydian.Screens
                 UpdateView();
             }
             
-            if (InputManager.isKeyToggled(Keys.PrintScreen))
+            if (InputManager.isKeyToggled(Keys.Tab))
             {
                 InputManager.YesScreenshot = true;
             }
@@ -246,10 +246,10 @@ namespace Vaerydian.Screens
                     w_MapEngine.ShowPrecipitation = false;
                 }
             }
-            if (InputManager.isKeyToggled(Keys.PrintScreen))
-            {
-                w_MapEngine.YesScreenshot = true;
-            }
+//            if (InputManager.isKeyToggled(Keys.PrintScreen))
+//            {
+//                w_MapEngine.YesScreenshot = true;
+//            }
             
 
         }
@@ -302,6 +302,12 @@ namespace Vaerydian.Screens
 
             w_MapEngine.DrawMap(gameTime, w_SpriteBatch);
 
+			//check to see if the user wanted a screenshot
+			if (InputManager.YesScreenshot)
+			{
+				w_MapEngine.saveScreenShot(w_SpriteBatch.GraphicsDevice, gameTime);
+				InputManager.YesScreenshot = false;
+			}
         }
 
         #endregion

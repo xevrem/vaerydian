@@ -66,7 +66,7 @@ namespace Vaerydian.Systems.Draw
             m_SpriteBatch = m_Container.SpriteBatch;
         }
 
-        public override void initialize()
+		protected override void initialize()
         {
             m_CaveMapMapper = new ComponentMapper(new GameMap(), ecs_instance);
             m_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
@@ -85,7 +85,7 @@ namespace Vaerydian.Systems.Draw
             m_DepthMask[8] = new Color(0f, 0f, 0f, 1f);
         }
         
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             m_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
             m_Player = ecs_instance.tag_manager.get_entity_by_tag("PLAYER");
@@ -94,8 +94,6 @@ namespace Vaerydian.Systems.Draw
             m_DepthTex = m_Container.ContentManager.Load<Texture2D>("depth");
             m_TileSize = m_DepthTex.Width;
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

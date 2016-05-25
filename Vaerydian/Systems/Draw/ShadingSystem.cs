@@ -58,7 +58,7 @@ namespace Vaerydian.Systems.Draw
             s_GraphicsDevice = s_Container.GraphicsDevice;
         }
 
-        public override void initialize()
+		protected override void initialize()
         {
             //s_ShadingEffect.CurrentTechnique = s_ShadingEffect.Techniques["PointLight"];
             s_GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
@@ -85,14 +85,12 @@ namespace Vaerydian.Systems.Draw
             s_BlendState.AlphaDestinationBlend = Blend.One;
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             s_ShadingEffect = s_Container.ContentManager.Load<Effect>("effects\\Shading");
             s_GeometryMap = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
             s_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void begin()
         {

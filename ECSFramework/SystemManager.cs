@@ -26,31 +26,59 @@ namespace ECSFramework
 	public class SystemManager
 	{
 		private List<EntitySystem> _systems;
+		private ECSInstance _ecs_instance;
 
-		public SystemManager ()
+		public SystemManager (ECSInstance instance)
 		{
+			this._ecs_instance = instance;
 			this._systems = new List<EntitySystem> ();
 		}
 
 		public EntitySystem set_system(EntitySystem system, params Component[] components){
 			//TODO add the system and assign its components.
+			foreach (Component c in components) {
+				system.component_types.Add (c.type_id);
+			}
+
+			this._systems.Add (system);
 			return system;
 		}
 
+
 		public void initialize_systems(){
-			//TODO
+			foreach (EntitySystem system in this._systems) {
+				system.initialize_system ();
+			}
 		}
 
 		public void systems_load_content(){
-			//TODO
+			foreach (EntitySystem system in this._systems) {
+				system.load_content ();
+			}
 		}
 
 		public void resolve(Entity e){
-			//TODO: assign the entity to the appropriate systems.
+			bool valid;
+
+			foreach (EntitySystem system in this._systems) {
+				valid = true;
+
+				foreach (int type_id in system.component_types) {
+					valid &= this._ecs_instance.has_component (e, type_id);
+				}
+
+				if (valid) {
+					
+					system.add_entity(e);
+				}
+			}
 		}
 
 		public void delete_entity(Entity e){
-			//TODO
+			//FIXME: very innefficient... find a better method
+			foreach (EntitySystem system in this._systems) {
+				system.remove_entity (e);
+			}
 		}
 	}
 }

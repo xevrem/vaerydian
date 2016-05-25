@@ -57,7 +57,7 @@ namespace Vaerydian.Systems.Update
 
         public ProjectileSystem() { }
 
-        public override void initialize()
+		protected override void initialize()
         {
             p_ProjectileMapper = new ComponentMapper(new Projectile(), ecs_instance);
             p_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
@@ -74,13 +74,11 @@ namespace Vaerydian.Systems.Update
 
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             p_Spatial = ecs_instance.tag_manager.get_entity_by_tag("SPATIAL");
 
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

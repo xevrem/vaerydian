@@ -48,7 +48,7 @@ namespace Vaerydian.Systems.Update
 
         public AwardSystem(){ }
         
-        public override void initialize()
+		protected override void initialize()
         {
             v_KnowledgeMapper = new ComponentMapper(new Knowledges(), ecs_instance);
             v_VictoryMapper = new ComponentMapper(new Award(), ecs_instance);
@@ -58,14 +58,7 @@ namespace Vaerydian.Systems.Update
             v_AttributeMapper = new ComponentMapper(new Statistics(), ecs_instance);
             v_HealthMapper = new ComponentMapper(new Health(), ecs_instance);
 
-        }
-        
-        public override void preLoadContent(Bag<Entity> entities)
-        {
-            
-        }
-
-        public override void cleanUp(Bag<Entity> entities) { }
+        }    
                 
         protected override void process(Entity entity)
         {

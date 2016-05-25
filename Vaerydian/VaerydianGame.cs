@@ -59,9 +59,8 @@ namespace Vaerydian
         private int elapsed;
         private int count = 0;
         private float avg;
-		private bool changeRez = true;
-		private int height = 720;
-		private int width = 1280;
+		private int height = 240;
+		private int width = 426;
 
         public VaerydianGame()
         {
@@ -134,8 +133,8 @@ namespace Vaerydian
 			if (!GameConfig.loadConfig ())
 				InputManager.YesExit = true;
 
-            //NewLoadingScreen.Load(screenManager, false, new StartScreen());
-			NewLoadingScreen.Load(screenManager,true,new WorldScreen());
+            NewLoadingScreen.Load(screenManager, false, new StartScreen());
+			//NewLoadingScreen.Load(screenManager,true,new WorldScreen());
 			//screenManager.addScreen (new StartScreen());
 #if DEBUG
             Console.Out.WriteLine("GAME LOADED...");
@@ -184,20 +183,7 @@ namespace Vaerydian
                 this.Exit();
             }
 
-//			if(InputManager.isKeyToggled(Keys.F1))
-//				this.changeRez = true;
-//			
-//			if (changeRez) 
-//			{
-//				graphics.PreferredBackBufferHeight = height;
-//	            graphics.PreferredBackBufferWidth = width;
-//
-//				graphics.ApplyChanges();
-//
-//				changeRez = false;
-//			}
-			
-            //calculate ms/s
+			//calculate ms/s
             elapsed += gameTime.ElapsedGameTime.Milliseconds;
             count++;
             if(count > 100)

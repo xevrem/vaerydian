@@ -42,20 +42,13 @@ namespace Vaerydian.Systems.Update
         
         public HealthSystem() { }
 
-        public override void initialize()
+		protected override void initialize()
         {
             h_HealthMapper = new ComponentMapper(new Health(), ecs_instance);
             h_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
             h_AggroMapper = new ComponentMapper(new Aggrivation(), ecs_instance);
             h_InteractionMapper = new ComponentMapper(new Interactable(), ecs_instance);
         }
-
-        public override void preLoadContent(Bag<Entity> entities)
-        {
-            
-        }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

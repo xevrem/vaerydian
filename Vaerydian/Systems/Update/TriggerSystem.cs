@@ -32,16 +32,11 @@ namespace Vaerydian.Systems.Update
         private ComponentMapper t_TriggerMapper;
         
 
-        public override void initialize()
+		protected override void initialize()
         {
             t_TriggerMapper = new ComponentMapper(new Trigger(), ecs_instance);
         }
-
-        public override void preLoadContent(Bag<Entity> entities)
-        {
-            
-        }
-
+			
         protected override void process(Entity entity)
         {
             Trigger trigger = (Trigger)t_TriggerMapper.get(entity);
@@ -80,11 +75,6 @@ namespace Vaerydian.Systems.Update
                 trigger.clearAction();
                 ecs_instance.delete_entity(entity);
             }
-        }
-
-        public override void cleanUp(Bag<Entity> entities)
-        {
-            
         }
 
     }

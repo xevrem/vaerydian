@@ -40,11 +40,7 @@ namespace Vaerydian.Systems.Update
 
 		#region implemented abstract members of EntitySystem
 
-		public override void cleanUp (Bag<Entity> entities)
-		{
-		}
-
-		public override void initialize ()
+		protected override void initialize ()
 		{
 			t_TargetMapper = new ComponentMapper (new Target(), ecs_instance);
 			t_PositionMapper = new ComponentMapper (new Position(), ecs_instance);
@@ -52,10 +48,6 @@ namespace Vaerydian.Systems.Update
 			t_SpriteMapper = new ComponentMapper(new Sprite(), ecs_instance);
 
 			base.initialize ();
-		}
-
-		public override void preLoadContent (Bag<Entity> entities)
-		{
 		}
 
 		#endregion

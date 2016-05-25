@@ -59,7 +59,7 @@ namespace Vaerydian.Systems.Draw
         }
 
 
-        public override void initialize()   
+		protected override void initialize()   
         {
             _DamageMapper = new ComponentMapper(new Damage(), ecs_instance);
             _PositionMapper = new ComponentMapper(new Position(), ecs_instance);
@@ -67,13 +67,11 @@ namespace Vaerydian.Systems.Draw
             _FloatMapper = new ComponentMapper(new FloatingText(), ecs_instance);
         }
         
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             _Font = FontManager.fonts["Damage"];
             _Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

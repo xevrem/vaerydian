@@ -58,7 +58,7 @@ namespace Vaerydian.Systems.Update
 
         public AttackSystem() { }
         
-        public override void initialize()
+		protected override void initialize()
         {
             _AttackMapper = new ComponentMapper(new Attack(), ecs_instance);
             _PositionMapper = new ComponentMapper(new Position(), ecs_instance);
@@ -73,13 +73,6 @@ namespace Vaerydian.Systems.Update
 
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
-        {
-            
-        }
-
-        public override void cleanUp(Bag<Entity> entities) { }
-        
         protected override void process(Entity entity)
         {
             //retrieve this attack

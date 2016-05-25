@@ -44,7 +44,7 @@ namespace Vaerydian.Systems.Update
 
         public DamageSystem() { }
 
-        public override void initialize()
+		protected override void initialize()
         {
             _DamageMapper = new ComponentMapper(new Damage(), ecs_instance);
             _HealthMapper = new ComponentMapper(new Health(), ecs_instance);
@@ -52,13 +52,6 @@ namespace Vaerydian.Systems.Update
             _InteractMapper = new ComponentMapper(new Interactable(), ecs_instance);
 
         }
-
-        public override void preLoadContent(Bag<Entity> entities)
-        {
-         
-        }
-
-        public override void cleanUp(Bag<Entity> entities) { }
         
         protected override void process(Entity entity)
         {

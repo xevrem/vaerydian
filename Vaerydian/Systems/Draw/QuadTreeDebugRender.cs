@@ -56,14 +56,14 @@ namespace Vaerydian.Systems.Draw
             q_SpriteBatch = container.SpriteBatch;
         }
 
-        public override void initialize()
+		protected override void initialize()
         {
             q_SpatialMapper = new ComponentMapper(new SpatialPartition(), ecs_instance);
             q_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
             q_ViewPortMapper = new ComponentMapper(new ViewPort(), ecs_instance);
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             q_Player = ecs_instance.tag_manager.get_entity_by_tag("PLAYER");
             q_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
@@ -71,8 +71,6 @@ namespace Vaerydian.Systems.Draw
 
             q_Texture = q_Contaner.ContentManager.Load<Texture2D>("export");
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

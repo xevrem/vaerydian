@@ -46,17 +46,16 @@ namespace Vaerydian.Systems.Draw
             _SpriteBatch = _Container.SpriteBatch;
         }
 
-        public override void initialize()
+		protected override void initialize()
         {
             _GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             _CombinedEffect = _Container.ContentManager.Load<Effect>("effects\\DiferredCombine");
         }
 
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

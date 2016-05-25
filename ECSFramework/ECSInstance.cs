@@ -39,9 +39,9 @@ namespace ECSFramework
 
 		public ECSInstance ()
 		{
-			this.entity_manager = new EntityManager ();
-			this.component_manager = new ComponentManager ();
-			this.system_manager = new SystemManager ();
+			this.entity_manager = new EntityManager (this);
+			this.component_manager = new ComponentManager (this);
+			this.system_manager = new SystemManager (this);
 			this.tag_manager = new TagManager ();
 			this.group_manager = new GroupManager ();
 			this._updating_entities = new Queue<Entity> ();
@@ -54,6 +54,14 @@ namespace ECSFramework
 
 		public void add_component(Entity e, Component c){
 			this.component_manager.add_component(e,c);
+		}
+
+		public void remove_component(Component c){
+			this.component_manager.remove_component (c);
+		}
+
+		public bool has_component(Entity e, int type_id){
+			return this.component_manager.has_component (e, type_id);
 		}
 
 		public void resolve(Entity e){
@@ -79,6 +87,11 @@ namespace ECSFramework
 			if (this._deleting_entities.Count > 0) {
 				foreach (Entity e in this._deleting_entities) {
 					//TODO: procee deletions
+					this.system_manager.delete_entity (e);
+					this.tag_manager.delete_entity (e);
+					this.group_manager.delete_entity (e);
+					this.component_manager.delete_entity (e);
+					this.entity_manager.delete_entity (e);
 				}
 			}
 		}

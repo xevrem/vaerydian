@@ -67,7 +67,7 @@ namespace Vaerydian.Systems.Draw
             m_SpriteBatch = m_Container.SpriteBatch;
         }
 
-        public override void initialize()
+		protected override void initialize()
         {
             m_RectDict = new Dictionary<short, Rectangle>();
             m_GameMapMapper = new ComponentMapper(new GameMap(), ecs_instance);
@@ -77,7 +77,7 @@ namespace Vaerydian.Systems.Draw
             m_GeometryMapper = new ComponentMapper(new GeometryMap(), ecs_instance);
         }
         
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             m_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
             m_Player = ecs_instance.tag_manager.get_entity_by_tag("PLAYER");
@@ -136,8 +136,6 @@ namespace Vaerydian.Systems.Draw
 
 			base.end ();
 		}
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

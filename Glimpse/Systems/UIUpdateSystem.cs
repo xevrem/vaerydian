@@ -31,25 +31,12 @@ namespace Glimpse.Systems
 
 		#region implemented abstract members of EntityProcessingSystem
 
-		public override void initialize ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override void preLoadContent (Bag<Entity> entities)
-		{
-			throw new NotImplementedException ();
-		}
 
 		protected override void process (Entity entity)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public override void cleanUp (Bag<Entity> entities)
-		{
-			throw new NotImplementedException ();
-		}
 
 		#endregion
 	}

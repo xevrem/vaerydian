@@ -55,7 +55,7 @@ namespace Vaerydian.Systems.Draw
             this.s_SpriteBatch = gameContainer.SpriteBatch;
         }
 
-        public override void initialize()
+		protected override void initialize()
         {
             s_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
             s_ViewportMapper = new ComponentMapper(new ViewPort(), ecs_instance);
@@ -64,7 +64,7 @@ namespace Vaerydian.Systems.Draw
             s_TranformMapper = new ComponentMapper(new Transform(), ecs_instance); 
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             Sprite sprite;
             String texName;
@@ -84,8 +84,7 @@ namespace Vaerydian.Systems.Draw
             s_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
             s_Geometry = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
+			
 
         protected override void added(Entity entity)
         {

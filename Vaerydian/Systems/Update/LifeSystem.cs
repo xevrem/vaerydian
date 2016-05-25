@@ -38,18 +38,16 @@ namespace Vaerydian.Systems.Update
 
         private NPCFactory l_NPCFactory;
 
-        public override void initialize()
+		protected override void initialize()
         {
             l_LifeMapper = new ComponentMapper(new Life(), ecs_instance);
             l_NPCFactory = new NPCFactory(ecs_instance);
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             l_Player = ecs_instance.tag_manager.get_entity_by_tag("PLAYER");
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

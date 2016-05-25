@@ -43,6 +43,13 @@ namespace Glimpse.Input
 		private static MouseState _previous_m_state;
 		private static MouseState _current_m_state;
 
+		public static void initialize(){
+			_previous_kb_state = Keyboard.GetState ();
+			_current_kb_state = Keyboard.GetState ();
+			_previous_m_state = Mouse.GetState ();
+			_current_m_state = Mouse.GetState ();
+		}
+
 		public static bool isKeyToggled(Keys key){
 			return _previous_kb_state.IsKeyDown (key) && _current_kb_state.IsKeyUp (key);
 		}

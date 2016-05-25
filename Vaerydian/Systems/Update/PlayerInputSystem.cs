@@ -90,7 +90,7 @@ namespace Vaerydian.Systems.Update
 
         public PlayerInputSystem() : base() { }
 
-        public override void initialize()
+		protected override void initialize()
         {
             p_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
             p_VelocityMapper = new ComponentMapper(new Velocity(), ecs_instance);
@@ -103,14 +103,12 @@ namespace Vaerydian.Systems.Update
 			p_SpriteMapper = new ComponentMapper (new Sprite (), ecs_instance);
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             p_Mouse = ecs_instance.tag_manager.get_entity_by_tag("MOUSE");
             p_Spatial = ecs_instance.tag_manager.get_entity_by_tag("SPATIAL");
 			p_Target = ecs_instance.tag_manager.get_entity_by_tag ("TARGET");
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

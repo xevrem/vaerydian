@@ -53,7 +53,7 @@ namespace Vaerydian.Systems.Update
 
         public MeleeSystem() { }
 
-        public override void initialize()
+		protected override void initialize()
         {
             m_MeleeActionMapper = new ComponentMapper(new MeleeAction(), ecs_instance);
             m_PositionMapper = new ComponentMapper(new Position(), ecs_instance);
@@ -66,13 +66,11 @@ namespace Vaerydian.Systems.Update
 
         }
 
-        public override void preLoadContent(Bag<Entity> entities)
+		protected override void pre_load_content(Bag<Entity> entities)
         {
             m_Spatial = ecs_instance.tag_manager.get_entity_by_tag("SPATIAL");
             m_Mouse = ecs_instance.tag_manager.get_entity_by_tag("MOUSE");
         }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

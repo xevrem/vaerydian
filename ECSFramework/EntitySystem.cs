@@ -19,35 +19,66 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Collections.Generic;
 
 namespace ECSFramework
 {
 	public abstract class EntitySystem
 	{
 		public ECSInstance ecs_instance;
+		public List<int> component_types;
+
+		protected Bag<Entity> _entities;
+
 
 		public EntitySystem ()
 		{
+			this.component_types = new List<int> ();
+			this._entities = new Bag<Entity> ();
 		}
 
-		public virtual void initialize(){}
-		public abstract void preLoadContent(Bag<Entity> entities);
-		public virtual void cleanUp(Bag<Entity> entities){}
+		public void initialize_system(){
+			initialize ();
+		}
 
+		public void load_content(){
+			pre_load_content (this._entities);
+		}
+
+		public void remove_entity(Entity e){
+			this._entities.remove(e);
+			removed (e);
+		}
+
+		public void add_entity(Entity e){
+			this._entities.add(e);
+			added (e);
+		}
 
 		public void process(){
 			begin();
 
-			process_entities ();
+			process_entities (this._entities);
 
 			end ();
 		}
 
-		protected abstract void process_entities();
+
+		protected abstract void process_entities(Bag<Entity> entities);
+
+		protected virtual bool should_process(){
+			return true;
+		}
+
+		protected virtual void pre_load_content(Bag<Entity> entities){}
+		protected virtual void cleanUp(Bag<Entity> entities){}
+		protected virtual void initialize(){}
 		protected virtual void added(Entity entity){}
+		protected virtual void removed (Entity entity){}
 		protected virtual void begin(){}
 		protected virtual void end(){}
-		protected virtual void removed (Entity entity){}
+
+
 
 
 		//TODO

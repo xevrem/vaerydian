@@ -42,18 +42,11 @@ namespace Vaerydian.Systems.Update
 
         public BehaviorSystem() {}//: base(intervals) { }
 
-        public override void initialize()
+		protected override void initialize()
         {
             _BehaviorMapper = new ComponentMapper(new AiBehavior(), ecs_instance);
             _LifeMapper = new ComponentMapper(new Life(), ecs_instance);
         }
-
-        public override void preLoadContent(Bag<Entity> entities)
-        {
-
-        }
-
-        public override void cleanUp(Bag<Entity> entities) { }
 
         protected override void process(Entity entity)
         {

@@ -25,7 +25,7 @@ namespace ECSFramework
 	public abstract class Component
 	{
 		public int id { get; set; }
-		public int owner { get; set; }
+		public int owner_id { get; set; }
 		public int type_id { get; set; }
 	}
 
