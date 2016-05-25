@@ -60,14 +60,14 @@ namespace Vaerydian
         private int count = 0;
         private float avg;
 		private bool changeRez = true;
-		private int height = 480;
-		private int width = 854;
+		private int height = 720;
+		private int width = 1280;
 
         public VaerydianGame()
         {
             graphics = new GraphicsDeviceManager(this);
             
-			//this.Window.AllowUserResizing = true;
+			this.Window.AllowUserResizing = true;
 			
 			graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
@@ -134,7 +134,8 @@ namespace Vaerydian
 			if (!GameConfig.loadConfig ())
 				InputManager.YesExit = true;
 
-            NewLoadingScreen.Load(screenManager, false, new StartScreen());
+            //NewLoadingScreen.Load(screenManager, false, new StartScreen());
+			NewLoadingScreen.Load(screenManager,true,new WorldScreen());
 			//screenManager.addScreen (new StartScreen());
 #if DEBUG
             Console.Out.WriteLine("GAME LOADED...");
