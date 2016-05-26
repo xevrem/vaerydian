@@ -1,0 +1,401 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin Damage.xnb
+/copy:Damage.xnb
+
+#begin DamageBold.xnb
+/copy:DamageBold.xnb
+
+#begin Frame_c2.xnb
+/copy:Frame_c2.xnb
+
+#begin General.xnb
+/copy:General.xnb
+
+#begin Loading.xnb
+/copy:Loading.xnb
+
+#begin StartScreen.xnb
+/copy:StartScreen.xnb
+
+#begin Title.xnb
+/copy:Title.xnb
+
+#begin depth.xnb
+/copy:depth.xnb
+
+#begin dialog.xnb
+/copy:dialog.xnb
+
+#begin dialog_bubble.xnb
+/copy:dialog_bubble.xnb
+
+#begin export.xnb
+/copy:export.xnb
+
+#begin frame.xnb
+/copy:frame.xnb
+
+#begin frame_c.xnb
+/copy:frame_c.xnb
+
+#begin frame_h.xnb
+/copy:frame_h.xnb
+
+#begin frame_v.xnb
+/copy:frame_v.xnb
+
+#begin pointer.xnb
+/copy:pointer.xnb
+
+#begin projectile.xnb
+/copy:projectile.xnb
+
+#begin projectile2.xnb
+/copy:projectile2.xnb
+
+#begin reticle.xnb
+/copy:reticle.xnb
+
+#begin reticle_normal.xnb
+/copy:reticle_normal.xnb
+
+#begin sonic_attack.xnb
+/copy:sonic_attack.xnb
+
+#begin sword.xnb
+/copy:sword.xnb
+
+#begin swordnormal.xnb
+/copy:swordnormal.xnb
+
+#begin temperature.xnb
+/copy:temperature.xnb
+
+#begin test_dialog.xnb
+/copy:test_dialog.xnb
+
+#begin test_dialog2.xnb
+/copy:test_dialog2.xnb
+
+#begin whitebg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:whitebg.png
+
+#begin audio/effects/death.xnb
+/copy:audio/effects/death.xnb
+
+#begin audio/effects/fire.xnb
+/copy:audio/effects/fire.xnb
+
+#begin audio/effects/flame.xnb
+/copy:audio/effects/flame.xnb
+
+#begin audio/effects/help.xnb
+/copy:audio/effects/help.xnb
+
+#begin audio/effects/help2.xnb
+/copy:audio/effects/help2.xnb
+
+#begin audio/effects/help3.xnb
+/copy:audio/effects/help3.xnb
+
+#begin audio/effects/hitwall.xnb
+/copy:audio/effects/hitwall.xnb
+
+#begin audio/effects/hurt.xnb
+/copy:audio/effects/hurt.xnb
+
+#begin audio/effects/hurt2.xnb
+/copy:audio/effects/hurt2.xnb
+
+#begin audio/effects/hurt3.xnb
+/copy:audio/effects/hurt3.xnb
+
+#begin audio/effects/hurt4.xnb
+/copy:audio/effects/hurt4.xnb
+
+#begin audio/effects/thereheis.xnb
+/copy:audio/effects/thereheis.xnb
+
+#begin audio/effects/thereheis2.xnb
+/copy:audio/effects/thereheis2.xnb
+
+#begin audio/effects/thereheis3.xnb
+/copy:audio/effects/thereheis3.xnb
+
+#begin characters/arm.bmp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:characters/arm.bmp
+
+#begin characters/bat_head.xnb
+/copy:characters/bat_head.xnb
+
+#begin characters/bat_wing.xnb
+/copy:characters/bat_wing.xnb
+
+#begin characters/face.bmp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:characters/face.bmp
+
+#begin characters/foot.bmp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:characters/foot.bmp
+
+#begin characters/hand.bmp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:characters/hand.bmp
+
+#begin characters/herr_von_speck_sheet.xnb
+/copy:characters/herr_von_speck_sheet.xnb
+
+#begin characters/lBody.bmp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:characters/lBody.bmp
+
+#begin characters/leg.bmp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:characters/leg.bmp
+
+#begin characters/lord_lard_sheet.xnb
+/copy:characters/lord_lard_sheet.xnb
+
+#begin characters/ubody.bmp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:characters/ubody.bmp
+
+#begin characters/normals/herr_von_speck_sheet_normals.xnb
+/copy:characters/normals/herr_von_speck_sheet_normals.xnb
+
+#begin characters/normals/lord_lard_sheet_normals.xnb
+/copy:characters/normals/lord_lard_sheet_normals.xnb
+
+#begin json/actions.v
+/copy:json/actions.v
+
+#begin json/avatars.v
+/copy:json/avatars.v
+
+#begin json/characters.v
+/copy:json/characters.v
+
+#begin json/damage.v
+/copy:json/damage.v
+
+#begin json/effects.v
+/copy:json/effects.v
+
+#begin json/interactions.v
+/copy:json/interactions.v
+
+#begin json/items.v
+/copy:json/items.v
+
+#begin json/map_params.v
+/copy:json/map_params.v
+
+#begin json/maps.v
+/copy:json/maps.v
+
+#begin json/materials.v
+/copy:json/materials.v
+
+#begin json/quests.v
+/copy:json/quests.v
+
+#begin json/start_screen.v
+/copy:json/start_screen.v
+
+#begin json/terrain.v
+/copy:json/terrain.v
+
+#begin effects/DiferredCombine.xnb
+/copy:effects/DiferredCombine.xnb
+
+#begin effects/Shading.xnb
+/copy:effects/Shading.xnb
+
+#begin terrain/abyssal.xnb
+/copy:terrain/abyssal.xnb
+
+#begin terrain/arctic.xnb
+/copy:terrain/arctic.xnb
+
+#begin terrain/beach.xnb
+/copy:terrain/beach.xnb
+
+#begin terrain/cascade.xnb
+/copy:terrain/cascade.xnb
+
+#begin terrain/default.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:terrain/default.png
+
+#begin terrain/desert.xnb
+/copy:terrain/desert.xnb
+
+#begin terrain/foothills.xnb
+/copy:terrain/foothills.xnb
+
+#begin terrain/forest.xnb
+/copy:terrain/forest.xnb
+
+#begin terrain/grass.xnb
+/copy:terrain/grass.xnb
+
+#begin terrain/grasslands.xnb
+/copy:terrain/grasslands.xnb
+
+#begin terrain/ice.xnb
+/copy:terrain/ice.xnb
+
+#begin terrain/jungle.xnb
+/copy:terrain/jungle.xnb
+
+#begin terrain/littoral.xnb
+/copy:terrain/littoral.xnb
+
+#begin terrain/mountains.xnb
+/copy:terrain/mountains.xnb
+
+#begin terrain/noise.xnb
+/copy:terrain/noise.xnb
+
+#begin terrain/ocean.xnb
+/copy:terrain/ocean.xnb
+
+#begin terrain/peak.xnb
+/copy:terrain/peak.xnb
+
+#begin terrain/steppes.xnb
+/copy:terrain/steppes.xnb
+
+#begin terrain/sublittoral.xnb
+/copy:terrain/sublittoral.xnb
+
+#begin terrain/swamp.xnb
+/copy:terrain/swamp.xnb
+
+#begin terrain/terrain.xnb
+/copy:terrain/terrain.xnb
+
+#begin terrain/terrain_normals.xnb
+/copy:terrain/terrain_normals.xnb
+
+#begin terrain/tundra.xnb
+/copy:terrain/tundra.xnb
+
+#begin terrain/various.xnb
+/copy:terrain/various.xnb
+
+#begin terrain/various_normals.xnb
+/copy:terrain/various_normals.xnb
+
+#begin terrain/normals/cascade_normal.xnb
+/copy:terrain/normals/cascade_normal.xnb
+
+#begin terrain/normals/cascade_normal2.xnb
+/copy:terrain/normals/cascade_normal2.xnb
+
+#begin terrain/normals/mountains_normal.xnb
+/copy:terrain/normals/mountains_normal.xnb
+
+#begin terrain/normals/mountains_normal2.xnb
+/copy:terrain/normals/mountains_normal2.xnb
+
+#begin ui/buttonNormal.xnb
+/copy:ui/buttonNormal.xnb
+
+#begin ui/buttonOver.xnb
+/copy:ui/buttonOver.xnb
+
+#begin ui/buttonPressed.xnb
+/importer:
+/processor:
+/build:ui/buttonPressed.xnb
+
