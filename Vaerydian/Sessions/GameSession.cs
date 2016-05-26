@@ -57,8 +57,7 @@ namespace Vaerydian.Sessions
             get { return GameSession.g_MapStack; }
             set { GameSession.g_MapStack = value; }
         }
-
-
+			
         private static PlayerState g_PlayerState;
 
         public static PlayerState PlayerState

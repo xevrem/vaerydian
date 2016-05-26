@@ -20,14 +20,14 @@
 using System;
 
 #if OSX
-using MonoMac.AppKit;
-using MonoMac.Foundation;
+//using MonoMac.AppKit;
+//using MonoMac.Foundation;
 #endif
 
 namespace Vaerydian
 {
 
-	#if WINDOWS_OR_LINUX
+	#if WINDOWS || LINUX
     static class Program
     {
         /// <summary>

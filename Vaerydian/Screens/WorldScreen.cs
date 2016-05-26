@@ -79,7 +79,7 @@ namespace Vaerydian.Screens
 
         private ScreenViewPort w_ViewPort = new ScreenViewPort();
 
-        private int ws_TileSize = 32;
+        private int ws_TileSize = 1;
 
         /// <summary>
         /// list of usuable textures

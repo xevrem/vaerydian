@@ -395,5 +395,7 @@
 /copy:ui/buttonOver.xnb
 
 #begin ui/buttonPressed.xnb
-/copy:ui/buttonPressed.xnb
+/importer:
+/processor:
+/build:ui/buttonPressed.xnb
 

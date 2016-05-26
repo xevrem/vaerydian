@@ -133,8 +133,8 @@ namespace Vaerydian
 			if (!GameConfig.loadConfig ())
 				InputManager.YesExit = true;
 
-            NewLoadingScreen.Load(screenManager, false, new StartScreen());
-			//NewLoadingScreen.Load(screenManager,true,new WorldScreen());
+            //NewLoadingScreen.Load(screenManager, false, new StartScreen());
+			NewLoadingScreen.Load(screenManager,true,new WorldScreen());
 			//screenManager.addScreen (new StartScreen());
 #if DEBUG
             Console.Out.WriteLine("GAME LOADED...");

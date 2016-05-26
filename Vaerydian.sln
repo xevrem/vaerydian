@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNoise", "libnoise\LibNoi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glimpse", "Glimpse\Glimpse.csproj", "{39ED39A6-AE8F-4E29-A481-1F87F61C40DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vaerydian", "Vaerydian\Vaerydian.csproj", "{0129B8E2-F6AE-4961-B234-DB4E0A5B560E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vaerydian", "Vaerydian\Vaerydian.csproj", "{F88337A6-22FB-42CE-A919-04D598694DCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0129B8E2-F6AE-4961-B234-DB4E0A5B560E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0129B8E2-F6AE-4961-B234-DB4E0A5B560E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0129B8E2-F6AE-4961-B234-DB4E0A5B560E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0129B8E2-F6AE-4961-B234-DB4E0A5B560E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{031C8CFF-F147-44EA-B7E5-0A5644808A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{031C8CFF-F147-44EA-B7E5-0A5644808A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{031C8CFF-F147-44EA-B7E5-0A5644808A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,6 +45,10 @@ Global
 		{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F88337A6-22FB-42CE-A919-04D598694DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F88337A6-22FB-42CE-A919-04D598694DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F88337A6-22FB-42CE-A919-04D598694DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F88337A6-22FB-42CE-A919-04D598694DCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
