@@ -22,11 +22,14 @@ using System;
 using ECSFramework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Glimpse.Components;
 
 namespace Glimpse.Systems
 {
 	public class UIDrawSystem : EntityProcessingSystem
 	{
+		private ComponentMapper _ui_mapper;
+
 		public UIDrawSystem ()
 		{
 		}
@@ -36,10 +39,14 @@ namespace Glimpse.Systems
 
 		#region implemented abstract members of EntityProcessingSystem
 
+		protected override void initialize(){
+			_ui_mapper = new ComponentMapper(new UserInterface(), ecs_instance);
+		}
 
 		protected override void process (Entity entity)
 		{
-			throw new NotImplementedException ();
+			UserInterface ui = (UserInterface) this._ui_mapper.get (entity);
+			ui.draw ();
 		}
 
 

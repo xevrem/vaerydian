@@ -35,12 +35,14 @@ namespace Glimpse.Controls
 
 		public override void update ()
 		{
-			throw new NotImplementedException ();
+			foreach (GCanvas canvas in this.canvas_controls)
+				canvas.update ();
 		}
 
 		public override void draw ()
 		{
-			throw new NotImplementedException ();
+			foreach (GCanvas canvas in this.canvas_controls)
+				canvas.draw ();		
 		}
 
 		public override void clean_up ()

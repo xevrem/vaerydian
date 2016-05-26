@@ -20,11 +20,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using ECSFramework;
+using Glimpse.Components;
 
 namespace Glimpse.Systems
 {
 	public class UIUpdateSystem : EntityProcessingSystem
 	{
+		private ComponentMapper _ui_mapper;
+
 		public UIUpdateSystem ()
 		{
 		}
@@ -32,9 +35,14 @@ namespace Glimpse.Systems
 		#region implemented abstract members of EntityProcessingSystem
 
 
+		protected override void initialize(){
+			_ui_mapper = new ComponentMapper(new UserInterface(), ecs_instance);
+		}
+
 		protected override void process (Entity entity)
 		{
-			throw new NotImplementedException ();
+			UserInterface ui = (UserInterface) this._ui_mapper.get (entity);
+			ui.update ();
 		}
 
 

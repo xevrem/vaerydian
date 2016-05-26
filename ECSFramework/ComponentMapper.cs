@@ -24,19 +24,21 @@ namespace ECSFramework
 {
 	public class ComponentMapper
 	{
-		public static ECSInstance ecs_instance;
+		private ECSInstance _ecs_instance;
+
+		private int _type_id;
 
 		public ComponentMapper ()
 		{
 		}
 
 		public ComponentMapper(Component c, ECSInstance ecs_instance){
-			//TODO
+			this._type_id = c.type_id;
+			this._ecs_instance = ecs_instance;
 		}
 
-		public object get(Entity e){
-			//TODO
-			return default(object);
+		public Component get(Entity e){
+			return this._ecs_instance.component_manager.components[_type_id][e.id];
 		}
 
 		public static T get<T>(Entity e){

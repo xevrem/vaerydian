@@ -24,20 +24,20 @@ namespace ECSFramework
 {
 	public class ComponentManager
 	{
-		private Bag<Bag<Component>> _components;
+		public Bag<Bag<Component>> components;
 		private int _next_type_id = 1;
 		private ECSInstance _ecs_instance;
 
 		public ComponentManager (ECSInstance instance)
 		{
 			this._ecs_instance = instance;
-			this._components = new Bag<Bag<Component>> ();
+			this.components = new Bag<Bag<Component>> ();
 		}
 
 		public void register_component_type(Component component){
 			if (component.type_id == 0) {
 				component.type_id = _next_type_id++;
-				this._components [component.type_id] = new Bag<Component> ();
+				this.components [component.type_id] = new Bag<Component> ();
 			}
 		}
 
@@ -48,17 +48,17 @@ namespace ECSFramework
 
 		public void add_component(Entity e, Component c){
 			c.owner_id = e.id;
-			this._components[c.type_id].set (e.id, c);
+			this.components[c.type_id].set (e.id, c);
 		}
 
 		public void remove_components(Entity e){
-			for(int i=0; i < this._components.count;i++) {
-				this._components[i].set (e.id, null);
+			for(int i=0; i < this.components.count;i++) {
+				this.components[i].set (e.id, null);
 			}
 		}
 
 		public void remove_component(Component c){
-			this._components[c.type_id].set(c.owner_id, null);
+			this.components[c.type_id].set(c.owner_id, null);
 		}
 
 		public void delete_entity(Entity e){
@@ -66,7 +66,7 @@ namespace ECSFramework
 		}
 
 		public bool has_component(Entity e, int type_id){
-			if (this._components [type_id] [e.id] != null) {
+			if (this.components [type_id] [e.id] != null) {
 				return true;
 			} else {
 				return false;

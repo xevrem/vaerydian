@@ -35,12 +35,15 @@ namespace Glimpse.Controls
 
 		public override void update ()
 		{
-			throw new NotImplementedException ();
+			foreach(Control control in this.controls)
+				control.update ();
 		}
+				
 
 		public override void draw ()
 		{
-			throw new NotImplementedException ();
+			foreach(Control control in this.controls)
+				control.draw ();
 		}
 
 		public override void clean_up ()

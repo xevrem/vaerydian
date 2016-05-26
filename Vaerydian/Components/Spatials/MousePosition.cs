@@ -34,7 +34,7 @@ namespace Vaerydian.Components.Spatials
         public MousePosition() { }
 
 		public override int type_id{ 
-			get{ return this.type_id;} 
+			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}
 
