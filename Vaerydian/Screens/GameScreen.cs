@@ -223,7 +223,7 @@ namespace Vaerydian.Screens
             healthBarRenderSystem = ecsInstance.system_manager.set_system(new HealthBarRenderSystem(gameContainer), new Health());
             floatingTextDisplaySystem = ecsInstance.system_manager.set_system(new FloatingTextDisplaySystem(gameContainer), new FloatingText());
             quadTreeDebugRenderSystem = ecsInstance.system_manager.set_system(new QuadTreeDebugRenderSystem(gameContainer), new Position(),new AiBehavior());
-            uiDrawSystem = ecsInstance.system_manager.set_system(new UIDrawSystem(gameContainer.ContentManager, gameContainer.GraphicsDevice), new UserInterface());
+			uiDrawSystem = ecsInstance.system_manager.set_system(new UIDrawSystem(gameContainer.ContentManager, gameContainer.SpriteBatch), new UserInterface());
 
 
 

@@ -29,12 +29,16 @@ namespace Glimpse.Systems
 	public class UIDrawSystem : EntityProcessingSystem
 	{
 		private ComponentMapper _ui_mapper;
+		private ContentManager _content_manager;
+		private SpriteBatch _sprite_batch;
 
 		public UIDrawSystem ()
 		{
 		}
 
-		public UIDrawSystem(ContentManager content_manager, GraphicsDevice graphics_device){
+		public UIDrawSystem(ContentManager content_manager, SpriteBatch sprite_batch){
+			this._content_manager = content_manager;
+			this._sprite_batch = sprite_batch;
 		}
 
 		#region implemented abstract members of EntityProcessingSystem
@@ -43,12 +47,26 @@ namespace Glimpse.Systems
 			_ui_mapper = new ComponentMapper(new UserInterface(), ecs_instance);
 		}
 
+		protected override void pre_load_content(Bag<Entity> entities){
+			for (int i = 0; i < entities.count; i++) {
+				UserInterface ui = (UserInterface) this._ui_mapper.get (entities[i]);
+				ui.load (this._content_manager);
+			}
+		}
+
+		protected override void begin(){
+			this._sprite_batch.Begin ();
+		}
+
 		protected override void process (Entity entity)
 		{
 			UserInterface ui = (UserInterface) this._ui_mapper.get (entity);
-			ui.draw ();
+			ui.draw (this._sprite_batch);
 		}
 
+		protected override void end(){
+			this._sprite_batch.End ();
+		}
 
 		#endregion
 	}

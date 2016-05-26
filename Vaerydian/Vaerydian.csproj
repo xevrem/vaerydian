@@ -12,6 +12,7 @@
     <AssemblyName>Vaerydian</AssemblyName>
     <MonoGamePlatform>MacOSX</MonoGamePlatform>
     <StartupObject>Vaerydian.Program</StartupObject>
+    <SuppressXamMacUpsell>True</SuppressXamMacUpsell>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

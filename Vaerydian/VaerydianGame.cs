@@ -59,8 +59,8 @@ namespace Vaerydian
         private int elapsed;
         private int count = 0;
         private float avg;
-		private int height = 240;
-		private int width = 426;
+		private int height = 480;
+		private int width = 854;
 
         public VaerydianGame()
         {

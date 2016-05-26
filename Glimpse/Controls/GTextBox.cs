@@ -20,6 +20,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace Glimpse.Controls
 {
@@ -32,12 +34,18 @@ namespace Glimpse.Controls
 
 		#region implemented abstract members of Control
 
-		public override void update ()
+		public override void init(){
+		}
+
+		public override void load(ContentManager content){
+		}
+
+		public override void update (int elapsed_time)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public override void draw ()
+		public override void draw (SpriteBatch sprite_batch)
 		{
 			throw new NotImplementedException ();
 		}

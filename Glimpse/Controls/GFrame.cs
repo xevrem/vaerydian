@@ -19,6 +19,8 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Glimpse.Controls
 {
@@ -31,14 +33,21 @@ namespace Glimpse.Controls
 
 		#region implemented abstract members of Control
 
-		public override void update ()
-		{
-			throw new NotImplementedException ();
+		public override void init(){
 		}
 
-		public override void draw ()
+		public override void load(ContentManager content){
+			this.background = content.Load<Texture2D>(this.background_name);
+		}
+
+		public override void update (int elapsed_time)
 		{
-			throw new NotImplementedException ();
+			//throw new NotImplementedException ();
+		}
+
+		public override void draw (SpriteBatch sprite_batch)
+		{
+			sprite_batch.Draw (this.background, this.bounds, this.background_color);
 		}
 
 		public override void clean_up ()

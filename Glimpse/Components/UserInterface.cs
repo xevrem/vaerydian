@@ -21,6 +21,9 @@
 using System;
 using ECSFramework;
 using Glimpse.Controls;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Glimpse.Components
 {
@@ -41,12 +44,16 @@ namespace Glimpse.Components
 
 		public GForm form;
 
-		public void update(){
-			form.update ();
+		public void update(int elapsed_time){
+			form.update (elapsed_time);
 		}
 			
-		public void draw(){
-			form.draw ();
+		public void draw(SpriteBatch sprite_batch){
+			form.draw (sprite_batch);
+		}
+
+		public void load(ContentManager content){
+			form.load (content);
 		}
 	}
 }

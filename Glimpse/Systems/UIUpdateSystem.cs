@@ -42,7 +42,7 @@ namespace Glimpse.Systems
 		protected override void process (Entity entity)
 		{
 			UserInterface ui = (UserInterface) this._ui_mapper.get (entity);
-			ui.update ();
+			ui.update (this.ecs_instance.ElapsedTime);
 		}
 
 

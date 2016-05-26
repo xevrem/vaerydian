@@ -20,6 +20,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace Glimpse.Controls
 {
@@ -33,16 +35,24 @@ namespace Glimpse.Controls
 
 		#region implemented abstract members of Control
 
-		public override void update ()
-		{
-			foreach (GCanvas canvas in this.canvas_controls)
-				canvas.update ();
+		public override void init(){
 		}
 
-		public override void draw ()
+		public override void load(ContentManager content){
+			foreach (GCanvas canvas in this.canvas_controls)
+				canvas.load (content);
+		}
+
+		public override void update (int elapsed_time)
 		{
 			foreach (GCanvas canvas in this.canvas_controls)
-				canvas.draw ();		
+				canvas.update (elapsed_time);
+		}
+
+		public override void draw (SpriteBatch sprite_batch)
+		{
+			foreach (GCanvas canvas in this.canvas_controls)
+				canvas.draw (sprite_batch);		
 		}
 
 		public override void clean_up ()

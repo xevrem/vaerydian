@@ -74,7 +74,7 @@ namespace Vaerydian.Screens
 
             //define and init systems
             s_UiUpdateSystem = ecs_instance.system_manager.set_system(new UIUpdateSystem(), new UserInterface());
-			s_UiDrawSystem = ecs_instance.system_manager.set_system(new UIDrawSystem(s_Container.ContentManager, s_Container.GraphicsDevice), new UserInterface());
+			s_UiDrawSystem = ecs_instance.system_manager.set_system(new UIDrawSystem(s_Container.ContentManager, s_Container.SpriteBatch), new UserInterface());
             ecs_instance.system_manager.initialize_systems();
 
 			//setup json manager

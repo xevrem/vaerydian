@@ -22,6 +22,8 @@ using System;
 using ECSFramework;
 using Microsoft.Xna.Framework;
 using Glimpse.Input;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Glimpse.Controls
 {
@@ -35,6 +37,7 @@ namespace Glimpse.Controls
 		public Rectangle bounds;
 		public string font_name;
 		public string background_name;
+		public Texture2D background;
 		public int border = 0;
 		public string text;
 		public Color text_color = Color.Black;
@@ -50,8 +53,10 @@ namespace Glimpse.Controls
 		public event InterfaceHandler mouse_press;
 		public event InterfaceHandler mouse_leave;
 
-		public abstract void update();
-		public abstract void draw();
+		public abstract void init();
+		public abstract void load(ContentManager content);
+		public abstract void update(int elapsed_time);
+		public abstract void draw(SpriteBatch sprite_batch);
 		public abstract void clean_up();
 		public abstract void reload();
 		public abstract void resize();
