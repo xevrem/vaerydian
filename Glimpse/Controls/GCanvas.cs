@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Glimpse.Input;
 
 namespace Glimpse.Controls
 {
@@ -71,7 +72,11 @@ namespace Glimpse.Controls
 			throw new NotImplementedException ();
 		}
 
-		#endregion
-	}
+        public override void handle_events(InterfaceArgs args)
+        {
+            //throw new NotImplementedException();
+        }
+        #endregion
+    }
 }
 

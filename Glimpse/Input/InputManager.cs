@@ -81,6 +81,16 @@ namespace Glimpse.Input
 			return Mouse.GetState ().Position;
 		}
 
+        public static InterfaceArgs get_interface_args()
+        {
+            InterfaceArgs args = new InterfaceArgs();
+            args.state_container.current_kb_state = _current_kb_state;
+            args.state_container.previous_kb_state = _previous_kb_state;
+            args.state_container.current_mouse_state = _current_m_state;
+            args.state_container.previous_mouse_state = _previous_m_state;
+            return args;
+        }
+
 	}
 }
 

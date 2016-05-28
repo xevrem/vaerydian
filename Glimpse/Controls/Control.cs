@@ -57,6 +57,7 @@ namespace Glimpse.Controls
 		public abstract void load(ContentManager content);
 		public abstract void update(int elapsed_time);
 		public abstract void draw(SpriteBatch sprite_batch);
+        public abstract void handle_events(InterfaceArgs args);
 		public abstract void clean_up();
 		public abstract void reload();
 		public abstract void resize();

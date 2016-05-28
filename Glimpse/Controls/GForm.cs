@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Glimpse.Input;
 
 namespace Glimpse.Controls
 {
@@ -45,7 +46,11 @@ namespace Glimpse.Controls
 
 		public override void update (int elapsed_time)
 		{
-			foreach (GCanvas canvas in this.canvas_controls)
+            if (this.bounds.Contains(InputManager.getMousePosition())){
+                this.handle_events(InputManager.get_interface_args());
+            }
+
+            foreach (GCanvas canvas in this.canvas_controls)
 				canvas.update (elapsed_time);
 		}
 
@@ -70,7 +75,17 @@ namespace Glimpse.Controls
 			throw new NotImplementedException ();
 		}
 
-		#endregion
-	}
+        public override void handle_events(InterfaceArgs args)
+        {
+            foreach (GCanvas canvas in this.canvas_controls)
+            {
+                if (canvas.bounds.Contains(args.state_container.current_mouse_state.Position)){
+                    canvas.handle_events(args);
+                }
+            }
+        }
+
+        #endregion
+    }
 }
 
