@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vaerydian-mac", "vaerydian-mac.csproj", "{D164B413-0597-44FF-A6A0-B07045D83A79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "behaviorlib", "..\behaviorlib\behaviorlib\behaviorlib.csproj", "{CC824B6F-6145-485F-9604-FB94F0ECACA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECSFramework", "..\ECSFramework\ECSFramework.csproj", "{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fastJSON", "..\fastjson\fastJSON.csproj", "{207E91B1-C9F8-4913-88E1-3549EF5F3273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glimpse", "..\Glimpse\Glimpse.csproj", "{39ED39A6-AE8F-4E29-A481-1F87F61C40DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNoise", "..\libnoise\LibNoise.csproj", "{031C8CFF-F147-44EA-B7E5-0A5644808A7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{031C8CFF-F147-44EA-B7E5-0A5644808A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031C8CFF-F147-44EA-B7E5-0A5644808A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031C8CFF-F147-44EA-B7E5-0A5644808A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031C8CFF-F147-44EA-B7E5-0A5644808A7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39ED39A6-AE8F-4E29-A481-1F87F61C40DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39ED39A6-AE8F-4E29-A481-1F87F61C40DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39ED39A6-AE8F-4E29-A481-1F87F61C40DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39ED39A6-AE8F-4E29-A481-1F87F61C40DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC824B6F-6145-485F-9604-FB94F0ECACA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC824B6F-6145-485F-9604-FB94F0ECACA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC824B6F-6145-485F-9604-FB94F0ECACA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC824B6F-6145-485F-9604-FB94F0ECACA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1A9D5F-553F-4C81-A3F5-E52FC6ADBC8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D164B413-0597-44FF-A6A0-B07045D83A79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D164B413-0597-44FF-A6A0-B07045D83A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D164B413-0597-44FF-A6A0-B07045D83A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D164B413-0597-44FF-A6A0-B07045D83A79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

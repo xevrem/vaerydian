@@ -31,18 +31,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="MonoGame.Framework">
-      <HintPath>C:\Program Files %28x86%29\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.0\Assemblies\MacOSX\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK">
-      <HintPath>C:\Program Files %28x86%29\MonoGame\v3.0\Assemblies\DesktopGL\OpenTK.dll</HintPath>
+      <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.0\Assemblies\MacOSX\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="Tao.Sdl">
       <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.0\Assemblies\MacOSX\Tao.Sdl.dll</HintPath>
     </Reference>
     <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral" />
-    <Reference Include="NVorbis">
-      <HintPath>C:\Program Files %28x86%29\MonoGame\v3.0\Assemblies\DesktopGL\NVorbis.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
