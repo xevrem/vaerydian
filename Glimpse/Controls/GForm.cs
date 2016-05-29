@@ -36,6 +36,8 @@ namespace Glimpse.Controls
 
 		#region implemented abstract members of Control
 
+		public override event InterfaceHandler updating;
+
 		public override void init(){
 		}
 

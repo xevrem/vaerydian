@@ -59,7 +59,7 @@ namespace ECSFramework
 		{
 			get
 			{
-				return this._data[index];
+				return (T) this._data[index];
 			}
 
 			set

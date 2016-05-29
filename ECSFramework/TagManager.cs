@@ -19,22 +19,26 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Collections.Generic;
 
 namespace ECSFramework
 {
 	public class TagManager
 	{
+		private Dictionary<string, Entity> tagged_entities;
+
 		public TagManager ()
 		{
+			this.tagged_entities = new Dictionary<string, Entity> ();
 		}
 
 		public Entity get_entity_by_tag(string name){
 			//TODO
-			return new Entity();
+			return this.tagged_entities[name];
 		}
 
 		public void tag_entity(string tag, Entity e){
-			//TODO
+			this.tagged_entities.Add (tag, e);
 		}
 
 		public void refresh(Entity e){
@@ -43,6 +47,7 @@ namespace ECSFramework
 
 		public void delete_entity(Entity e){
 			//TODO
+
 		}
 
 	}

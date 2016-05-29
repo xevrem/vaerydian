@@ -74,7 +74,10 @@ namespace Glimpse.Controls
 
         public override void handle_events(InterfaceArgs args)
         {
-            //throw new NotImplementedException();
+			foreach (Control control in this.controls) {
+				if(control.bounds.Contains (args.state_container.current_mouse_state.Position))
+					control.handle_events (args);
+			}
         }
         #endregion
     }

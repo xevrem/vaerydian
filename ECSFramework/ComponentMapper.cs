@@ -19,12 +19,13 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Reflection;
 
 namespace ECSFramework
 {
 	public class ComponentMapper
 	{
-		private ECSInstance _ecs_instance;
+		private static ECSInstance _ecs_instance;
 
 		private int _type_id;
 
@@ -34,16 +35,18 @@ namespace ECSFramework
 
 		public ComponentMapper(Component c, ECSInstance ecs_instance){
 			this._type_id = c.type_id;
-			this._ecs_instance = ecs_instance;
+			_ecs_instance = ecs_instance;
 		}
 
 		public Component get(Entity e){
-			return this._ecs_instance.component_manager.components[_type_id][e.id];
+			return _ecs_instance.component_manager.components[_type_id][e.id];
 		}
 
-		public static T get<T>(Entity e){
+		public static T get<T>(Entity e) where T: Component {
 			//TODO
-			return default(T);
+			T t = Activator.CreateInstance<T>();
+
+			return (T) _ecs_instance.component_manager.components[t.type_id][e.id];
 		}
 	}
 }

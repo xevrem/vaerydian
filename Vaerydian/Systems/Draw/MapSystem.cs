@@ -82,7 +82,7 @@ namespace Vaerydian.Systems.Draw
             m_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
             m_Player = ecs_instance.tag_manager.get_entity_by_tag("PLAYER");
             m_MapDebug = ecs_instance.tag_manager.get_entity_by_tag("MAP_DEBUG");
-            m_Geometry = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
+            //m_Geometry = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
 
             m_RectDict.Add(TerrainType_Old.CAVE_FLOOR, new Rectangle(19 * 32, 10 * 32, 32, 32));
             m_RectDict.Add(TerrainType_Old.CAVE_WALL, new Rectangle(18 * 32, 13 * 32, 32, 32));
@@ -110,7 +110,7 @@ namespace Vaerydian.Systems.Draw
                     {
                         if (!m_Textures.ContainsKey(tDef.TerrainDef.Texture))
                             m_Textures.Add(tDef.TerrainDef.Texture,
-                                       m_Container.ContentManager.Load<Texture2D>(tDef.TerrainDef.Texture));
+                        	m_Container.ContentManager.Load<Texture2D>(tDef.TerrainDef.Texture));
                     }
                 }
 			}

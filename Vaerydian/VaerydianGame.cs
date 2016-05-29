@@ -84,7 +84,6 @@ namespace Vaerydian
             //Components.Add(new GamerServicesComponent(this));
 
 			Content.RootDirectory = "Content";//GameConfig.root_dir + "/Content";
-
             //give the fontManager a reference to Content
             FontManager.content_manager = this.Content;
 

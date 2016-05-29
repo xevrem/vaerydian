@@ -21,6 +21,7 @@
 using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 using Glimpse.Managers;
 using Glimpse.Input;
 
@@ -33,6 +34,9 @@ namespace Glimpse.Controls
 		}
 
 		#region implemented abstract members of Control
+
+		public override event InterfaceHandler updating;
+		public override event InterfaceHandler mouse_click;
 
 		public override void init(){
 		}
@@ -69,7 +73,13 @@ namespace Glimpse.Controls
 
         public override void handle_events(InterfaceArgs args)
         {
-            //throw new NotImplementedException();
+			if (args.state_container.current_mouse_state.LeftButton == ButtonState.Released &&
+				args.state_container.previous_mouse_state.LeftButton == ButtonState.Pressed){
+				if(mouse_click != null){
+					mouse_click (this, args);
+				}
+			}
+				
         }
 
         #endregion

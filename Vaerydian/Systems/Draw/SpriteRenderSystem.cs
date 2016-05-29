@@ -89,7 +89,7 @@ namespace Vaerydian.Systems.Draw
 
             //pre-load camera entity reference
             s_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
-            s_Geometry = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
+            //s_Geometry = ecs_instance.tag_manager.get_entity_by_tag("GEOMETRY");
         }
 
         protected override void added(Entity entity)

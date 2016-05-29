@@ -34,6 +34,9 @@ namespace Glimpse.Controls
 
 		#region implemented abstract members of Control
 
+		public override event InterfaceHandler updating;
+
+
 		public override void init(){
 		}
 
@@ -43,7 +46,8 @@ namespace Glimpse.Controls
 
 		public override void update (int elapsed_time)
 		{
-			//throw new NotImplementedException ();
+			if(updating != null)
+				updating (this, InputManager.get_interface_args ());
 		}
 
 		public override void draw (SpriteBatch sprite_batch)

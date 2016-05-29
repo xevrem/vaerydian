@@ -46,12 +46,12 @@ namespace Glimpse.Controls
 		public Color background_color = Color.White;
 		public float transparency = 1.0f;
 
-		public event InterfaceHandler updating;
-		public event InterfaceHandler drawing;
-		public event InterfaceHandler mouse_click;
-		public event InterfaceHandler mouse_hover;
-		public event InterfaceHandler mouse_press;
-		public event InterfaceHandler mouse_leave;
+		public virtual event InterfaceHandler updating;
+		public virtual event InterfaceHandler drawing;
+		public virtual event InterfaceHandler mouse_click;
+		public virtual event InterfaceHandler mouse_hover;
+		public virtual event InterfaceHandler mouse_press;
+		public virtual event InterfaceHandler mouse_leave;
 
 		public abstract void init();
 		public abstract void load(ContentManager content);
