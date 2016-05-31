@@ -211,7 +211,7 @@ namespace Vaerydian
 
             
             //begin the sprite batch
-            spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+			spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
             //display performance
 			spriteBatch.DrawString(FontManager.fonts["General"], "ms / frame: " + avg, new Vector2(0), Color.Red);

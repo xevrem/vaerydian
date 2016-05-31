@@ -44,6 +44,10 @@ namespace ECSFramework
 		public void delete_entity(Entity e){
 			//TODO
 		}
+
+		public void clean_up(){
+			//TODO
+		}
 	}
 }
 

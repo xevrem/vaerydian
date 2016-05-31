@@ -73,14 +73,18 @@ namespace Vaerydian.Components.Items
 		BLASTER
 	}
 
-    class Item : Component
+    class Item : IComponent
     {
 		private static int _type_id;
         private int i_entity_id;
 
         public Item() { }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

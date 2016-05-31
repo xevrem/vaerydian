@@ -29,14 +29,18 @@ using Microsoft.Xna.Framework;
 
 namespace Vaerydian.Components.Spatials
 {
-    public class Transform : Component
+    public class Transform : IComponent
     {
 		private static int _type_id;
         private int t_entity_id;
 
         public Transform() { }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

@@ -25,7 +25,7 @@ namespace ECSFramework
 {
 	public class ComponentMapper
 	{
-		private static ECSInstance _ecs_instance;
+		public static ECSInstance ecs_instance;
 
 		private int _type_id;
 
@@ -33,20 +33,20 @@ namespace ECSFramework
 		{
 		}
 
-		public ComponentMapper(Component c, ECSInstance ecs_instance){
+		public ComponentMapper(IComponent c, ECSInstance ecs_instance){
 			this._type_id = c.type_id;
-			_ecs_instance = ecs_instance;
+			ecs_instance = ecs_instance;
 		}
 
-		public Component get(Entity e){
-			return _ecs_instance.component_manager.components[_type_id][e.id];
+		public IComponent get(Entity e){
+			return ecs_instance.component_manager.components[_type_id][e.id];
 		}
 
-		public static T get<T>(Entity e) where T: Component {
+		public static T get<T>(Entity e) where T: IComponent {
 			//TODO
 			T t = Activator.CreateInstance<T>();
 
-			return (T) _ecs_instance.component_manager.components[t.type_id][e.id];
+			return (T) ecs_instance.component_manager.components[t.type_id][e.id];
 		}
 	}
 }

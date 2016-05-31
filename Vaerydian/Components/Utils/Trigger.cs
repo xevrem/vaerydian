@@ -29,7 +29,7 @@ namespace Vaerydian.Components.Utils
 
     public delegate void TriggerActionHandler(ECSInstance ecsInstance, Object[] parameters);
 
-    public class Trigger : Component
+    public class Trigger : IComponent
     {
 		private static int _type_id;
         private int t_entity_id;
@@ -43,7 +43,11 @@ namespace Vaerydian.Components.Utils
             t_Params = parameters;
         }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

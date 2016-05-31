@@ -49,7 +49,8 @@ namespace Glimpse.Systems
 
 		protected override void pre_load_content(Bag<Entity> entities){
 			for (int i = 0; i < entities.count; i++) {
-				UserInterface ui = (UserInterface) this._ui_mapper.get (entities.get(i));
+				//UserInterface ui = (UserInterface) this._ui_mapper.get (entities.get(i));
+				UserInterface ui = ComponentMapper.get<UserInterface> (entities[i]);
 				ui.load (this._content_manager);
 			}
 		}
@@ -66,6 +67,12 @@ namespace Glimpse.Systems
 
 		protected override void end(){
 			this._sprite_batch.End ();
+		}
+
+		protected override void added (Entity entity)
+		{
+			UserInterface ui = ComponentMapper.get<UserInterface> (entity);
+			ui.load (this._content_manager);
 		}
 
 		#endregion

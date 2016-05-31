@@ -28,7 +28,7 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Spatials
 {
-    public class Position : Component
+    public class Position : IComponent
     {
 		private static int _type_id;
 
@@ -58,7 +58,11 @@ namespace Vaerydian.Components.Spatials
 
         public Position() { }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

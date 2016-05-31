@@ -31,7 +31,7 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Graphical
 {
-    public class Sprite : Component
+    public class Sprite : IComponent
     {
 
 		private static int _type_id;
@@ -41,7 +41,11 @@ namespace Vaerydian.Components.Graphical
 
         public Sprite() { }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

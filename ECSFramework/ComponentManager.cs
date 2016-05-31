@@ -24,40 +24,47 @@ namespace ECSFramework
 {
 	public class ComponentManager
 	{
-		public Bag<Bag<Component>> components;
-		private int _next_type_id = 1;
+		public Bag<Bag<IComponent>> components;
+		private static int _next_type_id = 1;
 		private ECSInstance _ecs_instance;
 
 		public ComponentManager (ECSInstance instance)
 		{
 			this._ecs_instance = instance;
-			this.components = new Bag<Bag<Component>> ();
+			this.components = new Bag<Bag<IComponent>> ();
 		}
 
-		public void register_component_type(Component component){
+		public void register_component_type(IComponent component){
 			if (component.type_id == 0) {
 				component.type_id = _next_type_id++;
-				this.components [component.type_id] = new Bag<Component> ();
+			}
+			if (component.type_id < components.capacity) {
+				if (this.components [component.type_id] == null) {
+					this.components [component.type_id] = new Bag<IComponent> ();
+				}
+			} else {
+				//already no null test required, add the new bag
+				this.components [component.type_id] = new Bag<IComponent> ();
 			}
 		}
 
-		public Component get_component(Entity e, int component_type){
+		public IComponent get_component(Entity e, int component_type){
 			//TODO
-			return default(Component);
+			return this.components[component_type][e.id];
 		}
 
-		public void add_component(Entity e, Component c){
+		public void add_component(Entity e, IComponent c){
 			c.owner_id = e.id;
 			this.components[c.type_id].set (e.id, c);
 		}
 
 		public void remove_components(Entity e){
-			for(int i=0; i < this.components.count;i++) {
+			for(int i=1; i < this.components.count;i++) {
 				this.components[i].set (e.id, null);
 			}
 		}
 
-		public void remove_component(Component c){
+		public void remove_component(IComponent c){
 			this.components[c.type_id].set(c.owner_id, null);
 		}
 
@@ -71,6 +78,15 @@ namespace ECSFramework
 			} else {
 				return false;
 			}
+		}
+
+		public void clean_up(){
+			for (int i = 0; i < this.components.count; i++) {
+				if (this.components [i] != null) {
+					this.components [i].clear ();
+				}
+			}
+
 		}
 	}
 }

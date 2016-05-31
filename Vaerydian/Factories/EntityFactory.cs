@@ -320,7 +320,7 @@ namespace Vaerydian.Factories
 
 			ecs_instance.add_component(e, new Position(start,new Vector2(16)));
 			ecs_instance.add_component(e, new Heading(heading));
-            Sprite sprite = new Sprite("soni_attack", "soni_attack", 32, 32, 0, 0);
+            Sprite sprite = new Sprite("sonic_attack", "sonic_attack", 32, 32, 0, 0);
             sprite.SpriteAnimation = new SpriteAnimation(4, 16);
             sprite.ShouldSystemAnimate = true;
 			ecs_instance.add_component(e, sprite);

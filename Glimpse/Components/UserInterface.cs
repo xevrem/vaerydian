@@ -27,8 +27,10 @@ using Microsoft.Xna.Framework;
 
 namespace Glimpse.Components
 {
-	public class UserInterface : Component
+	public class UserInterface : IComponent
 	{
+		private static int _type_id = 0;
+
 		public UserInterface(){}
 
 		public UserInterface (GForm form)
@@ -36,8 +38,11 @@ namespace Glimpse.Components
 			this.form = form;
 		}
 
-		private static int _type_id = 0;
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{ 
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

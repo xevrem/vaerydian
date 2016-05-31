@@ -36,14 +36,18 @@ namespace Vaerydian.Components.Characters
 		public List<Knowledge> UniqueKnowledges;	
 	}
 
-	public class Knowledges : Component
+	public class Knowledges : IComponent
     {
 		private static int _type_id;
         private int e_entity_id;
 
         public Knowledges() { }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

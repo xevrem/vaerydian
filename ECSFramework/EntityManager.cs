@@ -61,6 +61,11 @@ namespace ECSFramework
 			this._old_ids.Enqueue(e.id);
 			this._entities.set (e.id, null);
 		}
+
+		public void clean_up(){
+			this._old_ids.Clear ();
+			this._entities.clear ();
+		}
 	}
 }
 

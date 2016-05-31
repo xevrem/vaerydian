@@ -69,6 +69,9 @@ namespace Vaerydian.Screens
             ecs_instance = new ECSInstance();
             s_Container = ScreenManager.GameContainer;
 
+			//setup component mapper
+			ComponentMapper.ecs_instance = ecs_instance;
+
 			UIFactory.Container = ScreenManager.GameContainer;
 			UIFactory.ecs_instance = ecs_instance;
 

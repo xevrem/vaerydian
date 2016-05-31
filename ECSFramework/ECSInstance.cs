@@ -52,11 +52,11 @@ namespace ECSFramework
 			return this.entity_manager.create();
 		}
 
-		public void add_component(Entity e, Component c){
+		public void add_component(Entity e, IComponent c){
 			this.component_manager.add_component(e,c);
 		}
 
-		public void remove_component(Component c){
+		public void remove_component(IComponent c){
 			this.component_manager.remove_component (c);
 		}
 
@@ -79,13 +79,17 @@ namespace ECSFramework
 		public void resolve_entities(){
 			//TODO: process updates
 			if (this._updating_entities.Count > 0) {
-				foreach (Entity e in this._updating_entities) {
-					this.system_manager.resolve (e);
+				int size = this._updating_entities.Count;
+				for(int i =0; i < size; i++){
+					this.system_manager.resolve (this._updating_entities.Dequeue ());
 				}
 			}
 
 			if (this._deleting_entities.Count > 0) {
-				foreach (Entity e in this._deleting_entities) {
+				int size = this._deleting_entities.Count;
+
+				for(int i =0; i < size; i++){
+					Entity e = this._deleting_entities.Dequeue ();
 					//TODO: procee deletions
 					this.system_manager.delete_entity (e);
 					this.tag_manager.delete_entity (e);
@@ -97,7 +101,11 @@ namespace ECSFramework
 		}
 
 		public void clean_up(){
-			//TODO
+			this.entity_manager.clean_up();
+			this.component_manager.clean_up();
+			this.system_manager.clean_up ();
+			this.group_manager.clean_up ();
+			this.tag_manager.clean_up ();
 		}
 	}
 }

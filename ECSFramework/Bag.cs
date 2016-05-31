@@ -59,7 +59,11 @@ namespace ECSFramework
 		{
 			get
 			{
-				return (T) this._data[index];
+				if (index < this._data.Length) {
+					return (T)this._data [index];
+				} else {
+					return default(T);
+				}
 			}
 
 			set
@@ -82,7 +86,7 @@ namespace ECSFramework
 		public void add(T element)
 		{
 			// is size greater than capacity increase capacity
-			if (this.count == this._data.Length)
+			if (this.count >= this._data.Length)
 			{
 				this.grow();
 			}

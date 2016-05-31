@@ -23,6 +23,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Glimpse.Input;
+using Glimpse.Managers;
 
 namespace Glimpse.Controls
 {
@@ -39,16 +40,19 @@ namespace Glimpse.Controls
 		}
 
 		public override void load(ContentManager content){
+			this.background = content.Load<Texture2D>(this.background_name);
 		}
 
 		public override void update (int elapsed_time)
 		{
-			throw new NotImplementedException ();
+			//throw new NotImplementedException ();
 		}
 
 		public override void draw (SpriteBatch sprite_batch)
 		{
-			throw new NotImplementedException ();
+			sprite_batch.Draw (this.background, this.bounds, this.background_color);
+
+			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this.bounds.Center.ToVector2 (), this.text_color);
 		}
 
 		public override void clean_up ()

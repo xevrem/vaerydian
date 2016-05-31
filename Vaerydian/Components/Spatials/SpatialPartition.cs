@@ -28,14 +28,18 @@ using Vaerydian.Utils;
 
 namespace Vaerydian.Components.Spatials
 {
-    class SpatialPartition : Component
+    class SpatialPartition : IComponent
     {
         private static int _type_id;
         private int s_entity_id;
 
         public SpatialPartition() { }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

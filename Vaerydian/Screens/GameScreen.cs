@@ -168,7 +168,7 @@ namespace Vaerydian.Screens
 
             ecsInstance = new ECSInstance();
 
-            //ComponentMapper.ecs_instance = ecsInstance;
+            ComponentMapper.ecs_instance = ecsInstance;
 
             gameContainer = ScreenManager.GameContainer;
 
@@ -264,7 +264,6 @@ namespace Vaerydian.Screens
 
         public override void LoadContent ()
 		{
-			base.LoadContent ();
 
 			//debugTex = ScreenManager.Game.Content.Load<Texture2D>("temperature");
 			//debugTex = gameContainer.ContentManager.Load<Texture2D>("temperature");
@@ -384,7 +383,7 @@ namespace Vaerydian.Screens
 
             //setup bus components
 
-                
+			base.LoadContent ();    
         }
 
         public override void UnloadContent()
@@ -533,44 +532,10 @@ namespace Vaerydian.Screens
 
             gameContainer.GraphicsDevice.Clear(Color.Black);
 
-            //gameContainer.GraphicsDevice.SetRenderTarget(null);
-            //gameContainer.GraphicsDevice.SetRenderTarget(geometry.ColorMap);
-            //gameContainer.GraphicsDevice.Clear(Color.Transparent);
-
             //run color draw systems
             mapSystem.process();
             spriteRenderSystem.process();
             animationSystem.process();
-
-			/* 
-            gameContainer.GraphicsDevice.SetRenderTarget(null);
-            gameContainer.GraphicsDevice.SetRenderTarget(geometry.NormalMap);
-            gameContainer.GraphicsDevice.Clear(Color.Transparent);
-
-            //run normal systems
-            mapNormalSystem.process();
-            spriteNormalSystem.process();
-
-            //GraphicsDevice.SetRenderTarget(null);
-            //GraphicsDevice.SetRenderTarget(geometry.DepthMap);
-            //GraphicsDevice.Clear(Color.Transparent);
-
-            //mapDepthSystem.process();
-            //spriteDepthSystem.process();
-
-            gameContainer.GraphicsDevice.SetRenderTarget(null);
-            gameContainer.GraphicsDevice.SetRenderTarget(geometry.ShadingMap);
-            gameContainer.GraphicsDevice.Clear(Color.Transparent);
-
-            //run shading system
-            shadingSystem.process();
-
-            gameContainer.GraphicsDevice.SetRenderTarget(null);
-            gameContainer.GraphicsDevice.Clear(Color.Black);
-
-            //run differed system
-            deferredSystem.process();
-			*/
 
             //run UI systems
             floatingTextDisplaySystem.process();
@@ -580,7 +545,7 @@ namespace Vaerydian.Screens
             //run debug systems
             //quadTreeDebugRenderSystem.process();
 
-            spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+			spriteBatch.Begin (SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
             spriteBatch.DrawString(FontManager.fonts["General"], "Entities: " + ecsInstance.entity_manager.get_entity_count(), new Vector2(0, 14), Color.Red);
 

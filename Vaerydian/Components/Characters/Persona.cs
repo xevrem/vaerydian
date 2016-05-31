@@ -28,14 +28,18 @@ namespace Vaerydian.Components.Characters
     /// <summary>
     /// contains the entitie's persona
     /// </summary>
-    class Persona : Component
+    class Persona : IComponent
     {
 		private static int _type_id;
         private int p_entity_id;
 
         public Persona() { }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

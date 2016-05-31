@@ -30,14 +30,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Vaerydian.Components.Graphical
 {
-    public class GeometryMap : Component
+    public class GeometryMap : IComponent
     {
         private static int _type_id;
         private int _entity_id;
 
         public GeometryMap() { }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

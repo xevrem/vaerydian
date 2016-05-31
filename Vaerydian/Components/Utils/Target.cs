@@ -42,14 +42,18 @@ using ECSFramework;
 
 namespace Vaerydian.Components.Utils
 {
-	public class Target : Component
+	public class Target : IComponent
 	{
 		private static int _type_id;
 		private int t_entity_id;
 
 		public Target() { }
 
-		public override int type_id{ 
+		public int id { get; set;}
+
+		public int owner_id { get; set;}
+
+		public int type_id{
 			get{ return _type_id;} 
 			set{ _type_id = value;}
 		}

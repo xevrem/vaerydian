@@ -34,9 +34,9 @@ namespace ECSFramework
 			this._systems = new List<EntitySystem> ();
 		}
 
-		public EntitySystem set_system(EntitySystem system, params Component[] components){
+		public EntitySystem set_system(EntitySystem system, params IComponent[] components){
 			//TODO add the system and assign its components.
-			foreach (Component c in components) {
+			foreach (IComponent c in components) {
 				this._ecs_instance.component_manager.register_component_type (c);
 				system.component_types.Add (c.type_id);
 			}
@@ -80,6 +80,13 @@ namespace ECSFramework
 			foreach (EntitySystem system in this._systems) {
 				system.remove_entity (e);
 			}
+		}
+
+		public void clean_up(){
+			foreach (EntitySystem system in this._systems) {
+				system.clean_system ();
+			}
+			this._systems.Clear ();
 		}
 	}
 }

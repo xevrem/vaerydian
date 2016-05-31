@@ -22,11 +22,11 @@ using System;
 
 namespace ECSFramework
 {
-	public abstract class Component
+	public interface IComponent
 	{
-		public int id { get; set; }
-		public int owner_id { get; set; }
-		public abstract int type_id { get; set; }
+		int id { get; set; }
+		int owner_id { get; set; }
+		int type_id { get; set; }
 	}
 
 }

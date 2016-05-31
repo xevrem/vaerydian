@@ -55,6 +55,11 @@ namespace ECSFramework
 			added (e);
 		}
 
+		public void clean_system(){
+			this.cleanUp (this._entities);
+			this._entities.clear ();
+		}
+
 		public void process(){
 			begin();
 

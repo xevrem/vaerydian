@@ -25,20 +25,20 @@ namespace ECSFramework
 {
 	public class TagManager
 	{
-		private Dictionary<string, Entity> tagged_entities;
+		private Dictionary<string, Entity> _tagged_entities;
 
 		public TagManager ()
 		{
-			this.tagged_entities = new Dictionary<string, Entity> ();
+			this._tagged_entities = new Dictionary<string, Entity> ();
 		}
 
 		public Entity get_entity_by_tag(string name){
 			//TODO
-			return this.tagged_entities[name];
+			return this._tagged_entities[name];
 		}
 
 		public void tag_entity(string tag, Entity e){
-			this.tagged_entities.Add (tag, e);
+			this._tagged_entities.Add (tag, e);
 		}
 
 		public void refresh(Entity e){
@@ -48,6 +48,10 @@ namespace ECSFramework
 		public void delete_entity(Entity e){
 			//TODO
 
+		}
+
+		public void clean_up(){
+			this._tagged_entities.Clear ();
 		}
 
 	}

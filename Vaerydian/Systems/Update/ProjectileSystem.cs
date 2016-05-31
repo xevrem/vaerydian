@@ -150,7 +150,7 @@ namespace Vaerydian.Systems.Update
                                         continue;
 
                                     //UtilFactory.createAttack(projectile.Originator, locals[i], AttackType.Projectile);
-									ActionDef def = GameConfig.ActionDefs["RANGE_DMG"];
+									ActionDef def = GameConfig.ActionDefs["RANGED_DMG"];
 									ActionFactory.createAction(def,projectile.Originator,locals[i]);
 
 
