@@ -40,7 +40,7 @@ namespace Vaerydian.Systems.Draw
     {
         private GameContainer h_Container;
 
-        private SpriteBatch h_SpriteBatch;
+        private SpriteBatch _sprite_batch;
 
         private ComponentMapper h_PositionMapper;
         private ComponentMapper h_ViewportMapper;
@@ -54,7 +54,7 @@ namespace Vaerydian.Systems.Draw
         public HealthBarRenderSystem(GameContainer container) 
         {
             h_Container = container;
-            h_SpriteBatch = container.SpriteBatch;
+            _sprite_batch = container.SpriteBatch;
         }
 
 		protected override void initialize()
@@ -70,6 +70,13 @@ namespace Vaerydian.Systems.Draw
 
             h_Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
+
+		protected override void begin ()
+		{
+			_sprite_batch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+
+			base.begin ();
+		}
 
         protected override void process(Entity entity)
         {
@@ -91,14 +98,16 @@ namespace Vaerydian.Systems.Draw
             //construct the drawing region rectangle
             Rectangle rect = new Rectangle((int)(pos.X-origin.X),(int)(pos.Y - 10 -origin.Y),max,5);
 
-            h_SpriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
             //draw the health bar
-            h_SpriteBatch.Draw(h_Texture, rect, Color.Red);
-
-            h_SpriteBatch.End();
+            _sprite_batch.Draw(h_Texture, rect, Color.Red);
         }
 
+		protected override void end ()
+		{
+			_sprite_batch.End ();
+			base.end ();
+		}
 
     }
 }

@@ -41,7 +41,7 @@ namespace Vaerydian.Systems.Draw
     public class FloatingTextDisplaySystem : EntityProcessingSystem
     {
         private GameContainer _Container;
-        private SpriteBatch _SpriteBatch;
+        private SpriteBatch _sprite_batch;
 
         private ComponentMapper _DamageMapper;
         private ComponentMapper _PositionMapper;
@@ -55,7 +55,7 @@ namespace Vaerydian.Systems.Draw
         public FloatingTextDisplaySystem(GameContainer container)
         {
             _Container = container;
-            _SpriteBatch = container.SpriteBatch;
+            _sprite_batch = container.SpriteBatch;
         }
 
 
@@ -72,6 +72,12 @@ namespace Vaerydian.Systems.Draw
             _Font = FontManager.fonts["Damage"];
             _Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
         }
+
+		protected override void begin ()
+		{
+			_sprite_batch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+			base.begin ();
+		}
 
         protected override void process(Entity entity)
         {
@@ -121,18 +127,22 @@ namespace Vaerydian.Systems.Draw
                 fade = (1f - (text.ElapsedTime - half) / half);
             
 
-            _SpriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
             
             //background
-            _SpriteBatch.DrawString(_Font, text.Text, pos - origin + new Vector2(1, 0), Color.Black * fade);
-            _SpriteBatch.DrawString(_Font, text.Text, pos - origin + new Vector2(-1, 0), Color.Black * fade);
-            _SpriteBatch.DrawString(_Font, text.Text, pos - origin + new Vector2(0, 1), Color.Black * fade);
-            _SpriteBatch.DrawString(_Font, text.Text, pos - origin + new Vector2(0, -1), Color.Black * fade);
+            _sprite_batch.DrawString(_Font, text.Text, pos - origin + new Vector2(1, 0), Color.Black * fade);
+            _sprite_batch.DrawString(_Font, text.Text, pos - origin + new Vector2(-1, 0), Color.Black * fade);
+            _sprite_batch.DrawString(_Font, text.Text, pos - origin + new Vector2(0, 1), Color.Black * fade);
+            _sprite_batch.DrawString(_Font, text.Text, pos - origin + new Vector2(0, -1), Color.Black * fade);
             //foreground
-            _SpriteBatch.DrawString(_Font, text.Text, pos - origin, text.Color * fade);
-
-            _SpriteBatch.End();
+            _sprite_batch.DrawString(_Font, text.Text, pos - origin, text.Color * fade);
         }
+
+		protected override void end ()
+		{
+			_sprite_batch.End ();
+
+			base.end ();
+		}
 
 
     }

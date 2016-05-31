@@ -46,7 +46,7 @@ namespace Vaerydian.Systems.Draw
         private ComponentMapper _LifeMapper;
         
         private GameContainer _Container;
-        private SpriteBatch _SpriteBatch;
+        private SpriteBatch _sprite_batch;
 
         private Dictionary<String, Texture2D> _Textures = new Dictionary<string, Texture2D>();
 
@@ -70,19 +70,26 @@ namespace Vaerydian.Systems.Draw
 		protected override void pre_load_content(Bag<Entity> entities)
         {
             _Camera = ecs_instance.tag_manager.get_entity_by_tag("CAMERA");
-            _SpriteBatch = _Container.SpriteBatch;
+            _sprite_batch = _Container.SpriteBatch;
         }
 
         protected override void added(Entity entity)
         {
             Character character = (Character)_CharacterMapper.get(entity);
 
-               foreach (Bone bone in character.Skeletons[character.CurrentSkeleton].Bones)
+            foreach (Bone bone in character.Skeletons[character.CurrentSkeleton].Bones)
             {
                 if(!_Textures.ContainsKey(bone.TextureName))
                     _Textures.Add(bone.TextureName, _Container.ContentManager.Load<Texture2D>(bone.TextureName));
             }
         }
+
+		protected override void begin ()
+		{
+			_sprite_batch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+
+			base.begin ();
+		}
 
         protected override void process(Entity entity)
         {
@@ -91,7 +98,6 @@ namespace Vaerydian.Systems.Draw
             ViewPort viewPort = (ViewPort)_ViewportMapper.get(_Camera);
             Life life = (Life)_LifeMapper.get(entity);
 
-            _SpriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
             float fade = 1;
 			
@@ -110,13 +116,19 @@ namespace Vaerydian.Systems.Draw
             foreach (Bone bone in character.Skeletons[character.CurrentSkeleton].Bones)
             {
                 updateTime(bone, ecs_instance.ElapsedTime);
-                _SpriteBatch.Draw(_Textures[bone.TextureName], position.Pos + getKeyPosition(bone, character.CurrentAnimtaion) - viewPort.getOrigin() + bone.RotationOrigin,
+                _sprite_batch.Draw(_Textures[bone.TextureName], position.Pos + getKeyPosition(bone, character.CurrentAnimtaion) - viewPort.getOrigin() + bone.RotationOrigin,
                     null, _Color * fade, getKeyRotation(bone, character.CurrentAnimtaion), bone.RotationOrigin, 1f, SpriteEffects.None, 1f);
             }
 
-            _SpriteBatch.End();
 
         }
+
+		protected override void end ()
+		{
+			_sprite_batch.End();
+
+			base.end ();
+		}
 
         public void updateTime(Bone bone, int gameTime)
         {

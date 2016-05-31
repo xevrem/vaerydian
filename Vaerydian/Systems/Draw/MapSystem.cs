@@ -55,16 +55,16 @@ namespace Vaerydian.Systems.Draw
         private Entity m_MapDebug;
         private Entity m_Geometry;
         private ViewPort m_ViewPort;
-        private SpriteBatch m_SpriteBatch;
+        private SpriteBatch _sprite_batch;
 
         private int m_xStart, m_yStart, m_xFinish, m_yFinish, m_TileSize;
 
-        private Terrain m_Terrain;
+        private Terrain _terrain;
 
         public MapSystem(GameContainer container)
         {
             m_Container = container;
-            m_SpriteBatch = m_Container.SpriteBatch;
+            _sprite_batch = m_Container.SpriteBatch;
         }
 
 		protected override void initialize()
@@ -117,24 +117,13 @@ namespace Vaerydian.Systems.Draw
 
 		}
 
-		protected override void end ()
+		protected override void begin ()
 		{
-			GameMap map = (GameMap) m_GameMapMapper.get(ecs_instance.tag_manager.get_entity_by_tag("MAP"));
+			_sprite_batch.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
-			for (int x = m_xStart; x <= m_xFinish; x++) {
-				for (int y = m_yStart; y <= m_yFinish; y++) {
-					//grab current tile terrain
-					m_Terrain = map.getTerrain (x, y);
-					
-					//ensure its useable
-					if (m_Terrain == null)
-						continue;
+			_sprite_batch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
-					m_Terrain.Lighting = 0.15f;
-				}
-			}
-
-			base.end ();
+			base.begin ();
 		}
 
         protected override void process(Entity entity)
@@ -154,9 +143,6 @@ namespace Vaerydian.Systems.Draw
             //updateView(origin, center, m_ViewPort.getDimensions());
             updateView(map.Map,origin,dimensions);
 
-			m_SpriteBatch.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-
-			m_SpriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
             //iterate through current viewable tiles
             for (int x = m_xStart; x <= m_xFinish; x++)
@@ -164,10 +150,10 @@ namespace Vaerydian.Systems.Draw
                 for (int y = m_yStart; y <= m_yFinish; y++)
                 {
                     //grab current tile terrain
-                    m_Terrain = map.getTerrain(x, y);
+                    _terrain = map.getTerrain(x, y);
 
                     //ensure its useable
-                    if (m_Terrain == null)
+                    if (_terrain == null)
                         continue;
 
                     //calculate position to place tile
@@ -176,17 +162,18 @@ namespace Vaerydian.Systems.Draw
                     //m_SpriteBatch.Draw(m_Texture, pos-origin, m_RectDict[m_Terrain.TerrainType], Color.White, 0f, new Vector2(0), new Vector2(1), SpriteEffects.None, 0f);
                     //m_SpriteBatch.Draw(m_Texture, pos - origin, null, getColorVariation(m_Terrain), 0f, new Vector2(0), new Vector2(1), SpriteEffects.None, 0f);
 
-                    if (m_Terrain.TerrainDef.Texture == null)
+                    if (_terrain.TerrainDef.Texture == null)
                     {
-                        m_SpriteBatch.Draw(m_Texture, pos - origin, null, getColorVariation(m_Terrain), 0f, new Vector2(0), new Vector2(1), SpriteEffects.None, 0f);
+                        _sprite_batch.Draw(m_Texture, pos - origin, null, getColorVariation(_terrain), 0f, new Vector2(0), new Vector2(1), SpriteEffects.None, 0f);
                         continue;
                     }
 
-                    m_SpriteBatch.Draw(m_Textures[m_Terrain.TerrainDef.Texture], pos - origin, null,
-                                       applyLighting(m_Terrain), 0f, new Vector2(0), new Vector2(1),
+                    _sprite_batch.Draw(m_Textures[_terrain.TerrainDef.Texture], pos - origin, null,
+                                       applyLighting(_terrain), 0f, new Vector2(0), new Vector2(1),
                                        SpriteEffects.None, 0f);
 
-
+					//reset terrain lighting
+					_terrain.Lighting = 0.15f;
                 }
             }
 
@@ -252,8 +239,14 @@ namespace Vaerydian.Systems.Draw
                 
             }*/
 
-            m_SpriteBatch.End();
         }
+
+		protected override void end ()
+		{
+			_sprite_batch.End ();
+
+			base.end ();
+		}
 
         /// <summary>
         /// updates the tile indexes based on current viewport for the draw loop

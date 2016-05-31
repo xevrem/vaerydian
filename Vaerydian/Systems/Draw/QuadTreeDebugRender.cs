@@ -38,7 +38,7 @@ namespace Vaerydian.Systems.Draw
     class QuadTreeDebugRenderSystem : EntityProcessingSystem
     {
         private GameContainer q_Contaner;
-        private SpriteBatch q_SpriteBatch;
+        private SpriteBatch _sprite_batch;
 
         private ComponentMapper q_SpatialMapper;
         private ComponentMapper q_PositionMapper;
@@ -53,7 +53,7 @@ namespace Vaerydian.Systems.Draw
         public QuadTreeDebugRenderSystem(GameContainer container) 
         {
             q_Contaner = container;
-            q_SpriteBatch = container.SpriteBatch;
+            _sprite_batch = container.SpriteBatch;
         }
 
 		protected override void initialize()
@@ -72,6 +72,12 @@ namespace Vaerydian.Systems.Draw
             q_Texture = q_Contaner.ContentManager.Load<Texture2D>("export");
         }
 
+		protected override void begin ()
+		{
+			_sprite_batch.Begin ();
+			base.begin ();
+		}
+
         protected override void process(Entity entity)
         {
             Position position = (Position)q_PositionMapper.get(entity);
@@ -87,12 +93,14 @@ namespace Vaerydian.Systems.Draw
 
             Rectangle rec = new Rectangle((int)(node.ULCorner.X - origin.X), (int)(node.ULCorner.Y - origin.Y), width, height);
 
-            q_SpriteBatch.Begin();
-
-            q_SpriteBatch.Draw(q_Texture, rec, new Color(1f,0f,0f,0f));
-
-            q_SpriteBatch.End();
+            _sprite_batch.Draw(q_Texture, rec, new Color(1f,0f,0f,0f));
         }
+
+		protected override void end ()
+		{
+			_sprite_batch.End ();
+			base.end ();
+		}
 
     }
 }

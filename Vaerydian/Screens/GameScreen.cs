@@ -212,14 +212,8 @@ namespace Vaerydian.Screens
 
             //register render systems
             spriteRenderSystem = ecsInstance.system_manager.set_system(new SpriteRenderSystem(gameContainer), new Position(), new Sprite());
-            //spriteNormalSystem = ecsInstance.system_manager.set_system(new SpriteNormalSystem(gameContainer), new Position(), new Sprite());
-            //spriteDepthSystem = ecsInstance.system_manager.set_system(new SpriteDepthSystem(gameContainer), new Position(), new Sprite());
             animationSystem = ecsInstance.system_manager.set_system(new AnimationSystem(gameContainer), new Character(), new Position());
             mapSystem = ecsInstance.system_manager.set_system(new MapSystem(gameContainer), new GameMap());
-            //mapNormalSystem = ecsInstance.system_manager.set_system(new MapNormalSystem(gameContainer), new GameMap());
-            //mapDepthSystem = ecsInstance.system_manager.set_system(new MapDepthSystem(gameContainer), new GameMap());
-            //shadingSystem = ecsInstance.system_manager.set_system(new ShadingSystem(gameContainer), new Light());
-            //deferredSystem = ecsInstance.system_manager.set_system(new DeferredSystem(gameContainer), new GeometryMap());
             healthBarRenderSystem = ecsInstance.system_manager.set_system(new HealthBarRenderSystem(gameContainer), new Health());
             floatingTextDisplaySystem = ecsInstance.system_manager.set_system(new FloatingTextDisplaySystem(gameContainer), new FloatingText());
             quadTreeDebugRenderSystem = ecsInstance.system_manager.set_system(new QuadTreeDebugRenderSystem(gameContainer), new Position(),new AiBehavior());

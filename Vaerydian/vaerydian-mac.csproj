@@ -146,16 +146,10 @@
     <Compile Include="Screens\WorldScreen.cs" />
     <Compile Include="Sessions\GameSession.cs" />
     <Compile Include="Systems\Draw\AnimationSystem.cs" />
-    <Compile Include="Systems\Draw\DeferredSystem.cs" />
     <Compile Include="Systems\Draw\FloatingTextDisplaySystem.cs" />
     <Compile Include="Systems\Draw\HealthBarRenderSystem.cs" />
-    <Compile Include="Systems\Draw\MapDepthSystem.cs" />
-    <Compile Include="Systems\Draw\MapNormalSystem.cs" />
     <Compile Include="Systems\Draw\MapSystem.cs" />
     <Compile Include="Systems\Draw\QuadTreeDebugRender.cs" />
-    <Compile Include="Systems\Draw\ShadingSystem.cs" />
-    <Compile Include="Systems\Draw\SpriteDepthSystem.cs" />
-    <Compile Include="Systems\Draw\SpriteNormalSystem.cs" />
     <Compile Include="Systems\Draw\SpriteRenderSystem.cs" />
     <Compile Include="Systems\Update\ActionSystem.cs" />
     <Compile Include="Systems\Update\AttackSystem.cs" />
@@ -208,6 +202,7 @@
     <Compile Include="GameConfig.cs" />
     <Compile Include="GameContainer.cs" />
     <Compile Include="VaerydianGame.cs" />
+    <Compile Include="Behaviors\Behaviors.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

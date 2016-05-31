@@ -41,7 +41,7 @@ namespace Vaerydian.Systems.Draw
 
         private Dictionary<String,Texture2D> s_Textures = new Dictionary<String,Texture2D>();
         private GameContainer s_Container;
-        private SpriteBatch s_SpriteBatch;
+        private SpriteBatch _sprite_batch;
         private ComponentMapper s_PositionMapper;
         private ComponentMapper s_ViewportMapper;
         private ComponentMapper s_SpriteMapper;
@@ -57,7 +57,7 @@ namespace Vaerydian.Systems.Draw
         public SpriteRenderSystem(GameContainer gameContainer) : base() 
         {
             this.s_Container = gameContainer;
-            this.s_SpriteBatch = gameContainer.SpriteBatch;
+            this._sprite_batch = gameContainer.SpriteBatch;
         }
 
 		protected override void initialize()
@@ -101,6 +101,13 @@ namespace Vaerydian.Systems.Draw
                 s_Textures.Add(sprite.TextureName, s_Container.ContentManager.Load<Texture2D>(sprite.TextureName));
         }
 
+		protected override void begin ()
+		{
+			_sprite_batch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+
+			base.begin ();
+		}
+
         protected override void process(Entity entity)
         {
             
@@ -136,19 +143,22 @@ namespace Vaerydian.Systems.Draw
             if(sprite.ShouldSystemAnimate)
                 sprite.Column = sprite.SpriteAnimation.updateFrame(ecs_instance.ElapsedTime);
 
-            s_SpriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
 
             //s_SpriteBatch.Draw(s_Textures[sprite.getTextureName()], pos+center , null, Color.White, 0f, origin, new Vector2(1), SpriteEffects.None,0f);
             if (transform != null)
             {
-                s_SpriteBatch.Draw(s_Textures[sprite.TextureName], pos - origin + transform.RotationOrigin, new Rectangle(sprite.Column * sprite.Width, sprite.Row * sprite.Height, sprite.Width, sprite.Height), s_Color * fade, transform.Rotation, transform.RotationOrigin, new Vector2(1), SpriteEffects.None, 0f);
+                _sprite_batch.Draw(s_Textures[sprite.TextureName], pos - origin + transform.RotationOrigin, new Rectangle(sprite.Column * sprite.Width, sprite.Row * sprite.Height, sprite.Width, sprite.Height), s_Color * fade, transform.Rotation, transform.RotationOrigin, new Vector2(1), SpriteEffects.None, 0f);
             }
             else
             {
-                s_SpriteBatch.Draw(s_Textures[sprite.TextureName], pos - origin, new Rectangle(sprite.Column * sprite.Width, sprite.Row * sprite.Height, sprite.Width, sprite.Height), s_Color * fade, 0f, new Vector2(0, 0), new Vector2(1), SpriteEffects.None, 0f);
+                _sprite_batch.Draw(s_Textures[sprite.TextureName], pos - origin, new Rectangle(sprite.Column * sprite.Width, sprite.Row * sprite.Height, sprite.Width, sprite.Height), s_Color * fade, 0f, new Vector2(0, 0), new Vector2(1), SpriteEffects.None, 0f);
             }
-
-            s_SpriteBatch.End();
         }
+
+		protected override void end ()
+		{
+			_sprite_batch.End ();
+			base.end ();
+		}
     }
 }

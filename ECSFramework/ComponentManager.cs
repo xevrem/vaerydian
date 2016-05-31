@@ -73,11 +73,14 @@ namespace ECSFramework
 		}
 
 		public bool has_component(Entity e, int type_id){
-			if (this.components [type_id] [e.id] != null) {
-				return true;
-			} else {
-				return false;
+			if (type_id < this.components.capacity) {
+				if (e.id < this.components [type_id].capacity) {
+					if (this.components [type_id] [e.id] != null) {
+						return true;
+					} 
+				}
 			}
+			return false;
 		}
 
 		public void clean_up(){

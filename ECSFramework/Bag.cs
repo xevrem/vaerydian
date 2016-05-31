@@ -59,11 +59,7 @@ namespace ECSFramework
 		{
 			get
 			{
-				if (index < this._data.Length) {
-					return (T)this._data [index];
-				} else {
-					return default(T);
-				}
+				return (T)this._data [index];
 			}
 
 			set

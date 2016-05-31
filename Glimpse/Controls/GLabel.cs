@@ -52,7 +52,7 @@ namespace Glimpse.Controls
 		{
 			sprite_batch.Draw (this.background, this.bounds, this.background_color);
 
-			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this.bounds.Center.ToVector2 (), this.text_color);
+			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this.bounds.Location.ToVector2 (), this.text_color);
 		}
 
 		public override void clean_up ()

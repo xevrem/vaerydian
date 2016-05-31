@@ -298,7 +298,7 @@ namespace Vaerydian.Behaviors
         private BehaviorReturnCode updateAnimation()
         {
             //grab components
-            /*
+            
             Sprite sprite = (Sprite)s_SpriteMapper.get(s_ThisEntity);
             Heading heading = (Heading)s_HeadingMapper.get(s_ThisEntity);
 
@@ -326,7 +326,7 @@ namespace Vaerydian.Behaviors
 
             //reset movement flag
             s_moved = false;     
-            */
+            
             return BehaviorReturnCode.Success;
         }
 
