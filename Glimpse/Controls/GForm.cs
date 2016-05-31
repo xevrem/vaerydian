@@ -39,6 +39,8 @@ namespace Glimpse.Controls
 		public override event InterfaceHandler updating;
 
 		public override void init(){
+			foreach (GCanvas canvas in this.canvas_controls)
+				canvas.init ();
 		}
 
 		public override void load(ContentManager content){
@@ -64,7 +66,12 @@ namespace Glimpse.Controls
 
 		public override void clean_up ()
 		{
-			throw new NotImplementedException ();
+			foreach (GCanvas canvas in this.canvas_controls)
+				canvas.clean_up ();
+
+			canvas_controls.Clear ();
+
+			this.updating = null;
 		}
 
 		public override void reload ()
@@ -81,11 +88,13 @@ namespace Glimpse.Controls
         {
             foreach (GCanvas canvas in this.canvas_controls)
             {
-                if (canvas.bounds.Contains(args.state_container.current_mouse_state.Position)){
+                if (canvas.bounds.Contains(args.current_mouse_state.Position)){
                     canvas.handle_events(args);
                 }
             }
         }
+
+
 
         #endregion
     }

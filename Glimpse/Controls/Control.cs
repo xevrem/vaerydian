@@ -49,7 +49,7 @@ namespace Glimpse.Controls
 		public virtual event InterfaceHandler updating;
 		public virtual event InterfaceHandler drawing;
 		public virtual event InterfaceHandler mouse_click;
-		public virtual event InterfaceHandler mouse_hover;
+		public virtual event InterfaceHandler mouse_enter;
 		public virtual event InterfaceHandler mouse_press;
 		public virtual event InterfaceHandler mouse_leave;
 

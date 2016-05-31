@@ -22,11 +22,13 @@ using System;
 
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using Glimpse.Controls;
 
 namespace Glimpse.Input
 {
+	public delegate void InterfaceHandler(Control control, InterfaceArgs args);
 
-	public struct InputStateContainer{
+	public struct InterfaceArgs{
 		public MouseState current_mouse_state;
 		public MouseState previous_mouse_state;
 		public KeyboardState current_kb_state;
@@ -84,11 +86,11 @@ namespace Glimpse.Input
         public static InterfaceArgs get_interface_args()
         {
             InterfaceArgs args = new InterfaceArgs();
-            args.state_container.current_kb_state = _current_kb_state;
-            args.state_container.previous_kb_state = _previous_kb_state;
-            args.state_container.current_mouse_state = _current_m_state;
-            args.state_container.previous_mouse_state = _previous_m_state;
-            return args;
+            args.current_kb_state = _current_kb_state;
+            args.previous_kb_state = _previous_kb_state;
+            args.current_mouse_state = _current_m_state;
+            args.previous_mouse_state = _previous_m_state;
+			return args;
         }
 
 	}

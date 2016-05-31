@@ -55,7 +55,6 @@
     <Compile Include="Controls\GFrame.cs" />
     <Compile Include="Controls\GTextBox.cs" />
     <Compile Include="Controls\GButton.cs" />
-    <Compile Include="Input\InterfaceArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

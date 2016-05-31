@@ -33,10 +33,16 @@ namespace Glimpse.Controls
 		{
 		}
 
+		private bool _mouse_entered = false;
+
 		#region implemented abstract members of Control
 
 		public override event InterfaceHandler updating;
+		public override event InterfaceHandler drawing;
 		public override event InterfaceHandler mouse_click;
+		public override event InterfaceHandler mouse_enter;
+		public override event InterfaceHandler mouse_press;
+		public override event InterfaceHandler mouse_leave;
 
 		public override void init(){
 		}
@@ -47,18 +53,35 @@ namespace Glimpse.Controls
 
 		public override void update (int elapsed_time)
 		{
-			//throw new NotImplementedException ();
+			if (_mouse_entered) {
+				if(!bounds.Contains (InputManager.get_interface_args ().current_mouse_state.Position)){
+					_mouse_entered = false;
+					mouse_leave (this, InputManager.get_interface_args ());
+				}
+			}
+
+			if(updating != null)
+				updating(this, InputManager.get_interface_args ());
 		}
 
 		public override void draw (SpriteBatch sprite_batch){
-			sprite_batch.Draw (this.background, this.bounds, this.background_color);
+			
+			sprite_batch.Draw (this.background, this.bounds, this.background_color * this.transparency);
 			//TODO: fix positioning
 			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this.bounds.Location.ToVector2 (), this.text_color);
+
+			if(drawing != null)
+				drawing(this, InputManager.get_interface_args ());
 		}
 
 		public override void clean_up ()
 		{
-			throw new NotImplementedException ();
+			this.updating = null;
+			this.drawing = null;
+			this.mouse_click = null;
+			this.mouse_enter = null;
+			this.mouse_press = null;
+			this.mouse_leave = null;
 		}
 
 		public override void reload ()
@@ -73,13 +96,27 @@ namespace Glimpse.Controls
 
         public override void handle_events(InterfaceArgs args)
         {
-			if (args.state_container.current_mouse_state.LeftButton == ButtonState.Released &&
-				args.state_container.previous_mouse_state.LeftButton == ButtonState.Pressed){
+			if (bounds.Contains (args.current_mouse_state.Position) &&
+			   !bounds.Contains (args.previous_mouse_state.Position)) {
+				if (mouse_enter != null) {
+					_mouse_entered = true;
+					mouse_enter (this, args);
+				}
+			}
+
+			if (args.current_mouse_state.LeftButton == ButtonState.Released &&
+				args.previous_mouse_state.LeftButton == ButtonState.Pressed){
 				if(mouse_click != null){
 					mouse_click (this, args);
 				}
 			}
-				
+
+			if (args.current_mouse_state.LeftButton == ButtonState.Pressed &&
+			   args.previous_mouse_state.LeftButton == ButtonState.Pressed) {
+				if (mouse_press != null)
+					mouse_press (this, args);
+			}
+
         }
 
         #endregion

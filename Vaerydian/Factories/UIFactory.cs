@@ -209,7 +209,7 @@ namespace Vaerydian.Factories
 			label.font_name = "StartScreen";
 			label.border = 10;
 			label.background_name = "dialog_bubble";
-			label.background_color = Color.Black;
+			label.background_color = Color.Gray;
 			label.transparency = 0.5f;
 			label.center_text = true;
 			label.text = "XXX / XXX";
@@ -252,7 +252,7 @@ namespace Vaerydian.Factories
             
 
 			//setup mouse events
-			window.Button.mouse_hover += change_button_on_hover;
+			window.Button.mouse_enter += change_button_on_hover;
 			window.Button.mouse_press += change_button_on_press;
 			window.Button.mouse_leave += change_button_on_leave;
 			window.Button.mouse_click += destroyUI;
@@ -364,7 +364,7 @@ namespace Vaerydian.Factories
 
 
 			//setup button mouse events
-			window.Button.mouse_hover += change_button_on_hover;
+			window.Button.mouse_enter += change_button_on_hover;
 			window.Button.mouse_press += change_button_on_press;
 			window.Button.mouse_leave += change_button_on_leave;
 			window.Button.mouse_click += destroyUI;

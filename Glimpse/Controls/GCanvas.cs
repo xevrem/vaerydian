@@ -37,6 +37,8 @@ namespace Glimpse.Controls
 		#region implemented abstract members of Control
 
 		public override void init(){
+			foreach (Control control in this.controls)
+				control.init();
 		}
 
 		public override void load(ContentManager content){
@@ -59,7 +61,11 @@ namespace Glimpse.Controls
 
 		public override void clean_up ()
 		{
-			throw new NotImplementedException ();
+			foreach (Control control in this.controls)
+				control.clean_up ();
+
+			this.controls.Clear ();
+
 		}
 
 		public override void reload ()
@@ -75,7 +81,7 @@ namespace Glimpse.Controls
         public override void handle_events(InterfaceArgs args)
         {
 			foreach (Control control in this.controls) {
-				if(control.bounds.Contains (args.state_container.current_mouse_state.Position))
+				if(control.bounds.Contains (args.current_mouse_state.Position))
 					control.handle_events (args);
 			}
         }

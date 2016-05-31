@@ -46,8 +46,8 @@ namespace ECSFramework
 		}
 
 		public void remove_entity(Entity e){
-			this._entities.remove(e);
-			removed (e);
+			if(this._entities.remove(e))
+				removed (e);
 		}
 
 		public void add_entity(Entity e){

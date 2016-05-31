@@ -121,7 +121,7 @@ namespace Vaerydian.Screens
             s_ButtonMenu.Buttons[0].center_text = true;
 			s_ButtonMenu.Buttons[0].text = "New Game";
             s_ButtonMenu.Buttons[0].text_color = Color.White;
-			s_ButtonMenu.Buttons[0].mouse_hover += change_button_on_hover;
+			s_ButtonMenu.Buttons[0].mouse_enter += change_button_on_hover;
 			s_ButtonMenu.Buttons[0].mouse_press += change_button_on_press;
 			s_ButtonMenu.Buttons[0].mouse_leave += change_button_on_leave;
 			s_ButtonMenu.Buttons[0].mouse_click += OnMouseClickNewGame;
@@ -135,10 +135,10 @@ namespace Vaerydian.Screens
             s_ButtonMenu.Buttons[1].center_text = true;
 			s_ButtonMenu.Buttons[1].text = "World Gen";
 			s_ButtonMenu.Buttons[1].text_color = Color.White;
-			s_ButtonMenu.Buttons[1].mouse_hover += change_button_on_hover;
+			s_ButtonMenu.Buttons[1].mouse_enter += change_button_on_hover;
 			s_ButtonMenu.Buttons[1].mouse_press += change_button_on_press;
 			s_ButtonMenu.Buttons[1].mouse_leave += change_button_on_leave;
-			s_ButtonMenu.Buttons[1].mouse_click += OnMouseClickNewGame;
+			s_ButtonMenu.Buttons[1].mouse_click += OnMouseClickWorldGen;
 
 			s_ButtonMenu.Buttons[2].background_name = "test_dialog";
 			s_ButtonMenu.Buttons[2].background_color = Color.Gray;
@@ -149,10 +149,10 @@ namespace Vaerydian.Screens
             s_ButtonMenu.Buttons[2].center_text = true;
 			s_ButtonMenu.Buttons[2].text = "Exit Game";
 			s_ButtonMenu.Buttons[2].text_color = Color.White;
-			s_ButtonMenu.Buttons[2].mouse_hover += change_button_on_hover;
+			s_ButtonMenu.Buttons[2].mouse_enter += change_button_on_hover;
 			s_ButtonMenu.Buttons[2].mouse_press += change_button_on_press;
 			s_ButtonMenu.Buttons[2].mouse_leave += change_button_on_leave;
-			s_ButtonMenu.Buttons[2].mouse_click += OnMouseClickNewGame;            
+			s_ButtonMenu.Buttons[2].mouse_click += OnMouseClickExit;            
 
 
             s_ButtonMenu.assemble();
@@ -252,7 +252,7 @@ namespace Vaerydian.Screens
 
         private void OnMousePointerUpdate(Control control, InterfaceArgs args)
         {
-			control.bounds = new Rectangle(args.state_container.current_mouse_state.Position.X, args.state_container.current_mouse_state.Position.Y, 10, 10);
+			control.bounds = new Rectangle(args.current_mouse_state.Position.X, args.current_mouse_state.Position.Y, 10, 10);
         }
 
 		private void change_button_on_press(Control sender, InterfaceArgs args){

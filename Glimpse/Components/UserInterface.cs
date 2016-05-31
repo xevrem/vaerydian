@@ -49,6 +49,10 @@ namespace Glimpse.Components
 
 		public GForm form;
 
+		public void init(){
+			form.init ();
+		}
+
 		public void update(int elapsed_time){
 			form.update (elapsed_time);
 		}
@@ -59,6 +63,10 @@ namespace Glimpse.Components
 
 		public void load(ContentManager content){
 			form.load (content);
+		}
+
+		public void clean_up(){
+			form.clean_up ();
 		}
 	}
 }

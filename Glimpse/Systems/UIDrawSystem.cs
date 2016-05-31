@@ -72,7 +72,14 @@ namespace Glimpse.Systems
 		protected override void added (Entity entity)
 		{
 			UserInterface ui = ComponentMapper.get<UserInterface> (entity);
+			ui.init ();
 			ui.load (this._content_manager);
+		}
+
+		protected override void removed (Entity entity)
+		{
+			UserInterface ui = ComponentMapper.get<UserInterface> (entity);
+			ui.clean_up ();
 		}
 
 		#endregion

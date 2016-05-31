@@ -29,6 +29,9 @@ namespace Glimpse.Controls
 {
 	public class GLabel : Control
 	{
+		private int _spacing;
+		private Vector2 _text_lengths;
+		private Vector2 _text_position;
 
 		public GLabel ()
 		{
@@ -36,7 +39,20 @@ namespace Glimpse.Controls
 
 		#region implemented abstract members of Control
 
+		public override event InterfaceHandler updating;
+
 		public override void init(){
+			_spacing = FontManager.fonts[this.font_name].LineSpacing;
+			_text_lengths = FontManager.fonts [this.font_name].MeasureString (this.text);
+
+			this.bounds = new Rectangle(this.bounds.Location, new Point ((int) _text_lengths.X+2*this.border, (int)_text_lengths.Y+2*border));
+
+			if (center_text) {
+				_text_position.Y = this.bounds.Center.Y - (_text_lengths.Y / 2);
+				_text_position.X = this.bounds.Center.X - (_text_lengths.X / 2);
+			} else {
+				_text_position = this.bounds.Location.ToVector2 ();
+			}
 		}
 
 		public override void load(ContentManager content){
@@ -45,19 +61,26 @@ namespace Glimpse.Controls
 
 		public override void update (int elapsed_time)
 		{
-			//throw new NotImplementedException ();
+			if (center_text) {
+				_text_position.Y = this.bounds.Center.Y - (_text_lengths.Y / 2);
+				_text_position.X = this.bounds.Center.X - (_text_lengths.X / 2);
+			}
+
+			if(updating != null)
+				updating(this, InputManager.get_interface_args ());
 		}
 
 		public override void draw (SpriteBatch sprite_batch)
 		{
-			sprite_batch.Draw (this.background, this.bounds, this.background_color);
+			sprite_batch.Draw (this.background, this.bounds, this.background_color * this.transparency);
 
-			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this.bounds.Location.ToVector2 (), this.text_color);
+
+			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this._text_position, this.text_color);
 		}
 
 		public override void clean_up ()
 		{
-			throw new NotImplementedException ();
+			this.updating = null;
 		}
 
 		public override void reload ()
@@ -67,7 +90,7 @@ namespace Glimpse.Controls
 
 		public override void resize ()
 		{
-			throw new NotImplementedException ();
+			//throw new NotImplementedException ();
 		}
 
         public override void handle_events(InterfaceArgs args)

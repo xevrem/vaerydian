@@ -52,12 +52,12 @@ namespace Glimpse.Controls
 
 		public override void draw (SpriteBatch sprite_batch)
 		{
-			sprite_batch.Draw (this.background, this.bounds, this.background_color);
+			sprite_batch.Draw (this.background, this.bounds, this.background_color * this.transparency);
 		}
 
 		public override void clean_up ()
 		{
-			throw new NotImplementedException ();
+			this.updating = null;
 		}
 
 		public override void reload ()
