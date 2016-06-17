@@ -24,11 +24,16 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using Glimpse.Managers;
 using Glimpse.Input;
+using Microsoft.Xna.Framework;
 
 namespace Glimpse.Controls
 {
 	public class GButton : Control
 	{
+		private int _spacing;
+		private Vector2 _text_lengths;
+		private Vector2 _text_position;
+
 		public GButton ()
 		{
 		}
@@ -45,6 +50,18 @@ namespace Glimpse.Controls
 		public override event InterfaceHandler mouse_leave;
 
 		public override void init(){
+			_spacing = FontManager.fonts[this.font_name].LineSpacing;
+			_text_lengths = FontManager.fonts [this.font_name].MeasureString (this.text);
+
+			if(autosize)
+				this.bounds = new Rectangle(this.bounds.Location, new Point ((int) _text_lengths.X+2*this.border, (int)_text_lengths.Y+2*border));
+
+			if (center_text) {
+				_text_position.Y = this.bounds.Center.Y - (_text_lengths.Y / 2f);
+				_text_position.X = this.bounds.Center.X - (_text_lengths.X / 2f);
+			} else {
+				_text_position = this.bounds.Location.ToVector2 ();
+			}
 		}
 
 		public override void load(ContentManager content){
@@ -53,6 +70,12 @@ namespace Glimpse.Controls
 
 		public override void update (int elapsed_time)
 		{
+			if (center_text) {
+				_text_lengths = FontManager.fonts [this.font_name].MeasureString (this.text);
+				_text_position.Y = this.bounds.Center.Y - (_text_lengths.Y / 2f);
+				_text_position.X = this.bounds.Center.X - (_text_lengths.X / 2f);
+			}
+
 			if (_mouse_entered) {
 				if(!bounds.Contains (InputManager.get_interface_args ().current_mouse_state.Position)){
 					_mouse_entered = false;
@@ -68,7 +91,7 @@ namespace Glimpse.Controls
 			
 			sprite_batch.Draw (this.background, this.bounds, this.background_color * this.transparency);
 			//TODO: fix positioning
-			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this.bounds.Location.ToVector2 (), this.text_color);
+			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this._text_position, this.text_color);
 
 			if(drawing != null)
 				drawing(this, InputManager.get_interface_args ());

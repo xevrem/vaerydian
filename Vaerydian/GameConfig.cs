@@ -36,7 +36,7 @@ namespace Vaerydian
 
 	public static class GameConfig
 	{
-		private static JsonManager g_JM = new JsonManager();
+		static JsonManager g_JM = new JsonManager();
 
 		public static string root_dir = ".";//Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
@@ -77,7 +77,7 @@ namespace Vaerydian
 
 		public static AwardDef AwardDefs;
 
-		private static bool loadAwardDefs(){
+		static bool loadAwardDefs(){
 			AwardDef aDef = default(AwardDef);
 
 			aDef.HealthChance = 0.1f;
@@ -104,7 +104,7 @@ namespace Vaerydian
 		/// Loads the effect defs.
 		/// </summary>
 		/// <returns><c>true</c>, if effect defs was loaded, <c>false</c> otherwise.</returns>
-		private static bool loadEffectDefs(){
+		static bool loadEffectDefs(){
 
 			Effects.Add ("NONE", 0);
 
@@ -194,7 +194,7 @@ namespace Vaerydian
 		/// Loads the terrain defs.
 		/// </summary>
 		/// <returns><c>true</c>, if terrain defs was loaded, <c>false</c> otherwise.</returns>
-		private static bool loadTerrainDefs(){
+		static bool loadTerrainDefs(){
 			try{
 				string json = g_JM.loadJSON (GameConfig.root_dir + "/Content/json/terrain.v");
 				JsonObject jo = g_JM.jsonToJsonObject(json);
@@ -240,7 +240,7 @@ namespace Vaerydian
 		/// Loads the map defs.
 		/// </summary>
 		/// <returns><c>true</c>, if map defs was loaded, <c>false</c> otherwise.</returns>
-		private static bool loadMapDefs(){
+		static bool loadMapDefs(){
 
 			try{
 				string json = g_JM.loadJSON(GameConfig.root_dir + "/Content/json/maps.v");
@@ -305,7 +305,7 @@ namespace Vaerydian
 		/// Loads the start defs.
 		/// </summary>
 		/// <returns><c>true</c>, if start defs was loaded, <c>false</c> otherwise.</returns>
-		private static bool loadStartDefs(){
+		static bool loadStartDefs(){
 			try{
 				string json = g_JM.loadJSON (GameConfig.root_dir + "/Content/json/start_screen.v");
 				JsonObject jo = g_JM.jsonToJsonObject(json);
@@ -339,7 +339,7 @@ namespace Vaerydian
 		/// Loads the character animation.
 		/// </summary>
 		/// <returns><c>true</c>, if character animation was loaded, <c>false</c> otherwise.</returns>
-		private static bool loadAvatars(){
+		static bool loadAvatars(){
 			try{
 				string json = g_JM.loadJSON(GameConfig.root_dir + "/Content/json/avatars.v");
 				JsonObject jo = g_JM.jsonToJsonObject(json);
@@ -457,7 +457,7 @@ namespace Vaerydian
 		/// Loads the creatures.
 		/// </summary>
 		/// <returns><c>true</c>, if creatures was loaded, <c>false</c> otherwise.</returns>
-		private static bool loadCreatures(){
+		static bool loadCreatures(){
 			try{
 				string json = g_JM.loadJSON (GameConfig.root_dir + "/Content/json/characters.v");
 				JsonObject jo = g_JM.jsonToJsonObject (json);

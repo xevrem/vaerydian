@@ -51,6 +51,7 @@ namespace Glimpse.Systems
 			for (int i = 0; i < entities.count; i++) {
 				//UserInterface ui = (UserInterface) this._ui_mapper.get (entities.get(i));
 				UserInterface ui = ComponentMapper.get<UserInterface> (entities[i]);
+				ui.init ();
 				ui.load (this._content_manager);
 			}
 		}

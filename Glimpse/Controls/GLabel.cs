@@ -45,11 +45,12 @@ namespace Glimpse.Controls
 			_spacing = FontManager.fonts[this.font_name].LineSpacing;
 			_text_lengths = FontManager.fonts [this.font_name].MeasureString (this.text);
 
-			this.bounds = new Rectangle(this.bounds.Location, new Point ((int) _text_lengths.X+2*this.border, (int)_text_lengths.Y+2*border));
+			if(autosize)
+				this.bounds = new Rectangle(this.bounds.Location, new Point ((int) _text_lengths.X+2*this.border, (int)_text_lengths.Y+2*border));
 
 			if (center_text) {
-				_text_position.Y = this.bounds.Center.Y - (_text_lengths.Y / 2);
-				_text_position.X = this.bounds.Center.X - (_text_lengths.X / 2);
+				_text_position.Y = this.bounds.Center.ToVector2 ().Y - (_text_lengths.Y / 2f);
+				_text_position.X = this.bounds.Center.ToVector2 ().X - (_text_lengths.X / 2f);
 			} else {
 				_text_position = this.bounds.Location.ToVector2 ();
 			}
@@ -62,8 +63,9 @@ namespace Glimpse.Controls
 		public override void update (int elapsed_time)
 		{
 			if (center_text) {
-				_text_position.Y = this.bounds.Center.Y - (_text_lengths.Y / 2);
-				_text_position.X = this.bounds.Center.X - (_text_lengths.X / 2);
+				_text_lengths = FontManager.fonts [this.font_name].MeasureString (this.text);
+				_text_position.Y = this.bounds.Center.ToVector2 ().Y - (_text_lengths.Y / 2f);
+				_text_position.X = this.bounds.Center.ToVector2 ().X - (_text_lengths.X / 2f);
 			}
 
 			if(updating != null)
@@ -73,7 +75,6 @@ namespace Glimpse.Controls
 		public override void draw (SpriteBatch sprite_batch)
 		{
 			sprite_batch.Draw (this.background, this.bounds, this.background_color * this.transparency);
-
 
 			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this._text_position, this.text_color);
 		}

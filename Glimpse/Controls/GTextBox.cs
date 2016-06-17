@@ -29,6 +29,10 @@ namespace Glimpse.Controls
 {
 	public class GTextBox : Control
 	{
+		private int _spacing;
+		private Vector2 _text_lengths;
+		private Vector2 _text_position;
+
 
 		public GTextBox ()
 		{
@@ -39,6 +43,18 @@ namespace Glimpse.Controls
 		public override event InterfaceHandler updating;
 
 		public override void init(){
+			_spacing = FontManager.fonts[this.font_name].LineSpacing;
+			_text_lengths = FontManager.fonts [this.font_name].MeasureString (this.text);
+
+			if(autosize)
+				this.bounds = new Rectangle(this.bounds.Location, new Point ((int) _text_lengths.X+2*this.border, (int)_text_lengths.Y+2*border));
+
+			if (center_text) {
+				_text_position.Y = this.bounds.Center.ToVector2 ().Y - (_text_lengths.Y / 2f);
+				_text_position.X = this.bounds.Center.ToVector2 ().X - (_text_lengths.X / 2f);
+			} else {
+				_text_position = this.bounds.Location.ToVector2 ();
+			}
 		}
 
 		public override void load(ContentManager content){
@@ -47,6 +63,12 @@ namespace Glimpse.Controls
 
 		public override void update (int elapsed_time)
 		{
+			if (center_text) {
+				_text_lengths = FontManager.fonts [this.font_name].MeasureString (this.text);
+				_text_position.Y = this.bounds.Center.ToVector2 ().Y - (_text_lengths.Y / 2f);
+				_text_position.X = this.bounds.Center.ToVector2 ().X - (_text_lengths.X / 2f);
+			}
+
 			if(updating != null)
 				updating(this, InputManager.get_interface_args ());		
 		}
@@ -56,7 +78,7 @@ namespace Glimpse.Controls
 			//throw new NotImplementedException ();
 			sprite_batch.Draw (this.background, this.bounds, this.background_color);
 			//TODO: fix positioning
-			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this.bounds.Location.ToVector2 (), this.text_color);
+			sprite_batch.DrawString (FontManager.fonts[this.font_name], this.text, this._text_position, this.text_color);
 		}
 
 		public override void clean_up ()

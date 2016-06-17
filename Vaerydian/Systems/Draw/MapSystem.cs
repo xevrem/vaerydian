@@ -173,7 +173,7 @@ namespace Vaerydian.Systems.Draw
                                        SpriteEffects.None, 0f);
 
 					//reset terrain lighting
-					_terrain.Lighting = 0.15f;
+					_terrain.Lighting = 0.35f;
                 }
             }
 
