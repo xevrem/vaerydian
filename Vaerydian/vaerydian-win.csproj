@@ -70,17 +70,12 @@
       <Project>{031C8CFF-F147-44EA-B7E5-0A5644808A7E}</Project>
       <Name>LibNoise</Name>
     </ProjectReference>
+    <ProjectReference Include="..\monogame\MonoGame.Framework\MonoGame.Framework.Linux.csproj">
+      <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
+      <Name>MonoGame.Framework.Linux</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>C:\Program Files %28x86%29\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="NVorbis">
-      <HintPath>C:\Program Files %28x86%29\MonoGame\v3.0\Assemblies\DesktopGL\NVorbis.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK">
-      <HintPath>C:\Program Files %28x86%29\MonoGame\v3.0\Assemblies\DesktopGL\OpenTK.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -163,16 +158,10 @@
     <Compile Include="Screens\WorldScreen.cs" />
     <Compile Include="Sessions\GameSession.cs" />
     <Compile Include="Systems\Draw\AnimationSystem.cs" />
-    <Compile Include="Systems\Draw\DeferredSystem.cs" />
     <Compile Include="Systems\Draw\FloatingTextDisplaySystem.cs" />
     <Compile Include="Systems\Draw\HealthBarRenderSystem.cs" />
-    <Compile Include="Systems\Draw\MapDepthSystem.cs" />
-    <Compile Include="Systems\Draw\MapNormalSystem.cs" />
     <Compile Include="Systems\Draw\MapSystem.cs" />
     <Compile Include="Systems\Draw\QuadTreeDebugRender.cs" />
-    <Compile Include="Systems\Draw\ShadingSystem.cs" />
-    <Compile Include="Systems\Draw\SpriteDepthSystem.cs" />
-    <Compile Include="Systems\Draw\SpriteNormalSystem.cs" />
     <Compile Include="Systems\Draw\SpriteRenderSystem.cs" />
     <Compile Include="Systems\Update\ActionSystem.cs" />
     <Compile Include="Systems\Update\AttackSystem.cs" />

@@ -117,7 +117,7 @@ namespace Vaerydian.Systems.Draw
             {
                 updateTime(bone, ecs_instance.ElapsedTime);
                 _sprite_batch.Draw(_Textures[bone.TextureName], position.Pos + getKeyPosition(bone, character.CurrentAnimtaion) - viewPort.getOrigin() + bone.RotationOrigin,
-                    null, _Color * fade, getKeyRotation(bone, character.CurrentAnimtaion), bone.RotationOrigin, 1f, SpriteEffects.None, 1f);
+                    null, _Color * fade, getKeyRotation(bone, character.CurrentAnimtaion), bone.RotationOrigin, 1f, SpriteEffects.None, 0f);
             }
 
 
