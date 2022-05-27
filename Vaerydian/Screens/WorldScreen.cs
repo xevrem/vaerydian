@@ -94,7 +94,7 @@ namespace Vaerydian.Screens
         {
             base.Initialize();
 
-			w_SpriteBatch = new SpriteBatch(this.ScreenManager.GraphicsDevice);
+            w_SpriteBatch = new SpriteBatch(this.ScreenManager.GraphicsDevice);
 
             w_ViewPort.Dimensions = new Point(this.ScreenManager.GraphicsDevice.Viewport.Width, this.ScreenManager.GraphicsDevice.Viewport.Height);
 
@@ -126,9 +126,9 @@ namespace Vaerydian.Screens
 
             MapMaker.Parameters = parameters;
 
-			MapMaker.generate(map, MapType.WORLD);
+            MapMaker.generate(map, MapType.WORLD);
 
-			w_MapEngine.Map = map;
+            w_MapEngine.Map = map;
             //end quick test hack
 
             //w_MapEngine.WorldGenerator.generateNewWorld(0, 0, w_MapEngine.XTiles, w_MapEngine.YTiles, 5f, w_MapEngine.XTiles, w_MapEngine.YTiles, new Random().Next());
@@ -160,10 +160,10 @@ namespace Vaerydian.Screens
         {
             base.UnloadContent();
             w_MapEngine.UnloadContent();
-            
-            
+
+
             textures.Clear();
-            
+
         }
 
         private int MOVE_VALUE = 15;
@@ -216,12 +216,12 @@ namespace Vaerydian.Screens
                 w_ViewPort.Origin.X += MOVE_VALUE;
                 UpdateView();
             }
-            
+
             if (InputManager.isKeyToggled(Keys.Tab))
             {
                 InputManager.YesScreenshot = true;
             }
-            
+
             if (InputManager.isKeyToggled(Keys.T))
             {
                 if (!w_MapEngine.ShowTemperature)
@@ -234,7 +234,7 @@ namespace Vaerydian.Screens
                     w_MapEngine.ShowTemperature = false;
                 }
             }
-            if(InputManager.isKeyToggled(Keys.P))
+            if (InputManager.isKeyToggled(Keys.P))
             {
                 if (!w_MapEngine.ShowPrecipitation)
                 {
@@ -246,11 +246,11 @@ namespace Vaerydian.Screens
                     w_MapEngine.ShowPrecipitation = false;
                 }
             }
-//            if (InputManager.isKeyToggled(Keys.PrintScreen))
-//            {
-//                w_MapEngine.YesScreenshot = true;
-//            }
-            
+            //            if (InputManager.isKeyToggled(Keys.PrintScreen))
+            //            {
+            //                w_MapEngine.YesScreenshot = true;
+            //            }
+
 
         }
 
@@ -298,16 +298,16 @@ namespace Vaerydian.Screens
         {
             base.Draw(gameTime);
 
-			this.ScreenManager.GraphicsDevice.Clear(Color.Black);
+            this.ScreenManager.GraphicsDevice.Clear(Color.Black);
 
             w_MapEngine.DrawMap(gameTime, w_SpriteBatch);
 
-			//check to see if the user wanted a screenshot
-			if (InputManager.YesScreenshot)
-			{
-				w_MapEngine.saveScreenShot(w_SpriteBatch.GraphicsDevice, gameTime);
-				InputManager.YesScreenshot = false;
-			}
+            //check to see if the user wanted a screenshot
+            if (InputManager.YesScreenshot)
+            {
+                w_MapEngine.saveScreenShot(w_SpriteBatch.GraphicsDevice, gameTime);
+                InputManager.YesScreenshot = false;
+            }
         }
 
         #endregion
