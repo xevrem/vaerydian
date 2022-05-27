@@ -3,4 +3,4 @@
 	url = http://github.com/xevrem/behaviorlib.git
 [submodule "monogame"]
 	path = monogame
-	url = https://github.com/monogame/monogame.git
+	url = git@github.com:monogame/monogame.git

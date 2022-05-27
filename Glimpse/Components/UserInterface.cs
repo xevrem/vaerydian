@@ -18,56 +18,60 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
 using ECSFramework;
 using Glimpse.Controls;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 
 namespace Glimpse.Components
 {
-	public class UserInterface : IComponent
-	{
-		private static int _type_id = 0;
+    public class UserInterface : IComponent
+    {
+        private static int _type_id = 0;
 
-		public UserInterface(){}
+        public UserInterface() { }
 
-		public UserInterface (GForm form)
-		{
-			this.form = form;
-		}
+        public UserInterface(GForm form)
+        {
+            this.form = form;
+        }
 
-		public int id { get; set;}
+        public int id { get; set; }
 
-		public int owner_id { get; set;}
+        public int owner_id { get; set; }
 
-		public int type_id{ 
-			get{ return _type_id;} 
-			set{ _type_id = value;}
-		}
+        public int type_id
+        {
+            get { return _type_id; }
+            set { _type_id = value; }
+        }
 
-		public GForm form;
+        public GForm form;
 
-		public void init(){
-			form.init ();
-		}
+        public void init()
+        {
+            form.init();
+        }
 
-		public void update(int elapsed_time){
-			form.update (elapsed_time);
-		}
-			
-		public void draw(SpriteBatch sprite_batch){
-			form.draw (sprite_batch);
-		}
+        public void update(int elapsed_time)
+        {
+            form.update(elapsed_time);
+        }
 
-		public void load(ContentManager content){
-			form.load (content);
-		}
+        public void draw(SpriteBatch sprite_batch)
+        {
+            form.draw(sprite_batch);
+        }
 
-		public void clean_up(){
-			form.clean_up ();
-		}
-	}
+        public void load(ContentManager content)
+        {
+            form.load(content);
+        }
+
+        public void clean_up()
+        {
+            form.clean_up();
+        }
+    }
 }
 

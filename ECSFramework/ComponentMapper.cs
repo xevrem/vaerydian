@@ -35,7 +35,7 @@ namespace ECSFramework
 
 		public ComponentMapper(IComponent c, ECSInstance ecs_instance){
 			this._type_id = c.type_id;
-			ecs_instance = ecs_instance;
+			ComponentMapper.ecs_instance = ecs_instance;
 		}
 
 		public IComponent get(Entity e){

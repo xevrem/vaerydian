@@ -59,31 +59,31 @@ namespace Vaerydian
         private int elapsed;
         private int count = 0;
         private float avg;
-		private int height = 480;
-		private int width = 854;
+        private int height = 480;
+        private int width = 854;
 
         public VaerydianGame()
         {
             graphics = new GraphicsDeviceManager(this);
-            
-			this.Window.AllowUserResizing = true;
-			
-			graphics.PreferredBackBufferHeight = height;
+
+            this.Window.AllowUserResizing = true;
+
+            graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
             graphics.IsFullScreen = false;
             graphics.SynchronizeWithVerticalRetrace = true;
             //this.IsFixedTimeStep = false;
-			//this.TargetElapsedTime = new TimeSpan(0, 0, 0, 0, 1);
+            //this.TargetElapsedTime = new TimeSpan(0, 0, 0, 0, 1);
             graphics.PreferMultiSampling = false;
             graphics.ApplyChanges();
-			
-			
-			this.IsMouseVisible = false;
+
+
+            this.IsMouseVisible = false;
 
             // add a gamer-services component, which is required for the storage APIs
             //Components.Add(new GamerServicesComponent(this));
 
-			Content.RootDirectory = "Content";//GameConfig.root_dir + "/Content";
+            Content.RootDirectory = "Content";//GameConfig.root_dir + "/Content";
             //give the fontManager a reference to Content
             FontManager.content_manager = this.Content;
 
@@ -100,7 +100,7 @@ namespace Vaerydian
         protected override void Initialize()
         {
             FontManager.fonts_to_load.Add("General");
-			FontManager.fonts_to_load.Add("Loading");
+            FontManager.fonts_to_load.Add("Loading");
             FontManager.fonts_to_load.Add("StartScreen");
             FontManager.fonts_to_load.Add("Damage");
             FontManager.fonts_to_load.Add("DamageBold");
@@ -129,12 +129,12 @@ namespace Vaerydian
 
             FontManager.LoadContent();
 
-			if (!GameConfig.loadConfig ())
-				InputManager.YesExit = true;
+            if (!GameConfig.loadConfig())
+                InputManager.YesExit = true;
 
             NewLoadingScreen.Load(screenManager, false, new StartScreen());
-			//NewLoadingScreen.Load(screenManager,true,new WorldScreen());
-			//screenManager.addScreen (new StartScreen());
+            //NewLoadingScreen.Load(screenManager,true,new WorldScreen());
+            //screenManager.addScreen (new StartScreen());
 #if DEBUG
             Console.Out.WriteLine("GAME LOADED...");
 #endif
@@ -150,7 +150,7 @@ namespace Vaerydian
 
             FontManager.fonts.Clear();
 
-            for(int i = 0; i < screenManager.Screens.Count;i++)
+            for (int i = 0; i < screenManager.Screens.Count; i++)
             {
                 screenManager.removeScreen(screenManager.Screens[i]);
             }
@@ -159,7 +159,7 @@ namespace Vaerydian
 #endif
             GC.Collect();
 
-			base.UnloadContent ();
+            base.UnloadContent();
 
         }
 
@@ -170,11 +170,11 @@ namespace Vaerydian
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-			base.Update(gameTime);
+            base.Update(gameTime);
 
 
             //update all input
-			InputManager.Update();
+            InputManager.Update();
 
             if (InputManager.YesExit)
             {
@@ -182,10 +182,10 @@ namespace Vaerydian
                 this.Exit();
             }
 
-			//calculate ms/s
+            //calculate ms/s
             elapsed += gameTime.ElapsedGameTime.Milliseconds;
             count++;
-            if(count > 100)
+            if (count > 100)
             {
                 avg = (float)elapsed / (float)count;
                 count = 0;
@@ -199,26 +199,26 @@ namespace Vaerydian
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw (GameTime gameTime)
-		{
-			//graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-			base.Draw (gameTime);
+        protected override void Draw(GameTime gameTime)
+        {
+            //graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            base.Draw(gameTime);
 
 
-			if (InputManager.YesExit)
-				return;
+            if (InputManager.YesExit)
+                return;
 
 
-            
+
             //begin the sprite batch
-			spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone);
 
             //display performance
-			spriteBatch.DrawString(FontManager.fonts["General"], "ms / frame: " + avg, new Vector2(0), Color.Red);
+            spriteBatch.DrawString(FontManager.fonts["General"], "ms / frame: " + avg, new Vector2(0), Color.Red);
 
             //end sprite batch
             spriteBatch.End();
-            
+
 
         }
     }

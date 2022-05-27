@@ -62,9 +62,9 @@ namespace Vaerydian.Screens
     class GameScreen : Screen
     {
         private ECSInstance ecsInstance;
-        
+
         private SpriteBatch spriteBatch;
-        
+
 
         private GameContainer gameContainer = new GameContainer();
 
@@ -83,10 +83,10 @@ namespace Vaerydian.Screens
         private EntitySystem victorySystem;
         private EntitySystem uiUpdateSystem;
         private EntitySystem triggerSystem;
-		private EntitySystem actionSystem;
-		private EntitySystem lightSystem;
-		private EntitySystem targetingSystem;
-        
+        private EntitySystem actionSystem;
+        private EntitySystem lightSystem;
+        private EntitySystem targetingSystem;
+
         //audio
         private EntitySystem audioSystem;
 
@@ -130,7 +130,7 @@ namespace Vaerydian.Screens
 
         public static bool PLAYER_IS_DEAD = false;
 
-		private JsonManager g_JsonManager = new JsonManager();
+        private JsonManager g_JsonManager = new JsonManager();
 
         /// <summary>
         /// current loading message
@@ -149,7 +149,7 @@ namespace Vaerydian.Screens
 
         private MapType g_MapType;
 
-		private long prevCycles, currentCycles, elapsedCycles;
+        private long prevCycles, currentCycles, elapsedCycles;
 
         public GameScreen() { }
 
@@ -172,20 +172,20 @@ namespace Vaerydian.Screens
 
             gameContainer = ScreenManager.GameContainer;
 
-			//setup factories
-			AnimationFactory.ecs_instance = ecsInstance;
-			ActionFactory.ECSInstance = ecsInstance;
+            //setup factories
+            AnimationFactory.ecs_instance = ecsInstance;
+            ActionFactory.ECSInstance = ecsInstance;
 
-			EntityFactory.ecs_instance = ecsInstance;
-			EntityFactory.GameContainer = gameContainer;
-			UtilFactory.ecs_instance = ecsInstance;
-			UtilFactory.Container = gameContainer;
-			UIFactory.ecs_instance = ecsInstance;
-			UIFactory.Container = gameContainer;
-            
+            EntityFactory.ecs_instance = ecsInstance;
+            EntityFactory.GameContainer = gameContainer;
+            UtilFactory.ecs_instance = ecsInstance;
+            UtilFactory.Container = gameContainer;
+            UIFactory.ecs_instance = ecsInstance;
+            UIFactory.Container = gameContainer;
 
 
-           
+
+
 
             //create & register systems
             //register update systems
@@ -201,11 +201,11 @@ namespace Vaerydian.Screens
             healthSystem = ecsInstance.system_manager.set_system(new HealthSystem(), new Health());
             lifeSystem = ecsInstance.system_manager.set_system(new LifeSystem(), new Life());
             victorySystem = ecsInstance.system_manager.set_system(new AwardSystem(), new Award());
-			uiUpdateSystem = ecsInstance.system_manager.set_system(new UIUpdateSystem(), new UserInterface());
+            uiUpdateSystem = ecsInstance.system_manager.set_system(new UIUpdateSystem(), new UserInterface());
             triggerSystem = ecsInstance.system_manager.set_system(new TriggerSystem(), new Trigger());
-			actionSystem = ecsInstance.system_manager.set_system (new ActionSystem (), new VAction ());
-			lightSystem = ecsInstance.system_manager.set_system (new LightSystem (), new Light (), new Position ());
-			targetingSystem = ecsInstance.system_manager.set_system (new TargetingSystem(), new Target ());
+            actionSystem = ecsInstance.system_manager.set_system(new ActionSystem(), new VAction());
+            lightSystem = ecsInstance.system_manager.set_system(new LightSystem(), new Light(), new Position());
+            targetingSystem = ecsInstance.system_manager.set_system(new TargetingSystem(), new Target());
 
             //audio systems
             audioSystem = ecsInstance.system_manager.set_system(new AudioSystem(gameContainer), new Audio());
@@ -216,8 +216,8 @@ namespace Vaerydian.Screens
             mapSystem = ecsInstance.system_manager.set_system(new MapSystem(gameContainer), new GameMap());
             healthBarRenderSystem = ecsInstance.system_manager.set_system(new HealthBarRenderSystem(gameContainer), new Health());
             floatingTextDisplaySystem = ecsInstance.system_manager.set_system(new FloatingTextDisplaySystem(gameContainer), new FloatingText());
-            quadTreeDebugRenderSystem = ecsInstance.system_manager.set_system(new QuadTreeDebugRenderSystem(gameContainer), new Position(),new AiBehavior());
-			uiDrawSystem = ecsInstance.system_manager.set_system(new UIDrawSystem(gameContainer.ContentManager, gameContainer.SpriteBatch), new UserInterface());
+            quadTreeDebugRenderSystem = ecsInstance.system_manager.set_system(new QuadTreeDebugRenderSystem(gameContainer), new Position(), new AiBehavior());
+            uiDrawSystem = ecsInstance.system_manager.set_system(new UIDrawSystem(gameContainer.ContentManager, gameContainer.SpriteBatch), new UserInterface());
 
 
 
@@ -228,7 +228,7 @@ namespace Vaerydian.Screens
             ecsInstance.component_manager.register_component_type(new MapDebug());
             ecsInstance.component_manager.register_component_type(new Transform());
             ecsInstance.component_manager.register_component_type(new SpatialPartition());
-			ecsInstance.component_manager.register_component_type(new Interactable());
+            ecsInstance.component_manager.register_component_type(new Interactable());
             ecsInstance.component_manager.register_component_type(new BoundingPolygon());
             ecsInstance.component_manager.register_component_type(new Item());
             ecsInstance.component_manager.register_component_type(new Equipment());
@@ -241,9 +241,9 @@ namespace Vaerydian.Screens
             ecsInstance.component_manager.register_component_type(new Award());
             ecsInstance.component_manager.register_component_type(new Information());
             ecsInstance.component_manager.register_component_type(new Aggrivation());
-			ecsInstance.component_manager.register_component_type(new Audio());
-            ecsInstance.component_manager.register_component_type(new Vaerydian.Components.Utils.Path());
-			ecsInstance.component_manager.register_component_type(new Light ());
+            ecsInstance.component_manager.register_component_type(new Audio());
+            ecsInstance.component_manager.register_component_type(new APath());
+            ecsInstance.component_manager.register_component_type(new Light());
 
             //initialize all systems
             ecsInstance.system_manager.initialize_systems();
@@ -256,95 +256,101 @@ namespace Vaerydian.Screens
             geometryMapper = new ComponentMapper(new GeometryMap(), ecsInstance);
         }
 
-        public override void LoadContent ()
-		{
+        public override void LoadContent()
+        {
 
-			//debugTex = ScreenManager.Game.Content.Load<Texture2D>("temperature");
-			//debugTex = gameContainer.ContentManager.Load<Texture2D>("temperature");
+            //debugTex = ScreenManager.Game.Content.Load<Texture2D>("temperature");
+            //debugTex = gameContainer.ContentManager.Load<Texture2D>("temperature");
 
-			Console.Out.WriteLine ("LOADING LEVEL...");
+            Console.Out.WriteLine("LOADING LEVEL...");
 
-			string json = g_JsonManager.loadJSON("./Content/json/map_params.v");
-			JsonObject jo = g_JsonManager.jsonToJsonObject (json);
+            string json = g_JsonManager.loadJSON("./Content/json/map_params.v");
+            JsonObject jo = g_JsonManager.jsonToJsonObject(json);
 
 
-			switch (g_MapType) {
-			case MapType.WORLD:
-				if (g_FirstLoad) {
-					g_Map = mapFactory.createWorldMap(jo["WORLD","x"].asInt(),
-					                                  jo["WORLD","y"].asInt(),
-					                                  jo["WORLD","dx"].asInt(),
-					                                  jo["WORLD","dy"].asInt(),
-					                                  jo["WORLD","z"].asFloat(),
-					                                  jo["WORLD","xsize"].asInt(),
-					                                  jo["WORLD","ysize"].asInt(),
-					                                  (int) g_Parameters[GAMESCREEN_SEED]);
-					GameSession.WorldMap = g_Map;
-				} else {
-					g_Map = mapFactory.recreateWorldMap (GameSession.WorldMap);
-					GameSession.WorldMap = g_Map;
-				}
-				break;
-			case MapType.CAVE:
-				g_Map = mapFactory.createRandomCaveMap(jo["CAVE","x"].asInt (),
-				                                       jo["CAVE","y"].asInt (),
-				                                       jo["CAVE","prob"].asInt (),
-				                                       jo["CAVE","cell_op_spec"].asBool (),
-				                                       jo["CAVE","iter"].asInt (),
-				                                       jo["CAVE","neighbors"].asInt (),
-				                                       (int)g_Parameters[GAMESCREEN_SEED]);
-				break;
-			case MapType.WILDERNESS:
-				g_Map = mapFactory.createRandomForestMap(100,
-				                                         100,
-				                                         75,
-				                                         TerrainType_Old.FOREST_FLOOR,
-				                                         TerrainType_Old.FOREST_TREE,
-				                                         (int) g_Parameters[GAMESCREEN_SEED]);
-				break;
-			case MapType.DUNGEON:
-				g_Map = mapFactory.createRandomDungeonMap(100,100,200, (int) g_Parameters[GAMESCREEN_SEED]);
-				break;
-			default:
-				g_Map = mapFactory.createWorldMap(jo["WORLD","x"].asInt(),
-				                                  jo["WORLD","y"].asInt(),
-				                                  jo["WORLD","dx"].asInt(),
-				                                  jo["WORLD","dy"].asInt(),
-				                                  jo["WORLD","z"].asFloat(),
-				                                  jo["WORLD","xsize"].asInt(),
-				                                  jo["WORLD","ysize"].asInt(),
-				                                  (int) g_Parameters[GAMESCREEN_SEED]);
-				break;
-			}
+            switch (g_MapType)
+            {
+                case MapType.WORLD:
+                    if (g_FirstLoad)
+                    {
+                        g_Map = mapFactory.createWorldMap(jo["WORLD", "x"].asInt(),
+                                                          jo["WORLD", "y"].asInt(),
+                                                          jo["WORLD", "dx"].asInt(),
+                                                          jo["WORLD", "dy"].asInt(),
+                                                          jo["WORLD", "z"].asFloat(),
+                                                          jo["WORLD", "xsize"].asInt(),
+                                                          jo["WORLD", "ysize"].asInt(),
+                                                          (int)g_Parameters[GAMESCREEN_SEED]);
+                        GameSession.WorldMap = g_Map;
+                    }
+                    else
+                    {
+                        g_Map = mapFactory.recreateWorldMap(GameSession.WorldMap);
+                        GameSession.WorldMap = g_Map;
+                    }
+                    break;
+                case MapType.CAVE:
+                    g_Map = mapFactory.createRandomCaveMap(jo["CAVE", "x"].asInt(),
+                                                           jo["CAVE", "y"].asInt(),
+                                                           jo["CAVE", "prob"].asInt(),
+                                                           jo["CAVE", "cell_op_spec"].asBool(),
+                                                           jo["CAVE", "iter"].asInt(),
+                                                           jo["CAVE", "neighbors"].asInt(),
+                                                           (int)g_Parameters[GAMESCREEN_SEED]);
+                    break;
+                case MapType.WILDERNESS:
+                    g_Map = mapFactory.createRandomForestMap(100,
+                                                             100,
+                                                             75,
+                                                             TerrainType_Old.FOREST_FLOOR,
+                                                             TerrainType_Old.FOREST_TREE,
+                                                             (int)g_Parameters[GAMESCREEN_SEED]);
+                    break;
+                case MapType.DUNGEON:
+                    g_Map = mapFactory.createRandomDungeonMap(100, 100, 200, (int)g_Parameters[GAMESCREEN_SEED]);
+                    break;
+                default:
+                    g_Map = mapFactory.createWorldMap(jo["WORLD", "x"].asInt(),
+                                                      jo["WORLD", "y"].asInt(),
+                                                      jo["WORLD", "dx"].asInt(),
+                                                      jo["WORLD", "dy"].asInt(),
+                                                      jo["WORLD", "z"].asFloat(),
+                                                      jo["WORLD", "xsize"].asInt(),
+                                                      jo["WORLD", "ysize"].asInt(),
+                                                      (int)g_Parameters[GAMESCREEN_SEED]);
+                    break;
+            }
 
-			if (g_FirstLoad)
-				player = EntityFactory.createPlayer ((int)g_Parameters [GAMESCREEN_SKILLLEVEL]);
-			else {
-				if ((bool)g_Parameters [GAMESCREEN_RETURNING])
-					player = EntityFactory.recreatePlayer (GameSession.PlayerState, (Position)g_Parameters [GAMESCREEN_LAST_PLAYER_POSITION]);
-				else {
-					player = EntityFactory.recreatePlayer (GameSession.PlayerState, new Position (MapFactory.findSafeLocation (g_Map), new Vector2 (16, 16)));
-				}
-			}
+            if (g_FirstLoad)
+                player = EntityFactory.createPlayer((int)g_Parameters[GAMESCREEN_SKILLLEVEL]);
+            else
+            {
+                if ((bool)g_Parameters[GAMESCREEN_RETURNING])
+                    player = EntityFactory.recreatePlayer(GameSession.PlayerState, (Position)g_Parameters[GAMESCREEN_LAST_PLAYER_POSITION]);
+                else
+                {
+                    player = EntityFactory.recreatePlayer(GameSession.PlayerState, new Position(MapFactory.findSafeLocation(g_Map), new Vector2(16, 16)));
+                }
+            }
 
-			UtilFactory.createTarget ();
+            UtilFactory.createTarget();
 
             mapState = new MapState();
             mapState.MapType = g_Map.Map.MapDef.MapType;
             mapState.Seed = g_Map.Map.Seed;
             mapState.SkillLevel = (int)g_Parameters[GAMESCREEN_SKILLLEVEL];
-            
 
-			EntityFactory.createCamera();
 
-			UIFactory.createHitPointLabel(player, 100, 50, new Point((this.ScreenManager.GraphicsDevice.Viewport.Width - 100) / 2, 0));
+            EntityFactory.createCamera();
 
-			if(!g_FirstLoad && mapState.MapType != MapType.WORLD)
-                npcFactory.createWandererTrigger(20, g_Map,(int)g_Parameters[GAMESCREEN_SKILLLEVEL]);
+            UIFactory.createHitPointLabel(player, 100, 50, new Point((this.ScreenManager.GraphicsDevice.Viewport.Width - 100) / 2, 0));
+
+            if (!g_FirstLoad && mapState.MapType != MapType.WORLD)
+                npcFactory.createWandererTrigger(20, g_Map, (int)g_Parameters[GAMESCREEN_SKILLLEVEL]);
 
             //create map debug
-			EntityFactory.createMapDebug();
-            
+            EntityFactory.createMapDebug();
+
             //create lights
             /*
             for (int i = 0; i <= 5; i++)
@@ -361,7 +367,7 @@ namespace Vaerydian.Screens
             //entityFactory.createGeometryMap();
 
             //create spatialpartition
-			EntityFactory.createSpatialPartition(new Vector2(0, 0), new Vector2(3200, 3200), 4);
+            EntityFactory.createSpatialPartition(new Vector2(0, 0), new Vector2(3200, 3200), 4);
 
             //create mouse
             EntityFactory.createMousePointer();
@@ -377,7 +383,7 @@ namespace Vaerydian.Screens
 
             //setup bus components
 
-			base.LoadContent ();    
+            base.LoadContent();
         }
 
         public override void UnloadContent()
@@ -391,78 +397,85 @@ namespace Vaerydian.Screens
             GC.Collect();
         }
 
-        public override void hasFocusUpdate (GameTime gameTime)
-		{
-			base.hasFocusUpdate (gameTime);
+        public override void hasFocusUpdate(GameTime gameTime)
+        {
+            base.hasFocusUpdate(gameTime);
 
-			//check to see if escape was recently pressed
-			if (InputManager.isKeyToggled (Keys.Escape)) {
-				this.ScreenManager.removeScreen (this);
-				NewLoadingScreen.Load (this.ScreenManager, false, new StartScreen ());
-			}
+            //check to see if escape was recently pressed
+            if (InputManager.isKeyToggled(Keys.Escape))
+            {
+                this.ScreenManager.removeScreen(this);
+                NewLoadingScreen.Load(this.ScreenManager, false, new StartScreen());
+            }
 
-			if (InputManager.isKeyToggled (Keys.Enter)) {
-				Console.Out.WriteLine ("CHANGING LEVEL...");
+            if (InputManager.isKeyToggled(Keys.Enter))
+            {
+                Console.Out.WriteLine("CHANGING LEVEL...");
 
-				//set skill level
-				Skills skills = new Skills ();
-				int skilllevel = ((Skills)ecsInstance.component_manager.get_component (player, skills.getTypeId ())).Ranged.Value;
-                
-				//set seed
-				Position pos = new Position ();
-				pos = (Position)ecsInstance.component_manager.get_component (player, pos.getTypeId ());
-				int x = (int)(pos.Pos.X + pos.Offset.X) / 32;
-				int y = (int)(pos.Pos.Y + pos.Offset.Y) / 32;
+                //set skill level
+                Skills skills = new Skills();
+                int skilllevel = ((Skills)ecsInstance.component_manager.get_component(player, skills.getTypeId())).Ranged.Value;
 
-				/* WILL HELP DETECT ENTRANCES LATER
+                //set seed
+                Position pos = new Position();
+                pos = (Position)ecsInstance.component_manager.get_component(player, pos.getTypeId());
+                int x = (int)(pos.Pos.X + pos.Offset.X) / 32;
+                int y = (int)(pos.Pos.Y + pos.Offset.Y) / 32;
+
+                /* WILL HELP DETECT ENTRANCES LATER
                 if (map.Map.Terrain[x,y].TerrainType != TerrainType.CAVE_ENTRANCE)
                     return;
                  */
 
-				mapState.LastPlayerPosition = pos;
+                mapState.LastPlayerPosition = pos;
 
-				GameSession.MapStack.Push (mapState);
+                GameSession.MapStack.Push(mapState);
 
-				//setup the parameters for the new zone
-				object[] parameters = new object[GameScreen.GAMESCREEN_PARAM_SIZE];
-				parameters [GameScreen.GAMESCREEN_SEED] = x * y + x + y + (int)g_Parameters [GAMESCREEN_SEED];
-				parameters [GameScreen.GAMESCREEN_SKILLLEVEL] = mapState.SkillLevel + 5;//skilllevel + 5;
-				parameters [GameScreen.GAMESCREEN_RETURNING] = false;
-				parameters [GameScreen.GAMESCREEN_LAST_PLAYER_POSITION] = null;
+                //setup the parameters for the new zone
+                object[] parameters = new object[GameScreen.GAMESCREEN_PARAM_SIZE];
+                parameters[GameScreen.GAMESCREEN_SEED] = x * y + x + y + (int)g_Parameters[GAMESCREEN_SEED];
+                parameters[GameScreen.GAMESCREEN_SKILLLEVEL] = mapState.SkillLevel + 5;//skilllevel + 5;
+                parameters[GameScreen.GAMESCREEN_RETURNING] = false;
+                parameters[GameScreen.GAMESCREEN_LAST_PLAYER_POSITION] = null;
 
-				this.ScreenManager.removeScreen (this);
-				if((int)parameters[GameScreen.GAMESCREEN_SEED] % 2 == 0){
-					NewLoadingScreen.Load (this.ScreenManager, false, new GameScreen (false, MapType.CAVE, parameters));
-				}else{
-					NewLoadingScreen.Load (this.ScreenManager, false, new GameScreen (false, MapType.DUNGEON, parameters));
-				}
-			}
+                this.ScreenManager.removeScreen(this);
+                if ((int)parameters[GameScreen.GAMESCREEN_SEED] % 2 == 0)
+                {
+                    NewLoadingScreen.Load(this.ScreenManager, false, new GameScreen(false, MapType.CAVE, parameters));
+                }
+                else
+                {
+                    NewLoadingScreen.Load(this.ScreenManager, false, new GameScreen(false, MapType.DUNGEON, parameters));
+                }
+            }
 
-			//return to previous map
-			if (InputManager.isKeyToggled (Keys.F12)) {
-				if (GameSession.MapStack.Count == 0)
-					return;
+            //return to previous map
+            if (InputManager.isKeyToggled(Keys.F12))
+            {
+                if (GameSession.MapStack.Count == 0)
+                    return;
 
-				MapState state = GameSession.MapStack.Pop ();
+                MapState state = GameSession.MapStack.Pop();
 
-				//setup the parameters for the previous zone
-				object[] parameters = new object[GameScreen.GAMESCREEN_PARAM_SIZE];
-				parameters [GameScreen.GAMESCREEN_SEED] = state.Seed;
-				parameters [GameScreen.GAMESCREEN_SKILLLEVEL] = state.SkillLevel;
-				parameters [GameScreen.GAMESCREEN_RETURNING] = true;
-				parameters [GameScreen.GAMESCREEN_LAST_PLAYER_POSITION] = state.LastPlayerPosition;
+                //setup the parameters for the previous zone
+                object[] parameters = new object[GameScreen.GAMESCREEN_PARAM_SIZE];
+                parameters[GameScreen.GAMESCREEN_SEED] = state.Seed;
+                parameters[GameScreen.GAMESCREEN_SKILLLEVEL] = state.SkillLevel;
+                parameters[GameScreen.GAMESCREEN_RETURNING] = true;
+                parameters[GameScreen.GAMESCREEN_LAST_PLAYER_POSITION] = state.LastPlayerPosition;
 
-				this.ScreenManager.removeScreen (this);
-				NewLoadingScreen.Load (this.ScreenManager, true, new GameScreen (false, state.MapType, parameters));
-			}
+                this.ScreenManager.removeScreen(this);
+                NewLoadingScreen.Load(this.ScreenManager, true, new GameScreen(false, state.MapType, parameters));
+            }
 
-			if (InputManager.isKeyToggled (Keys.F6)) {
-				string json = g_JsonManager.objToJsonString(g_Map);
-				g_JsonManager.saveJSON("./map_"+g_Parameters[GAMESCREEN_SEED] +".v",json);
+            if (InputManager.isKeyToggled(Keys.F6))
+            {
+                string json = g_JsonManager.objToJsonString(g_Map);
+                g_JsonManager.saveJSON("./map_" + g_Parameters[GAMESCREEN_SEED] + ".v", json);
 
-				json = g_JsonManager.objToJsonString(GameSession.PlayerState);
-				g_JsonManager.saveJSON("./player.v",json);
-			}
+                json = g_JsonManager.objToJsonString(GameSession.PlayerState);
+                g_JsonManager.saveJSON("./player.v", json);
+            }
 
             if (PLAYER_IS_DEAD)
             {
@@ -503,9 +516,9 @@ namespace Vaerydian.Screens
             attackSystem.process();
             victorySystem.process();
             triggerSystem.process();
-			actionSystem.process ();
-			lightSystem.process ();
-			targetingSystem.process ();
+            actionSystem.process();
+            lightSystem.process();
+            targetingSystem.process();
 
             mapCollisionSystem.process();
 
@@ -516,8 +529,8 @@ namespace Vaerydian.Screens
             uiUpdateSystem.process();
 
 
-			prevCycles = currentCycles;
-			elapsedCycles = currentCycles - prevCycles;
+            prevCycles = currentCycles;
+            elapsedCycles = currentCycles - prevCycles;
         }
 
         public override void Draw(GameTime gameTime)
@@ -539,7 +552,7 @@ namespace Vaerydian.Screens
             //run debug systems
             //quadTreeDebugRenderSystem.process();
 
-			spriteBatch.Begin (SpriteSortMode.Deferred,BlendState.AlphaBlend,SamplerState.PointClamp,DepthStencilState.Default,RasterizerState.CullNone);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone);
 
             spriteBatch.DrawString(FontManager.fonts["General"], "Entities: " + ecsInstance.entity_manager.get_entity_count(), new Vector2(0, 14), Color.Red);
 
@@ -549,9 +562,9 @@ namespace Vaerydian.Screens
 
             if (InputManager.YesScreenshot)
             {
-				InputManager.YesScreenshot = false;
-				saveScreenShot(gameContainer.GraphicsDevice, gameTime);
-			}
+                InputManager.YesScreenshot = false;
+                saveScreenShot(gameContainer.GraphicsDevice, gameTime);
+            }
 
             //DrawDebugRenderTargets(spriteBatch);
         }
@@ -563,30 +576,35 @@ namespace Vaerydian.Screens
         /// <param name="graphicsDevice"></param>
         public void saveScreenShot(GraphicsDevice graphicsDevice, GameTime time)
         {
-			RenderTarget2D render = new RenderTarget2D (graphicsDevice,
-			                                           graphicsDevice.PresentationParameters.BackBufferWidth,
-			                                           graphicsDevice.PresentationParameters.BackBufferHeight);
+            RenderTarget2D render = new RenderTarget2D(graphicsDevice,
+                                                       graphicsDevice.PresentationParameters.BackBufferWidth,
+                                                       graphicsDevice.PresentationParameters.BackBufferHeight);
 
-			graphicsDevice.SetRenderTarget (render);
+            graphicsDevice.SetRenderTarget(render);
 
-			Draw (time);
+            Draw(time);
 
-			graphicsDevice.SetRenderTarget (null);
+            graphicsDevice.SetRenderTarget(null);
 
-			string timestamp = "" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second;
+            string timestamp = "" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second;
             FileStream fs = null;
-			try{
-				fs = new FileStream("screenshot_" + timestamp + ".png", FileMode.Create);
+            try
+            {
+                fs = new FileStream("screenshot_" + timestamp + ".png", FileMode.Create);
 
-				render.SaveAsJpeg(fs,render.Width,render.Height);
+                render.SaveAsJpeg(fs, render.Width, render.Height);
 
-			}catch(Exception e){
-				Console.Error.WriteLine("ERROR: could not create screenshot:\n" + e.ToString());
-				return;
-			}finally{
-                if(fs != null)
-				    fs.Close();
-			}
-		}
-	}
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine("ERROR: could not create screenshot:\n" + e.ToString());
+                return;
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Close();
+            }
+        }
+    }
 }

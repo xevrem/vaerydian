@@ -174,7 +174,7 @@ namespace Vaerydian.Behaviors
             f_MapDebugMapper = new ComponentMapper(new MapDebug(), ecsInstance);
             f_SpatialMapper = new ComponentMapper(new SpatialPartition(), ecsInstance);
             f_SpriteMapper = new ComponentMapper(new Sprite(), ecsInstance);
-            f_PathMapper = new ComponentMapper(new Path(), ecsInstance);
+            f_PathMapper = new ComponentMapper(new APath(), ecsInstance);
         }
 
         public override BehaviorReturnCode Behave()
@@ -235,7 +235,7 @@ namespace Vaerydian.Behaviors
             s_CurrentCell.Position = sVec;
 
             //findPath = new FindPathAction(s_EcsInstance,sVec,fVec, map);
-            Path path = (Path)f_PathMapper.get(f_ThisEntity);
+            APath path = (APath)f_PathMapper.get(f_ThisEntity);
             path.Start = sVec;
             path.Finish = fVec;
             path.Map = map;
@@ -421,7 +421,7 @@ namespace Vaerydian.Behaviors
         /// <returns></returns>
         private bool hasPathFailed()
         {
-            Path path = (Path)f_PathMapper.get(f_ThisEntity);
+            APath path = (APath)f_PathMapper.get(f_ThisEntity);
             return path.PathState == PathState.PathFailed ? true : false;
         }
 
@@ -431,7 +431,7 @@ namespace Vaerydian.Behaviors
         /// <returns></returns>
         private bool hasPathBeenFound()
         {
-            Path path = (Path)f_PathMapper.get(f_ThisEntity);
+            APath path = (APath)f_PathMapper.get(f_ThisEntity);
             return (path.PathState == PathState.PathFound ? true : false) && (path.FoundPath != null);
         }
 
@@ -441,7 +441,7 @@ namespace Vaerydian.Behaviors
         /// <returns></returns>
         private BehaviorReturnCode getCurrentPath()
         {
-            Path path = (Path)f_PathMapper.get(f_ThisEntity);
+            APath path = (APath)f_PathMapper.get(f_ThisEntity);
 
             
             s_currentPath = path.FoundPath;
@@ -516,7 +516,7 @@ namespace Vaerydian.Behaviors
         private BehaviorReturnCode calculatePath()
         {
             f_newPath = true;
-            Path path = (Path)f_PathMapper.get(f_ThisEntity);
+            APath path = (APath)f_PathMapper.get(f_ThisEntity);
 
             switch(path.PathState)
             {
@@ -550,7 +550,7 @@ namespace Vaerydian.Behaviors
             s_TargetCell.Position = fVec;
             s_CurrentCell.Position = sVec;
 
-            Path path = (Path)f_PathMapper.get(f_ThisEntity);
+            APath path = (APath)f_PathMapper.get(f_ThisEntity);
             path.Map = map;
             path.Start = sVec;
             path.Finish = fVec;

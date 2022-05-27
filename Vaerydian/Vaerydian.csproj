@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\AsyncCS\AsyncCS.csproj" />
+    <ProjectReference Include="..\behaviorlib\behaviorlib\behaviorlib.csproj" />
+    <ProjectReference Include="..\ECSFramework\ECSFramework.csproj" />
+    <ProjectReference Include="..\Glimpse\Glimpse.csproj" />
+    <ProjectReference Include="..\fastjson\fastJSON.csproj" />
+    <ProjectReference Include="..\libnoise\LibNoise.csproj" />
+    <ProjectReference Include="..\monogame\MonoGame.Framework\MonoGame.Framework.DesktopGL.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

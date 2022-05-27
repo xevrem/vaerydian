@@ -18,85 +18,92 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
+// using System;
+// using System.Collections.Generic;
+// using Microsoft.Xna.Framework.Graphics;
+// using Microsoft.Xna.Framework.Content;
 using Glimpse.Input;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Glimpse.Controls
 {
-	public class GForm : Control
-	{
-		public List<GCanvas> canvas_controls = new List<GCanvas>();
+  public class GForm : Control
+  {
+    public List<GCanvas> canvas_controls = new List<GCanvas>();
 
-		public GForm ()
-		{
-		}
-
-		#region implemented abstract members of Control
-
-		public override event InterfaceHandler updating;
-
-		public override void init(){
-			foreach (GCanvas canvas in this.canvas_controls)
-				canvas.init ();
-		}
-
-		public override void load(ContentManager content){
-			foreach (GCanvas canvas in this.canvas_controls)
-				canvas.load (content);
-		}
-
-		public override void update (int elapsed_time)
-		{
-            if (this.bounds.Contains(InputManager.getMousePosition())){
-                this.handle_events(InputManager.get_interface_args());
-            }
-
-            foreach (GCanvas canvas in this.canvas_controls)
-				canvas.update (elapsed_time);
-		}
-
-		public override void draw (SpriteBatch sprite_batch)
-		{
-			foreach (GCanvas canvas in this.canvas_controls)
-				canvas.draw (sprite_batch);		
-		}
-
-		public override void clean_up ()
-		{
-			foreach (GCanvas canvas in this.canvas_controls)
-				canvas.clean_up ();
-
-			canvas_controls.Clear ();
-
-			this.updating = null;
-		}
-
-		public override void reload ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override void resize ()
-		{
-			throw new NotImplementedException ();
-		}
-
-        public override void handle_events(InterfaceArgs args)
-        {
-            foreach (GCanvas canvas in this.canvas_controls)
-            {
-                if (canvas.bounds.Contains(args.current_mouse_state.Position)){
-                    canvas.handle_events(args);
-                }
-            }
-        }
-
-
-
-        #endregion
+    public GForm()
+    {
     }
+
+    #region implemented abstract members of Control
+
+    public override event InterfaceHandler updating;
+
+    public override void init()
+    {
+      foreach (GCanvas canvas in this.canvas_controls)
+        canvas.init();
+    }
+
+    public override void load(ContentManager content)
+    {
+      foreach (GCanvas canvas in this.canvas_controls)
+        canvas.load(content);
+    }
+
+    public override void update(int elapsed_time)
+    {
+      if (this.bounds.Contains(InputManager.getMousePosition()))
+      {
+        this.handle_events(InputManager.get_interface_args());
+      }
+
+      foreach (GCanvas canvas in this.canvas_controls)
+        canvas.update(elapsed_time);
+    }
+
+    public override void draw(SpriteBatch sprite_batch)
+    {
+      foreach (GCanvas canvas in this.canvas_controls)
+        canvas.draw(sprite_batch);
+    }
+
+    public override void clean_up()
+    {
+      foreach (GCanvas canvas in this.canvas_controls)
+        canvas.clean_up();
+
+      canvas_controls.Clear();
+
+      this.updating = null;
+    }
+
+    public override void reload()
+    {
+      throw new NotImplementedException();
+    }
+
+    public override void resize()
+    {
+      throw new NotImplementedException();
+    }
+
+    public override void handle_events(InterfaceArgs args)
+    {
+      foreach (GCanvas canvas in this.canvas_controls)
+      {
+        if (canvas.bounds.Contains(args.current_mouse_state.Position))
+        {
+          canvas.handle_events(args);
+        }
+      }
+    }
+
+  }
+
+
+
+  #endregion
 }
 

@@ -39,19 +39,19 @@ namespace Vaerydian.Components.Utils
         PathFailed
     }
 
-    class Path : IComponent
+    class APath : IComponent
     {
 		private static int _type_id;
 
         public static int TypeID
         {
-            get { return Path._type_id; }
-            set { Path._type_id = value; }
+            get { return APath._type_id; }
+            set { APath._type_id = value; }
         }
 
         private int p_entity_id;
 
-        public Path() { }
+        public APath() { }
 
 		public int id { get; set;}
 

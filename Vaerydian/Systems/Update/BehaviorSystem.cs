@@ -40,9 +40,9 @@ namespace Vaerydian.Systems.Update
         private ComponentMapper _BehaviorMapper;
         private ComponentMapper _LifeMapper;
 
-        public BehaviorSystem() {}//: base(intervals) { }
+        public BehaviorSystem() { }//: base(intervals) { }
 
-		protected override void initialize()
+        protected override void initialize()
         {
             _BehaviorMapper = new ComponentMapper(new AiBehavior(), ecs_instance);
             _LifeMapper = new ComponentMapper(new Life(), ecs_instance);
@@ -61,6 +61,6 @@ namespace Vaerydian.Systems.Update
             }
         }
 
-        
+
     }
 }

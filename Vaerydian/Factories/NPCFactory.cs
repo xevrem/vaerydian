@@ -70,7 +70,7 @@ namespace Vaerydian.Factories
 			ecs_instance.add_component(e, new Heading());
 			ecs_instance.add_component(e, new Transform());
 			ecs_instance.add_component(e, new Aggrivation());
-			ecs_instance.add_component(e, new Path());
+			ecs_instance.add_component(e, new APath());
 
             /*
             //setup pathing agent
